@@ -35,8 +35,8 @@ public unsafe class TestFileReadingInJob : MonoBehaviour
             var buffer = (byte*)readCmdArray.ReadCommands[0].Buffer;
             Box.Value = new ISOBox()
             {
-                size = BitTools.GetUInt32(buffer),
-                type = (ISOBoxType)BitTools.GetUInt32(buffer)
+                size = BitTools.BigEndian.GetUInt32(buffer),
+                type = (ISOBoxType)BitTools.BigEndian.GetUInt32(buffer)
             };
 
             readHandle.Dispose();

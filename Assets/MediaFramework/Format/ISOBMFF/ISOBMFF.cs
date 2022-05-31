@@ -26,26 +26,16 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public uint size;           // 32 bits
         public ISOBoxType type;     // 32 bits
 
-        public ISOBox(in BitStream stream)
+        public ISOBox(ref BitStream stream)
         {
             size = stream.PeekUInt32();
             type = (ISOBoxType)stream.PeekUInt32(4);
         }
 
-        public ISOBox(in BitStream stream, int offset)
+        public ISOBox(ref BitStream stream, int offset)
         {
             size = stream.PeekUInt32(offset);
             type = (ISOBoxType)stream.PeekUInt32(offset + 4);
-        }
-
-        public ulong GetExtendedSize(in BitStream stream)
-        {
-            return size > 1 ? size : size == 1 ? stream.PeekUInt64(8) : (ulong)stream.length;
-        }
-
-        public int GetHeaderSize()
-        {
-            return size != 1 ? 8 : 16;
         }
     }
 
@@ -58,7 +48,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public byte version;        // 8 bits
         public uint flags;          // 24 bits
 
-        public ISOFullBox(in BitStream stream)
+        public ISOFullBox(ref BitStream stream)
         {
             size = stream.PeekUInt32();
             type = (ISOBoxType)stream.PeekUInt32(4);
@@ -66,16 +56,6 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             version = stream.PeekByte(8);
             // Peek the version and flags then remove the version
             flags = stream.PeekUInt32(8) & 0x00FFFFFF;
-        }
-
-        public ulong GetExtendedSize(in BitStream stream)
-        {
-            return size > 1 ? size : size == 1 ? stream.PeekUInt64(12) : (ulong)stream.length;
-        }
-
-        public int GetBoxSize()
-        {
-            return size != 1 ? 12 : 20;
         }
     }
 
@@ -88,22 +68,38 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
     public unsafe static class ISOBMFFExtensions
     {
-        public static ISOBox PeekISOBox(this BitStream stream) => new ISOBox(stream);
+        public static ISOBox PeekISOBox(this BitStream stream) => new ISOBox()
+        {
+            size = stream.PeekUInt32(),
+            type = (ISOBoxType)stream.PeekUInt32(4)
+        };
 
-        public static ISOBox PeekISOBox(this BitStream stream, int offset) => new ISOBox(stream, offset);
+        public static ISOBox PeekISOBox(this BitStream stream, int offset) => new ISOBox()
+        {
+            size = stream.PeekUInt32(offset),
+            type = (ISOBoxType)stream.PeekUInt32(4 + offset)
+        };
 
-        public static ISOFullBox PeekISOFullBox(this BitStream stream) => new ISOFullBox(stream);
+        public static ISOFullBox PeekISOFullBox(this BitStream stream) => new ISOFullBox()
+        {
+            size = stream.PeekUInt32(),
+            type = (ISOBoxType)stream.PeekUInt32(4),
+
+            version = stream.PeekByte(8),
+            // Peek the version and flags then remove the version
+            flags = stream.PeekUInt32(8) & 0x00FFFFFF
+        };
 
         public static ISOBox ReadISOBox(this BitStream stream)
         {
-            var box = new ISOBox(stream);
+            var box = new ISOBox(ref stream);
             stream.Seek(8);
             return box;
         }
 
         public static ISOFullBox ReadISOFullBox(this BitStream stream)
         {
-            var box = new ISOFullBox(stream);
+            var box = new ISOFullBox(ref stream);
             stream.Seek(12);
             return box;
         }

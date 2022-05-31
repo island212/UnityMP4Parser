@@ -1,9 +1,11 @@
-﻿using Unity.Collections;
+﻿using Unity.Burst;
+using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 
 namespace Unity.MediaFramework.Video
 {
+    [BurstCompile]
     public unsafe struct BitStream
     {
         [NativeDisableUnsafePtrRestriction]
@@ -31,13 +33,13 @@ namespace Unity.MediaFramework.Video
 
         public byte PeekByte(int offset) => current[offset];
 
-        public uint PeekUInt32() => BitTools.GetUInt32(current);
+        public uint PeekUInt32() => BitTools.BigEndian.GetUInt32(current);
 
-        public uint PeekUInt32(int offset) => BitTools.GetUInt32(current + offset);
+        public uint PeekUInt32(int offset) => BitTools.BigEndian.GetUInt32(current + offset);
 
-        public ulong PeekUInt64() => BitTools.GetUInt64(current);
+        public ulong PeekUInt64() => BitTools.BigEndian.GetUInt64(current);
 
-        public ulong PeekUInt64(int offset) => BitTools.GetUInt64(current + offset);
+        public ulong PeekUInt64(int offset) => BitTools.BigEndian.GetUInt64(current + offset);
 
         public void Seek(int seek)
         {
@@ -46,24 +48,28 @@ namespace Unity.MediaFramework.Video
         }
     }
 
+    [BurstCompile]
     public unsafe static class BitTools
     {
-        public static uint GetUInt32(byte* data) =>
+        public static class BigEndian
+        {
+            public static uint GetUInt32(byte* data) =>
+                    (uint)data[0] << 24 | (uint)data[1] << 16 | (uint)data[2] << 8 | (uint)data[3];
+
+            public static ulong GetUInt64(byte* data) =>
+                (uint)data[0] << 56 | (uint)data[1] << 48 | (uint)data[2] << 40 | (uint)data[3] << 32 |
+                (uint)data[4] << 24 | (uint)data[5] << 16 | (uint)data[6] << 8 | (uint)data[7];
+
+            public static string ConvertToString(uint data) =>
+                new string(new char[4] {
+                (char)((data & 0xFF000000) >> 24),
+                (char)((data & 0x00FF0000) >> 16),
+                (char)((data & 0x0000FF00) >> 8),
+                (char)((data & 0x000000FF))
+                });
+
+            public static uint ConvertFourCCToUInt32(string data) =>
                 (uint)data[0] << 24 | (uint)data[1] << 16 | (uint)data[2] << 8 | (uint)data[3];
-
-        public static ulong GetUInt64(byte* data) =>
-            (uint)data[0] << 56 | (uint)data[1] << 48 | (uint)data[2] << 40 | (uint)data[3] << 32 |
-            (uint)data[4] << 24 | (uint)data[5] << 16 | (uint)data[6] << 8 | (uint)data[7];
-
-        public static string ConvertToString(uint data) => 
-            new string(new char[4] { 
-                (char)((data & 0xFF000000) >> 24), 
-                (char)((data & 0x00FF0000) >> 16), 
-                (char)((data & 0x0000FF00) >> 8), 
-                (char)((data & 0x000000FF)) 
-            });
-
-        public static uint ConvertFourCCToUInt32(string data) => 
-            (uint)data[0] << 24 | (uint)data[1] << 16 | (uint)data[2] << 8 | (uint)data[3];
+        }
     }
 }

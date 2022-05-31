@@ -35,11 +35,6 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 if (box.size == 1)
                     ExtendedSizes.Add(Stream.PeekUInt64(8));
 
-                // Check first if the current box can be a parent.
-                // If yes, let's peek and check if the children type is valid.
-                // It is necessary to do that because some childrens are optional so,
-                // it is possible that a box can be a parent, but is currently not.
-                //seek = box.type.CanBeParent() && Stream.HasValidISOBoxType(offset) ? offset : (long)size;
                 seek = box.size;
             }
             while (seek > 1 && Stream.Remains() > seek + 12);
@@ -71,7 +66,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 int offset = 8;
                 if (box.size == 1)
                 {
-                    ExtendedSizes.Add(Stream.PeekUInt64(8));
+                    ExtendedSizes.Add(Stream.PeekUInt64(offset));
                     offset += 4;
                 }
 
@@ -83,5 +78,95 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             }
             while (seek > 1 && Stream.Remains() > seek + 12);
         }
+    }
+
+    public unsafe struct ISOExtractMOOV : IJob
+    {
+        public BitStream Stream;
+
+        public NativeReference<MediaAttributes> Attributes;
+        public NativeList<VideoTrack> VideoTracks;
+        public NativeList<AudioTrack> AudioTracks;
+
+        public void Execute()
+        {
+            var moovBox = Stream.ReadISOBox();
+            if (moovBox.type != ISOBoxType.MOOV)
+                return;
+
+            while (Stream.Remains() >= 8)
+            {
+                var box = Stream.PeekISOBox();
+                switch (box.type)
+                { 
+                    case ISOBoxType.MVHD: ParseMVHD(); break;
+                }
+            }
+        }
+
+        public void ParseMVHD()
+        {
+            var fullBox = Stream.ReadISOFullBox();
+            if (fullBox.version == 1)
+            {
+                ulong creationTime = Stream.PeekUInt64();
+                ulong modificationTime = Stream.PeekUInt64(8);
+                uint timescale = Stream.PeekUInt32(16);
+                ulong duration = Stream.PeekUInt64(20);
+
+                Stream.Seek(28);
+            }
+            else
+            {
+                uint creationTime = Stream.PeekUInt32();
+                uint modificationTime = Stream.PeekUInt32(4);
+                uint timescale = Stream.PeekUInt32(8);
+                uint duration = Stream.PeekUInt32(12);
+
+                Stream.Seek(16);
+            }
+
+            //double rate = 
+
+        }
+    }
+
+    public struct MVHDBox
+    {
+        public ulong creationTime;
+        public ulong modificationTime;
+        public uint timescale;
+        public ulong duration;
+    }
+
+    public struct MediaAttributes
+    {
+        public int FrameCount;
+        public BigRational Duration;
+    }
+
+    public struct AudioTrack
+    {
+        public int channelCount;
+        public int sampleRate;
+        public uint codecFourCC;
+    }
+
+    public struct VideoTrack
+    {
+        public int width, height;
+        public Rational aspectRatio;
+        public uint codecFourCC;
+        public uint colorStandard;
+    }
+
+    public struct BigRational
+    {
+        public uint num, denom;
+    }
+
+    public struct Rational
+    {
+        public int num, denom;
     }
 }

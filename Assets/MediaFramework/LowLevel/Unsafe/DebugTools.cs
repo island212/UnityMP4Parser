@@ -28,7 +28,26 @@ namespace Unity.MediaFramework.Video
 
         public static void Print(in ISOBox box)
         {
-            Debug.Log($"Type={BitTools.ConvertToString((uint)box.type)} Size={box.size}");
+            Debug.Log($"Type={BitTools.BigEndian.ConvertToString((uint)box.type)} Size={box.size}");
+        }
+
+        public static void Print(in MP4Handle handle)
+        {
+            StringBuilder sb = new StringBuilder("Boxes: ");
+
+            int index = 0;
+            foreach (var box in handle.Boxes)
+            {
+                sb.Append($"{BitTools.BigEndian.ConvertToString((uint)box.type)}");
+                if (box.size > 1)
+                    sb.Append($"({box.size})");
+                else
+                    sb.Append($"({handle.ExtendedSizes[index++]})");
+                sb.Append(", ");
+            }
+            sb.Remove(sb.Length - 2, 2);
+
+            Debug.Log(sb.ToString());
         }
     }
 }

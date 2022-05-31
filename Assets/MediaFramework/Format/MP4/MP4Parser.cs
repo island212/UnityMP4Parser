@@ -18,69 +18,84 @@ namespace Unity.MediaFramework.Format.MP4
 
     public unsafe static class MP4Parser
     {
-        public static void Parse(string path)
+        public static MP4Handle Create(string path, int chunkSize)
         { 
             FileInfoResult fileInfo;
+
             AsyncReadManager.GetFileInfo(path, &fileInfo).JobHandle.Complete();
 
-            UnityEngine.Debug.Log($"Opening file {path} ({fileInfo.FileState}) Size={fileInfo.FileSize}");
+            var handle = new MP4Handle()
+            {
+                FileHandle = AsyncReadManager.OpenFileAsync(path),
+                FileSize = fileInfo.FileSize,
+                Boxes = new NativeList<ISOBox>(128, Allocator.Persistent),
+                ExtendedSizes = new NativeList<ulong>(4, Allocator.Persistent)
+            };
 
-            FileHandle fileHandle = AsyncReadManager.OpenFileAsync(path);
-
-            long bufferSize = 2048;
+            long bufferSize = math.min(chunkSize, fileInfo.FileSize);
             using var fileBuffer = new NativeArray<byte>((int)bufferSize, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
-
-            using var boxes = new NativeList<ISOBox>(128, Allocator.TempJob);
-            using var extendedSize = new NativeList<ulong>(4, Allocator.TempJob);
 
             long offset = 0;
             int sizeIndex = 0, boxIndex = 0;
 
-            // Until we find MDAT continue seeking
             while (offset < fileInfo.FileSize)
             {
                 ReadCommand cmd;
                 cmd.Offset = offset;
-                cmd.Size = math.min(bufferSize, fileInfo.FileSize - offset);
+                cmd.Size = math.min(chunkSize, fileInfo.FileSize - offset);
                 cmd.Buffer = fileBuffer.GetUnsafeReadOnlyPtr();
 
                 UnityEngine.Debug.Log($"ReadCommand Offset={cmd.Offset} Size={cmd.Size}");
 
-                ReadHandle readHandle = AsyncReadManagerEx.Read(fileHandle, cmd);
+                ReadHandle readHandle = AsyncReadManagerEx.Read(handle.FileHandle, cmd);
 
                 var extractJob = new ISOExtractAllParentBoxes()
                 {
                     Stream = new BitStream((byte*)cmd.Buffer, (int)cmd.Size),
-                    Boxes = boxes,
-                    ExtendedSizes = extendedSize
+                    Boxes = handle.Boxes,
+                    ExtendedSizes = handle.ExtendedSizes
                 };
 
                 readHandle.JobHandle.Complete();
                 extractJob.Run();
 
-                while (boxIndex < boxes.Length)
+                while (boxIndex < handle.Boxes.Length)
                 {
-                    var box = boxes[boxIndex];
-                    DebugTools.Print(box);
+                    var box = handle.Boxes[boxIndex];
+                    offset += box.size > 1 ? box.size : box.size == 1 ? 
+                        (long)handle.ExtendedSizes[sizeIndex++] : fileInfo.FileSize - offset;
 
-                    switch (box.type)
-                    {
-                        case ISOBoxType.MOOV:
-                            //Start job to parse MOOV header here
-                            break;
-                    }
-
-                    if(box.size == 1)
-                        UnityEngine.Debug.Log($"Extended={extendedSize[sizeIndex]}");
-                    if(box.size == 0)
-                        UnityEngine.Debug.Log($"EOF={fileInfo.FileSize - offset}");
-
-                    offset += box.size > 1 ? box.size : box.size == 1 ? (long)extendedSize[sizeIndex++] : fileInfo.FileSize - offset;
                     boxIndex++;
                 }
-            }       
+            }
 
-            fileHandle.Close().Complete();
+            return handle;
+        }
+
+        public static JobHandle Parse(in MP4Handle handle)
+        {
+            JobHandle jobHandle = default;
+
+
+
+            return jobHandle;
+        }
+    }
+
+    public struct MP4Handle : IDisposable
+    {
+        public FileHandle FileHandle;
+        public long FileSize;
+
+        public NativeList<ISOBox> Boxes;
+        public NativeList<ulong> ExtendedSizes;
+
+        public void Dispose()
+        {
+            FileHandle.Close().Complete();
+
+            Boxes.Dispose();
+            ExtendedSizes.Dispose();
         }
     }
 

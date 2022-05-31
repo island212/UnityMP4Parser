@@ -1,13 +1,7 @@
-using Unity.Collections;
-using Unity.IO.LowLevel.Unsafe;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
-using Unity.Jobs;
 using UnityEngine.Video;
-using Unity.MediaFramework.Video;
 using Unity.MediaFramework.Format.MP4;
-using BitStream = Unity.MediaFramework.Video.BitStream;
-using Unity.Jobs.LowLevel.Unsafe;
+using Unity.MediaFramework.Video;
 
 public unsafe class TestParseMP4Boxes : MonoBehaviour
 {
@@ -15,6 +9,14 @@ public unsafe class TestParseMP4Boxes : MonoBehaviour
 
     void Start()
     {
-        MP4Parser.Parse(clip.originalPath);
+        var mp4Handle = MP4Parser.Create(clip.originalPath, 1024);
+
+        Debug.Log($"Opening file {clip.originalPath} Size={mp4Handle.FileSize}");
+
+        DebugTools.Print(mp4Handle);
+
+
+
+        mp4Handle.Dispose();
     }
 }
