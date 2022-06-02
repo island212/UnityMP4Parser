@@ -5,48 +5,29 @@ using System.Text;
 using System.Threading.Tasks;
 using Unity.MediaFramework.Format.ISOBMFF;
 using Unity.MediaFramework.Format.MP4;
+using Unity.MediaFramework.LowLevel.Unsafe;
 using UnityEngine;
 
 namespace Unity.MediaFramework.Video
 {
     public static class DebugTools
     {
-        public static void Print(in FTYPBox box)
-        {
-            //StringBuilder sb = new StringBuilder();
-            //sb.Append($"FTYP MajorBrand={BitTools.ConvertToString(box.majorBrand)} MinorVersion={box.minorVersion} Compatible Brands=[");
-            //foreach (var compBrand in MP4Tools.FlagToBrand(box.compatibleBrands))
-            //{
-            //    sb.Append(BitTools.ConvertToString(compBrand));
-            //    sb.Append(", ");
-            //}
-            //sb.Remove(sb.Length - 2, 2);
-            //sb.Append(']');
-
-            //Debug.Log(sb.ToString());
-        }
-
         public static void Print(in ISOBox box)
         {
-            Debug.Log($"Type={BitTools.BigEndian.ConvertToString((uint)box.type)} Size={box.size}");
+            Debug.Log($"Type={BigEndian.ConvertToString((uint)box.type)} Size={box.size}");
         }
 
-        public static void Print(in MP4Handle handle)
+        public static void Print(in ISOReader reader)
         {
             StringBuilder sb = new StringBuilder("Boxes: ");
 
-            int index = 0;
-            foreach (var box in handle.Boxes)
+            for (int i = 0; i < reader.BoxeTypes.Length; i++)
             {
-                sb.Append($"{BitTools.BigEndian.ConvertToString((uint)box.type)}");
-                if (box.size > 1)
-                    sb.Append($"({box.size})");
-                else
-                    sb.Append($"({handle.ExtendedSizes[index++]})");
-                sb.Append(", ");
+                sb.Append($"[{BigEndian.ConvertToString((uint)reader.BoxeTypes[i])}, {reader.BoxOffsets[i]}], ");
             }
             sb.Remove(sb.Length - 2, 2);
 
+            Debug.Log($"FileSize={reader.FileSize}");
             Debug.Log(sb.ToString());
         }
     }

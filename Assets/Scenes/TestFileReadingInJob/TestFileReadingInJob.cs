@@ -6,6 +6,7 @@ using Unity.Jobs;
 using UnityEngine.Video;
 using Unity.MediaFramework.Video;
 using Unity.MediaFramework.Format.ISOBMFF;
+using Unity.MediaFramework.LowLevel.Unsafe;
 
 public unsafe class TestFileReadingInJob : MonoBehaviour
 {
@@ -35,8 +36,8 @@ public unsafe class TestFileReadingInJob : MonoBehaviour
             var buffer = (byte*)readCmdArray.ReadCommands[0].Buffer;
             Box.Value = new ISOBox()
             {
-                size = BitTools.BigEndian.GetUInt32(buffer),
-                type = (ISOBoxType)BitTools.BigEndian.GetUInt32(buffer)
+                size = BigEndian.GetUInt32(buffer),
+                type = (ISOBoxType)BigEndian.GetUInt32(buffer)
             };
 
             readHandle.Dispose();

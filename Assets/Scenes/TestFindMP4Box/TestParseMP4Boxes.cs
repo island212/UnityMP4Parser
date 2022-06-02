@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.Video;
 using Unity.MediaFramework.Format.MP4;
 using Unity.MediaFramework.Video;
+using Unity.MediaFramework.Format.ISOBMFF;
+using Unity.Jobs;
 
 public unsafe class TestParseMP4Boxes : MonoBehaviour
 {
@@ -9,14 +11,13 @@ public unsafe class TestParseMP4Boxes : MonoBehaviour
 
     void Start()
     {
-        var mp4Handle = MP4Parser.Create(clip.originalPath, 1024);
+        Debug.Log($"Opening file {clip.originalPath}");
+        JobHandle job = ISOReader.GetContentTable(clip.originalPath, out ISOReader reader);
 
-        Debug.Log($"Opening file {clip.originalPath} Size={mp4Handle.FileSize}");
+        job.Complete();
 
-        DebugTools.Print(mp4Handle);
+        DebugTools.Print(reader);
 
-
-
-        mp4Handle.Dispose();
+        reader.Dispose();
     }
 }

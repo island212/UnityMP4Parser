@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.MediaFramework.LowLevel.Unsafe;
 using Unity.MediaFramework.Video;
 
 namespace Unity.MediaFramework.Format.ISOBMFF
@@ -23,88 +24,80 @@ namespace Unity.MediaFramework.Format.ISOBMFF
     [StructLayout(LayoutKind.Sequential, Size = 8)]
     public unsafe struct ISOBox
     {
+        public const int Stride = 8;
+
         public uint size;           // 32 bits
         public ISOBoxType type;     // 32 bits
-
-        public ISOBox(ref BitStream stream)
-        {
-            size = stream.PeekUInt32();
-            type = (ISOBoxType)stream.PeekUInt32(4);
-        }
-
-        public ISOBox(ref BitStream stream, int offset)
-        {
-            size = stream.PeekUInt32(offset);
-            type = (ISOBoxType)stream.PeekUInt32(offset + 4);
-        }
     }
 
     // 4.2 ISO/IEC 14496-12:2015(E)
     [StructLayout(LayoutKind.Sequential, Size = 16)]
     public unsafe struct ISOFullBox
     {
+        public const int Stride = 12;
+
         public uint size;           // 32 bits
         public ISOBoxType type;     // 32 bits
         public byte version;        // 8 bits
         public uint flags;          // 24 bits
+    }
 
-        public ISOFullBox(ref BitStream stream)
+    public readonly unsafe struct MVHDBox
+    {
+        public readonly ISOFullBox fullBox;
+
+        public readonly ulong creationTime;
+        public readonly ulong modificationTime;
+        public readonly uint timescale;
+        public readonly ulong duration;
+
+        public MVHDBox(byte* buffer)
         {
-            size = stream.PeekUInt32();
-            type = (ISOBoxType)stream.PeekUInt32(4);
+            fullBox = ISOUtility.GetISOFullBox(buffer);
+            if (fullBox.version == 1)
+            {
+                creationTime = BigEndian.GetUInt64(buffer + ISOFullBox.Stride);
+                modificationTime = BigEndian.GetUInt64(buffer + ISOFullBox.Stride + 8);
+                timescale = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 16);
+                duration = BigEndian.GetUInt64(buffer + ISOFullBox.Stride + 20);
 
-            version = stream.PeekByte(8);
-            // Peek the version and flags then remove the version
-            flags = stream.PeekUInt32(8) & 0x00FFFFFF;
+                buffer += ISOFullBox.Stride + 28;
+            }
+            else
+            {
+                creationTime = BigEndian.GetUInt32(buffer + ISOFullBox.Stride);
+                modificationTime = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 4);
+                timescale = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 8);
+                duration = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 12);
+
+                buffer += ISOFullBox.Stride + 16;
+            }
         }
     }
 
-    public unsafe static class ISOTools
+    public unsafe static class ISOUtility
     {
         public static bool IsBoxTypeValid(uint type) => ((ISOBoxType)type).IsValid();
 
         public static bool CanBoxTypeBeParent(uint type) => ((ISOBoxType)type).CanBeParent();
-    }
 
-    public unsafe static class ISOBMFFExtensions
-    {
-        public static ISOBox PeekISOBox(this BitStream stream) => new ISOBox()
+        public static ISOBox GetISOBox(byte* buffer) => new ISOBox()
         {
-            size = stream.PeekUInt32(),
-            type = (ISOBoxType)stream.PeekUInt32(4)
+            size = BigEndian.GetUInt32(buffer),
+            type = (ISOBoxType)BigEndian.GetUInt32(buffer + 4)
         };
 
-        public static ISOBox PeekISOBox(this BitStream stream, int offset) => new ISOBox()
+        public static ISOFullBox GetISOFullBox(byte* buffer) => new ISOFullBox()
         {
-            size = stream.PeekUInt32(offset),
-            type = (ISOBoxType)stream.PeekUInt32(4 + offset)
-        };
+            size = BigEndian.GetUInt32(buffer),
+            type = (ISOBoxType)BigEndian.GetUInt32(buffer + 4),
 
-        public static ISOFullBox PeekISOFullBox(this BitStream stream) => new ISOFullBox()
-        {
-            size = stream.PeekUInt32(),
-            type = (ISOBoxType)stream.PeekUInt32(4),
-
-            version = stream.PeekByte(8),
+            version = *(buffer + 8),
             // Peek the version and flags then remove the version
-            flags = stream.PeekUInt32(8) & 0x00FFFFFF
+            flags = BigEndian.GetUInt32(buffer + 8) & 0x00FFFFFF
         };
 
-        public static ISOBox ReadISOBox(this BitStream stream)
-        {
-            var box = new ISOBox(ref stream);
-            stream.Seek(8);
-            return box;
-        }
-
-        public static ISOFullBox ReadISOFullBox(this BitStream stream)
-        {
-            var box = new ISOFullBox(ref stream);
-            stream.Seek(12);
-            return box;
-        }
-
-        public static bool HasValidISOBoxType(this BitStream stream, int offset) => ((ISOBoxType)(stream.PeekUInt32(offset + 4))).IsValid();
+        public static bool HasValidISOBoxType(byte* buffer) => ((ISOBoxType)BigEndian.GetUInt32(buffer + 4)).IsValid();
 
         public static bool CanBeParent(this ISOBoxType type)
         {

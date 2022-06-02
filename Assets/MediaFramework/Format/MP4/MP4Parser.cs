@@ -7,6 +7,7 @@ using Unity.IO.LowLevel.Unsafe;
 using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.MediaFramework.Format.ISOBMFF;
+using Unity.MediaFramework.LowLevel.Unsafe;
 using Unity.MediaFramework.Video;
 
 namespace Unity.MediaFramework.Format.MP4
@@ -18,85 +19,38 @@ namespace Unity.MediaFramework.Format.MP4
 
     public unsafe static class MP4Parser
     {
-        public static MP4Handle Create(string path, int chunkSize)
-        { 
-            FileInfoResult fileInfo;
-
-            AsyncReadManager.GetFileInfo(path, &fileInfo).JobHandle.Complete();
-
-            var handle = new MP4Handle()
-            {
-                FileHandle = AsyncReadManager.OpenFileAsync(path),
-                FileSize = fileInfo.FileSize,
-                Boxes = new NativeList<ISOBox>(128, Allocator.Persistent),
-                ExtendedSizes = new NativeList<ulong>(4, Allocator.Persistent)
-            };
-
-            long bufferSize = math.min(chunkSize, fileInfo.FileSize);
-            using var fileBuffer = new NativeArray<byte>((int)bufferSize, Allocator.Temp, NativeArrayOptions.UninitializedMemory);
-
-            long offset = 0;
-            int sizeIndex = 0, boxIndex = 0;
-
-            while (offset < fileInfo.FileSize)
-            {
-                ReadCommand cmd;
-                cmd.Offset = offset;
-                cmd.Size = math.min(chunkSize, fileInfo.FileSize - offset);
-                cmd.Buffer = fileBuffer.GetUnsafeReadOnlyPtr();
-
-                UnityEngine.Debug.Log($"ReadCommand Offset={cmd.Offset} Size={cmd.Size}");
-
-                ReadHandle readHandle = AsyncReadManagerEx.Read(handle.FileHandle, cmd);
-
-                var extractJob = new ISOExtractAllParentBoxes()
-                {
-                    Stream = new BitStream((byte*)cmd.Buffer, (int)cmd.Size),
-                    Boxes = handle.Boxes,
-                    ExtendedSizes = handle.ExtendedSizes
-                };
-
-                readHandle.JobHandle.Complete();
-                extractJob.Run();
-
-                while (boxIndex < handle.Boxes.Length)
-                {
-                    var box = handle.Boxes[boxIndex];
-                    offset += box.size > 1 ? box.size : box.size == 1 ? 
-                        (long)handle.ExtendedSizes[sizeIndex++] : fileInfo.FileSize - offset;
-
-                    boxIndex++;
-                }
-            }
-
-            return handle;
-        }
-
-        public static JobHandle Parse(in MP4Handle handle)
-        {
-            JobHandle jobHandle = default;
-
-
-
-            return jobHandle;
-        }
+        
     }
 
-    public struct MP4Handle : IDisposable
+    public struct MediaAttributes
     {
-        public FileHandle FileHandle;
-        public long FileSize;
+        public int FrameCount;
+        public BigRational Duration;
+    }
 
-        public NativeList<ISOBox> Boxes;
-        public NativeList<ulong> ExtendedSizes;
+    public struct AudioTrack
+    {
+        public int channelCount;
+        public int sampleRate;
+        public uint codecFourCC;
+    }
 
-        public void Dispose()
-        {
-            FileHandle.Close().Complete();
+    public struct VideoTrack
+    {
+        public int width, height;
+        public Rational aspectRatio;
+        public uint codecFourCC;
+        public uint colorStandard;
+    }
 
-            Boxes.Dispose();
-            ExtendedSizes.Dispose();
-        }
+    public struct BigRational
+    {
+        public uint num, denom;
+    }
+
+    public struct Rational
+    {
+        public int num, denom;
     }
 
     public enum MP4Brand : uint

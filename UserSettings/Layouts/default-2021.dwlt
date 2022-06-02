@@ -20,7 +20,7 @@ MonoBehaviour:
     height: 1357
   m_ShowMode: 4
   m_Title: Console
-  m_RootView: {fileID: 6}
+  m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
@@ -33,117 +33,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 1
-  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children:
-  - {fileID: 9}
-  - {fileID: 3}
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 30
-    width: 2560
-    height: 1307
-  m_MinSize: {x: 300, y: 200}
-  m_MaxSize: {x: 24288, y: 16192}
-  vertical: 0
-  controlID: 89
---- !u!114 &3
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children: []
-  m_Position:
-    serializedVersion: 2
-    x: 1955
-    y: 0
-    width: 605
-    height: 1307
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 13}
-  m_Panes:
-  - {fileID: 13}
-  m_Selected: 0
-  m_LastSelected: 0
---- !u!114 &4
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children: []
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 484
-    height: 775
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 14}
-  m_Panes:
-  - {fileID: 14}
-  m_Selected: 0
-  m_LastSelected: 0
---- !u!114 &5
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
-  m_EditorClassIdentifier: 
-  m_Children: []
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 775
-    width: 1955
-    height: 532
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 17}
-  m_Panes:
-  - {fileID: 12}
-  - {fileID: 17}
-  m_Selected: 1
-  m_LastSelected: 0
---- !u!114 &6
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
   m_Script: {fileID: 12008, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 7}
-  - {fileID: 2}
-  - {fileID: 8}
+  - {fileID: 3}
+  - {fileID: 5}
+  - {fileID: 4}
   m_Position:
     serializedVersion: 2
     x: 0
@@ -156,7 +52,7 @@ MonoBehaviour:
   m_TopViewHeight: 30
   m_UseBottomView: 1
   m_BottomViewHeight: 20
---- !u!114 &7
+--- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LastLoadedLayoutName: 
---- !u!114 &8
+--- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -199,7 +95,7 @@ MonoBehaviour:
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
---- !u!114 &9
+--- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,8 +108,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
+  - {fileID: 6}
+  - {fileID: 11}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 30
+    width: 2560
+    height: 1307
+  m_MinSize: {x: 300, y: 200}
+  m_MaxSize: {x: 24288, y: 16192}
+  vertical: 0
+  controlID: 19
+--- !u!114 &6
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 7}
   - {fileID: 10}
-  - {fileID: 5}
   m_Position:
     serializedVersion: 2
     x: 0
@@ -223,8 +144,8 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 73
---- !u!114 &10
+  controlID: 82
+--- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,8 +158,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 4}
-  - {fileID: 11}
+  - {fileID: 8}
+  - {fileID: 9}
   m_Position:
     serializedVersion: 2
     x: 0
@@ -248,7 +169,90 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 74
+  controlID: 83
+--- !u!114 &8
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 484
+    height: 775
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 13}
+  m_Panes:
+  - {fileID: 13}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &9
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: TestReportWindow
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 484
+    y: 0
+    width: 1471
+    height: 775
+  m_MinSize: {x: 640, y: 480}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 18}
+  m_Panes:
+  - {fileID: 14}
+  - {fileID: 15}
+  - {fileID: 16}
+  - {fileID: 17}
+  - {fileID: 18}
+  m_Selected: 4
+  m_LastSelected: 1
+--- !u!114 &10
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: ConsoleWindow
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 775
+    width: 1955
+    height: 532
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 12}
+  m_Panes:
+  - {fileID: 19}
+  - {fileID: 12}
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -259,23 +263,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: SceneView
+  m_Name: 
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 484
+    x: 1955
     y: 0
-    width: 1471
-    height: 775
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 15}
+    width: 605
+    height: 1307
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 20}
   m_Panes:
-  - {fileID: 15}
-  - {fileID: 16}
+  - {fileID: 20}
   m_Selected: 0
-  m_LastSelected: 1
+  m_LastSelected: 0
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -285,14 +288,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 1
-  m_Script: {fileID: 12014, guid: 0000000000000000e000000000000000, type: 0}
+  m_Script: {fileID: 12003, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Project
-    m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000, type: 0}
+    m_Text: Console
+    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
@@ -304,165 +307,7 @@ MonoBehaviour:
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
-  m_SearchFilter:
-    m_NameFilter: 
-    m_ClassNames: []
-    m_AssetLabels: []
-    m_AssetBundleNames: []
-    m_VersionControlStates: []
-    m_SoftLockControlStates: []
-    m_ReferencingInstanceIDs: 
-    m_SceneHandles: 
-    m_ShowAllHits: 0
-    m_SkipHidden: 0
-    m_SearchArea: 3
-    m_Folders:
-    - Assets/Media
-    m_Globs: []
-    m_OriginalText: 
-  m_ViewMode: 1
-  m_StartGridSize: 16
-  m_LastFolders:
-  - Assets/Media
-  m_LastFoldersGridSize: -1
-  m_LastProjectPath: E:\Projects\UnityMP4Parser
-  m_LockTracker:
-    m_IsLocked: 0
-  m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 564e0000
-    m_LastClickedID: 20054
-    m_ExpandedIDs: 000000004e4e0000584e00005a4e000000ca9a3bffffff7f
-    m_RenameOverlay:
-      m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
-      m_EditFieldRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      m_UserData: 0
-      m_IsWaitingForDelay: 0
-      m_IsRenaming: 0
-      m_OriginalEventType: 11
-      m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
-    m_SearchString: 
-    m_CreateAssetUtility:
-      m_EndAction: {fileID: 0}
-      m_InstanceID: 0
-      m_Path: 
-      m_Icon: {fileID: 0}
-      m_ResourceFile: 
-  m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 000000004e4e0000
-    m_RenameOverlay:
-      m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
-      m_EditFieldRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      m_UserData: 0
-      m_IsWaitingForDelay: 0
-      m_IsRenaming: 0
-      m_OriginalEventType: 11
-      m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
-    m_SearchString: 
-    m_CreateAssetUtility:
-      m_EndAction: {fileID: 0}
-      m_InstanceID: 0
-      m_Path: 
-      m_Icon: {fileID: 0}
-      m_ResourceFile: 
-  m_ListAreaState:
-    m_SelectedInstanceIDs: d44f0000
-    m_LastClickedInstanceID: 20436
-    m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000
-    m_RenameOverlay:
-      m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
-      m_EditFieldRect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 0
-        height: 0
-      m_UserData: 0
-      m_IsWaitingForDelay: 0
-      m_IsRenaming: 0
-      m_OriginalEventType: 11
-      m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 5}
-    m_CreateAssetUtility:
-      m_EndAction: {fileID: 0}
-      m_InstanceID: 0
-      m_Path: 
-      m_Icon: {fileID: 0}
-      m_ResourceFile: 
-    m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
-    m_GridSize: 16
-  m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 207
 --- !u!114 &13
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12019, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Inspector
-    m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 1955
-    y: 73
-    width: 604
-    height: 1286
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-  m_ObjectsLockedBeforeSerialization:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  m_InstanceIDsLockedBeforeSerialization: d44f0000
-  m_PreviewResizer:
-    m_CachedPref: 160
-    m_ControlHash: -371814159
-    m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
-  m_GlobalObjectId: 
-  m_InspectorMode: 0
-  m_LockTracker:
-    m_IsLocked: 1
-  m_PreviewWindow: {fileID: 0}
---- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -493,9 +338,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: d44f0000
-      m_LastClickedID: 20436
-      m_ExpandedIDs: 32eeffff86f4ffff38fbffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 34fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -519,7 +364,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
---- !u!114 &15
+--- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -797,9 +642,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_Size:
-    m_Target: 10
+    m_Target: 9.12025
     speed: 2
-    m_Value: 10
+    m_Value: 9.12025
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -824,7 +669,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &16
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -885,7 +730,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -916,6 +761,34 @@ MonoBehaviour:
   m_LowResolutionForAspectRatios: 01000000000000000000
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
+--- !u!114 &16
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13953, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 800, y: 250}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Package Manager
+    m_Image: {fileID: -2824328813065806953, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 484
+    y: 73
+    width: 1469
+    height: 754
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -924,15 +797,638 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12003, guid: 0000000000000000e000000000000000, type: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13401, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
   m_EditorClassIdentifier: 
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
-    m_Text: Console
-    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000, type: 0}
+    m_Text: Test Runner
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 484
+    y: 73
+    width: 1469
+    height: 754
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+  m_Spl:
+    ID: 407
+    splitterInitialOffset: 0
+    currentActiveSplitter: -1
+    realSizes:
+    - 513
+    - 171
+    relativeSizes:
+    - 0.75
+    - 0.25
+    minSizes:
+    - 32
+    - 32
+    maxSizes:
+    - 0
+    - 0
+    lastTotalSize: 684
+    splitSize: 6
+    xOffset: 0
+    m_Version: 1
+    oldRealSizes: 
+    oldMinSizes: 
+    oldMaxSizes: 
+    oldSplitSize: 0
+  m_TestTypeToolbarIndex: 0
+  m_PlayModeTestListGUI:
+    m_Window: {fileID: 17}
+    m_NewResultList:
+    - id: 1000
+      uniqueId: '[UnityMP4Parser][suite]'
+      name: UnityMP4Parser
+      fullName: UnityMP4Parser
+      resultStatus: 1
+      duration: 8.052306
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 
+      parentUniqueId: 
+    - id: 1009
+      uniqueId: '[Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Tests.dll][suite]'
+      name: Tests.dll
+      fullName: E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Tests.dll
+      resultStatus: 0
+      duration: 8.033705
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1006
+      parentUniqueId: '[DOTS-MP4][suite]'
+    - id: 1001
+      uniqueId: Tests.dll/[Tests][BitStreamPerformance][suite]
+      name: BitStreamPerformance
+      fullName: BitStreamPerformance
+      resultStatus: 0
+      duration: 8.027292
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1010
+      parentUniqueId: '[Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Tests.dll][suite]'
+    - id: 1002
+      uniqueId: Tests.dll/BitStreamPerformance/[Tests][BitStreamPerformance.BitStreamVsNativeArray]
+      name: BitStreamVsNativeArray
+      fullName: BitStreamPerformance.BitStreamVsNativeArray
+      resultStatus: 0
+      duration: 8.012251
+      messages: 
+      output: 'BitStream Millisecond Median:86.35 Min:85.94 Max:96.11 Avg:86.99 Std:2.18
+        SampleCount: 20 Sum: 1739.89
+
+        NativeArray Millisecond Median:230.79
+        Min:229.86 Max:232.26 Avg:230.77 Std:0.64 SampleCount: 20 Sum: 4615.42
+
+
+
+        ##performancetestresult2:{"Name":"BitStreamPerformance.BitStreamVsNativeArray","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"BitStream","Unit":2,"IncreaseIsBetter":false,"Samples":[88.36779999999999,86.57849999999996,86.64390000000003,85.94299999999999,87.9103,87.11739999999998,86.35050000000001,86.70260000000008,86.01749999999993,96.1088000000002,86.04970000000003,86.03589999999986,85.9994999999999,85.93950000000018,86.0635000000002,86.06549999999993,86.85770000000002,86.47550000000001,86.31850000000009,86.33979999999974],"Min":85.93950000000018,"Max":96.1088000000002,"Median":86.35050000000001,"Average":86.99427,"StandardDeviation":2.1849989235924558,"Sum":1739.8854000000001},{"Name":"NativeArray","Unit":2,"IncreaseIsBetter":false,"Samples":[230.87660000000006,230.29640000000019,231.62410000000024,230.50330000000009,231.69270000000007,230.0367000000001,231.4082000000003,230.42039999999998,230.27610000000005,230.88659999999983,229.85800000000018,229.85969999999998,230.73099999999978,231.1921000000002,231.27070000000004,230.78909999999997,230.20200000000023,231.04839999999968,230.1891999999998,232.26200000000063],"Min":229.85800000000018,"Max":232.26200000000063,"Median":230.78909999999997,"Average":230.77116500000006,"StandardDeviation":0.642925867635689,"Sum":4615.423300000001}]}
+
+        ##performancetestruninfo2:{"TestSuite":"Playmode","Date":1654050871931,"Player":{"Development":true,"ScreenWidth":2560,"ScreenHeight":1440,"ScreenRefreshRate":144,"Fullscreen":false,"Vsync":1,"AntiAliasing":2,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsEditor","ColorSpace":"Gamma","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows
+        10  (10.0.19043) 64bit","DeviceModel":"System Product Name (System manufacturer)","DeviceName":"DESKTOP-66R04J2","ProcessorType":"AMD
+        Ryzen 9 5950X 16-Core Processor ","ProcessorCount":32,"GraphicsDeviceName":"NVIDIA
+        GeForce RTX 3090","SystemMemorySizeMB":32673},"Editor":{"Version":"2021.2.1f1","Branch":"2021.2/staging","Changeset":"c20c6d589440","Date":1635200762},"Dependencies":["com.unity.burst@1.6.5","com.unity.collab-proxy@1.15.15","com.unity.collections@1.2.3","com.unity.ide.rider@3.0.7","com.unity.ide.visualstudio@2.0.14","com.unity.ide.vscode@1.2.5","com.unity.test-framework@1.1.31","com.unity.test-framework.performance@2.8.1-preview","com.unity.textmeshpro@3.0.6","com.unity.timeline@1.6.2","com.unity.ugui@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.uielementsnative@1.0.0","com.unity.ext.nunit@1.0.6","com.unity.services.core@1.0.1","com.unity.mathematics@1.2.4"],"Results":[]}
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Performance
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][BitStreamPerformance][suite]
+    - id: 1001
+      uniqueId: Tests.dll/[Tests][GenericFunction][suite]
+      name: GenericFunction
+      fullName: GenericFunction
+      resultStatus: 1
+      duration: 0.0595207
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1005
+      parentUniqueId: '[Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Tests.dll][suite]'
+    - id: 1002
+      uniqueId: Tests.dll/GenericFunction/[Tests][GenericFunction.GenericFunctionTest]
+      name: GenericFunctionTest
+      fullName: GenericFunction.GenericFunctionTest
+      resultStatus: 1
+      duration: 0.0498273
+      messages: 
+      output: 'Compare<T> Millisecond Median:0.04 Min:0.04 Max:0.05 Avg:0.04 Std:0.00
+        SampleCount: 20 Sum: 0.75
+
+        Compare Millisecond Median:0.01 Min:0.01
+        Max:0.01 Avg:0.01 Std:0.00 SampleCount: 20 Sum: 0.15
+
+
+
+        ##performancetestresult2:{"Name":"GenericFunction.GenericFunctionTest","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"Compare<T>","Unit":2,"IncreaseIsBetter":false,"Samples":[0.03720000000000001,0.036599999999999969,0.03709999999999991,0.03620000000000001,0.04859999999999998,0.036699999999999958,0.03600000000000003,0.03610000000000002,0.03550000000000009,0.03810000000000002,0.03820000000000001,0.03620000000000001,0.03600000000000003,0.03760000000000008,0.036599999999999969,0.03649999999999998,0.03880000000000017,0.0374000000000001,0.03669999999999973,0.035600000000000079],"Min":0.03550000000000009,"Max":0.04859999999999998,"Median":0.03669999999999973,"Average":0.03738500000000001,"StandardDeviation":0.0027120610243871708,"Sum":0.7477000000000001},{"Name":"Compare","Unit":2,"IncreaseIsBetter":false,"Samples":[0.007499999999999993,0.007499999999999993,0.00739999999999999,0.007400000000000018,0.00739999999999999,0.007500000000000007,0.007500000000000007,0.00739999999999999,0.007500000000000007,0.007499999999999979,0.00739999999999999,0.007500000000000007,0.007400000000000018,0.007499999999999979,0.007500000000000007,0.007500000000000007,0.007500000000000007,0.007500000000000007,0.00739999999999999,0.007500000000000007],"Min":0.00739999999999999,"Max":0.007500000000000007,"Median":0.007499999999999993,"Average":0.007464999999999999,"StandardDeviation":0.00004769696007084843,"Sum":0.1493}]}
+
+        ##performancetestruninfo2:{"TestSuite":"Playmode","Date":1654044452267,"Player":{"Development":true,"ScreenWidth":2560,"ScreenHeight":1440,"ScreenRefreshRate":144,"Fullscreen":false,"Vsync":1,"AntiAliasing":2,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsEditor","ColorSpace":"Gamma","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows
+        10  (10.0.19043) 64bit","DeviceModel":"System Product Name (System manufacturer)","DeviceName":"DESKTOP-66R04J2","ProcessorType":"AMD
+        Ryzen 9 5950X 16-Core Processor ","ProcessorCount":32,"GraphicsDeviceName":"NVIDIA
+        GeForce RTX 3090","SystemMemorySizeMB":32673},"Editor":{"Version":"2021.2.1f1","Branch":"2021.2/staging","Changeset":"c20c6d589440","Date":1635200762},"Dependencies":["com.unity.burst@1.6.5","com.unity.collab-proxy@1.15.15","com.unity.collections@1.2.3","com.unity.ide.rider@3.0.7","com.unity.ide.visualstudio@2.0.14","com.unity.ide.vscode@1.2.5","com.unity.test-framework@1.1.31","com.unity.test-framework.performance@2.8.1-preview","com.unity.textmeshpro@3.0.6","com.unity.timeline@1.6.2","com.unity.ugui@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.uielementsnative@1.0.0","com.unity.ext.nunit@1.0.6","com.unity.services.core@1.0.1","com.unity.mathematics@1.2.4"],"Results":[]}
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][GenericFunction][suite]
+    - id: 1007
+      uniqueId: Tests.dll/[Tests][ReadingBitFromArray][suite]
+      name: ReadingBitFromArray
+      fullName: ReadingBitFromArray
+      resultStatus: 0
+      duration: 1.3091022
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1009
+      parentUniqueId: '[Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Tests.dll][suite]'
+    - id: 1004
+      uniqueId: Tests.dll/ReadingBitFromArray/[Tests][ReadingBitFromArray.ReadingBitFromArrayTest]
+      name: ReadingBitFromArrayTest
+      fullName: ReadingBitFromArray.ReadingBitFromArrayTest
+      resultStatus: 0
+      duration: 1.2850927
+      messages: 
+      output: 'GetUInt64 Millisecond Median:8.45 Min:8.26 Max:8.68 Avg:8.47 Std:0.10
+        SampleCount: 20 Sum: 169.35
+
+        UnsafeUtility.ReadArrayElement Millisecond
+        Median:7.96 Min:7.87 Max:8.04 Avg:7.96 Std:0.04 SampleCount: 20 Sum: 159.11
+
+        ReadArrayElement
+        Millisecond Median:11.22 Min:11.19 Max:11.29 Avg:11.22 Std:0.02 SampleCount:
+        20 Sum: 224.45
+
+        GetUInt64WithValue Millisecond Median:12.90 Min:12.79
+        Max:13.31 Avg:12.95 Std:0.13 SampleCount: 20 Sum: 258.91
+
+
+
+        ##performancetestresult2:{"Name":"ReadingBitFromArray.ReadingBitFromArrayTest","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"GetUInt64","Unit":2,"IncreaseIsBetter":false,"Samples":[8.346799999999995,8.6659,8.2605,8.4439,8.349599999999996,8.528000000000006,8.45490000000001,8.554000000000002,8.68050000000001,8.490600000000015,8.449900000000014,8.45920000000001,8.438999999999993,8.424000000000007,8.449299999999994,8.411200000000008,8.537900000000008,8.508099999999985,8.480400000000003,8.413100000000015],"Min":8.2605,"Max":8.68050000000001,"Median":8.45490000000001,"Average":8.467340000000004,"StandardDeviation":0.09611325298833788,"Sum":169.34680000000007},{"Name":"UnsafeUtility.ReadArrayElement","Unit":2,"IncreaseIsBetter":false,"Samples":[7.892899999999997,7.8703,8.036900000000003,7.926299999999998,7.977599999999995,7.919699999999992,7.9550000000000129,7.951300000000003,7.962500000000006,7.936999999999983,7.944099999999992,7.971800000000002,7.967700000000008,7.940200000000004,7.961900000000014,7.952000000000027,7.987500000000011,7.995400000000018,7.945899999999995,8.017500000000013],"Min":7.8703,"Max":8.036900000000003,"Median":7.9550000000000129,"Average":7.955675000000004,"StandardDeviation":0.03756257279527455,"Sum":159.11350000000008},{"Name":"ReadArrayElement","Unit":2,"IncreaseIsBetter":false,"Samples":[11.225300000000005,11.2046,11.22580000000002,11.248999999999996,11.2406,11.227000000000004,11.195300000000004,11.257000000000005,11.213699999999989,11.187699999999979,11.290500000000009,11.229500000000002,11.190300000000036,11.233699999999999,11.215599999999995,11.215800000000002,11.210099999999955,11.210200000000043,11.220300000000009,11.21180000000004],"Min":11.187699999999979,"Max":11.290500000000009,"Median":11.220300000000009,"Average":11.222690000000004,"StandardDeviation":0.023408607391299405,"Sum":224.4538000000001},{"Name":"GetUInt64WithValue","Unit":2,"IncreaseIsBetter":false,"Samples":[12.864499999999993,12.9632,12.860199999999992,12.924000000000007,12.868200000000002,12.789699999999982,12.80589999999998,12.903599999999983,12.903300000000002,12.877499999999998,12.8784,12.890499999999975,12.957400000000007,13.213600000000043,13.306399999999997,13.196899999999971,13.030400000000043,12.901499999999999,12.916699999999992,12.860299999999996],"Min":12.789699999999982,"Max":13.306399999999997,"Median":12.903300000000002,"Average":12.945609999999999,"StandardDeviation":0.1346736459000112,"Sum":258.9122}]}
+
+        ##performancetestruninfo2:{"TestSuite":"Playmode","Date":1653974599258,"Player":{"Development":true,"ScreenWidth":2560,"ScreenHeight":1440,"ScreenRefreshRate":144,"Fullscreen":false,"Vsync":1,"AntiAliasing":2,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsEditor","ColorSpace":"Gamma","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows
+        10  (10.0.19043) 64bit","DeviceModel":"System Product Name (System manufacturer)","DeviceName":"DESKTOP-66R04J2","ProcessorType":"AMD
+        Ryzen 9 5950X 16-Core Processor ","ProcessorCount":32,"GraphicsDeviceName":"NVIDIA
+        GeForce RTX 3090","SystemMemorySizeMB":32673},"Editor":{"Version":"2021.2.1f1","Branch":"2021.2/staging","Changeset":"c20c6d589440","Date":1635200762},"Dependencies":["com.unity.burst@1.6.5","com.unity.collab-proxy@1.15.15","com.unity.collections@1.2.3","com.unity.ide.rider@3.0.7","com.unity.ide.visualstudio@2.0.14","com.unity.ide.vscode@1.2.5","com.unity.test-framework@1.1.31","com.unity.test-framework.performance@2.8.1-preview","com.unity.textmeshpro@3.0.6","com.unity.timeline@1.6.2","com.unity.ugui@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.uielementsnative@1.0.0","com.unity.ext.nunit@1.0.6","com.unity.services.core@1.0.1","com.unity.mathematics@1.2.4"],"Results":[]}
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Performance
+      parentId: 1003
+      parentUniqueId: Tests.dll/[Tests][ReadingBitFromArray][suite]
+    - id: 1005
+      uniqueId: Tests.dll/[Tests][RefVsInVsImmutableIn][suite]
+      name: RefVsInVsImmutableIn
+      fullName: RefVsInVsImmutableIn
+      resultStatus: 1
+      duration: 1.3463815
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1007
+      parentUniqueId: '[Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Tests.dll][suite]'
+    - id: 1006
+      uniqueId: Tests.dll/RefVsInVsImmutableIn/[Tests][RefVsInVsImmutableIn.RefVsInVsImmutableInTest]
+      name: RefVsInVsImmutableInTest
+      fullName: RefVsInVsImmutableIn.RefVsInVsImmutableInTest
+      resultStatus: 1
+      duration: 2.6944842
+      messages: 
+      output: 'BigValue.Sum Millisecond Median:19.30 Min:19.01 Max:24.18 Avg:19.63
+        Std:1.12 SampleCount: 20 Sum: 392.63
+
+        BigValue.SumIn Millisecond
+        Median:16.33 Min:16.25 Max:16.44 Avg:16.34 Std:0.05 SampleCount: 20 Sum:
+        326.84
+
+        BigValue.SumRef Millisecond Median:16.68 Min:16.60 Max:18.52
+        Avg:16.82 Std:0.47 SampleCount: 20 Sum: 336.43
+
+        BigValueImmutable.Sum
+        Millisecond Median:19.67 Min:19.38 Max:19.74 Avg:19.64 Std:0.08 SampleCount:
+        20 Sum: 392.83
+
+        BigValueImmutable.SumIn Millisecond Median:16.46
+        Min:16.33 Max:16.80 Avg:16.47 Std:0.10 SampleCount: 20 Sum: 329.48
+
+        BigValueImmutable.SumRef
+        Millisecond Median:16.47 Min:16.40 Max:16.84 Avg:16.52 Std:0.12 SampleCount:
+        20 Sum: 330.48
+
+
+
+        ##performancetestresult2:{"Name":"RefVsInVsImmutableIn.RefVsInVsImmutableInTest","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"BigValue.Sum","Unit":2,"IncreaseIsBetter":false,"Samples":[24.1751,19.125900000000017,19.1447,19.30340000000001,19.293299999999989,19.009500000000004,20.99940000000001,19.74709999999999,19.330100000000017,19.07850000000002,19.131400000000043,19.278399999999978,19.1884,19.59050000000002,19.3091,19.266099999999996,19.46460000000002,19.213599999999987,19.45949999999999,19.517100000000029],"Min":19.009500000000004,"Max":24.1751,"Median":19.30340000000001,"Average":19.631285000000007,"StandardDeviation":1.1198751659336848,"Sum":392.6257000000001},{"Name":"BigValue.SumIn","Unit":2,"IncreaseIsBetter":false,"Samples":[16.34020000000001,16.41680000000001,16.433499999999996,16.361099999999995,16.441900000000005,16.418300000000018,16.387699999999997,16.33189999999999,16.384500000000004,16.33759999999998,16.318600000000005,16.30600000000004,16.288099999999987,16.311900000000038,16.32740000000001,16.30680000000001,16.324700000000008,16.289699999999983,16.250499999999989,16.258899999999984],"Min":16.250499999999989,"Max":16.441900000000005,"Median":16.33189999999999,"Average":16.341805,"StandardDeviation":0.05457646447875015,"Sum":326.83610000000007},{"Name":"BigValue.SumRef","Unit":2,"IncreaseIsBetter":false,"Samples":[16.709900000000006,16.697500000000006,16.73570000000001,16.6156,16.595200000000007,16.617800000000018,16.624899999999998,18.519000000000007,16.730400000000004,16.65439999999998,16.652299999999998,16.665399999999978,16.654600000000018,16.624900000000026,16.697000000000004,16.678699999999993,17.875699999999996,16.666999999999974,16.73570000000001,16.676500000000034],"Min":16.595200000000007,"Max":18.519000000000007,"Median":16.676500000000034,"Average":16.82141,"StandardDeviation":0.47146904977951589,"Sum":336.4282},{"Name":"BigValueImmutable.Sum","Unit":2,"IncreaseIsBetter":false,"Samples":[19.382899999999994,19.5728,19.555499999999996,19.67259999999999,19.705099999999989,19.682600000000009,19.717399999999999,19.678500000000015,19.694199999999996,19.693600000000005,19.69290000000001,19.688900000000048,19.616000000000044,19.62020000000001,19.738200000000007,19.617099999999995,19.671899999999995,19.636300000000007,19.587300000000029,19.609199999999988],"Min":19.382899999999994,"Max":19.738200000000007,"Median":19.67259999999999,"Average":19.641660000000006,"StandardDeviation":0.0771955529807272,"Sum":392.8332000000001},{"Name":"BigValueImmutable.SumIn","Unit":2,"IncreaseIsBetter":false,"Samples":[16.463700000000004,16.4987,16.448300000000005,16.55800000000002,16.45349999999999,16.470799999999998,16.458,16.4563,16.460700000000004,16.453099999999979,16.804599999999966,16.329799999999979,16.538399999999969,16.3467,16.567700000000003,16.35329999999999,16.37529999999998,16.396799999999986,16.573500000000025,16.472199999999988],"Min":16.329799999999979,"Max":16.804599999999966,"Median":16.460700000000004,"Average":16.473969999999996,"StandardDeviation":0.10233327464710535,"Sum":329.4793999999999},{"Name":"BigValueImmutable.SumRef","Unit":2,"IncreaseIsBetter":false,"Samples":[16.40310000000001,16.4345,16.801999999999994,16.438499999999978,16.64840000000001,16.585099999999984,16.59790000000001,16.536500000000019,16.8373,16.643900000000003,16.471899999999978,16.444399999999975,16.4298,16.4221,16.535599999999989,16.46750000000003,16.456999999999995,16.4735,16.42320000000001,16.430499999999996],"Min":16.40310000000001,"Max":16.8373,"Median":16.471899999999978,"Average":16.524134999999999,"StandardDeviation":0.12291392221794949,"Sum":330.48269999999999}]}
+
+        ##performancetestruninfo2:{"TestSuite":"Playmode","Date":1654045579083,"Player":{"Development":true,"ScreenWidth":2560,"ScreenHeight":1440,"ScreenRefreshRate":144,"Fullscreen":false,"Vsync":1,"AntiAliasing":2,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsEditor","ColorSpace":"Gamma","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows
+        10  (10.0.19043) 64bit","DeviceModel":"System Product Name (System manufacturer)","DeviceName":"DESKTOP-66R04J2","ProcessorType":"AMD
+        Ryzen 9 5950X 16-Core Processor ","ProcessorCount":32,"GraphicsDeviceName":"NVIDIA
+        GeForce RTX 3090","SystemMemorySizeMB":32673},"Editor":{"Version":"2021.2.1f1","Branch":"2021.2/staging","Changeset":"c20c6d589440","Date":1635200762},"Dependencies":["com.unity.burst@1.6.5","com.unity.collab-proxy@1.15.15","com.unity.collections@1.2.3","com.unity.ide.rider@3.0.7","com.unity.ide.visualstudio@2.0.14","com.unity.ide.vscode@1.2.5","com.unity.test-framework@1.1.31","com.unity.test-framework.performance@2.8.1-preview","com.unity.textmeshpro@3.0.6","com.unity.timeline@1.6.2","com.unity.ugui@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.uielementsnative@1.0.0","com.unity.ext.nunit@1.0.6","com.unity.services.core@1.0.1","com.unity.mathematics@1.2.4"],"Results":[]}
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Performance
+      parentId: 1005
+      parentUniqueId: Tests.dll/[Tests][RefVsInVsImmutableIn][suite]
+    - id: 1007
+      uniqueId: Tests.dll/RefVsInVsImmutableIn/[Tests][RefVsInVsImmutableIn.RefVsOutVsReturn]
+      name: RefVsOutVsReturn
+      fullName: RefVsInVsImmutableIn.RefVsOutVsReturn
+      resultStatus: 1
+      duration: 1.3361131
+      messages: 
+      output: 'BigValue.SumReturnRef Millisecond Median:14.53 Min:14.44 Max:20.41
+        Avg:15.02 Std:1.42 SampleCount: 20 Sum: 300.32
+
+        BigValue.SumReturnOut
+        Millisecond Median:16.75 Min:16.68 Max:17.15 Avg:16.83 Std:0.15 SampleCount:
+        20 Sum: 336.66
+
+        BigValue.Sum Millisecond Median:19.70 Min:19.60 Max:19.91
+        Avg:19.72 Std:0.09 SampleCount: 20 Sum: 394.34
+
+
+
+        ##performancetestresult2:{"Name":"RefVsInVsImmutableIn.RefVsOutVsReturn","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"BigValue.SumReturnRef","Unit":2,"IncreaseIsBetter":false,"Samples":[14.5595,14.478000000000009,14.4666,14.529999999999987,15.185000000000003,14.633700000000005,14.455599999999976,14.707699999999989,14.59729999999999,20.410899999999999,17.640300000000026,14.586000000000013,14.529600000000017,14.46120000000002,14.637900000000002,14.529499999999985,14.439899999999966,14.473700000000008,14.525599999999998,14.47339999999997],"Min":14.439899999999966,"Max":20.410899999999999,"Median":14.529999999999987,"Average":15.01607,"StandardDeviation":1.4152156606326858,"Sum":300.3214},{"Name":"BigValue.SumReturnOut","Unit":2,"IncreaseIsBetter":false,"Samples":[17.153499999999995,17.138000000000007,16.753,16.753899999999989,16.741600000000007,16.825099999999993,16.868799999999994,16.731799999999994,16.755000000000025,17.08620000000002,16.818899999999986,16.75030000000004,16.7235,16.720100000000003,16.93919999999997,16.7543,16.69380000000001,16.688300000000028,16.678600000000018,17.08420000000001],"Min":16.678600000000018,"Max":17.153499999999995,"Median":16.7543,"Average":16.832905000000005,"StandardDeviation":0.1541165126616846,"Sum":336.65810000000007},{"Name":"BigValue.Sum","Unit":2,"IncreaseIsBetter":false,"Samples":[19.646500000000004,19.648300000000007,19.640100000000019,19.726499999999989,19.817000000000009,19.71090000000001,19.825199999999997,19.884500000000004,19.80509999999998,19.66579999999999,19.70999999999998,19.697599999999967,19.629599999999983,19.630899999999998,19.618899999999998,19.68889999999999,19.8313,19.65210000000002,19.60129999999998,19.91239999999999],"Min":19.60129999999998,"Max":19.91239999999999,"Median":19.697599999999967,"Average":19.717144999999996,"StandardDeviation":0.09236120113445894,"Sum":394.3428999999999}]}
+
+        ##performancetestruninfo2:{"TestSuite":"Playmode","Date":1654046201658,"Player":{"Development":true,"ScreenWidth":2560,"ScreenHeight":1440,"ScreenRefreshRate":144,"Fullscreen":false,"Vsync":1,"AntiAliasing":2,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsEditor","ColorSpace":"Gamma","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows
+        10  (10.0.19043) 64bit","DeviceModel":"System Product Name (System manufacturer)","DeviceName":"DESKTOP-66R04J2","ProcessorType":"AMD
+        Ryzen 9 5950X 16-Core Processor ","ProcessorCount":32,"GraphicsDeviceName":"NVIDIA
+        GeForce RTX 3090","SystemMemorySizeMB":32673},"Editor":{"Version":"2021.2.1f1","Branch":"2021.2/staging","Changeset":"c20c6d589440","Date":1635200762},"Dependencies":["com.unity.burst@1.6.5","com.unity.collab-proxy@1.15.15","com.unity.collections@1.2.3","com.unity.ide.rider@3.0.7","com.unity.ide.visualstudio@2.0.14","com.unity.ide.vscode@1.2.5","com.unity.test-framework@1.1.31","com.unity.test-framework.performance@2.8.1-preview","com.unity.textmeshpro@3.0.6","com.unity.timeline@1.6.2","com.unity.ugui@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.uielementsnative@1.0.0","com.unity.ext.nunit@1.0.6","com.unity.services.core@1.0.1","com.unity.mathematics@1.2.4"],"Results":[]}
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Performance
+      parentId: 1005
+      parentUniqueId: Tests.dll/[Tests][RefVsInVsImmutableIn][suite]
+    m_ResultText: 'BitStreamVsNativeArray (8.012s)
+
+      ---
+
+      BitStream Millisecond
+      Median:86.35 Min:85.94 Max:96.11 Avg:86.99 Std:2.18 SampleCount: 20 Sum: 1739.89
+
+      NativeArray
+      Millisecond Median:230.79 Min:229.86 Max:232.26 Avg:230.77 Std:0.64 SampleCount:
+      20 Sum: 4615.42
+
+
+
+      ##performancetestresult2:{"Name":"BitStreamPerformance.BitStreamVsNativeArray","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"BitStream","Unit":2,"IncreaseIsBetter":false,"Samples":[88.36779999999999,86.57849999999996,86.64390000000003,85.94299999999999,87.9103,87.11739999999998,86.35050000000001,86.70260000000008,86.01749999999993,96.1088000000002,86.04970000000003,86.03589999999986,85.9994999999999,85.93950000000018,86.0635000000002,86.06549999999993,86.85770000000002,86.47550000000001,86.31850000000009,86.33979999999974],"Min":85.93950000000018,"Max":96.1088000000002,"Median":86.35050000000001,"Average":86.99427,"StandardDeviation":2.1849989235924558,"Sum":1739.8854000000001},{"Name":"NativeArray","Unit":2,"IncreaseIsBetter":false,"Samples":[230.87660000000006,230.29640000000019,231.62410000000024,230.50330000000009,231.69270000000007,230.0367000000001,231.4082000000003,230.42039999999998,230.27610000000005,230.88659999999983,229.85800000000018,229.85969999999998,230.73099999999978,231.1921000000002,231.27070000000004,230.78909999999997,230.20200000000023,231.04839999999968,230.1891999999998,232.26200000000063],"Min":229.85800000000018,"Max":232.26200000000063,"Median":230.78909999999997,"Average":230.77116500000006,"StandardDeviation":0.642925867635689,"Sum":4615.423300000001}]}
+
+      ##performancetestruninfo2:{"TestSuite":"Playmode","Date":1654050871931,"Player":{"Development":true,"ScreenWidth":2560,"ScreenHeight":1440,"ScreenRefreshRate":144,"Fullscreen":false,"Vsync":1,"AntiAliasing":2,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsEditor","ColorSpace":"Gamma","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows
+      10  (10.0.19043) 64bit","DeviceModel":"System Product Name (System manufacturer)","DeviceName":"DESKTOP-66R04J2","ProcessorType":"AMD
+      Ryzen 9 5950X 16-Core Processor ","ProcessorCount":32,"GraphicsDeviceName":"NVIDIA
+      GeForce RTX 3090","SystemMemorySizeMB":32673},"Editor":{"Version":"2021.2.1f1","Branch":"2021.2/staging","Changeset":"c20c6d589440","Date":1635200762},"Dependencies":["com.unity.burst@1.6.5","com.unity.collab-proxy@1.15.15","com.unity.collections@1.2.3","com.unity.ide.rider@3.0.7","com.unity.ide.visualstudio@2.0.14","com.unity.ide.vscode@1.2.5","com.unity.test-framework@1.1.31","com.unity.test-framework.performance@2.8.1-preview","com.unity.textmeshpro@3.0.6","com.unity.timeline@1.6.2","com.unity.ugui@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.uielementsnative@1.0.0","com.unity.ext.nunit@1.0.6","com.unity.services.core@1.0.1","com.unity.mathematics@1.2.4"],"Results":[]}'
+    m_ResultStacktrace: 
+    m_TestListState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: c2171a93
+      m_LastClickedID: -1827006526
+      m_ExpandedIDs: feda0987ceffd5af2358b0c5b4c4d031c3227844b1302b6826bccc6affffff7f
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    m_TestRunnerUIFilter:
+      PassedHidden: 0
+      FailedHidden: 0
+      NotRunHidden: 0
+      m_SearchString: 
+      selectedCategoryMask: 0
+      availableCategories:
+      - Performance
+      - Uncategorized
+    m_SelectedOption: 0
+  m_EditModeTestListGUI:
+    m_Window: {fileID: 17}
+    m_NewResultList:
+    - id: 1000
+      uniqueId: '[DOTS-MP4][suite]'
+      name: DOTS-MP4
+      fullName: DOTS-MP4
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 
+      parentUniqueId: 
+    m_ResultText: 
+    m_ResultStacktrace: 
+    m_TestListState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: ceffd5afffffff7f
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    m_TestRunnerUIFilter:
+      PassedHidden: 0
+      FailedHidden: 0
+      NotRunHidden: 0
+      m_SearchString: 
+      selectedCategoryMask: 0
+      availableCategories:
+      - Uncategorized
+--- !u!114 &18
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4272062d6dbd273438736c85848ea974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 640, y: 480}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Test Report
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 484
+    y: 73
+    width: 1469
+    height: 754
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+  m_colorWhite: {r: 1, g: 1, b: 1, a: 1}
+  m_colorBarBackground: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_colorBoxAndWhiskerBackground: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+  m_colorBar: {r: 0.95, g: 0.95, b: 0.95, a: 1}
+  m_colorStandardLine: {r: 1, g: 1, b: 1, a: 1}
+  m_colorMedianLine: {r: 0.2, g: 0.5, b: 1, a: 0.5}
+  m_colorMedianText: {r: 0.4, g: 0.7, b: 1, a: 1}
+  m_colorWarningText: {r: 1, g: 0, b: 0, a: 1}
+  m_testListTreeViewState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 00000000
+    m_LastClickedID: 0
+    m_ExpandedIDs: 
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 0
+      m_ClientGUIView: {fileID: 0}
+    m_SearchString: 
+  m_testListMulticolumnHeaderState:
+    m_Columns:
+    - width: 63.066666
+      sortedAscending: 1
+      headerContent:
+        m_Text: Index
+        m_Image: {fileID: 0}
+        m_Tooltip: Ordering from the test run
+      contextMenuText: 
+      headerTextAlignment: 0
+      sortingArrowAlignment: 0
+      minWidth: 50
+      maxWidth: 1000000
+      autoResize: 1
+      allowToggleVisibility: 1
+      canSort: 1
+      userData: 0
+    - width: 500
+      sortedAscending: 1
+      headerContent:
+        m_Text: Name
+        m_Image: {fileID: 0}
+        m_Tooltip: Name of test
+      contextMenuText: 
+      headerTextAlignment: 0
+      sortingArrowAlignment: 0
+      minWidth: 100
+      maxWidth: 1000000
+      autoResize: 0
+      allowToggleVisibility: 0
+      canSort: 1
+      userData: 0
+    - width: 94.6
+      sortedAscending: 0
+      headerContent:
+        m_Text: Groups
+        m_Image: {fileID: 0}
+        m_Tooltip: Number of Sample Groups
+      contextMenuText: 
+      headerTextAlignment: 0
+      sortingArrowAlignment: 0
+      minWidth: 50
+      maxWidth: 1000000
+      autoResize: 1
+      allowToggleVisibility: 1
+      canSort: 1
+      userData: 0
+    - width: 157.66667
+      sortedAscending: 0
+      headerContent:
+        m_Text: SD
+        m_Image: {fileID: 0}
+        m_Tooltip: Standard Deviation
+      contextMenuText: 
+      headerTextAlignment: 0
+      sortingArrowAlignment: 0
+      minWidth: 50
+      maxWidth: 1000000
+      autoResize: 1
+      allowToggleVisibility: 1
+      canSort: 1
+      userData: 0
+    - width: 157.66667
+      sortedAscending: 0
+      headerContent:
+        m_Text: Deviation
+        m_Image: {fileID: 0}
+        m_Tooltip: Standard Deviation / Median
+      contextMenuText: 
+      headerTextAlignment: 0
+      sortingArrowAlignment: 0
+      minWidth: 50
+      maxWidth: 1000000
+      autoResize: 1
+      allowToggleVisibility: 1
+      canSort: 1
+      userData: 0
+    - width: 157.66667
+      sortedAscending: 0
+      headerContent:
+        m_Text: Median
+        m_Image: {fileID: 0}
+        m_Tooltip: Median value
+      contextMenuText: 
+      headerTextAlignment: 0
+      sortingArrowAlignment: 0
+      minWidth: 50
+      maxWidth: 1000000
+      autoResize: 1
+      allowToggleVisibility: 1
+      canSort: 1
+      userData: 0
+    - width: 157.66667
+      sortedAscending: 0
+      headerContent:
+        m_Text: Min
+        m_Image: {fileID: 0}
+        m_Tooltip: Min value
+      contextMenuText: 
+      headerTextAlignment: 0
+      sortingArrowAlignment: 0
+      minWidth: 50
+      maxWidth: 1000000
+      autoResize: 1
+      allowToggleVisibility: 1
+      canSort: 1
+      userData: 0
+    - width: 157.66667
+      sortedAscending: 0
+      headerContent:
+        m_Text: Max
+        m_Image: {fileID: 0}
+        m_Tooltip: Max value
+      contextMenuText: 
+      headerTextAlignment: 0
+      sortingArrowAlignment: 0
+      minWidth: 50
+      maxWidth: 1000000
+      autoResize: 1
+      allowToggleVisibility: 1
+      canSort: 1
+      userData: 0
+    m_VisibleColumns: 0000000001000000020000000400000003000000050000000600000007000000
+    m_SortedColumns: 00000000
+--- !u!114 &19
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12014, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_TitleContent:
+    m_Text: Project
+    m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
@@ -944,3 +1440,156 @@ MonoBehaviour:
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
+  m_SearchFilter:
+    m_NameFilter: 
+    m_ClassNames: []
+    m_AssetLabels: []
+    m_AssetBundleNames: []
+    m_VersionControlStates: []
+    m_SoftLockControlStates: []
+    m_ReferencingInstanceIDs: 
+    m_SceneHandles: 
+    m_ShowAllHits: 0
+    m_SkipHidden: 0
+    m_SearchArea: 1
+    m_Folders:
+    - Assets
+    m_Globs: []
+    m_OriginalText: 
+  m_ViewMode: 1
+  m_StartGridSize: 16
+  m_LastFolders:
+  - Assets
+  m_LastFoldersGridSize: -1
+  m_LastProjectPath: E:\Projects\UnityMP4Parser
+  m_LockTracker:
+    m_IsLocked: 0
+  m_FolderTreeState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: ca4e0000
+    m_LastClickedID: 20170
+    m_ExpandedIDs: 00000000cc4e0000ce4e0000d04e0000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 1
+      m_ClientGUIView: {fileID: 0}
+    m_SearchString: 
+    m_CreateAssetUtility:
+      m_EndAction: {fileID: 0}
+      m_InstanceID: 0
+      m_Path: 
+      m_Icon: {fileID: 0}
+      m_ResourceFile: 
+  m_AssetTreeState:
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: 00000000cc4e0000ce4e0000d04e0000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 1
+      m_ClientGUIView: {fileID: 0}
+    m_SearchString: 
+    m_CreateAssetUtility:
+      m_EndAction: {fileID: 0}
+      m_InstanceID: 0
+      m_Path: 
+      m_Icon: {fileID: 0}
+      m_ResourceFile: 
+  m_ListAreaState:
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c6230000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+      m_EditFieldRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      m_UserData: 0
+      m_IsWaitingForDelay: 0
+      m_IsRenaming: 0
+      m_OriginalEventType: 11
+      m_IsRenamingFilename: 1
+      m_ClientGUIView: {fileID: 10}
+    m_CreateAssetUtility:
+      m_EndAction: {fileID: 0}
+      m_InstanceID: 0
+      m_Path: 
+      m_Icon: {fileID: 0}
+      m_ResourceFile: 
+    m_NewAssetIndexInList: -1
+    m_ScrollPosition: {x: 0, y: 0}
+    m_GridSize: 16
+  m_SkipHiddenPackages: 0
+  m_DirectoriesAreaWidth: 207
+--- !u!114 &20
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12019, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Inspector
+    m_Image: {fileID: -2667387946076563598, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1955
+    y: 73
+    width: 604
+    height: 1286
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+  m_ObjectsLockedBeforeSerialization: []
+  m_InstanceIDsLockedBeforeSerialization: 
+  m_PreviewResizer:
+    m_CachedPref: 160
+    m_ControlHash: -371814159
+    m_PrefName: Preview_InspectorPreview
+  m_LastInspectedObjectInstanceID: -1
+  m_LastVerticalScrollValue: 0
+  m_GlobalObjectId: 
+  m_InspectorMode: 0
+  m_LockTracker:
+    m_IsLocked: 0
+  m_PreviewWindow: {fileID: 0}

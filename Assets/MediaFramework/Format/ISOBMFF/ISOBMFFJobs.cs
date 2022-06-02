@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Unity.Burst;
-using Unity.Collections;
+﻿using Unity.Burst;
 using Unity.Jobs;
-using Unity.MediaFramework.Video;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
+using Unity.MediaFramework.LowLevel.Unsafe;
+using Unity.Mathematics;
 
 namespace Unity.MediaFramework.Format.ISOBMFF
 {
@@ -16,157 +13,70 @@ namespace Unity.MediaFramework.Format.ISOBMFF
     [BurstCompile]
     public unsafe struct ISOExtractAllParentBoxes : IJob
     {
-        public BitStream Stream;
+        [ReadOnly] public NativeArray<byte> Stream;
 
         public NativeList<ISOBox> Boxes;
         public NativeList<ulong> ExtendedSizes;
 
         public void Execute()
         {
-            uint seek = 0;
+            long position = 0;
+            var buffer = (byte*)Stream.GetUnsafeReadOnlyPtr();
+
             do
             {
-                // We can safely cast seek to int because Remains will never be over int.MaxValue
-                Stream.Seek((int)seek);
-
-                var box = Stream.PeekISOBox();
+                var box = ISOUtility.GetISOBox(buffer + position);
                 Boxes.Add(box);
 
                 if (box.size == 1)
-                    ExtendedSizes.Add(Stream.PeekUInt64(8));
+                {
+                    ExtendedSizes.Add(BigEndian.GetUInt64(buffer + ISOBox.Stride + position));
+                    return;
+                }
 
-                seek = box.size;
+                position = math.min(box.size + position, Stream.Length - 1);
             }
-            while (seek > 1 && Stream.Remains() > seek + 12);
+            while (Stream.Length - position - 1 >= ISOBox.Stride);
         }
     }
 
     /// <summary>
-    /// Find all boxes type and copy them in the buffer
+    /// Find all boxes type and the ptr to the data
     /// </summary>
     [BurstCompile]
-    public unsafe struct ISOExtractAllBoxes : IJob
+    public unsafe struct ISOGetTableContent : IJob
     {
-        public BitStream Stream;
+        [ReadOnly] public NativeArray<byte> Stream;
 
-        public NativeList<ISOBox> Boxes;
-        public NativeList<ulong> ExtendedSizes;
+        public NativeList<ISOBoxType> BoxeTypes;
+        public NativeList<int> BoxOffsets;
 
         public void Execute()
         {
-            uint seek = 0;
+            int position = 0;
+            var buffer = (byte*)Stream.GetUnsafeReadOnlyPtr();
+
             do
             {
-                // We can safely cast seek to int because Remains will never be over int.MaxValue
-                Stream.Seek((int)seek);
+                var box = ISOUtility.GetISOBox(buffer + position);
+                // Check if size == 0 if at the end of the file
+                // Don't need to check for 1 as too big to fit in the job
+                box.size = box.size >= ISOBox.Stride ? box.size : (uint)(Stream.Length - position);
 
-                var box = Stream.PeekISOBox();
-                Boxes.Add(box);
-
-                int offset = 8;
-                if (box.size == 1)
-                {
-                    ExtendedSizes.Add(Stream.PeekUInt64(offset));
-                    offset += 4;
-                }
+                BoxeTypes.Add(box.type);
+                BoxOffsets.Add(position);
 
                 // Check first if the current box can be a parent.
                 // If yes, let's peek and check if the children type is valid.
                 // It is necessary to do that because some childrens are optional so,
                 // it is possible that a box can be a parent, but is currently not.
-                seek = box.type.CanBeParent() && Stream.HasValidISOBoxType(offset) ? (uint)offset : box.size;
+                int seek = ISOUtility.CanBeParent(box.type) && 
+                           ISOUtility.HasValidISOBoxType(buffer + ISOBox.Stride + position) 
+                           ? ISOBox.Stride : (int)box.size;
+
+                position = math.min(seek + position, Stream.Length - 1);
             }
-            while (seek > 1 && Stream.Remains() > seek + 12);
+            while (Stream.Length - position - 1 >= ISOBox.Stride);
         }
-    }
-
-    public unsafe struct ISOExtractMOOV : IJob
-    {
-        public BitStream Stream;
-
-        public NativeReference<MediaAttributes> Attributes;
-        public NativeList<VideoTrack> VideoTracks;
-        public NativeList<AudioTrack> AudioTracks;
-
-        public void Execute()
-        {
-            var moovBox = Stream.ReadISOBox();
-            if (moovBox.type != ISOBoxType.MOOV)
-                return;
-
-            while (Stream.Remains() >= 8)
-            {
-                var box = Stream.PeekISOBox();
-                switch (box.type)
-                { 
-                    case ISOBoxType.MVHD: ParseMVHD(); break;
-                }
-            }
-        }
-
-        public void ParseMVHD()
-        {
-            var fullBox = Stream.ReadISOFullBox();
-            if (fullBox.version == 1)
-            {
-                ulong creationTime = Stream.PeekUInt64();
-                ulong modificationTime = Stream.PeekUInt64(8);
-                uint timescale = Stream.PeekUInt32(16);
-                ulong duration = Stream.PeekUInt64(20);
-
-                Stream.Seek(28);
-            }
-            else
-            {
-                uint creationTime = Stream.PeekUInt32();
-                uint modificationTime = Stream.PeekUInt32(4);
-                uint timescale = Stream.PeekUInt32(8);
-                uint duration = Stream.PeekUInt32(12);
-
-                Stream.Seek(16);
-            }
-
-            //double rate = 
-
-        }
-    }
-
-    public struct MVHDBox
-    {
-        public ulong creationTime;
-        public ulong modificationTime;
-        public uint timescale;
-        public ulong duration;
-    }
-
-    public struct MediaAttributes
-    {
-        public int FrameCount;
-        public BigRational Duration;
-    }
-
-    public struct AudioTrack
-    {
-        public int channelCount;
-        public int sampleRate;
-        public uint codecFourCC;
-    }
-
-    public struct VideoTrack
-    {
-        public int width, height;
-        public Rational aspectRatio;
-        public uint codecFourCC;
-        public uint colorStandard;
-    }
-
-    public struct BigRational
-    {
-        public uint num, denom;
-    }
-
-    public struct Rational
-    {
-        public int num, denom;
     }
 }
