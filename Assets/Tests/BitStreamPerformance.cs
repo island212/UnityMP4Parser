@@ -15,7 +15,7 @@ public class BitStreamPerformance
     [Test, Performance]
     public unsafe void BitStreamVsNativeArray()
     {
-        var bigBuffer = new NativeArray<byte>(200000, Allocator.Temp);
+        using var bigBuffer = new NativeArray<byte>(200000, Allocator.Temp);
 
         Measure.Method(() =>
         {

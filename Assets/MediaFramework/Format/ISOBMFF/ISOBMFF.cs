@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Unity.Mathematics;
 using Unity.MediaFramework.LowLevel.Unsafe;
 using Unity.MediaFramework.Video;
 
@@ -11,14 +13,6 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 {
     // Useful link
     // https://b.goeswhere.com/ISO_IEC_14496-12_2015.pdf
-
-    [StructLayout(LayoutKind.Sequential, Size = 16)]
-    public struct FTYPBox
-    {
-        public uint majorBrand;
-        public uint minorVersion;
-        public uint compatibleBrands;
-    }
 
     // 4.2 ISO/IEC 14496-12:2015(E)
     [StructLayout(LayoutKind.Sequential, Size = 8)]
@@ -50,6 +44,10 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public readonly ulong modificationTime;
         public readonly uint timescale;
         public readonly ulong duration;
+        public readonly FixedPoint1616 rate;
+        public readonly FixedPoint88 volume;
+        public readonly FixedPoint1616Matrix3x3 matrix;
+        public readonly uint nextTrackID;
 
         public MVHDBox(byte* buffer)
         {
@@ -61,7 +59,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 timescale = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 16);
                 duration = BigEndian.GetUInt64(buffer + ISOFullBox.Stride + 20);
 
-                buffer += ISOFullBox.Stride + 28;
+                buffer += ISOFullBox.Stride + 28; // fullBox + creationTime + modificationTime + timescale + duration
             }
             else
             {
@@ -70,9 +68,63 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 timescale = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 8);
                 duration = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 12);
 
-                buffer += ISOFullBox.Stride + 16;
+                buffer += ISOFullBox.Stride + 16; // fullBox + creationTime + modificationTime + timescale + duration
             }
+
+            rate = new FixedPoint1616() { value = BigEndian.GetInt32(buffer) };
+            volume = new FixedPoint88() { value = BigEndian.GetInt16(buffer + 4) };
+
+            buffer += 4 + 2 + 2 + 4 + 4; // rate + volume + reserved(16) + reserved(32)[2]
+
+            matrix = new FixedPoint1616Matrix3x3
+            { 
+                value = new int3x3(
+                    BigEndian.GetInt32(buffer), BigEndian.GetInt32(buffer + 4), BigEndian.GetInt32(buffer + 8),
+                    BigEndian.GetInt32(buffer + 12), BigEndian.GetInt32(buffer + 16), BigEndian.GetInt32(buffer + 20),
+                    BigEndian.GetInt32(buffer + 24), BigEndian.GetInt32(buffer + 28), BigEndian.GetInt32(buffer + 32))
+            };
+
+            buffer += 36 + 4 * 6; // matrix + reserved(32)[6]
+
+            nextTrackID = BigEndian.GetUInt32(buffer);
         }
+    }
+
+    [StructLayout(LayoutKind.Sequential, Size = 16)]
+    public struct FTYPBox
+    {
+        public uint majorBrand;
+        public uint minorVersion;
+        public uint compatibleBrands;
+    }
+
+    public struct FixedPoint1616Matrix3x3
+    {
+        public int3x3 value;
+    }
+
+    public struct FixedPoint1616
+    {
+        public int value;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public double ConvertDouble() => ConvertDouble(value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double ConvertDouble(int value)
+            => value / 65536.0;
+    }
+
+    public struct FixedPoint88
+    {
+        public short value;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public double ConvertDouble() => ConvertDouble(value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double ConvertDouble(short value)
+            => value / 256.0;
     }
 
     public unsafe static class ISOUtility

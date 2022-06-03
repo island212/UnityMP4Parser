@@ -120,6 +120,23 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             return handle;
         }
 
+        public bool TryFindBox(ISOBoxType type, out byte* buffer)
+        {
+            int index = 0;
+            foreach (var boxType in BoxeTypes)
+            {
+                if (boxType == type)
+                {
+                    buffer = (byte*)Stream.GetUnsafeReadOnlyPtr() + BoxOffsets[index];
+                    return true;
+                }
+                index++;
+            }
+
+            buffer = null;
+            return false;
+        }
+
         public void Dispose()
         {
             FileHandle.Close().Complete();
