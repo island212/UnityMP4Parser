@@ -12,6 +12,34 @@ using Unity.Jobs;
 
 namespace Unity.MediaFramework.Format.ISOBMFF
 {
+    public unsafe struct AsyncISOReader
+    {
+        public FileInfoResult FileInfo;
+
+        public NativeList<byte> Stream;
+
+        public NativeList<ISOBoxType> BoxeTypes;
+        public NativeList<int> BoxOffsets;
+
+        public static JobHandle GetContent(string path, NativeArray<ISOBoxType> search, out AsyncISOReader reader)
+        {
+            reader = new AsyncISOReader();
+
+            JobHandle handle = default;
+
+            FileInfoResult fileInfo;
+            AsyncReadManager.GetFileInfo(path, &fileInfo).JobHandle.Complete();
+            reader.FileInfo = fileInfo;
+
+            if (fileInfo.FileState == FileState.Absent)
+                return handle;
+
+
+
+            return handle;
+        }
+    }
+
     public unsafe struct ISOReader
     {
         public FileHandle FileHandle;
