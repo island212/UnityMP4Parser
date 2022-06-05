@@ -31,10 +31,6 @@ namespace Unity.MediaFramework.Video
         public static void Print(in MVHDBox box)
         {
             var sb = new StringBuilder("[MVHDBox] ");
-            sb.Append($"Type: {box.fullBox.type} ");
-            sb.Append($"Size: {box.fullBox.size} ");
-            sb.Append($"Version: {box.fullBox.version} ");
-            sb.Append($"Flags: {box.fullBox.flags} ");
             sb.Append($"Creation Time: {box.creationTime} ");
             sb.Append($"Modification Time: {box.modificationTime} ");
             sb.Append($"Timescale: {box.timescale} ");
@@ -48,10 +44,6 @@ namespace Unity.MediaFramework.Video
 
             sb.Append($"View\n");
             sb.Append($"---------------------------\n");
-            sb.Append($"Type: {box.fullBox.type}\n");
-            sb.Append($"Size: {box.fullBox.size}\n");
-            sb.Append($"Version: {box.fullBox.version}\n");
-            sb.Append($"Flags: {box.fullBox.flags}\n");
             sb.Append($"Creation Time: {box.creationTime}\n");
             sb.Append($"Modification Time: {box.modificationTime}\n");
             sb.Append($"Timescale: {box.timescale}\n");

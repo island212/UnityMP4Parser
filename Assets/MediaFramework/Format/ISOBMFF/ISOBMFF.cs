@@ -36,10 +36,14 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public uint flags;          // 24 bits
     }
 
+    public struct ISOHeader
+    {
+        public FTYPBox FTYP;
+        public MVHDBox MVHD;
+    }
+
     public readonly unsafe struct MVHDBox
     {
-        public readonly ISOFullBox fullBox;
-
         public readonly ulong creationTime;
         public readonly ulong modificationTime;
         public readonly uint timescale;
@@ -51,7 +55,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
         public MVHDBox(byte* buffer)
         {
-            fullBox = ISOUtility.GetISOFullBox(buffer);
+            var fullBox = ISOUtility.GetISOFullBox(buffer);
             if (fullBox.version == 1)
             {
                 creationTime = BigEndian.GetUInt64(buffer + ISOFullBox.Stride);
@@ -88,6 +92,8 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
             nextTrackID = BigEndian.GetUInt32(buffer);
         }
+
+        public bool IsValid() => duration != 0 && timescale != 0;
     }
 
     [StructLayout(LayoutKind.Sequential, Size = 16)]
