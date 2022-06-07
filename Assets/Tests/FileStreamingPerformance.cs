@@ -24,7 +24,7 @@ public class FileStreamingPerformance
     const int MeasurementCount = 5;
 
     [Test, Performance]
-    public void FileStreamingPerformanceSequetialRead([Values(1024, 2048, 4096, 8192, 8192*2, 8192 * 4)] int bufferSize)
+    public void FileStreamingPerformanceSequetialRead([Values(1024, 2048, 4096, 8192, 16384, 32768)] int bufferSize)
     {
         string fullPath = Application.dataPath + SmallVideoPath;
 
@@ -63,7 +63,7 @@ public class FileStreamingPerformance
     }
 
     [Test, Performance]
-    public void FileStreamingPerformanceSequetialSeek([Values(1024, 2048, 4096, 8192, 8192 * 2 - 300, 8192 * 4)] int bufferSize)
+    public void FileStreamingPerformanceSequetialSeek([Values(1024, 2048, 4096, 8192, 16384, 32768)] int bufferSize)
     {
         string fullPath = Application.dataPath + SmallVideoPath;
 
