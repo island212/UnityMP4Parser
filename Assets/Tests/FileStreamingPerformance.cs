@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -18,160 +19,86 @@ using UnityEngine.TestTools;
 public class FileStreamingPerformance
 {
     const string SmallVideoPath = "/Media/small.mp4";
+    const int WarmupCount = 1;
+    const int IterationsPerMeasurement = 3;
+    const int MeasurementCount = 5;
 
     [Test, Performance]
-    public void FileStreamingPerformanceSequetialRead()
+    public void FileStreamingPerformanceSequetialRead([Values(1024, 2048, 4096, 8192, 16384, 32768)] int bufferSize)
     {
         string fullPath = Application.dataPath + SmallVideoPath;
-
-        Debug.Log(fullPath);
 
         Measure.Method(() =>
         {
             BinaryReaderMethod(fullPath);
         })
-        .SampleGroup("BinaryReaderMethod")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
+        .SampleGroup($"BinaryReaderMethod {bufferSize}")
+        .WarmupCount(WarmupCount)
+        .IterationsPerMeasurement(IterationsPerMeasurement)
+        .MeasurementCount(MeasurementCount)
         .Run();
 
         Measure.Method(() =>
         {
-            AsyncReaderMethod(fullPath, 1024);
+            AsyncReaderMethod(fullPath, bufferSize);
         })
-        .SampleGroup("AsyncReaderMethod 1024")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
+        .SampleGroup($"AsyncReaderMethod {bufferSize}")
+        .WarmupCount(WarmupCount)
+        .IterationsPerMeasurement(IterationsPerMeasurement)
+        .MeasurementCount(MeasurementCount)
         .Run();
 
         Measure.Method(() =>
         {
-            AsyncReaderMethod(fullPath, 2048);
+            new BufferedReaderReadJob(){ 
+                BufferSize = bufferSize,
+                Path = fullPath
+            }.Run();
         })
-        .SampleGroup("AsyncReaderMethod 2048")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
-        .Run();
-
-        Measure.Method(() =>
-        {
-            AsyncReaderMethod(fullPath, 4096);
-        })
-        .SampleGroup("AsyncReaderMethod 4096")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
-        .Run();
-
-        Measure.Method(() =>
-        {
-            AsyncReaderMethod(fullPath, 8192);
-        })
-        .SampleGroup("AsyncReaderMethod 8192")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
-        .Run();
-
-        Measure.Method(() =>
-        {
-            AsyncReaderMethod(fullPath, 16384);
-        })
-        .SampleGroup("AsyncReaderMethod 16384")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
+        .SampleGroup($"BufferedReaderReadJob {bufferSize}")
+        .WarmupCount(WarmupCount)
+        .IterationsPerMeasurement(IterationsPerMeasurement)
+        .MeasurementCount(MeasurementCount)
         .Run();
     }
 
     [Test, Performance]
-    public void FileStreamingPerformanceSequetialSeek()
+    public void FileStreamingPerformanceSequetialSeek([Values(1024, 2048, 4096, 8192, 16384, 32768)] int bufferSize)
     {
         string fullPath = Application.dataPath + SmallVideoPath;
 
-        Debug.Log(fullPath);
-
         Measure.Method(() =>
         {
-            BinaryReaderSeekMethod(fullPath, 1024);
+            BinaryReaderSeekMethod(fullPath, bufferSize);
         })
-        .SampleGroup("BinaryReaderSeekMethod 1024")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
+        .SampleGroup($"BinaryReaderSeekMethod {bufferSize}")
+        .WarmupCount(WarmupCount)
+        .IterationsPerMeasurement(IterationsPerMeasurement)
+        .MeasurementCount(MeasurementCount)
         .Run();
 
         Measure.Method(() =>
         {
-            BinaryReaderSeekMethod(fullPath, 2048);
+            AsyncReaderSeekMethod(fullPath, bufferSize);
         })
-        .SampleGroup("BinaryReaderSeekMethod 2048")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
+        .SampleGroup($"AsyncReaderMethod {bufferSize}")
+        .WarmupCount(WarmupCount)
+        .IterationsPerMeasurement(IterationsPerMeasurement)
+        .MeasurementCount(MeasurementCount)
         .Run();
 
         Measure.Method(() =>
         {
-            BinaryReaderSeekMethod(fullPath, 4096);
+            new BufferedReaderSeekJob()
+            {
+                BufferSize = bufferSize,
+                Path = fullPath
+            }.Run();
         })
-        .SampleGroup("BinaryReaderSeekMethod 4096")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
-        .Run();
-
-        Measure.Method(() =>
-        {
-            AsyncReaderSeekMethod(fullPath, 1024);
-        })
-        .SampleGroup("AsyncReaderMethod 1024")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
-        .Run();
-
-        Measure.Method(() =>
-        {
-            AsyncReaderSeekMethod(fullPath, 2048);
-        })
-        .SampleGroup("AsyncReaderMethod 2048")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
-        .Run();
-
-        Measure.Method(() =>
-        {
-            AsyncReaderSeekMethod(fullPath, 4096);
-        })
-        .SampleGroup("AsyncReaderMethod 4096")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
-        .Run();
-
-        Measure.Method(() =>
-        {
-            AsyncReaderSeekMethod(fullPath, 8192);
-        })
-        .SampleGroup("AsyncReaderMethod 8192")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
-        .Run();
-
-        Measure.Method(() =>
-        {
-            AsyncReaderSeekMethod(fullPath, 16384);
-        })
-        .SampleGroup("AsyncReaderMethod 16384")
-        .WarmupCount(1)
-        .IterationsPerMeasurement(1)
-        .MeasurementCount(3)
+        .SampleGroup($"BufferedReaderSeekJob {bufferSize}")
+        .WarmupCount(WarmupCount)
+        .IterationsPerMeasurement(IterationsPerMeasurement)
+        .MeasurementCount(MeasurementCount)
         .Run();
     }
 
@@ -179,7 +106,8 @@ public class FileStreamingPerformance
     {
         using var reader = new BinaryReader(File.OpenRead(path));
 
-        while (reader.BaseStream.Position + ISOBox.Stride < reader.BaseStream.Length)
+        long readCount = reader.BaseStream.Length - ISOBox.Stride;
+        for (long i = 0; i < readCount; i += ISOBox.Stride)
         {
             var box = new ISOBox
             {
@@ -191,15 +119,16 @@ public class FileStreamingPerformance
 
     public void BinaryReaderSeekMethod(string path, int stackSize)
     {
-        int halfStack = stackSize / 2;
-
         using var reader = new BinaryReader(File.OpenRead(path));
 
-        while (reader.BaseStream.Position + halfStack < reader.BaseStream.Length)
-        {
-            long position = reader.BaseStream.Position;
+        int halfBuffer = stackSize / 2;
 
-            for (int i = 0; i < halfStack; i+=ISOBox.Stride)
+        long position = 0;
+        long fileSize = reader.BaseStream.Length - ISOBox.Stride;
+        for (int i = 0; position < fileSize; i++)
+        {
+            int readCount = (int)math.min(halfBuffer, fileSize - position);
+            for (int j = 0; j < readCount; j+=ISOBox.Stride)
             {
                 var box = new ISOBox
                 {
@@ -208,8 +137,8 @@ public class FileStreamingPerformance
                 };
             }
 
-            long seek = math.min(reader.BaseStream.Position + halfStack, reader.BaseStream.Length - 1);
-            reader.BaseStream.Seek(seek, SeekOrigin.Begin);
+            reader.BaseStream.Seek(math.min(i * stackSize, fileSize), SeekOrigin.Begin);
+            position = reader.BaseStream.Position;
         }
     }
 
@@ -280,6 +209,7 @@ public class FileStreamingPerformance
             Commands.Value.ReadCommands[0].Size = math.min(FileLength - Commands.Value.ReadCommands[0].Offset, Stream.Length);
         }
     }
+
     public unsafe void AsyncReaderSeekMethod(string path, int stackSize)
     {
         FileInfoResult fileInfo;
@@ -345,6 +275,167 @@ public class FileStreamingPerformance
 
             Commands.Value.ReadCommands[0].Offset += Stream.Length;
             Commands.Value.ReadCommands[0].Size = math.min(FileLength - Commands.Value.ReadCommands[0].Offset, Stream.Length);
+        }
+    }
+
+    public unsafe struct BufferedReaderReadJob : IJob
+    {
+        public FixedString512Bytes Path;
+        public int BufferSize;
+
+        public void Execute()
+        {
+            byte[] array = new byte[BufferSize];
+            fixed (byte* arrayPtr = array)
+            {
+                var reader = new BufferedReader(File.Open(Path.ToString(), FileMode.Open, FileAccess.Read, FileShare.Read), array, arrayPtr);
+
+                long readCount = reader.stream.Length;
+                for (long i = 0; i < readCount; i += ISOBox.Stride)
+                {
+                    var box = new ISOBox
+                    {
+                        size = BigEndian.Reverse(reader.ReadUInt32()),
+                        type = (ISOBoxType)BigEndian.Reverse(reader.ReadUInt32())
+                    };
+                }
+            }
+        }
+    }
+
+    public unsafe struct BufferedReaderSeekJob : IJob
+    {
+        public FixedString512Bytes Path;
+        public int BufferSize;
+
+        public void Execute()
+        {
+            byte[] array = new byte[BufferSize];
+            fixed (byte* arrayPtr = array)
+            {
+                var reader = new BufferedReader(File.Open(Path.ToString(), FileMode.Open, FileAccess.Read, FileShare.Read), array, arrayPtr);
+
+                int halfBuffer = BufferSize / 2;
+                while (reader.position < reader.fileSize)
+                {
+                    int readCount = (int)math.min(halfBuffer, reader.fileSize - reader.position);
+                    for (int i = 0; i < readCount; i += ISOBox.Stride)
+                    {
+                        var box = new ISOBox
+                        {
+                            size = BigEndian.Reverse(reader.ReadUInt32()),
+                            type = (ISOBoxType)BigEndian.Reverse(reader.ReadUInt32())
+                        };
+                    }
+
+                    reader.Seek(math.min(halfBuffer, reader.fileSize - reader.position));
+                }
+            }
+        }
+    }
+
+    public unsafe class BufferedReader
+    {
+        public Stream stream;
+        public byte[] array;
+
+        public byte* arrayPtr;
+        public int index;
+        public int length;
+
+        public long position;
+        public long fileSize;
+
+        public BufferedReader(Stream stream, byte[] array, byte* arrayPtr)
+        {
+            this.stream = stream;
+            this.array = array;
+            this.arrayPtr = arrayPtr;
+
+            index = length = 0;
+            position = 0;
+            fileSize = stream.Length;
+        }
+
+        public uint ReadUInt32()
+        {
+            CheckAndRetrieveEnoughBuffer(4);
+
+            index += 4;
+            position += 4;
+            return UnsafeUtility.ReadArrayElementWithStride<uint>(arrayPtr, index - 4, 1);
+        }
+
+        public ulong ReadUInt64()
+        {
+            CheckAndRetrieveEnoughBuffer(8);
+
+            index += 8;
+            position += 8;
+            return UnsafeUtility.ReadArrayElementWithStride<uint>(arrayPtr, index - 8, 1);
+        }
+
+        public uint PeekUInt32(int offset)
+        {
+            CheckAndRetrieveEnoughBuffer(offset + 4);
+
+            return UnsafeUtility.ReadArrayElementWithStride<uint>(arrayPtr, index + offset, 1);
+        }
+
+        public uint PeekUInt64(int offset)
+        {
+            CheckAndRetrieveEnoughBuffer(offset + 8);
+
+            return UnsafeUtility.ReadArrayElementWithStride<uint>(arrayPtr, index + offset, 1);
+        }
+
+        public void CheckAndRetrieveEnoughBuffer(int size)
+        {
+            //Destroy all performance
+            //CheckIfOutOfBounds(size);
+
+            if (length - index < size)
+            {
+                int remains = length - index;
+                UnsafeUtility.MemCpy(arrayPtr, arrayPtr + index, remains);
+                length = (int)math.min(array.Length, fileSize - position + remains);
+                stream.Read(array, remains, length - remains);
+                index = 0;
+            }
+        }
+
+        public void Seek(long offset)
+        {
+            if (index + offset < length)
+            {
+                index += (int)offset;
+            }
+            else
+            {
+                position += offset;
+                if(position < fileSize)
+                {
+                    stream.Seek(offset, SeekOrigin.Current);
+                    length = (int)math.min(array.Length, fileSize - position);
+                    stream.Read(array, 0, length);
+                    index = 0;
+                }
+            }
+        }
+
+        public void Dispose()
+        {
+            stream.Dispose();
+        }
+
+        [Conditional("ENABLE_UNITY_COLLECTIONS_CHECKS")]
+        public void CheckIfOutOfBounds(int size)
+        {
+            if (size >= array.Length)
+                throw new System.ArgumentOutOfRangeException($"The reading size ({size}) is bigger than the buffer length ({array.Length})");
+
+            if (position + size >= fileSize)
+                throw new System.ArgumentOutOfRangeException($"The stream position ({stream.Position + size}) is bigger than the stream length ({stream.Length})");
         }
     }
 
