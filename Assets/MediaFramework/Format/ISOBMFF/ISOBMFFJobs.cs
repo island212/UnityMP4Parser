@@ -226,34 +226,47 @@ namespace Unity.MediaFramework.Format.ISOBMFF
     [BurstCompile]
     public unsafe struct AsyncISOParseContent : IJob
     {
+        public struct HeaderValue
+        {
+            public uint timescale;
+            public ulong duration;
+        }
+
+        public struct TrackValue
+        {
+            public ulong duration;
+        }
+
         public long FileSize;
 
         [ReadOnly] public NativeArray<byte> Stream;
-        [ReadOnly] public NativeArray<ISOBoxType> Search;
 
-        public NativeReference<FixedString512Bytes> Error;
-
+        public NativeReference<FixedString128Bytes> Error;
         public NativeReference<ReadCommandArray> Commands;
 
-        public NativeReference<ISOHeader> Header;
-        public NativeList<ISOBoxType> BoxTypes;
-        public NativeList<int> BoxOffsets;
-        public NativeList<byte> RawData;
+        public NativeReference<HeaderValue> Header;
+        public NativeList<TrackValue> Tracks;
 
         public void Execute()
         {
-            // Nothing was read, we can just exit 
+            // Nothing was read or there is an error, we can just exit 
             if (Commands.Value.CommandCount == 0 || Error.Value.IsEmpty)
                 return;
 
-            ref var error = ref UnsafeUtility.AsRef<FixedString512Bytes>(Error.GetUnsafePtr());
+            ref var header = ref UnsafeUtility.AsRef<HeaderValue>(Header.GetUnsafePtr());
 
-            var length = Stream.Length;
+            int trackIdx = -1;
+            var trackPtr = (TrackValue*)Tracks.GetUnsafePtr();
+
+            using NativeList<ISOBoxType> parents = new NativeList<ISOBoxType>(Allocator.Temp);
+            using NativeList<long> parentSizes = new NativeList<long>(Allocator.Temp);
+
+            // Like that, we always know we will have at least one ISOFullBox
+            var length = Commands.Value.ReadCommands[0].Size - ISOFullBox.Stride;
             var buffer = (byte*)Stream.GetUnsafeReadOnlyPtr();
-            ref var header = ref UnsafeUtility.AsRef<ISOHeader>(Header.GetUnsafePtr());
 
             long position = 0;
-            while (position + ISOBox.Stride < length)
+            while (position < length)
             {
                 var box = ISOUtility.GetISOBox(buffer + position);
 
@@ -264,37 +277,36 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 switch (box.type)
                 {
                     case ISOBoxType.MVHD:
-                        if (header.MVHD.IsValid())
-                        {   
-                            error = $"";
-                            return;
-                        }
+                        if (header.duration != 0)
+                            { Error.Value = "Found a second MVHD box in the file"; return; }
 
-                        header.MVHD = new MVHDBox(buffer);
+                        var mvhd = new MVHDBox(buffer + position);
+                        header.timescale = mvhd.timescale;
+                        header.duration = mvhd.duration;
                         position += size;
                         break;
-                    case ISOBoxType.FREE:
-                    case ISOBoxType.MDAT:
+                    case ISOBoxType.TRAK:
+                        trackIdx = Tracks.Length;
+                        Tracks.Add(new TrackValue());
+                        position += ISOBox.Stride;
+                        break;
+                    case ISOBoxType.TKHD:
+                        if (trackIdx < 0 || trackIdx >= Tracks.Length)
+                            { Error.Value = "Found a TKHD box without detecting a TRAK box"; return; }
+
+                        ref var track = ref UnsafeUtility.AsRef<TrackValue>(trackPtr + trackIdx);
+
+                        if (track.duration != 0)
+                            { Error.Value = $"Found a second TKHD box in the same TRAK box #{trackIdx}"; return; }
+
+                        var tkhd = new TKHDBox(buffer + position);
+                        track.duration = tkhd.duration;
                         position += size;
                         break;
                     default:
-                        // Check first if the current box can be a parent.
-                        // If yes, let's peek and check if the children type is valid.
-                        // It is necessary to do that because some childrens are optional so,
-                        // it is possible that a box can be a parent, but is currently not.
-                        bool hasChildren =
-                            ISOUtility.CanBeParent(box.type) &&
-                            ISOUtility.HasValidISOBoxType(buffer + ISOBox.Stride + position);
-
-                        if (IsBoxNeeded(box.type))
-                        {
-                            BoxTypes.Add(box.type);
-                            BoxOffsets.Add(RawData.Length);
-
-                            // TODO: Should be safe as you should not ask for container this big but we should check anyway
-                            RawData.AddRange(buffer, (int)box.size);
-                        }
-                        position += hasChildren ? ISOBox.Stride : size;
+                        position += ISOUtility.CanBeParent(box.type) &&
+                                    ISOUtility.HasValidISOBoxType(buffer + position + ISOBox.Stride)
+                                    ? ISOBox.Stride : size;
                         break;
                 }
             }
@@ -311,7 +323,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             if (commands.ReadCommands[0].Offset + ISOBox.Stride < FileSize)
             {
                 // We still have buffer to read
-                commands.ReadCommands[0].Size = math.min(commands.ReadCommands[0].Size, FileSize - commands.ReadCommands[0].Offset);
+                commands.ReadCommands[0].Size = math.min(Stream.Length, FileSize - commands.ReadCommands[0].Offset);
             }
             else
             {
@@ -319,15 +331,6 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 // We set CommandCount to 0 so any scheduled job end early
                 commands.CommandCount = 0;
             }
-        }
-
-        bool IsBoxNeeded(ISOBoxType type)
-        {
-            foreach (var boxType in BoxTypes)
-                if (boxType == type)
-                    return true;
-
-            return false;
         }
     }
 }

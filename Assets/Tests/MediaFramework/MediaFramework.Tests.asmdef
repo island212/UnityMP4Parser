@@ -1,13 +1,13 @@
 {
-    "name": "Tests",
+    "name": "MediaFramework.Tests",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
+        "MediaFramework",
+        "Unity.Burst",
         "Unity.Collections",
-        "Unity.Mathematics",
-        "Unity.PerformanceTesting",
-        "Unity.Burst"
+        "Unity.Mathematics"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

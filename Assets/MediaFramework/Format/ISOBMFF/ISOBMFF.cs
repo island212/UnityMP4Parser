@@ -36,12 +36,6 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public uint flags;          // 24 bits
     }
 
-    public struct ISOHeader
-    {
-        public FTYPBox FTYP;
-        public MVHDBox MVHD;
-    }
-
     public readonly unsafe struct MVHDBox
     {
         public readonly ulong creationTime;
@@ -88,12 +82,92 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                     BigEndian.GetInt32(buffer + 24), BigEndian.GetInt32(buffer + 28), BigEndian.GetInt32(buffer + 32))
             };
 
-            buffer += 36 + 4 * 6; // matrix + reserved(32)[6]
+            buffer += FixedPoint1616Matrix3x3.Stride + 4 * 6; // matrix + reserved(32)[6]
 
             nextTrackID = BigEndian.GetUInt32(buffer);
         }
 
         public bool IsValid() => duration != 0 && timescale != 0;
+    }
+
+    public enum TrackType
+    {
+        Video = 0,
+        Audio = 1,
+        TimedText = 2,
+        Misc = 3,
+    }
+
+    public readonly unsafe struct TKHDBox
+    {
+        public enum Flags : uint 
+        { 
+            Disabled = 0, 
+            Enabled =  0x1,
+            InMovie = 0x2,
+            InPreview = 0x4,
+            SizeIsAspectRatio = 0x8
+        }
+
+        public readonly Flags flags;
+        public readonly ulong creationTime;
+        public readonly ulong modificationTime;
+        public readonly uint trackID;
+        public readonly ulong duration;
+        public readonly short layer;
+        public readonly short alternateGroup;
+        public readonly FixedPoint88 volume;
+        public readonly FixedPoint1616Matrix3x3 matrix;
+        public readonly UFixedPoint1616 width;
+        public readonly UFixedPoint1616 height;
+
+        public TKHDBox(byte* buffer)
+        {
+            var fullBox = ISOUtility.GetISOFullBox(buffer);
+            flags = (Flags)fullBox.flags;
+
+            if (fullBox.version == 1)
+            {
+                creationTime = BigEndian.GetUInt64(buffer + ISOFullBox.Stride);
+                modificationTime = BigEndian.GetUInt64(buffer + ISOFullBox.Stride + 8);
+                trackID = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 16);
+                // reserved(32)
+                duration = BigEndian.GetUInt64(buffer + ISOFullBox.Stride + 24);
+
+                buffer += ISOFullBox.Stride + 40; // fullBox + creationTime + modificationTime + trackID + reserved(32) + duration + reserved(32)[2]
+            }
+            else
+            {
+                creationTime = BigEndian.GetUInt32(buffer + ISOFullBox.Stride);
+                modificationTime = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 4);
+                trackID = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 8);
+                // reserved(32)
+                duration = BigEndian.GetUInt32(buffer + ISOFullBox.Stride + 16);
+
+                buffer += ISOFullBox.Stride + 28; // fullBox + creationTime + modificationTime + trackID + reserved(32) + duration + reserved(32)[2]
+            }
+
+            layer = BigEndian.GetInt16(buffer);
+            alternateGroup = BigEndian.GetInt16(buffer + 2);
+            volume = new FixedPoint88() { value = BigEndian.GetInt16(buffer + 4) };
+
+            buffer += 2 + 2 + 2 + 2; // layer + alternateGroup + volume + reserved(16)
+
+            matrix = new FixedPoint1616Matrix3x3
+            {
+                value = new int3x3(
+                    BigEndian.GetInt32(buffer), BigEndian.GetInt32(buffer + 4), BigEndian.GetInt32(buffer + 8),
+                    BigEndian.GetInt32(buffer + 12), BigEndian.GetInt32(buffer + 16), BigEndian.GetInt32(buffer + 20),
+                    BigEndian.GetInt32(buffer + 24), BigEndian.GetInt32(buffer + 28), BigEndian.GetInt32(buffer + 32))
+            };
+
+            buffer += FixedPoint1616Matrix3x3.Stride;
+
+            width = new UFixedPoint1616 { value = BigEndian.GetUInt32(buffer) };
+            height = new UFixedPoint1616 { value = BigEndian.GetUInt32(buffer + 4) };
+        }
+
+        //public TrackType GetTrackType() => 
     }
 
     [StructLayout(LayoutKind.Sequential, Size = 16)]
@@ -106,6 +180,8 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
     public struct FixedPoint1616Matrix3x3
     {
+        public const int Stride = 36;
+
         public int3x3 value;
     }
 
@@ -121,6 +197,18 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             => value / 65536.0;
     }
 
+    public struct UFixedPoint1616
+    {
+        public uint value;
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public double ConvertDouble() => ConvertDouble(value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static double ConvertDouble(uint value)
+            => value / 65536.0;
+    }
+
     public struct FixedPoint88
     {
         public short value;
@@ -131,6 +219,12 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double ConvertDouble(short value)
             => value / 256.0;
+    }
+
+    public struct MediaRational
+    { 
+        public ulong num;
+        public ulong dem;
     }
 
     public unsafe static class ISOUtility
