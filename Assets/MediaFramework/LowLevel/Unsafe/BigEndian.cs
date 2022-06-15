@@ -1,48 +1,35 @@
 ﻿using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using Unity.Burst;
-using Unity.Collections;
-using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 
 namespace Unity.MediaFramework.LowLevel.Unsafe
 {
-    [BurstCompile]
     public unsafe static class BigEndian
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ushort GetUInt16(byte* data) => (ushort)(data[0] << 8 | data[1]);
+        public static ushort ReadUInt16(byte* data) => (ushort)(data[0] << 8 | data[1]);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint GetUInt32(byte* data) =>
+        public static uint ReadUInt32(byte* data) =>
                 (uint)data[0] << 24 | (uint)data[1] << 16 | (uint)data[2] << 8 | data[3];
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong GetUInt64(byte* data) =>
+        public static ulong ReadUInt64(byte* data) =>
             (ulong)data[0] << 56 | (ulong)data[1] << 48 | (ulong)data[2] << 40 | (ulong)data[3] << 32 |
             (ulong)data[4] << 24 | (ulong)data[5] << 16 | (ulong)data[6] << 8 | data[7];
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static short GetInt16(byte* data) => (short)(data[0] << 8 | data[1]);
+        public static short ReadInt16(byte* data) => (short)(data[0] << 8 | data[1]);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int GetInt32(byte* data) =>
+        public static int ReadInt32(byte* data) =>
             (int)data[0] << 24 | (int)data[1] << 16 | (int)data[2] << 8 | data[3];
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static long GetInt64(byte* data) =>
+        public static long ReadInt64(byte* data) =>
             (long)data[0] << 56 | (long)data[1] << 48 | (long)data[2] << 40 | (long)data[3] << 32 |
             (long)data[4] << 24 | (long)data[5] << 16 | (long)data[6] << 8 | data[7];
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Write(byte* data, ushort value)
+        public static void WriteUInt16(byte* data, ushort value)
         {
             data[0] = (byte)(value >> 8);
             data[1] = (byte)value;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Write(byte* data, uint value)
+        public static void WriteUInt32(byte* data, uint value)
         {
             data[0] = (byte)(value >> 24);
             data[1] = (byte)(value >> 16);
@@ -50,8 +37,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             data[3] = (byte)value;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Write(byte* data, ulong value)
+        public static void WriteUInt64(byte* data, ulong value)
         {
             data[0] = (byte)(value >> 56);
             data[1] = (byte)(value >> 48);
@@ -63,16 +49,12 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             data[7] = (byte)value;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Write(byte* data, short value) => Write(data, (ushort)value);
+        public static void WriteInt16(byte* data, short value) => WriteUInt16(data, (ushort)value);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Write(byte* data, int value) => Write(data, (uint)value);
+        public static void WriteInt32(byte* data, int value) => WriteUInt32(data, (uint)value);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Write(byte* data, long value) => Write(data, (ulong)value);
+        public static void WriteInt64(byte* data, long value) => WriteUInt64(data, (ulong)value);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ConvertToString(uint data) =>
             new string(new char[4] {
                 (char)((data & 0xFF000000) >> 24),
@@ -81,12 +63,10 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
                 (char)((data & 0x000000FF))
             });
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ConvertFourCCToUInt32(string data) =>
             (uint)data[0] << 24 | (uint)data[1] << 16 | (uint)data[2] << 8 | (uint)data[3];
     }
 
-    [BurstCompile]
     public unsafe struct BigEndianByteReader : ByteReader
     {
         public byte* array;
@@ -101,42 +81,42 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
         {
             CheckIfOutOfBounds(2);
 
-            return BigEndian.GetInt16(array + length);
+            return BigEndian.ReadInt16(array + length);
         }
 
         public short PeekInt16(int offset)
         {
             CheckIfOutOfBounds(offset + 2);
 
-            return BigEndian.GetInt16(array + length + offset);
+            return BigEndian.ReadInt16(array + length + offset);
         }
 
         public int PeekInt32()
         {
             CheckIfOutOfBounds(4);
 
-            return BigEndian.GetInt32(array + length);
+            return BigEndian.ReadInt32(array + length);
         }
 
         public int PeekInt32(int offset)
         {
             CheckIfOutOfBounds(4);
 
-            return BigEndian.GetInt32(array + length);
+            return BigEndian.ReadInt32(array + length);
         }
 
         public long PeekInt64()
         {
             CheckIfOutOfBounds(8);
 
-            return BigEndian.GetInt64(array + length);
+            return BigEndian.ReadInt64(array + length);
         }
 
         public long PeekInt64(int offset)
         {
             CheckIfOutOfBounds(8);
 
-            return BigEndian.GetInt64(array + length);
+            return BigEndian.ReadInt64(array + length);
         }
 
         public sbyte PeekInt8()
@@ -157,42 +137,42 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
         {
             CheckIfOutOfBounds(2);
 
-            return BigEndian.GetUInt16(array + length);
+            return BigEndian.ReadUInt16(array + length);
         }
 
         public ushort PeekUInt16(int offset)
         {
             CheckIfOutOfBounds(offset + 2);
 
-            return BigEndian.GetUInt16(array + length + offset);
+            return BigEndian.ReadUInt16(array + length + offset);
         }
 
         public uint PeekUInt32()
         {
             CheckIfOutOfBounds(4);
 
-            return BigEndian.GetUInt32(array + length);
+            return BigEndian.ReadUInt32(array + length);
         }
 
         public uint PeekUInt32(int offset)
         {
             CheckIfOutOfBounds(offset + 4);
 
-            return BigEndian.GetUInt32(array + length + offset);
+            return BigEndian.ReadUInt32(array + length + offset);
         }
 
         public ulong PeekUInt64()
         {
             CheckIfOutOfBounds(8);
 
-            return BigEndian.GetUInt64(array + length);
+            return BigEndian.ReadUInt64(array + length);
         }
 
         public ulong PeekUInt64(int offset)
         {
             CheckIfOutOfBounds(offset + 8);
 
-            return BigEndian.GetUInt64(array + length + offset);
+            return BigEndian.ReadUInt64(array + length + offset);
         }
 
         public byte PeekUInt8()
@@ -214,7 +194,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(2);
 
             length += 2;
-            return BigEndian.GetInt16(array + length - 2);
+            return BigEndian.ReadInt16(array + length - 2);
         }
 
         public int ReadInt32()
@@ -222,7 +202,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(4);
 
             length += 4;
-            return BigEndian.GetInt32(array + length - 4);
+            return BigEndian.ReadInt32(array + length - 4);
         }
 
         public long ReadInt64()
@@ -230,7 +210,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(8);
 
             length += 8;
-            return BigEndian.GetInt64(array + length - 8);
+            return BigEndian.ReadInt64(array + length - 8);
         }
 
         public sbyte ReadInt8()
@@ -246,7 +226,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(2);
 
             length += 2;
-            return BigEndian.GetUInt16(array + length - 2);
+            return BigEndian.ReadUInt16(array + length - 2);
         }
 
         public uint ReadUInt32()
@@ -254,7 +234,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(4);
 
             length += 4;
-            return BigEndian.GetUInt32(array + length - 4);
+            return BigEndian.ReadUInt32(array + length - 4);
         }
 
         public ulong ReadUInt64()
@@ -262,7 +242,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(8);
 
             length += 8;
-            return BigEndian.GetUInt64(array + length - 8);
+            return BigEndian.ReadUInt64(array + length - 8);
         }
 
         public byte ReadUInt8()
@@ -282,11 +262,10 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
         public void CheckIfOutOfBounds(int size)
         {
             if (length + size >= capacity)
-                throw new System.ArgumentOutOfRangeException($"Error write {size} bytes at index {length} with a length {capacity}");
+                throw new System.ArgumentOutOfRangeException($"Error write {size} bytes at {length} with a capacity of {capacity}");
         }
     }
 
-    [BurstCompile]
     public unsafe struct BigEndianByteWriter : ByteWriter
     {
         public byte* array;
@@ -302,7 +281,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(2);
 
             length += 2;
-            BigEndian.Write(array + length - 2, value);
+            BigEndian.WriteUInt16(array + length - 2, value);
         }
 
         public void WriteUInt32(uint value)
@@ -310,7 +289,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(4);
 
             length += 4;
-            BigEndian.Write(array + length - 4, value);
+            BigEndian.WriteUInt32(array + length - 4, value);
         }
 
         public void WriteUInt64(ulong value)
@@ -318,7 +297,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(8);
 
             length += 8;
-            BigEndian.Write(array + length - 8, value);
+            BigEndian.WriteUInt64(array + length - 8, value);
         }
 
         public void WriteInt16(short value)
@@ -326,7 +305,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(2);
 
             length += 2;
-            BigEndian.Write(array + length - 2, value);
+            BigEndian.WriteInt16(array + length - 2, value);
         }
 
         public void WriteInt32(int value)
@@ -334,7 +313,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(4);
 
             length += 4;
-            BigEndian.Write(array + length - 4, value);
+            BigEndian.WriteInt32(array + length - 4, value);
         }
 
         public void WriteInt64(long value)
@@ -342,7 +321,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             CheckIfOutOfBounds(8);
 
             length += 8;
-            BigEndian.Write(array + length - 8, value);
+            BigEndian.WriteInt64(array + length - 8, value);
         }
 
         public void WriteInt8(sbyte value)
@@ -361,16 +340,19 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             array[length - 1] = value;
         }
 
-        public void Seek(int offset)
+        public void WriteBytes(int count, byte value)
         {
-            length = math.min(length + offset, capacity);
+            CheckIfOutOfBounds(count);
+
+            for (int i = 0; i < count; i++)
+                array[length + i] = value;
+
+            length += count;
         }
 
-        [Conditional("ENABLE_UNITY_COLLECTIONS_CHECKS")]
-        public void CheckIfOutOfBounds(int size)
+        public void Seek(int offset)
         {
-            if (length + size >= capacity)
-                throw new System.ArgumentOutOfRangeException($"Error write {size} bytes at index {length} with a length {capacity}");
+            length += math.min(offset, capacity - length);
         }
 
         public void RemoveLast(int count)
@@ -381,6 +363,13 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
         public void Clear()
         {
             length = 0;
+        }
+
+        [Conditional("ENABLE_UNITY_COLLECTIONS_CHECKS")]
+        public void CheckIfOutOfBounds(int size)
+        {
+            if (length + size >= capacity)
+                throw new System.ArgumentOutOfRangeException($"Error: write {size} bytes at {length} with a capacity of {capacity}");
         }
     }
 }

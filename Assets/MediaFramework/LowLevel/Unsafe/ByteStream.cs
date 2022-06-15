@@ -56,6 +56,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
         void WriteUInt16(ushort value);
         void WriteUInt32(uint value);
         void WriteUInt64(ulong value);
+        void WriteBytes(int count, byte value);
 
         public void Seek(int offset);
         public void RemoveLast(int count);

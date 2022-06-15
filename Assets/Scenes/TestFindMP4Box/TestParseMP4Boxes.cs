@@ -23,7 +23,7 @@ public unsafe class TestParseMP4Boxes : MonoBehaviour
         byte* buffer;
         if (reader.TryFindBox(ISOBoxType.MVHD, out buffer))
         {
-            DebugTools.Print(new MVHDBox(buffer));
+            //DebugTools.Print(new MVHDBox(buffer));
         }
 
         reader.Dispose();

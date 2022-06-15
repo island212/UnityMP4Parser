@@ -52,19 +52,4 @@ namespace Unity.MediaFramework.Format.MP4
     {
         public int num, denom;
     }
-
-    public enum MP4Brand : uint
-    {
-        AVC1 = 0x61766331,
-        ISO2 = 0x69736f32,
-        ISO3 = 0x69736f33,
-        ISO4 = 0x69736f34,
-        ISO5 = 0x69736f35,
-        ISO6 = 0x69736f36,
-        ISO7 = 0x69736f37,
-        ISO8 = 0x69736f38,
-        ISO9 = 0x69736f39,
-        ISOM = 0x69736f6d,
-        MP71 = 0x6d703731,
-    }
 }

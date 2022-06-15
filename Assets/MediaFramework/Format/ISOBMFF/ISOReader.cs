@@ -100,10 +100,10 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                     while (boxIndex < topBoxes.Length)
                     {
                         var box = topBoxes[boxIndex];
-                        var size = box.size > 1 ? box.size : box.size == 1 ?
+                        var size = box.Size > 1 ? box.Size : box.Size == 1 ?
                             (long)extendedSizes[sizeIndex++] : fileInfo.FileSize - offset;
 
-                        if (box.type == ISOBoxType.MDAT)
+                        if (box.Type == ISOBoxType.MDAT)
                         {
                             preMDAT.Offset = 0;
                             preMDAT.Size = offset;
