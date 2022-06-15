@@ -53,15 +53,15 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
         [ReadOnly] public NativeArray<byte> Stream;
 
-        public NativeReference<ErrorValue> Error;
-        public NativeReference<ReadCommandArray> Commands;
+        [WriteOnly] public NativeReference<ErrorValue> Error;
+        [WriteOnly] public NativeReference<ReadCommandArray> Commands;
 
-        public NativeReference<HeaderValue> Header;
-        public NativeList<TrackValue> Tracks;
+        [WriteOnly] public NativeReference<HeaderValue> Header;
+        [WriteOnly] public NativeList<TrackValue> Tracks;
 
         public void Execute()
         {
-            // Nothing was read or there is an error, we can just exit 
+            // If nothing was fetch or there was an error, we can just exit 
             if (Commands.Value.CommandCount == 0 || Error.Value.Type != ErrorType.None)
                 return;
 

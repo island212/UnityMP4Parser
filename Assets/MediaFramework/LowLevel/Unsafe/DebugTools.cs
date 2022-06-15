@@ -17,17 +17,6 @@ namespace Unity.MediaFramework.Video
             Debug.Log($"Type={BigEndian.ConvertToString((uint)box.Type)} Size={box.Size}");
         }
 
-        public static void Print(in ISOReader reader)
-        {
-            StringBuilder sb = new StringBuilder($"[ISOReader] Size={reader.FileSize} ");
-            for (int i = 0; i < reader.BoxeTypes.Length; i++)
-            {
-                sb.Append($"[{reader.BoxeTypes[i]}, {reader.BoxOffsets[i]}], ");
-            }
-            sb.Remove(sb.Length - 2, 2);
-            Debug.Log(sb.ToString());
-        }
-
         public static void Print(in MVHDBox box)
         {
             var sb = new StringBuilder("[MVHDBox] ");
