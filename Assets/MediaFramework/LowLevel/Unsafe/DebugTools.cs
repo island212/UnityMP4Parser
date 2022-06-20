@@ -17,7 +17,7 @@ namespace Unity.MediaFramework.Video
             Debug.Log($"Type={BigEndian.ConvertToString((uint)box.Type)} Size={box.Size}");
         }
 
-        public static void Print(in MVHDBox box)
+        public static void Print(in MovieHeaderBox box)
         {
             var sb = new StringBuilder("[MVHDBox] ");
             sb.Append($"Creation Time: {box.CreationTime} ");

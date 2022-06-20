@@ -21,35 +21,4 @@ namespace Unity.MediaFramework.Format.MP4
     {
         
     }
-
-    public struct MediaAttributes
-    {
-        public int FrameCount;
-        public BigRational Duration;
-    }
-
-    public struct AudioTrack
-    {
-        public int channelCount;
-        public int sampleRate;
-        public uint codecFourCC;
-    }
-
-    public struct VideoTrack
-    {
-        public int width, height;
-        public Rational aspectRatio;
-        public uint codecFourCC;
-        public uint colorStandard;
-    }
-
-    public struct BigRational
-    {
-        public uint num, denom;
-    }
-
-    public struct Rational
-    {
-        public int num, denom;
-    }
 }

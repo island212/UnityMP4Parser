@@ -2,6 +2,7 @@ using NUnit.Framework;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
+using Unity.MediaFramework.LowLevel;
 using Unity.MediaFramework.LowLevel.Unsafe;
 using UnityEngine.TestTools;
 
@@ -29,7 +30,7 @@ public class BigEndianByteWriterTests
         var writer = Stream.AsByteWriter(Endianess.Big);
 
         using var numBuilder = new NativeArray<byte>(8, Allocator.Temp);
-        var numBuilderPtr = numBuilder.GetUnsafePtr();
+        var numBuilderPtr = (byte*)numBuilder.GetUnsafePtr();
 
         var random = new Random(12345);
 
@@ -104,6 +105,23 @@ public class BigEndianByteWriterTests
             Assert.AreEqual(Stream[i], numBuilder[writer.Length - 1 - i]);
 
         writer.Clear();
+
+        writer.WriteBytes(0, 9);
+        Assert.AreEqual(9, writer.Length);
+        for (int i = 0; i < writer.Length; i++)
+            Assert.AreEqual(Stream[i], 0);
+
+        writer.Clear();
+
+        for (int i = 0; i < 13; i++)
+            numBuilderPtr[i] = (byte)i;
+
+        writer.WriteBytes(numBuilderPtr, 13);
+        Assert.AreEqual(13, writer.Length);
+        for (int i = 0; i < writer.Length; i++)
+            Assert.AreEqual(Stream[i], numBuilderPtr[i]);
+
+        writer.Clear();
     }
 
     [Test]
@@ -138,6 +156,11 @@ public class BigEndianByteWriterTests
         Assert.AreEqual(i + 2, writer.Length);
         for (; i < writer.Length; i++)
             Assert.AreEqual(Stream[i], numBuilder[writer.Length - 1 - i]);
+
+        writer.WriteBytes(0, 9);
+        Assert.AreEqual(9, writer.Length);
+        for (; i < writer.Length; i++)
+            Assert.AreEqual(Stream[i], 0);
 
         var value5 = (uint)random.NextUInt();
         UnsafeUtility.WriteArrayElement(numBuilderPtr, 0, value5);

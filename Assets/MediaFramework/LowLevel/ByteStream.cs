@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
+using Unity.MediaFramework.LowLevel.Unsafe;
 
-namespace Unity.MediaFramework.LowLevel.Unsafe
+namespace Unity.MediaFramework.LowLevel
 {
     public interface ByteReader
     {
@@ -54,9 +56,11 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
         void WriteInt64(long value);
         void WriteUInt8(byte value);
         void WriteUInt16(ushort value);
+        void WriteUInt24(uint value);
         void WriteUInt32(uint value);
         void WriteUInt64(ulong value);
-        void WriteBytes(int count, byte value);
+        void WriteBytes(byte value, int count);
+        unsafe void WriteBytes(byte* srcArray, int srcLength);
 
         public void Seek(int offset);
         public void RemoveLast(int count);
@@ -69,26 +73,28 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
     {
         public static ByteWriter AsByteWriter(this NativeArray<byte> array, Endianess endian) => endian switch
         {
-            Endianess.Little => throw new NotSupportedException(),
             Endianess.Big => new BigEndianByteWriter() 
             { 
                 array = (byte*)array.GetUnsafePtr(), 
                 capacity = array.Length, 
                 length = 0 
             },
+#if ENABLE_UNITY_MEDIA_CHECKS
             _ => throw new NotSupportedException()
+#endif
         };
 
         public static ByteReader AsByteReader(this NativeArray<byte> array, Endianess endian) => endian switch
         {
-            Endianess.Little => throw new NotSupportedException(),
             Endianess.Big => new BigEndianByteReader()
             {
                 array = (byte*)array.GetUnsafePtr(),
                 capacity = array.Length,
                 length = 0
             },
+#if ENABLE_UNITY_MEDIA_CHECKS
             _ => throw new NotSupportedException()
+#endif
         };
     }
 }

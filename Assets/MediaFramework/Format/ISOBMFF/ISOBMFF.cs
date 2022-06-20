@@ -18,6 +18,14 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public ulong value;
     }
 
+    // ISO 639-2 Code
+    // https://en.wikipedia.org/wiki/List_of_ISO_639-2_codes
+    public struct ISOLanguage
+    {
+        // padding (1 bit) + character (5 bits)[3]
+        public ushort value;
+    }
+
     public struct FixedPoint1616Matrix3x3
     {
         public const int ByteNeeded = 36;
@@ -61,9 +69,10 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             => value > 0 ? value / 256.0 : 0;
     }
 
-    public unsafe static class ISOUtility
+    public static class ISOUtility
     {
-        public static bool CanBeParent(this ISOBoxType type)
+
+        public static bool CanBeParent(ISOBoxType type)
         {
             switch (type)
             {
@@ -227,6 +236,13 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         MP41 = 0x6d703431,
         MP42 = 0x6d703432,
         MP71 = 0x6d703731,
+    }
+
+    public enum ISOHandler
+    { 
+        None = 0,
+        VIDE = 0x76696465,
+        SOUN = 0x736f756e
     }
 
     public struct UUIDType : IEquatable<UUIDType>
