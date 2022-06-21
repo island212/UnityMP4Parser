@@ -77,12 +77,10 @@ namespace Unity.MediaFramework.Format.ISOBMFF
     public unsafe struct ISOTrack
     {
         public ISOHandler Handler;
-        public TrackHeaderBox TrackHeader;
-        public MediaHeaderBox MediaHeader;
+        public TKHDBox TrackHeader;
+        public MDHDBox MediaHeader;
 
-        public UnsafeRawArray SampleDescriptionRaw;
-        public UnsafeRawArray TimeToSampleRaw;
-        public UnsafeRawArray SyncSampleRaw;
+        public UnsafeRawArray TableContent;
     }
 
 
@@ -119,6 +117,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             }
             else
             {
+                context.ReadCommand.Offset = ioContext.FileSize;
                 context.ReadCommand.Size = 0;
             }
         }
@@ -141,7 +140,6 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
                 switch (box.Type)
                 {
-                    case ISOBoxType.STBL:
                     case ISOBoxType.MINF:
                     case ISOBoxType.MDIA:
                         size = ISOBox.ByteNeeded;
@@ -163,58 +161,27 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                         if (context.ReadCommand.Size - position < size)
                             return true;
 
-                        Tracks.ElementAt(trackIdx).Handler = HandlerBox.GetHandlerType(buffer + position);
+                        Tracks.ElementAt(trackIdx).Handler = HDLRBox.GetHandlerType(buffer + position);
                         break;
                     case ISOBoxType.TKHD:
                         if (context.ReadCommand.Size - position < size)
                             return true;
 
-                        Tracks.ElementAt(trackIdx).TrackHeader = TrackHeaderBox.Parse(buffer + position);
+                        Tracks.ElementAt(trackIdx).TrackHeader = TKHDBox.Parse(buffer + position);
                         break;
                     case ISOBoxType.MDHD:
                         if (context.ReadCommand.Size - position < size)
                             return true;
 
-                        Tracks.ElementAt(trackIdx).MediaHeader = MediaHeaderBox.Parse(buffer + position);
+                        Tracks.ElementAt(trackIdx).MediaHeader = MDHDBox.Parse(buffer + position);
                         break;
-                    case ISOBoxType.STSD:
-                        ref var sampleDes = ref Tracks.ElementAt(trackIdx).SampleDescriptionRaw;
+                    case ISOBoxType.STBL:
+                        ref var table = ref Tracks.ElementAt(trackIdx).TableContent;
                         {
-                            if (!MemCopyBuffer.TryAllocateBuffer(size, out byte* ptr))
-                            {
-                                ptr = (byte*)UnsafeUtility.Malloc(size, 1, Allocator.Persistent);
-                                sampleDes = new UnsafeRawArray(ptr, size, Allocator.Persistent);
-                            }
-                            else
-                                sampleDes = new UnsafeRawArray(ptr, size, Allocator.None);
+                            var ptr = (byte*)UnsafeUtility.Malloc(size, 1, Allocator.Persistent);
+                            table = new UnsafeRawArray(ptr, (int)size, Allocator.Persistent);
                         }
-                        MemCopy(ref ioContext, context.ReadCommand, sampleDes.Ptr, buffer, position, size);
-                        break;
-                    case ISOBoxType.STTS:
-                        ref var timeToSample = ref Tracks.ElementAt(trackIdx).TimeToSampleRaw;
-                        {
-                            if (!MemCopyBuffer.TryAllocateBuffer(size, out byte* ptr))
-                            {
-                                ptr = (byte*)UnsafeUtility.Malloc(size, 1, Allocator.Persistent);
-                                timeToSample = new UnsafeRawArray(ptr, size, Allocator.Persistent);
-                            }
-                            else
-                                timeToSample = new UnsafeRawArray(ptr, size, Allocator.None);
-                        }
-                        MemCopy(ref ioContext, context.ReadCommand, timeToSample.Ptr, buffer, position, size);
-                        break;
-                    case ISOBoxType.STSS:
-                        ref var syncSample = ref Tracks.ElementAt(trackIdx).SyncSampleRaw;
-                        {
-                            if (!MemCopyBuffer.TryAllocateBuffer(size, out byte* ptr))
-                            {
-                                ptr = (byte*)UnsafeUtility.Malloc(size, 1, Allocator.Persistent);
-                                syncSample = new UnsafeRawArray(ptr, size, Allocator.Persistent);
-                            }
-                            else
-                                syncSample = new UnsafeRawArray(ptr, size, Allocator.None);
-                        }
-                        MemCopy(ref ioContext, context.ReadCommand, syncSample.Ptr, buffer, position, size);
+                        MemCpyOverflow(ref ioContext, context.ReadCommand, table.Ptr, buffer, position, size);
                         break;
                     case ISOBoxType.MDAT:
                         context.MDAT = new BoxChunk
@@ -225,8 +192,9 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
                         // The MOOV box has already been parsed, so we can stop here
                         if (context.MOOV.Size != 0)
+                        {
                             return false;
-
+                        }
                         break;
                 }
 
@@ -236,7 +204,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             return context.ReadCommand.Offset + position < ioContext.FileSize;
         }
 
-        public unsafe static void MemCopy(ref IOContext ioContext, in ReadCommand readCommand, in byte* destination, in byte* stream, in long position, in long size)
+        public unsafe static void MemCpyOverflow(ref IOContext ioContext, in ReadCommand readCommand, in byte* destination, in byte* stream, in long position, in long size)
         {
             long buffered = math.min(size, readCommand.Size - position);
             UnsafeUtility.MemCpy(destination, stream + position, buffered);
@@ -272,10 +240,6 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         [WriteOnly] public NativeList<VideoTrack>.ParallelWriter VideoTracks;
         [WriteOnly] public NativeList<AudioTrack>.ParallelWriter AudioTracks;
 
-        [WriteOnly] public NativeArray<byte> TableBuffer;
-
-        public long TableBufferLength;
-
         public void Execute(int index)
         {
             ref var isoTrack = ref Tracks.ElementAt(index);
@@ -298,27 +262,50 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 Height = (int)isoTrack.TrackHeader.Height.ConvertDouble(),
             };
 
-            var tablePtr = (byte*)TableBuffer.GetUnsafePtr();
+            ref var table = ref isoTrack.TableContent;
+
+            int position = 0;
+            while (position < table.Length)
             {
-                ref long length = ref isoTrack.TimeToSampleRaw.Length;
-                long idx = Interlocked.Add(ref TableBufferLength, length) - length;
+                var box = ISOBox.Parse(table.Ptr + position);
 
-                var buffer = (SampleGoup*)(tablePtr + idx);
-                for (; idx < length; idx+=8, buffer++)
+                switch (box.Type)
                 {
-                    *buffer = new SampleGoup
-                    {
-                        Count = BigEndian.ReadUInt32(tablePtr + idx),
-                        Delta = BigEndian.ReadUInt32(tablePtr + idx + 4)
-                    };
+                    case ISOBoxType.STSD:
+                        break;
+                    case ISOBoxType.STTS:
+                        break;
+                    case ISOBoxType.STSS:
+                        break;
+                    case ISOBoxType.CTTS:
+                        break;
+                    case ISOBoxType.STSZ:
+                        break;
+                    case ISOBoxType.STSC:
+                        break;
+                    case ISOBoxType.STCO:
+                        break;
+                    case ISOBoxType.CO64:
+                        break;
                 }
-
-                videoTrack.TimeToSampleTable = new TimeToSampleTable
-                {
-                    EntryCount = (int)length / 2,
-                    SamplesTable = buffer
-                };
             }
+            //{
+            //    var buffer = (SampleGoup*)(tablePtr + idx);
+            //    for (; idx < length; idx+=8, buffer++)
+            //    {
+            //        *buffer = new SampleGoup
+            //        {
+            //            Count = BigEndian.ReadUInt32(tablePtr + idx),
+            //            Delta = BigEndian.ReadUInt32(tablePtr + idx + 4)
+            //        };
+            //    }
+
+            //    videoTrack.TimeToSampleTable = new TimeToSampleTable
+            //    {
+            //        EntryCount = (int)length / 2,
+            //        SamplesTable = buffer
+            //    };
+            //}
 
             VideoTracks.AddNoResize(videoTrack);
         }

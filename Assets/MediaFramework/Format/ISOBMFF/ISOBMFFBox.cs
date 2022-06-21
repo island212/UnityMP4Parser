@@ -31,7 +31,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
         public unsafe static ISOBox Parse(byte* buffer) => new
         (
-            BigEndian.ReadUInt32(buffer), 
+            BigEndian.ReadUInt32(buffer),
             (ISOBoxType)BigEndian.ReadUInt32(buffer + 4)
         );
     }
@@ -85,8 +85,31 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public unsafe static uint GetFlags(byte* buffer) => BigEndian.ReadUInt32(buffer + 8) & 0x00FFFFFF;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    public readonly struct SampleEntry
+    {
+        public const int ByteNeeded = 16;
+
+        public readonly ushort DataReferenceIndex;
+
+        public SampleEntry(ushort dataReferenceIndex)
+        {
+            DataReferenceIndex = dataReferenceIndex;
+        }
+
+        public unsafe static SampleEntry Parse(byte* buffer) => new
+        (
+            GetDataReferenceIndex(buffer)
+        );
+
+        public unsafe static ushort GetDataReferenceIndex(byte* buffer) => BigEndian.ReadUInt16(buffer + ISOBox.ByteNeeded + 48);
+    }
+
+    /// <summary>
+    /// FileTypeBox
+    /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = 32)]
-    public readonly struct FileTypeBox : IEquatable<FileTypeBox>
+    public readonly struct FTYPBox : IEquatable<FTYPBox>
     {
         public const int MaxCachedBrands = 5;
 
@@ -100,7 +123,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public readonly ISOBrand Brand3;
         public readonly ISOBrand Brand4;
 
-        public FileTypeBox(ISOBrand majorBrand, uint minorVersion, int brandCount, 
+        public FTYPBox(ISOBrand majorBrand, uint minorVersion, int brandCount,
             ISOBrand brand0, ISOBrand brand1, ISOBrand brand2, ISOBrand brand3, ISOBrand brand4)
         {
             MajorBrand = majorBrand;
@@ -115,7 +138,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
         public int GetSize() => GetSize(BrandCount);
 
-        public unsafe static FileTypeBox Parse(byte* buffer)
+        public unsafe static FTYPBox Parse(byte* buffer)
         {
 
             ISOBrand majorBrand = (ISOBrand)BigEndian.ReadUInt32(buffer + ISOBox.ByteNeeded);
@@ -123,7 +146,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
             int brandCount = (int)(BigEndian.ReadUInt32(buffer) - ISOBox.ByteNeeded - 8) / 4;
 
-            // Maximum 5 compatible brands
+            // Support maximum 5 compatible brands
             int count = math.min(brandCount, MaxCachedBrands);
             var brandsPtr = stackalloc ISOBrand[5];
             for (int i = 0; i < count; i++)
@@ -131,23 +154,24 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 brandsPtr[i] = (ISOBrand)BigEndian.ReadUInt32(buffer + ISOBox.ByteNeeded + 8 + i * 4);
             }
 
-            return new(majorBrand, minorVersion, brandCount, 
+            return new(majorBrand, minorVersion, brandCount,
                 brandsPtr[0], brandsPtr[1], brandsPtr[2], brandsPtr[3], brandsPtr[4]);
         }
 
         public static int GetSize(int brandCount) => ISOBox.ByteNeeded + 8 + brandCount * 4;
 
-        public bool Equals(FileTypeBox other)
-        {
-            return MajorBrand == other.MajorBrand && MinorVersion == other.MinorVersion && BrandCount == other.BrandCount &&
-                Brand0 == other.Brand0 && Brand1 == other.Brand1 && Brand2 == other.Brand2 && Brand3 == other.Brand3 && Brand4 == other.Brand4;
-        }
+        public bool Equals(FTYPBox other) 
+            => MajorBrand == other.MajorBrand && MinorVersion == other.MinorVersion && BrandCount == other.BrandCount &&
+               Brand0 == other.Brand0 && Brand1 == other.Brand1 && Brand2 == other.Brand2 && Brand3 == other.Brand3 && Brand4 == other.Brand4;
     }
 
-    public readonly struct MovieHeaderBox : IEquatable<MovieHeaderBox>
+    /// <summary>
+    /// MovieHeaderBox
+    /// </summary>
+    public readonly struct MVHDBox : IEquatable<MVHDBox>
     {
         public enum Size
-        { 
+        {
             Version0 = 108,
             Version1 = 120
         }
@@ -162,7 +186,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public readonly FixedPoint1616Matrix3x3 Matrix;
         public readonly uint NextTrackID;
 
-        public MovieHeaderBox(byte version, ulong creationTime, ulong modificationTime, uint timescale, 
+        public MVHDBox(byte version, ulong creationTime, ulong modificationTime, uint timescale,
             ulong duration, int rate, short volume, int3x3 matrix, uint nextTrackID)
         {
             Version = version;
@@ -178,7 +202,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
         public int GetSize() => GetSize(Version);
 
-        public unsafe static MovieHeaderBox Parse(byte* buffer)
+        public unsafe static MVHDBox Parse(byte* buffer)
         {
             var version = ISOFullBox.GetVersion(buffer);
 
@@ -217,7 +241,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
             var nextTrackID = BigEndian.ReadUInt32(buffer);
 
-            return new(version, creationTime, modificationTime, timescale, 
+            return new(version, creationTime, modificationTime, timescale,
                 duration, rate, volume, matrix, nextTrackID);
         }
 
@@ -229,22 +253,23 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public unsafe static ulong GetDuration(byte version, byte* buffer)
             => BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded + (version == 1 ? 20 : 12));
 
-        public bool Equals(MovieHeaderBox other)
-        {
-            return Version == other.Version && CreationTime.value == other.CreationTime.value && ModificationTime.value == other.ModificationTime.value &&
-                Timescale == other.Timescale && Duration == other.Duration && Rate.value == other.Rate.value && Volume.value == other.Volume.value &&
-                Matrix.value.Equals(other.Matrix.value) && NextTrackID == other.NextTrackID;
-        }
+        public bool Equals(MVHDBox other) 
+            => Version == other.Version && CreationTime.value == other.CreationTime.value && ModificationTime.value == other.ModificationTime.value &&
+               Timescale == other.Timescale && Duration == other.Duration && Rate.value == other.Rate.value && Volume.value == other.Volume.value &&
+               Matrix.value.Equals(other.Matrix.value) && NextTrackID == other.NextTrackID;
     }
 
     public enum TrackType
-    { 
+    {
         Video = 0,
         Audio = 1,
         Meta = 2,
     }
 
-    public readonly struct TrackHeaderBox : IEquatable<TrackHeaderBox>
+    /// <summary>
+    /// TrackHeaderBox
+    /// </summary>
+    public readonly struct TKHDBox : IEquatable<TKHDBox>
     {
         public enum Size
         {
@@ -274,7 +299,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public readonly UFixedPoint1616 Width;
         public readonly UFixedPoint1616 Height;
 
-        public TrackHeaderBox(byte version, FullBoxFlags flags, ulong creationTime, ulong modificationTime, uint trackID, ulong duration, short layer, 
+        public TKHDBox(byte version, FullBoxFlags flags, ulong creationTime, ulong modificationTime, uint trackID, ulong duration, short layer,
             short alternateGroup, short volume, int3x3 matrix, uint width, uint height)
         {
             Version = version;
@@ -304,7 +329,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
         public int GetSize() => GetSize(Version);
 
-        public unsafe static TrackHeaderBox Parse(byte* buffer)
+        public unsafe static TKHDBox Parse(byte* buffer)
         {
             var details = ISOFullBox.GetDetails(buffer);
 
@@ -348,21 +373,22 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             var width = BigEndian.ReadUInt32(buffer);
             var height = BigEndian.ReadUInt32(buffer + 4);
 
-            return new(details.Version, (FullBoxFlags)details.Flags, creationTime, modificationTime, 
+            return new(details.Version, (FullBoxFlags)details.Flags, creationTime, modificationTime,
                 trackID, duration, layer, alternateGroup, volume, matrix, width, height);
         }
 
         public static int GetSize(byte version) => version == 1 ? (int)Size.Version1 : (int)Size.Version0;
 
-        public bool Equals(TrackHeaderBox other)
-        {
-            return Version == other.Version && CreationTime.value == other.CreationTime.value && ModificationTime.value == other.ModificationTime.value &&
-                TrackID == other.TrackID && Duration == other.Duration && Layer == other.Layer && AlternateGroup == other.AlternateGroup &&
-                Volume.value == other.Volume.value && Matrix.value.Equals(other.Matrix.value) && Width.value == other.Width.value && Height.value == other.Height.value;
-        }
+        public bool Equals(TKHDBox other) 
+            => Version == other.Version && CreationTime.value == other.CreationTime.value && ModificationTime.value == other.ModificationTime.value &&
+               TrackID == other.TrackID && Duration == other.Duration && Layer == other.Layer && AlternateGroup == other.AlternateGroup &&
+               Volume.value == other.Volume.value && Matrix.value.Equals(other.Matrix.value) && Width.value == other.Width.value && Height.value == other.Height.value;
     }
 
-    public readonly struct MediaHeaderBox : IEquatable<MediaHeaderBox>
+    /// <summary>
+    /// MediaHeaderBox
+    /// </summary>
+    public readonly struct MDHDBox : IEquatable<MDHDBox>
     {
         public enum Size
         {
@@ -377,7 +403,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public readonly ulong Duration;
         public readonly ISOLanguage Language;
 
-        public MediaHeaderBox(byte version, ulong creationTime, ulong modificationTime, 
+        public MDHDBox(byte version, ulong creationTime, ulong modificationTime,
             uint timescale, ulong duration, ushort language)
         {
             Version = version;
@@ -388,13 +414,13 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             Language = new ISOLanguage { value = language };
         }
 
-        public bool Equals(MediaHeaderBox other)
+        public bool Equals(MDHDBox other)
         {
             return Version == other.Version && CreationTime.value == other.CreationTime.value && ModificationTime.value == other.ModificationTime.value &&
                 Timescale == other.Timescale && Duration == other.Duration && Language.value == other.Language.value;
         }
 
-        public unsafe static MediaHeaderBox Parse(byte* buffer)
+        public unsafe static MDHDBox Parse(byte* buffer)
         {
             var version = ISOFullBox.GetVersion(buffer);
 
@@ -429,19 +455,19 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public static int GetSize(byte version) => version == 1 ? (int)Size.Version1 : (int)Size.Version0;
     }
 
-    public readonly struct HandlerBox : IEquatable<HandlerBox>
+    public readonly struct HDLRBox : IEquatable<HDLRBox>
     {
         public readonly ISOHandler Handler;
         public readonly FixedString64Bytes Name;
 
-        public HandlerBox(ISOHandler handler, in FixedString64Bytes name)
+        public HDLRBox(ISOHandler handler, in FixedString64Bytes name)
         {
             Handler = handler;
             Name = name;
         }
 
-        public unsafe static HandlerBox Parse(byte* buffer)
-        { 
+        public unsafe static HDLRBox Parse(byte* buffer)
+        {
             var fullBox = ISOFullBox.Parse(buffer);
             // reserved(32)
             var handler = (ISOHandler)BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded + 4);
@@ -459,14 +485,22 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
         public static int GetSize(int nameLength) => ISOFullBox.ByteNeeded + 20 + nameLength + 1; // + 1 for the NULL terminate
 
-        public unsafe static ISOHandler GetHandlerType(byte* buffer) 
+        public unsafe static ISOHandler GetHandlerType(byte* buffer)
             => (ISOHandler)BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded + 4);
 
-        public bool Equals(HandlerBox other)
-        {
-            return Handler == other.Handler && Name == other.Name;
-        }
+        public bool Equals(HDLRBox other)
+            => Handler == other.Handler && Name == other.Name;
     }
+
+    /// <summary>
+    /// SampleDescriptionBox
+    /// </summary>
+    public readonly struct STSDBox
+    {
+        public const int SamplesOffset = ISOFullBox.ByteNeeded + 4;      
+    }
+
+
 
     ///// <summary>
     ///// TimeToSampleBox (STTS) 

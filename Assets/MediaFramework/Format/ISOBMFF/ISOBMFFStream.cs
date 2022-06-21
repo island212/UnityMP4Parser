@@ -12,9 +12,9 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 {
     public static class ISOByteWriterExtensions
     {
-        public static void WriteMVHD(this ByteWriter writer, in MovieHeaderBox box)
+        public static void WriteMVHD(this ByteWriter writer, in MVHDBox box)
         {
-            writer.WriteUInt32((uint)MovieHeaderBox.GetSize(box.Version));
+            writer.WriteUInt32((uint)MVHDBox.GetSize(box.Version));
             writer.WriteUInt32((uint)ISOBoxType.MVHD);
             writer.WriteUInt8(box.Version);
             writer.WriteUInt24(0);
@@ -52,11 +52,11 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             writer.WriteUInt32(box.NextTrackID);
         }
 
-        public static void WriteFTYP(this ByteWriter writer, in FileTypeBox box)
+        public static void WriteFTYP(this ByteWriter writer, in FTYPBox box)
         {
-            int brandCount = math.min(box.BrandCount, FileTypeBox.MaxCachedBrands);
+            int brandCount = math.min(box.BrandCount, FTYPBox.MaxCachedBrands);
 
-            writer.WriteUInt32((uint)FileTypeBox.GetSize(brandCount));
+            writer.WriteUInt32((uint)FTYPBox.GetSize(brandCount));
             writer.WriteUInt32((uint)ISOBoxType.FTYP);
             writer.WriteUInt32((uint)box.MajorBrand);
             writer.WriteUInt32(box.MinorVersion);
@@ -96,7 +96,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
         public static void WriteFTYP(this ByteWriter writer, ISOBrand major, uint minor, in NativeArray<ISOBrand> brands)
         {
-            writer.WriteUInt32((uint)FileTypeBox.GetSize(brands.Length));
+            writer.WriteUInt32((uint)FTYPBox.GetSize(brands.Length));
             writer.WriteUInt32((uint)ISOBoxType.FTYP);
             writer.WriteUInt32((uint)major);
             writer.WriteUInt32(minor);
@@ -107,9 +107,9 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             }
         }
 
-        public static void WriteTKHD(this ByteWriter writer, in TrackHeaderBox box)
+        public static void WriteTKHD(this ByteWriter writer, in TKHDBox box)
         {
-            writer.WriteUInt32((uint)TrackHeaderBox.GetSize(box.Version));
+            writer.WriteUInt32((uint)TKHDBox.GetSize(box.Version));
             writer.WriteUInt32((uint)ISOBoxType.TKHD);
             writer.WriteUInt8(box.Version);
             writer.WriteUInt24((uint)box.Flags);
@@ -152,9 +152,9 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             writer.WriteUInt32(box.Height.value);
         }
 
-        public static void WriteMDHD(this ByteWriter writer, in MediaHeaderBox box)
+        public static void WriteMDHD(this ByteWriter writer, in MDHDBox box)
         {
-            writer.WriteUInt32((uint)MediaHeaderBox.GetSize(box.Version));
+            writer.WriteUInt32((uint)MDHDBox.GetSize(box.Version));
             writer.WriteUInt32((uint)ISOBoxType.MDHD);
             writer.WriteUInt8(box.Version);
             writer.WriteBytes(0, 3);
@@ -178,7 +178,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             writer.WriteBytes(0, 2);
         }
 
-        public static void WriteHDLR(this ByteWriter writer, in HandlerBox box)
+        public static void WriteHDLR(this ByteWriter writer, in HDLRBox box)
         {
             writer.WriteUInt32((uint)box.GetSize());
             writer.WriteUInt32((uint)ISOBoxType.HDLR);

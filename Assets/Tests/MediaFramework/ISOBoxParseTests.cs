@@ -40,7 +40,7 @@ public unsafe class ISOBoxParseTests
 
         Writer.WriteFTYP(expected);
 
-        var actual = FileTypeBox.Parse(Writer.array);
+        var actual = FTYPBox.Parse(Writer.array);
 
         AssertISOBox.AreEqual(expected, actual);
     }
@@ -52,11 +52,12 @@ public unsafe class ISOBoxParseTests
 
         Writer.WriteMVHD(expected);
 
-        var actual = MovieHeaderBox.Parse(Writer.array);
+        var box = ISOBox.Parse(Writer.array);
+        var actual = MVHDBox.Parse(Writer.array);
 
         AssertISOBox.AreEqual(expected, actual);
-        Assert.AreEqual(expected.Duration, MovieHeaderBox.GetDuration(actual.Version, Writer.array));
-        Assert.AreEqual(expected.Timescale, MovieHeaderBox.GetTimeScale(actual.Version, Writer.array));
+        Assert.AreEqual(expected.Duration, MVHDBox.GetDuration(actual.Version, Writer.array));
+        Assert.AreEqual(expected.Timescale, MVHDBox.GetTimeScale(actual.Version, Writer.array));
     }
 
     [Test]
@@ -66,7 +67,7 @@ public unsafe class ISOBoxParseTests
 
         Writer.WriteTKHD(expected);
 
-        var actual = TrackHeaderBox.Parse(Writer.array);
+        var actual = TKHDBox.Parse(Writer.array);
 
         AssertISOBox.AreEqual(expected, actual);
     }
@@ -78,7 +79,7 @@ public unsafe class ISOBoxParseTests
 
         Writer.WriteTKHD(expected);
 
-        var actual = TrackHeaderBox.Parse(Writer.array);
+        var actual = TKHDBox.Parse(Writer.array);
 
         AssertISOBox.AreEqual(expected, actual);
     }
@@ -90,7 +91,7 @@ public unsafe class ISOBoxParseTests
 
         Writer.WriteMDHD(expected);
 
-        var actual = MediaHeaderBox.Parse(Writer.array);
+        var actual = MDHDBox.Parse(Writer.array);
 
         AssertISOBox.AreEqual(expected, actual);
     }
@@ -102,7 +103,7 @@ public unsafe class ISOBoxParseTests
 
         Writer.WriteHDLR(expected);
 
-        var actual = HandlerBox.Parse(Writer.array);
+        var actual = HDLRBox.Parse(Writer.array);
 
         AssertISOBox.AreEqual(expected, actual);
     }

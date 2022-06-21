@@ -12,6 +12,10 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
         public static uint ReadUInt32(byte* data) =>
                 (uint)data[0] << 24 | (uint)data[1] << 16 | (uint)data[2] << 8 | data[3];
 
+        public static ulong Read2UInt32(byte* data) =>
+            (ulong)data[3] << 56 | (ulong)data[2] << 48 | (ulong)data[1] << 40 | (ulong)data[0] << 32 |
+            (ulong)data[7] << 24 | (ulong)data[6] << 16 | (ulong)data[5] << 8 | data[4];
+
         public static ulong ReadUInt64(byte* data) =>
             (ulong)data[0] << 56 | (ulong)data[1] << 48 | (ulong)data[2] << 40 | (ulong)data[3] << 32 |
             (ulong)data[4] << 24 | (ulong)data[5] << 16 | (ulong)data[6] << 8 | data[7];

@@ -3,7 +3,7 @@ using Unity.MediaFramework.Format.ISOBMFF;
 
 public static class AssertISOBox
 {
-    public static void AreEqual(in FileTypeBox expected, in FileTypeBox actual)
+    public static void AreEqual(in FTYPBox expected, in FTYPBox actual)
     {
         Assert.AreEqual(expected.MajorBrand, actual.MajorBrand);
         Assert.AreEqual(expected.MinorVersion, actual.MinorVersion);
@@ -15,7 +15,7 @@ public static class AssertISOBox
         Assert.AreEqual(expected.Brand4, actual.Brand4);
     }
 
-    public static void AreEqual(in MovieHeaderBox expected, in MovieHeaderBox actual)
+    public static void AreEqual(in MVHDBox expected, in MVHDBox actual)
     { 
         Assert.AreEqual(expected.Version, actual.Version);
         Assert.AreEqual(expected.CreationTime, actual.CreationTime);
@@ -28,7 +28,7 @@ public static class AssertISOBox
         Assert.AreEqual(expected.NextTrackID, actual.NextTrackID);
     }
 
-    public static void AreEqual(in TrackHeaderBox expected, in TrackHeaderBox actual)
+    public static void AreEqual(in TKHDBox expected, in TKHDBox actual)
     {
         Assert.AreEqual(expected.Version, actual.Version);
         Assert.AreEqual(expected.CreationTime, actual.CreationTime);
@@ -43,7 +43,7 @@ public static class AssertISOBox
         Assert.AreEqual(expected.Height.value, actual.Height.value);
     }
 
-    public static void AreEqual(in MediaHeaderBox expected, in MediaHeaderBox actual)
+    public static void AreEqual(in MDHDBox expected, in MDHDBox actual)
     {
         Assert.AreEqual(expected.Version, actual.Version);
         Assert.AreEqual(expected.CreationTime, actual.CreationTime);
@@ -53,7 +53,7 @@ public static class AssertISOBox
         Assert.AreEqual(expected.Language.value, actual.Language.value);
     }
 
-    public static void AreEqual(in HandlerBox expected, in HandlerBox actual)
+    public static void AreEqual(in HDLRBox expected, in HDLRBox actual)
     {
         Assert.AreEqual(expected.Handler, actual.Handler);
         Assert.AreEqual(expected.Name, actual.Name);
