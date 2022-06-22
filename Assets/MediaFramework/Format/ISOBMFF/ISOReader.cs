@@ -13,6 +13,7 @@ using Unity.Jobs;
 using static Unity.MediaFramework.Format.ISOBMFF.AsyncTryParseISOBMFFContent;
 using UnityEngine;
 using System.Runtime.InteropServices;
+using Unity.Burst;
 
 namespace Unity.MediaFramework.Format.ISOBMFF
 {
@@ -83,60 +84,25 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public NativeArray<AudioTrack> AudioTracks;
     }
 
-    public struct PartialISOParse
+    public struct RawISOHeader
     {
-        public JobHandle Handle;
-
-        public NativeReference<JobContext> Context;
-        public NativeList<ISOTrack> Tracks;
-
-        internal NativeList<byte> MemCopyBuffer;
-
-        public PartialISOParse(int copyBufferCapacity = 16384)
-        {
-            Context = new NativeReference<JobContext>(Allocator.Persistent);
-            MemCopyBuffer = new NativeList<byte>(copyBufferCapacity, Allocator.Persistent);
-            Tracks = new NativeList<ISOTrack>(8, Allocator.Persistent);
-
-            Handle = default;
-        }
+        public NativeReference<UnsafeRawArray> RawBuffer;
 
         public JobHandle GetMediaAttributes(out ISOMediaAttributes attributes, JobHandle depends = default)
         {
-            int videoTrackCount = 0, audioTrackCount = 0;
-            foreach (var track in Tracks)
-            {
-                switch (track.Handler)
-                {
-                    case ISOHandler.VIDE: videoTrackCount++; break;
-                    case ISOHandler.SOUN: audioTrackCount++; break;
-                }
-            }
-
-            attributes = new ISOMediaAttributes
-            {
-                VideoTracks = new NativeArray<VideoTrack>(videoTrackCount, Allocator.Persistent),
-                AudioTracks = new NativeArray<AudioTrack>(audioTrackCount, Allocator.Persistent)
-            };
-
+            attributes = new ISOMediaAttributes();
             return depends;
         }
 
         public JobHandle Dispose(JobHandle depends = default)
         {
-            var disposeArray = new NativeArray<JobHandle>(3, Allocator.Temp);
-            disposeArray[0] = Context.Dispose(depends);
-            disposeArray[1] = Tracks.Dispose(depends);
-            disposeArray[2] = MemCopyBuffer.Dispose(depends);
-            var handle = JobHandle.CombineDependencies(disposeArray);
-            disposeArray.Dispose();
-            return handle;
+            return RawBuffer.Dispose(depends);
         }
     }
 
     public unsafe static class AsyncISOReader
     {
-        public static PartialISOParse ParseFile(string path, int streamSize = 65536, int copyBufferCapacity = 16384)
+        public static JobHandle Read(string path, out RawISOHeader header, int streamSize = 8192, JobHandle depends = default)
         {
             FileInfoResult fileInfo;
             AsyncReadManager.GetFileInfo(path, &fileInfo).JobHandle.Complete();
@@ -144,23 +110,23 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             if (fileInfo.FileState == FileState.Absent)
             {
                 Debug.LogError($"File at {path} does not exist");
+                header = default;
                 return default;
             }
 
             var fileHandle = AsyncReadManager.OpenFileAsync(path);
 
-            var isoParse = new PartialISOParse
+            header = new RawISOHeader
             {
-                Context = new NativeReference<JobContext>(Allocator.Persistent),
-                MemCopyBuffer = new NativeList<byte>(copyBufferCapacity, Allocator.Persistent),
-                Tracks = new NativeList<ISOTrack>(8, Allocator.Persistent),
-                Handle = fileHandle.JobHandle
+                RawBuffer = new NativeReference<UnsafeRawArray>(Allocator.Persistent)
             };
 
+            int readCount = 16;
             var stream = new NativeArray<byte>(streamSize, Allocator.TempJob);
-            var readCommands = new NativeArray<ReadCommand>(8, Allocator.TempJob);
+            var readCommands = new NativeArray<ReadCommand>(readCount, Allocator.TempJob);
+            var boxChunks = new NativeList<BoxChunk>(readCount, Allocator.TempJob);
 
-            var ioContext = new IOContext
+            var ioContext = new MediaIOContext
             {
                 FileSize = fileInfo.FileSize,
                 Commands = new ReadCommandArray
@@ -170,66 +136,72 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 }
             };
 
-            var readCommand = new ReadCommand
+            var jobContext = new MediaJobContext()
             {
-                Buffer = stream.GetUnsafePtr(),
-                Size = stream.Length,
-                Offset = 0,
+                ReadCommand = new ReadCommand
+                {
+                    Buffer = stream.GetUnsafePtr(),
+                    Size = stream.Length,
+                    Offset = 0,
+                }
             };
 
-            ioContext.AddReadCommandJob(ref readCommand);
+            ioContext.AddReadCommandJob(ref jobContext.ReadCommand);
 
-            isoParse.Context.Value = new JobContext
+            var refJobContext = new NativeReference<MediaJobContext>(jobContext, Allocator.TempJob);
+            var refIOContext = new NativeReference<MediaIOContext>(ioContext, Allocator.TempJob);
+
+            var handle = JobHandle.CombineDependencies(fileHandle.JobHandle, depends);
+            var readCommandsPtr = &((MediaIOContext*)refIOContext.GetUnsafePtr())->Commands;
+            for (int i = 0; i < readCount; i++)
             {
-                ReadCommand = readCommand
-            };
+                var readHandle = AsyncReadManager.ReadDeferred(fileHandle, readCommandsPtr, handle);
+                handle = JobHandle.CombineDependencies(handle, readHandle.JobHandle);
 
-            var refIOContext = new NativeReference<IOContext>(ioContext, Allocator.TempJob);
-            var readCommandsPtr = &((IOContext*)refIOContext.GetUnsafePtr())->Commands;
-
-            var readJobList = new NativeArray<ReadHandle>(32, Allocator.TempJob);
-            for (int i = 0; i < readJobList.Length; i++)
-            {
-                readJobList[i] = AsyncReadManager.ReadDeferred(fileHandle, readCommandsPtr, isoParse.Handle);
-                isoParse.Handle = JobHandle.CombineDependencies(isoParse.Handle, readJobList[i].JobHandle);
-
-                isoParse.Handle = new AsyncTryParseISOBMFFContent
+                handle = new FindTopBoxes
                 {
                     Stream = stream,
+                    BoxChunks = boxChunks,
                     IOContext = refIOContext,
-                    Context = isoParse.Context,
-                    MemCopyBuffer = isoParse.MemCopyBuffer,
-                    Tracks = isoParse.Tracks
+                    JobContext = refJobContext
                 }
-                .Schedule(isoParse.Handle);
+                .Schedule(handle);
+
+                handle = new DisposeReadHandleJob 
+                    { Job = readHandle }.Schedule(handle);
             }
 
-            isoParse.Handle = fileHandle.Close(isoParse.Handle);
-            isoParse.Handle = new ParseDisposeJob
-            { 
-                ReadJobs = readJobList,
+            handle = new ReadAndLoadInMemoryAllBoxChunks
+            {
+                BoxChunks = boxChunks,
                 IOContext = refIOContext,
-                ReadCommands = readCommands,
-                Stream = stream
+                RawBuffer = header.RawBuffer
             }
-            .Schedule(isoParse.Handle);
+            .Schedule(handle);
 
-            return isoParse;
+            handle = JobHandle.CombineDependencies(handle, fileHandle.Close(handle));
+
+            var diposeList = new NativeList<JobHandle>(8, Allocator.Temp);
+            diposeList.Add(boxChunks.Dispose(handle));
+            diposeList.Add(stream.Dispose(handle));
+            diposeList.Add(readCommands.Dispose(handle));
+            diposeList.Add(refJobContext.Dispose(handle));
+            diposeList.Add(refIOContext.Dispose(handle));
+
+            handle = JobHandle.CombineDependencies(diposeList);
+            diposeList.Dispose();
+
+            return handle;
         }
 
-        private struct ParseDisposeJob : IJob
+        [BurstCompile]
+        private struct DisposeReadHandleJob : IJob
         {
-            public NativeArray<ReadHandle> ReadJobs;
-            public NativeArray<byte> Stream;
-            public NativeArray<ReadCommand> ReadCommands;
-            public NativeReference<IOContext> IOContext;
+            public ReadHandle Job;
 
-            public void Execute()
+            public void Execute() 
             {
-                ReadJobs.Dispose();
-                Stream.Dispose();
-                ReadCommands.Dispose();
-                IOContext.Dispose();
+                Job.Dispose();
             }
         }
     }

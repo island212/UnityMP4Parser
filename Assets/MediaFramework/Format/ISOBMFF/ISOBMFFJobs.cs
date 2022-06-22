@@ -46,7 +46,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public FixedString128Bytes Message;
     }
 
-    public struct IOContext
+    public struct MediaIOContext
     {
         public long FileSize;
         public ReadCommandArray Commands;
@@ -62,52 +62,155 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             return index;
         }
     }
-    public struct JobContext
+    public struct MediaJobContext
     {
         public bool HasError => Error.Type != ErrorType.None;
 
         public ReadCommand ReadCommand;
-
-        public BoxChunk MDAT;
-        public BoxChunk MOOV;
-
         public ErrorMessage Error;
     }
 
-    public unsafe struct ISOTrack
+    public unsafe struct ISOTable
     {
-        public ISOHandler Handler;
-        public TKHDBox TrackHeader;
-        public MDHDBox MediaHeader;
 
-        public UnsafeRawArray TableContent;
     }
 
+    [BurstCompile]
+    public struct FindTopBoxes : IJob
+    {
+        [ReadOnly] public NativeArray<byte> Stream;
+
+        public NativeReference<MediaJobContext> JobContext;
+        public NativeReference<MediaIOContext> IOContext;
+
+        [WriteOnly] public NativeList<BoxChunk> BoxChunks;
+
+        public unsafe void Execute()
+        {
+            if (IOContext.Value.Commands.CommandCount == 0)
+                return;
+
+            ref var ioContext = ref UnsafeUtility.AsRef<MediaIOContext>(IOContext.GetUnsafePtrWithoutChecks());
+            ref var context = ref UnsafeUtility.AsRef<MediaJobContext>(JobContext.GetUnsafePtrWithoutChecks());
+
+            ioContext.Commands.CommandCount = 0;
+
+            var buffer = (byte*)Stream.GetUnsafeReadOnlyPtr();
+
+            long position = 0;
+            while (position + ISOBox.ByteNeeded < context.ReadCommand.Size)
+            {
+                var box = ISOBox.Parse(buffer + position);
+
+                long size = box.Size >= ISOBox.ByteNeeded ? box.Size :
+                            box.Size == 1 ? (long)BigEndian.ReadUInt64(buffer + position + ISOBox.ByteNeeded) :
+                                            ioContext.FileSize - context.ReadCommand.Offset - position;
+
+                switch (box.Type)
+                {
+                    case ISOBoxType.FTYP:
+                    case ISOBoxType.PDIN:
+                    case ISOBoxType.MOOV:
+                    case ISOBoxType.MOOF:
+                    case ISOBoxType.MFRA:
+                    case ISOBoxType.META:
+                    case ISOBoxType.MECO:
+                    case ISOBoxType.STYP:
+                    case ISOBoxType.SIDX:
+                    case ISOBoxType.SSIX:
+                    case ISOBoxType.PRFT:
+                        BoxChunks.Add(new BoxChunk
+                        {
+                            Offset = context.ReadCommand.Offset + position,
+                            Size = size
+                        });
+                        break;
+                }
+
+                position += size;
+            }
+
+            if (context.ReadCommand.Offset + position < ioContext.FileSize)
+            {
+                context.ReadCommand.Offset += position;
+                ioContext.AddReadCommandJob(ref context.ReadCommand);
+            }
+        }
+    }
+
+    [BurstCompile(Debug = true)]
+    public struct ReadAndLoadInMemoryAllBoxChunks : IJob
+    {
+        [ReadOnly] public NativeList<BoxChunk> BoxChunks;
+
+        [WriteOnly] public NativeReference<MediaIOContext> IOContext;
+        [WriteOnly] public NativeReference<UnsafeRawArray> RawBuffer;
+
+        public unsafe void Execute()
+        {
+            if (BoxChunks.Length == 0)
+                return;
+
+            var rawData = new UnsafeRawArray();
+            foreach (var chunk in BoxChunks)
+                rawData.Length += (int)chunk.Size;
+
+            rawData.Allocator = Allocator.Persistent;
+            rawData.Ptr = (byte*)UnsafeUtility.Malloc(rawData.Length, 1, rawData.Allocator);
+
+            RawBuffer.Value = rawData;
+
+            var buffer = rawData.Ptr;
+            ref var ioContext = ref UnsafeUtility.AsRef<MediaIOContext>(IOContext.GetUnsafePtrWithoutChecks());
+
+            ReadCommand readCommand; 
+            var combinedChunk = BoxChunks[0];
+            for (int i = 1; i < BoxChunks.Length; i++)
+            {
+                if (combinedChunk.Offset + combinedChunk.Size == BoxChunks[i].Offset)
+                {
+                    combinedChunk.Size += BoxChunks[i].Size;
+                }
+                else
+                {
+                    readCommand = new ReadCommand
+                    {
+                        Buffer = buffer,
+                        Offset = combinedChunk.Offset,
+                        Size = combinedChunk.Size
+                    };
+
+                    ioContext.AddReadCommandJob(ref readCommand);
+                    buffer += (int)combinedChunk.Size;
+                    combinedChunk = BoxChunks[i];
+                }          
+            }
+        }
+    }
 
     [BurstCompile]
     public struct AsyncTryParseISOBMFFContent : IJob
     {
         [ReadOnly] public NativeArray<byte> Stream;
 
-        public NativeReference<IOContext> IOContext;
-        public NativeReference<JobContext> Context;
-        public NativeList<byte> MemCopyBuffer;
+        public NativeReference<MediaIOContext> IOContext;
+        public NativeReference<MediaJobContext> Context;
 
-        public NativeList<ISOTrack> Tracks;
+        public NativeReference<ISOTable> Table;
 
         public unsafe void Execute()
         {
             if (Context.Value.HasError)
                 return;
 
-            ref var ioContext = ref UnsafeUtility.AsRef<IOContext>(IOContext.GetUnsafePtrWithoutChecks());
+            ref var ioContext = ref UnsafeUtility.AsRef<MediaIOContext>(IOContext.GetUnsafePtrWithoutChecks());
 
             ioContext.Commands.CommandCount = 0;
 
             if (Context.Value.ReadCommand.Size == 0)
                 return;
 
-            ref var context = ref UnsafeUtility.AsRef<JobContext>(Context.GetUnsafePtrWithoutChecks());
+            ref var context = ref UnsafeUtility.AsRef<MediaJobContext>(Context.GetUnsafePtrWithoutChecks());
 
             long position = 0;
             if (ExecuteMainLoop(ref ioContext, ref context, ref position))
@@ -122,9 +225,8 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             }
         }
 
-        public unsafe bool ExecuteMainLoop(ref IOContext ioContext, ref JobContext context, ref long position)
+        public unsafe bool ExecuteMainLoop(ref MediaIOContext ioContext, ref MediaJobContext context, ref long position)
         {
-            var trackIdx = Tracks.Length - 1;
             var buffer = (byte*)Stream.GetUnsafeReadOnlyPtr();
 
             while (position + ISOBox.ByteNeeded < context.ReadCommand.Size)
@@ -138,73 +240,13 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                             box.Size == 1 ? (long)BigEndian.ReadUInt64(buffer + position + ISOBox.ByteNeeded) :
                                             ioContext.FileSize - context.ReadCommand.Offset - position;
 
-                switch (box.Type)
-                {
-                    case ISOBoxType.MINF:
-                    case ISOBoxType.MDIA:
-                        size = ISOBox.ByteNeeded;
-                        break;
-                    case ISOBoxType.MOOV:
-                        context.MOOV = new BoxChunk
-                        {
-                            Offset = context.ReadCommand.Offset + position,
-                            Size = size,
-                        };
-                        size = ISOBox.ByteNeeded;
-                        break;
-                    case ISOBoxType.TRAK:
-                        trackIdx = Tracks.Length;
-                        Tracks.Add(new ISOTrack());
-                        size = ISOBox.ByteNeeded;
-                        break;
-                    case ISOBoxType.HDLR:
-                        if (context.ReadCommand.Size - position < size)
-                            return true;
-
-                        Tracks.ElementAt(trackIdx).Handler = HDLRBox.GetHandlerType(buffer + position);
-                        break;
-                    case ISOBoxType.TKHD:
-                        if (context.ReadCommand.Size - position < size)
-                            return true;
-
-                        Tracks.ElementAt(trackIdx).TrackHeader = TKHDBox.Parse(buffer + position);
-                        break;
-                    case ISOBoxType.MDHD:
-                        if (context.ReadCommand.Size - position < size)
-                            return true;
-
-                        Tracks.ElementAt(trackIdx).MediaHeader = MDHDBox.Parse(buffer + position);
-                        break;
-                    case ISOBoxType.STBL:
-                        ref var table = ref Tracks.ElementAt(trackIdx).TableContent;
-                        {
-                            var ptr = (byte*)UnsafeUtility.Malloc(size, 1, Allocator.Persistent);
-                            table = new UnsafeRawArray(ptr, (int)size, Allocator.Persistent);
-                        }
-                        MemCpyOverflow(ref ioContext, context.ReadCommand, table.Ptr, buffer, position, size);
-                        break;
-                    case ISOBoxType.MDAT:
-                        context.MDAT = new BoxChunk
-                        {
-                            Offset = context.ReadCommand.Offset + position,
-                            Size = size,
-                        };
-
-                        // The MOOV box has already been parsed, so we can stop here
-                        if (context.MOOV.Size != 0)
-                        {
-                            return false;
-                        }
-                        break;
-                }
-
                 position += size;
             }
 
             return context.ReadCommand.Offset + position < ioContext.FileSize;
         }
 
-        public unsafe static void MemCpyOverflow(ref IOContext ioContext, in ReadCommand readCommand, in byte* destination, in byte* stream, in long position, in long size)
+        public unsafe static void MemCpyOverflow(ref MediaIOContext ioContext, in ReadCommand readCommand, in byte* destination, in byte* stream, in long position, in long size)
         {
             long buffered = math.min(size, readCommand.Size - position);
             UnsafeUtility.MemCpy(destination, stream + position, buffered);
@@ -221,7 +263,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             }
         }
 
-        public unsafe static void ThrowError(ref IOContext ioContext, ref JobContext context, in ErrorType type, in FixedString128Bytes message)
+        public unsafe static void ThrowError(ref MediaIOContext ioContext, ref MediaJobContext context, in ErrorType type, in FixedString128Bytes message)
         {
             context.Error = new()
             {
@@ -230,84 +272,6 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             };
 
             ioContext.Commands.CommandCount = 0;
-        }
-    }
-
-    public struct ConvertISOTrackToMediaAttributesJob : IJobParallelFor
-    {
-        [ReadOnly] public NativeList<ISOTrack> Tracks;
-
-        [WriteOnly] public NativeList<VideoTrack>.ParallelWriter VideoTracks;
-        [WriteOnly] public NativeList<AudioTrack>.ParallelWriter AudioTracks;
-
-        public void Execute(int index)
-        {
-            ref var isoTrack = ref Tracks.ElementAt(index);
-            switch (isoTrack.Handler)
-            {
-                case ISOHandler.VIDE: ConvertVideoTrack(ref isoTrack); break;
-                case ISOHandler.SOUN:
-                    break;
-            }
-        }
-
-        public unsafe void ConvertVideoTrack(ref ISOTrack isoTrack)
-        {
-            var videoTrack = new VideoTrack
-            {
-                TrackID = isoTrack.TrackHeader.TrackID,
-                TimeScale = isoTrack.MediaHeader.Timescale,
-                Duration = isoTrack.MediaHeader.Duration,
-                Width = (int)isoTrack.TrackHeader.Width.ConvertDouble(),
-                Height = (int)isoTrack.TrackHeader.Height.ConvertDouble(),
-            };
-
-            ref var table = ref isoTrack.TableContent;
-
-            int position = 0;
-            while (position < table.Length)
-            {
-                var box = ISOBox.Parse(table.Ptr + position);
-
-                switch (box.Type)
-                {
-                    case ISOBoxType.STSD:
-                        break;
-                    case ISOBoxType.STTS:
-                        break;
-                    case ISOBoxType.STSS:
-                        break;
-                    case ISOBoxType.CTTS:
-                        break;
-                    case ISOBoxType.STSZ:
-                        break;
-                    case ISOBoxType.STSC:
-                        break;
-                    case ISOBoxType.STCO:
-                        break;
-                    case ISOBoxType.CO64:
-                        break;
-                }
-            }
-            //{
-            //    var buffer = (SampleGoup*)(tablePtr + idx);
-            //    for (; idx < length; idx+=8, buffer++)
-            //    {
-            //        *buffer = new SampleGoup
-            //        {
-            //            Count = BigEndian.ReadUInt32(tablePtr + idx),
-            //            Delta = BigEndian.ReadUInt32(tablePtr + idx + 4)
-            //        };
-            //    }
-
-            //    videoTrack.TimeToSampleTable = new TimeToSampleTable
-            //    {
-            //        EntryCount = (int)length / 2,
-            //        SamplesTable = buffer
-            //    };
-            //}
-
-            VideoTracks.AddNoResize(videoTrack);
         }
     }
 }

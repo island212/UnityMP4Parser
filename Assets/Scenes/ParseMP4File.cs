@@ -15,6 +15,10 @@ public class ParseMP4File : MonoBehaviour
 
     unsafe void Start()
     {
+        var handle = AsyncISOReader.Read(clip.originalPath, out var header);
 
+        handle.Complete();
+
+        header.Dispose();
     }
 }
