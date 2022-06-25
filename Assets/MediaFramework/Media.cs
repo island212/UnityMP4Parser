@@ -19,11 +19,11 @@ namespace Unity.MediaFramework
 
     public enum AudioCodec : uint
     {
-
+        MP4A = 0x6d703461
     }
 
     public enum VideoCodec : uint
     {
-
+        AVC1 = 0x61766331
     }
 }

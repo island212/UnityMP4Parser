@@ -111,6 +111,13 @@ namespace Unity.MediaFramework.Format.ISOBMFF
     [StructLayout(LayoutKind.Sequential, Size = 32)]
     public readonly struct FTYPBox : IEquatable<FTYPBox>
     {
+        public unsafe struct Ptr
+        { 
+            public byte* value;
+
+            public FTYPBox Parse() => FTYPBox.Parse(value);
+        }
+
         public const int MaxCachedBrands = 5;
 
         public readonly ISOBrand MajorBrand;
@@ -174,6 +181,13 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         {
             Version0 = 108,
             Version1 = 120
+        }
+
+        public unsafe struct Ptr
+        {
+            public byte* value;
+
+            public MVHDBox Parse() => MVHDBox.Parse(value);
         }
 
         public readonly byte Version;
@@ -271,6 +285,13 @@ namespace Unity.MediaFramework.Format.ISOBMFF
     /// </summary>
     public readonly struct TKHDBox : IEquatable<TKHDBox>
     {
+        public unsafe struct Ptr
+        {
+            public byte* value;
+
+            public TKHDBox Parse() => TKHDBox.Parse(value);
+        }
+
         public enum Size
         {
             Version0 = 92,
@@ -390,6 +411,13 @@ namespace Unity.MediaFramework.Format.ISOBMFF
     /// </summary>
     public readonly struct MDHDBox : IEquatable<MDHDBox>
     {
+        public unsafe struct Ptr
+        {
+            public byte* value;
+
+            public MDHDBox Parse() => MDHDBox.Parse(value);
+        }
+
         public enum Size
         {
             Version0 = 32,
@@ -457,6 +485,13 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
     public readonly struct HDLRBox : IEquatable<HDLRBox>
     {
+        public unsafe struct Ptr
+        {
+            public byte* value;
+
+            public HDLRBox Parse() => HDLRBox.Parse(value);
+        }
+
         public readonly ISOHandler Handler;
         public readonly FixedString64Bytes Name;
 
@@ -483,7 +518,8 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
         public int GetSize() => GetSize(Name.Length);
 
-        public static int GetSize(int nameLength) => ISOFullBox.ByteNeeded + 20 + nameLength + 1; // + 1 for the NULL terminate
+        public static int GetSize(int nameLength) 
+            => ISOFullBox.ByteNeeded + 20 + nameLength + 1; // + 1 for the NULL terminate
 
         public unsafe static ISOHandler GetHandlerType(byte* buffer)
             => (ISOHandler)BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded + 4);
@@ -497,10 +533,374 @@ namespace Unity.MediaFramework.Format.ISOBMFF
     /// </summary>
     public readonly struct STSDBox
     {
-        public const int SamplesOffset = ISOFullBox.ByteNeeded + 4;      
+        public unsafe struct Ptr
+        {
+            public byte* value;
+
+            public VisualSampleEntry ParseVideo() => VisualSampleEntry.Parse(value);
+
+            public AudioSampleEntry ParseAudio() => AudioSampleEntry.Parse(value);
+        }
     }
 
+    public unsafe readonly struct VisualSampleEntry
+    {
+        public enum EntryType
+        { 
+            AVCC = 0x61766343, // avcC
+            BTRT = 0x62747274,
+            CLAP = 0x636c6170,
+            COLR = 0x636f6c72,
+            PASP = 0x70617370,
+        }
 
+        public const int ByteNeeded = SampleEntry.ByteNeeded + 70;
+
+        public readonly VideoCodec Codec;
+        public readonly ushort Width, Height;
+        public readonly UFixedPoint1616 HorizResolution;
+        public readonly UFixedPoint1616 VertResolution;
+        public readonly ushort FrameCount;
+        public readonly FixedString64Bytes CompressorName;
+
+        public readonly byte* BitRateBox;
+        public readonly byte* DecoderConfigurationBox;
+        public readonly byte* CleanApertureBox;
+        public readonly byte* PixelAspectRatioBox;
+        public readonly byte* ColourInformationBox;
+
+        public VisualSampleEntry(VideoCodec codec, ushort width, ushort height, uint horizResolution, uint vertResolution, ushort frameCount, 
+            in FixedString64Bytes compressorName, byte* bitRateBox, byte* decoderConfigurationBox, byte* cleanApertureBox, byte* pixelAspectRatioBox, byte* colourInformationBox)
+        {
+            Codec = codec;
+            Width = width;
+            Height = height;
+            HorizResolution = new UFixedPoint1616 { value = horizResolution };
+            VertResolution = new UFixedPoint1616 { value = vertResolution };
+            FrameCount = frameCount;
+            CompressorName = compressorName;
+            BitRateBox = bitRateBox;
+            DecoderConfigurationBox = decoderConfigurationBox;
+            CleanApertureBox = cleanApertureBox;
+            PixelAspectRatioBox = pixelAspectRatioBox;
+            ColourInformationBox = colourInformationBox;
+        }
+
+        public static VisualSampleEntry Parse(byte* buffer)
+        {
+            var entryCount = BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded);
+
+            var box = ISOBox.Parse(buffer + ISOFullBox.ByteNeeded + 4);
+            var codec = (VideoCodec)box.Type;
+
+            buffer += ISOFullBox.ByteNeeded + 4 + SampleEntry.ByteNeeded + 16; // ISOFullBox + EntryCount + SampleEntry + reserved(32)[4]
+
+            var width = BigEndian.ReadUInt16(buffer);
+            var height = BigEndian.ReadUInt16(buffer + 2);
+            var horizresolution = BigEndian.ReadUInt32(buffer + 4);
+            var vertresolution = BigEndian.ReadUInt32(buffer + 8);
+            // reserved(32)
+            var frameCount = BigEndian.ReadUInt16(buffer + 16);
+
+            buffer += 18;
+
+            var compressorNameLength = *buffer;
+            var compressorName = new FixedString64Bytes();
+            compressorName.Append(buffer + 1, math.min(FixedString64Bytes.UTF8MaxLengthInBytes, compressorNameLength));
+
+            buffer += 36; // string[32] + depth(16) + reserved(16)
+
+            int size = (int)box.Size - ByteNeeded;
+            byte* bitRateBox = null, decoderConfigurationBox = null, cleanApertureBox = null, pixelAspectRatioBox = null, colourInformationBox = null;
+            while (size >= ISOBox.ByteNeeded)
+            {
+                var entryBox = ISOBox.Parse(buffer);
+                switch ((EntryType)entryBox.Type)
+                {
+                    case EntryType.AVCC:
+                        decoderConfigurationBox = buffer;
+                        break;
+                    case EntryType.BTRT:
+                        bitRateBox = buffer;
+                        break;
+                    case EntryType.CLAP:
+                        cleanApertureBox = buffer;
+                        break;
+                    case EntryType.PASP:
+                        pixelAspectRatioBox = buffer;
+                        break;
+                    case EntryType.COLR:
+                        colourInformationBox = buffer;
+                        break;
+                }
+
+                size -= (int)entryBox.Size;
+                buffer += (int)entryBox.Size;
+            }
+
+            return new(codec, width, height, horizresolution, vertresolution, frameCount, compressorName,
+                bitRateBox, decoderConfigurationBox, cleanApertureBox, pixelAspectRatioBox, colourInformationBox);
+        }
+    }
+
+    /// <summary>
+    /// AVCDecoderConfigurationRecord (avcC) ISO/IEC 14496-15
+    /// </summary>
+    public unsafe readonly struct AVCDecoderConfigurationRecord
+    {
+        public readonly byte ConfigurationVersion;
+        public readonly byte AVCProfileIndication;
+        public readonly byte ProfileCompatibility;
+        public readonly byte AVCLevelIndication;
+        public readonly byte LengthSizeMinusOne;
+
+        public readonly byte* SPS;
+        public readonly byte* PPS;
+        public readonly byte* AVCProfileIndicationMeta;
+
+        public AVCDecoderConfigurationRecord(byte configurationVersion, byte avcProfileIndication, byte profileCompatibility, 
+            byte avcLevelIndication, byte lengthSizeMinusOne, byte* sps, byte* pps, byte* avcProfileIndicationMeta)
+        {
+            ConfigurationVersion = configurationVersion;
+            AVCProfileIndication = avcProfileIndication;
+            ProfileCompatibility = profileCompatibility;
+            AVCLevelIndication = avcLevelIndication;
+            LengthSizeMinusOne = lengthSizeMinusOne;
+            SPS = sps;
+            PPS = pps;
+            AVCProfileIndicationMeta = avcProfileIndicationMeta;
+        }
+
+        public static AVCDecoderConfigurationRecord Parse(byte* buffer)
+        {
+            var box = ISOBox.Parse(buffer);
+
+            int pos = ISOBox.ByteNeeded;
+
+            var configurationVersion = buffer[pos++];
+            var avcProfileIndication = buffer[pos++];
+            var profileCompatibility = buffer[pos++];
+            var avcLevelIndication = buffer[pos++];
+            var lengthSizeMinusOne = (byte)(buffer[pos++] & 0b00000011);
+
+            var spsPtr = buffer + pos;
+            var numSPS = buffer[pos++] & 0b00011111;
+
+            for (int i = 0; i < numSPS; i++)
+            {
+                var spsLength = BigEndian.ReadUInt16(buffer + pos);
+                pos += 2 + spsLength;
+            }
+
+            var ppsPtr = buffer + pos;
+            var numPPS = buffer[pos++] & 0b00011111;
+
+            for (int i = 0; i < numPPS; i++)
+            {
+                var ppsLength = BigEndian.ReadUInt16(buffer + pos);
+                pos += 2 + ppsLength;
+            }
+
+            byte* avcProfileIndicationMetaPtr = box.Size - pos >= 4 && 
+                (avcProfileIndication == 100 || avcProfileIndication == 110 ||
+                avcProfileIndication == 122 || avcProfileIndication == 144) 
+                ? buffer + pos : null;
+
+            return new(configurationVersion, avcProfileIndication, profileCompatibility, avcLevelIndication, lengthSizeMinusOne, spsPtr, ppsPtr, avcProfileIndicationMetaPtr);
+        }
+    }
+
+    /// <summary>
+    /// AVCProfileIndicationMeta inside AVCDecoderConfigurationRecord (avcC) ISO/IEC 14496-15
+    /// If the AvcProfileIndication is 100, 110, 122 or 144 additionnal metadata can be provided
+    /// </summary>
+    public unsafe readonly struct AVCProfileIndicationMeta
+    {
+        public enum ChromaSubsampling : byte
+        {
+            YUV400 = 0,
+            YUV420 = 1,
+            YUV422 = 2,
+            YUV444 = 3
+        }
+
+        public readonly ChromaSubsampling ChromaFormat;
+        public readonly byte BitDepthLumaMinus8;
+        public readonly byte BitDepthChromaMinus8;
+        public readonly byte* SPSExt;
+
+        public AVCProfileIndicationMeta(byte chromaFormat, byte bitDepthLumaMinus8, byte bitDepthChromaMinus8, byte* spsExt)
+        {
+            ChromaFormat = (ChromaSubsampling)chromaFormat;
+            BitDepthLumaMinus8 = bitDepthLumaMinus8;
+            BitDepthChromaMinus8 = bitDepthChromaMinus8;
+            SPSExt = spsExt;
+        }
+
+        public static AVCProfileIndicationMeta Parse(byte* buffer)
+        {
+            var chromaFormat = (byte)(buffer[0] & 0b00000011);
+            var bitDepthLumaMinus8 = (byte)(buffer[1] & 0b00000111);
+            var bitDepthChromaMinus8 = (byte)(buffer[2] & 0b00000111);
+            var spsExt = buffer + 3;
+
+            return new(chromaFormat, bitDepthLumaMinus8, bitDepthChromaMinus8, spsExt);
+        }
+    }
+
+    public unsafe readonly struct AudioSampleEntry
+    {
+        public enum EntryType
+        {
+            SRAT = 0x73726174,
+            CHNL = 0x63686e6c,
+        }
+
+        public const int ByteNeeded = SampleEntry.ByteNeeded + 20;
+
+        public readonly AudioCodec Codec;
+        public readonly ushort ChannelCount;
+        public readonly ushort SampleSize;
+        public readonly uint SampleRate;
+
+        public readonly byte* ChannelLayout;
+
+        public AudioSampleEntry(AudioCodec codec, ushort channelCount, ushort sampleSize, uint sampleRate, byte* channelLayout)
+        {
+            Codec = codec;
+            ChannelCount = channelCount;
+            SampleSize = sampleSize;
+            SampleRate = sampleRate;
+            ChannelLayout = channelLayout;
+        }
+
+        public static AudioSampleEntry Parse(byte* buffer)
+        {
+            var entryCount = BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded);
+
+            var box = ISOBox.Parse(buffer + ISOFullBox.ByteNeeded + 4);
+            var codec = (AudioCodec)box.Type;
+
+            buffer += ISOFullBox.ByteNeeded + 4 + SampleEntry.ByteNeeded; // ISOFullBox + EntryCount + SampleEntry
+
+            var entryVersion = BigEndian.ReadUInt16(buffer);
+            var channelCount = BigEndian.ReadUInt16(buffer + 8);
+            var sampleSize = BigEndian.ReadUInt16(buffer + 10);
+            var sampleRate = (uint)UFixedPoint1616.ConvertDouble(BigEndian.ReadUInt32(buffer + 16));
+
+            buffer += 20;
+
+            int size = (int)box.Size - ByteNeeded;
+            byte* channelLayout = null;
+            while (size >= ISOBox.ByteNeeded)
+            {
+                var entryBox = ISOBox.Parse(buffer);
+                if (entryBox.Size == 0) // Prevent infinite loop
+                    return default;
+
+                switch ((EntryType)entryBox.Type)
+                {
+                    case EntryType.SRAT:
+                        if (entryVersion == 1)
+                        {
+                            sampleRate = BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded);
+                        }
+                        break;
+                    case EntryType.CHNL:
+                        channelLayout = buffer;
+                        break;
+                }
+
+                size -= (int)entryBox.Size;
+                buffer += (int)entryBox.Size;
+            }
+
+            return new(codec, channelCount, sampleSize, sampleRate, channelLayout);      
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public unsafe readonly struct STTSBox
+    {
+        public unsafe struct Ptr
+        {
+            public byte* value;
+
+            public STTSBox Parse() => STTSBox.Parse(value);
+        }
+
+        public const int SamplesOffset = ISOFullBox.ByteNeeded + 4;
+
+        public readonly uint SampleCount;
+        public readonly uint EntryCount;
+        public readonly SampleGoup* SamplesTable;
+
+        public STTSBox(uint sampleCount, uint entryCount, SampleGoup* samplesTable)
+        {
+            SampleCount = sampleCount;
+            EntryCount = entryCount;
+            SamplesTable = samplesTable;
+        }
+
+        public static STTSBox Parse(byte* buffer)
+        {
+            var entryCount = BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded);
+
+            buffer += ISOFullBox.ByteNeeded + 4;
+
+            var sampleCount = 0u;
+            var samplePtr = (ulong*)buffer;
+            for (int i = 0; i < entryCount; i++)
+            {
+                // Reading two UInt32 is 2x time faster than one at a time
+                *(samplePtr + i) = BigEndian.Read2UInt32(buffer + i * 8);
+                sampleCount += *(uint*)(samplePtr + i);
+            }
+
+            return new(sampleCount, entryCount, (SampleGoup*)buffer);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public unsafe readonly struct STSSBox
+    {
+        public unsafe struct Ptr
+        {
+            public byte* value;
+
+            public STSSBox Parse() => STSSBox.Parse(value);
+        }
+
+        public const int SamplesOffset = ISOFullBox.ByteNeeded + 4;
+
+        public readonly uint EntryCount;
+        public readonly uint* SyncSamplesTable;
+
+        public STSSBox(uint entryCount, uint* syncSamplesTable)
+        {
+            EntryCount = entryCount;
+            SyncSamplesTable = syncSamplesTable;
+        }
+
+        public static STSSBox Parse(byte* buffer)
+        {
+            var entryCount = BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded);
+
+            buffer += ISOFullBox.ByteNeeded + 4;
+
+            var samplePtr = (uint*)buffer;
+            for (int i = 0; i < entryCount; i++)
+            {
+                *(samplePtr + i) = BigEndian.ReadUInt32(buffer + i * 4);
+            }
+
+            return new(entryCount, (uint*)buffer);
+        }
+    }
 
     ///// <summary>
     ///// TimeToSampleBox (STTS) 

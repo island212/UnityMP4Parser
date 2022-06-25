@@ -27,11 +27,9 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public int PixelWidth, PixelHeight;             // STSD
         public ColorFormat ColorFormat;                 // STSD
 
-        public int FrameCount;                          // STTS
+        public uint FrameCount;                         // STTS
         public TimeToSampleTable TimeToSampleTable;     // STTS
         public SyncSampleTable SyncSampleTable;         // STSS
-
-        internal UnsafeRawArray TableContent;
     }
 
     public struct AudioTrack
@@ -42,14 +40,13 @@ namespace Unity.MediaFramework.Format.ISOBMFF
         public ISOLanguage Language;                    // MDHD
         public AudioCodec Codec;                        // STSD
         public int ChannelCount;                        // STSD
-        public int SampleRate;                          // STSD
+        public uint SampleRate;                         // STSD
 
-        public int SampleCount;                         // STTS
+        public uint SampleCount;                        // STTS
         public TimeToSampleTable TimeToSampleTable;     // STTS
-
-        internal UnsafeRawArray TableContent;
     }
 
+    [StructLayout(LayoutKind.Sequential, Size = 8)]
     public struct SampleGoup
     {
         public uint Count;
@@ -58,14 +55,14 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
     public unsafe struct TimeToSampleTable
     {
-        public int EntryCount;
-        public SampleGoup* SamplesTable;
+        public uint Length;
+        public SampleGoup* Samples;
     }
 
     public unsafe struct SyncSampleTable
     {
-        public int EntryCount;
-        public uint* SampleNumberTable;
+        public uint Length;
+        public uint* SampleNumbers;
     }
 
     [StructLayout(LayoutKind.Sequential, Size = 16)]
@@ -96,7 +93,19 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
         public JobHandle Dispose(JobHandle depends = default)
         {
+            depends = new DisposeRawBufferJob 
+                { RawBuffer = RawBuffer }.Schedule(depends);
             return RawBuffer.Dispose(depends);
+        }
+
+        public struct DisposeRawBufferJob : IJob
+        {
+            public NativeReference<UnsafeRawArray> RawBuffer;
+
+            public unsafe void Execute()
+            {
+                UnsafeUtility.AsRef<UnsafeRawArray>(RawBuffer.GetUnsafePtr()).Dispose();
+            }
         }
     }
 
@@ -136,7 +145,7 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 }
             };
 
-            var jobContext = new MediaJobContext()
+            var jobContext = new MediaJobContext
             {
                 ReadCommand = new ReadCommand
                 {
@@ -151,11 +160,12 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             var refJobContext = new NativeReference<MediaJobContext>(jobContext, Allocator.TempJob);
             var refIOContext = new NativeReference<MediaIOContext>(ioContext, Allocator.TempJob);
 
+            ReadHandle readHandle;
             var handle = JobHandle.CombineDependencies(fileHandle.JobHandle, depends);
             var readCommandsPtr = &((MediaIOContext*)refIOContext.GetUnsafePtr())->Commands;
             for (int i = 0; i < readCount; i++)
             {
-                var readHandle = AsyncReadManager.ReadDeferred(fileHandle, readCommandsPtr, handle);
+                readHandle = AsyncReadManager.ReadDeferred(fileHandle, readCommandsPtr, handle);
                 handle = JobHandle.CombineDependencies(handle, readHandle.JobHandle);
 
                 handle = new FindTopBoxes
@@ -175,9 +185,14 @@ namespace Unity.MediaFramework.Format.ISOBMFF
             {
                 BoxChunks = boxChunks,
                 IOContext = refIOContext,
-                RawBuffer = header.RawBuffer
+                Header = header.RawBuffer
             }
             .Schedule(handle);
+
+            readHandle = AsyncReadManager.ReadDeferred(fileHandle, readCommandsPtr, handle);
+            handle = JobHandle.CombineDependencies(handle, readHandle.JobHandle);
+            handle = new DisposeReadHandleJob
+                { Job = readHandle }.Schedule(handle);
 
             handle = JobHandle.CombineDependencies(handle, fileHandle.Close(handle));
 
