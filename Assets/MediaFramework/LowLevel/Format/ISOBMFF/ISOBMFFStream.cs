@@ -8,7 +8,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 using Unity.MediaFramework.LowLevel;
 
-namespace Unity.MediaFramework.Format.ISOBMFF
+namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 {
     public static class ISOByteWriterExtensions
     {

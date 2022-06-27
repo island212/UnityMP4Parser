@@ -11,7 +11,7 @@ using Unity.Mathematics;
 using Unity.MediaFramework.LowLevel.Unsafe;
 using Unity.MediaFramework.Video;
 
-namespace Unity.MediaFramework.Format.ISOBMFF
+namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 {
     public struct ISODate
     {
@@ -71,7 +71,6 @@ namespace Unity.MediaFramework.Format.ISOBMFF
 
     public static class ISOUtility
     {
-
         public static bool CanBeParent(ISOBoxType type)
         {
             switch (type)

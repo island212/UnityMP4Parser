@@ -6,9 +6,6 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.Jobs;
 using Unity.Mathematics;
-using Unity.MediaFramework.Format.ISOBMFF;
-using Unity.MediaFramework.LowLevel.Unsafe;
-using Unity.MediaFramework.Video;
 
 namespace Unity.MediaFramework.Format.MP4
 {

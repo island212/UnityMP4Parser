@@ -410,4 +410,61 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
                 throw new System.ArgumentOutOfRangeException($"Error: write {size} bytes at {length} with a capacity of {capacity}");
         }
     }
+
+    public unsafe struct BitReader
+    {
+        public int pos;
+        public byte* stream;
+
+        public BitReader(byte* buffer)
+        {
+            pos = 0;
+            stream = buffer;
+        }
+
+        public byte ReadBit()
+        {
+            var p = (pos >> 3);
+            var o = 0x07 - (pos & 0x07);
+            var val = (stream[p] >> o) & 0x01;
+            pos++;
+            return (byte)val;
+        }
+
+        public uint ReadBits(int bits)
+        {
+            uint value = 0;
+            for (int i = 0; i < bits; i++)
+            {
+                value = (value << 1) | ReadBit();
+            }
+            return value;
+        }
+
+        public bool ReadBool() => ReadBit() == 1;
+
+        public uint ReadUInt()
+        {
+            return ReadBits(16) << 16 | ReadBits(16);
+        }
+
+        public uint ReadUExpGolomb()
+        {
+            var zeros = 0;
+            while (ReadBit() != 1) zeros++;
+            var value = 1 << zeros;
+            for (var i = zeros - 1; i >= 0; i--)
+            {
+                value |= (ReadBit() << i);
+            }
+            return (uint)(value - 1);
+        }
+
+        public long ReadSExpGolomb()
+        {
+            var codeword = ReadUExpGolomb();
+            return codeword == 0 ? 0 :
+                (codeword & 0x01) == 0 ? 1 + (codeword >> 1) : -(codeword >> 1);
+        }
+    }
 }

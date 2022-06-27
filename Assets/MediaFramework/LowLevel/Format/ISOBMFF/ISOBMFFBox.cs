@@ -9,7 +9,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 using Unity.MediaFramework.LowLevel.Unsafe;
 
-namespace Unity.MediaFramework.Format.ISOBMFF
+namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 {
     // Useful link
     // https://b.goeswhere.com/ISO_IEC_14496-12_2015.pdf

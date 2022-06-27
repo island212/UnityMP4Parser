@@ -1,6 +1,6 @@
 ﻿using Unity.Collections.LowLevel.Unsafe;
 
-namespace Unity.MediaFramework.Format.ISOBMFF
+namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 {
     public struct ISOTable
     {

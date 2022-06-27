@@ -5,8 +5,9 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.MediaFramework.LowLevel.Unsafe;
 using Unity.Mathematics;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.MediaFramework.LowLevel.Format.NAL;
 
-namespace Unity.MediaFramework.Format.ISOBMFF
+namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 {
     public enum ErrorType
     {
@@ -330,20 +331,31 @@ namespace Unity.MediaFramework.Format.ISOBMFF
                 videoTrack.PixelHeight = stsd.Height;
                 videoTrack.ColorFormat = new ColorFormat();
 
-                //if (stsd.DecoderConfigurationBox != null)
-                //{
-                //    switch (stsd.Codec)
-                //    {
-                //        case VideoCodec.AVC1:
-                //            var decoderConfig = AVCDecoderConfigurationRecord.Parse(stsd.DecoderConfigurationBox);
-                //            if (decoderConfig.AVCProfileIndicationMeta != null)
-                //            { 
-                //                var profileMeta = AVCProfileIndicationMeta.Parse(decoderConfig.AVCProfileIndicationMeta);
-                //                UnityEngine.Debug.Log($"{profileMeta.ChromaFormat} {profileMeta.BitDepthChromaMinus8 + 8} {profileMeta.BitDepthLumaMinus8 + 8}");
-                //            }
-                //            break;
-                //    }
-                //}
+                if (stsd.DecoderConfigurationBox != null)
+                {
+                    switch (stsd.Codec)
+                    {
+                        case VideoCodec.AVC1:
+                            var decoderConfig = AVCDecoderConfigurationRecord.Parse(stsd.DecoderConfigurationBox);
+                            if (decoderConfig.SPS != null)
+                            {
+                                int pos = 0;
+                                var numSPS = decoderConfig.SPS[pos++] & 0b00011111;
+
+                                if (numSPS > 0)
+                                {
+                                    SequenceParameterSet.Parse(decoderConfig.SPS + 2 + pos, out var sps);
+                                }
+                            }
+
+                            if (decoderConfig.AVCProfileIndicationMeta != null)
+                            {
+                                var profileMeta = AVCProfileIndicationMeta.Parse(decoderConfig.AVCProfileIndicationMeta);
+                                UnityEngine.Debug.Log($"{profileMeta.ChromaFormat} {profileMeta.BitDepthChromaMinus8 + 8} {profileMeta.BitDepthLumaMinus8 + 8}");
+                            }
+                            break;
+                    }
+                }
             }
 
             if (table.STTS.value != null)

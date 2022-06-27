@@ -9,13 +9,11 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 using Unity.MediaFramework.LowLevel.Unsafe;
 using Unity.Jobs;
-
-using static Unity.MediaFramework.Format.ISOBMFF.AsyncTryParseISOBMFFContent;
 using UnityEngine;
 using System.Runtime.InteropServices;
 using Unity.Burst;
 
-namespace Unity.MediaFramework.Format.ISOBMFF
+namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 {
     public struct VideoTrack
     {

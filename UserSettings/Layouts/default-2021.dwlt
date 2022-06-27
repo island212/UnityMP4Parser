@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 2560
-    y: 233
-    width: 1920
-    height: 997
+    x: 0
+    y: 43
+    width: 2560
+    height: 1357
   m_ShowMode: 4
-  m_Title: Test Runner
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -44,8 +44,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
-    height: 997
+    width: 2560
+    height: 1357
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
@@ -69,7 +69,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
+    width: 2560
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 977
-    width: 1920
+    y: 1337
+    width: 2560
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -114,12 +114,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1920
-    height: 947
+    width: 2560
+    height: 1307
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 195
+  controlID: 82
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,12 +139,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1466
-    height: 947
+    width: 1955
+    height: 1307
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 160
+  controlID: 110
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,12 +164,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1466
-    height: 562
+    width: 1955
+    height: 776
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 161
+  controlID: 111
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -187,8 +187,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 363
-    height: 562
+    width: 484
+    height: 776
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
@@ -206,26 +206,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: TestRunnerWindow
+  m_Name: GameView
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 363
+    x: 484
     y: 0
-    width: 1103
-    height: 562
-  m_MinSize: {x: 102, y: 121}
+    width: 1471
+    height: 776
+  m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 14}
   - {fileID: 15}
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 3
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 3
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -236,23 +236,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 562
-    width: 1466
-    height: 385
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 19}
+    y: 776
+    width: 1955
+    height: 531
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
   - {fileID: 19}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -268,10 +268,10 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1466
+    x: 1955
     y: 0
-    width: 454
-    height: 947
+    width: 605
+    height: 1307
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 20}
@@ -300,9 +300,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 848
+    y: 849
     width: 1954
-    height: 511
+    height: 510
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -320,22 +320,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/MediaFramework/Format/ISOBMFF
+    - Assets/Media
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/MediaFramework/Format/ISOBMFF
+  - Assets/Media
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Projects\UnityMP4Parser
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ea4e0000
-    m_LastClickedID: 20202
-    m_ExpandedIDs: 00000000324e000000ca9a3bffffff7f
+    m_SelectedIDs: 7e500000
+    m_LastClickedID: 20606
+    m_ExpandedIDs: 000000007650000080500000ba54000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -363,7 +363,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000324e000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000076500000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -439,10 +439,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2560
-    y: 263
-    width: 362
-    height: 541
+    x: 0
+    y: 73
+    width: 483
+    height: 755
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -450,9 +450,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 7e500000
       m_LastClickedID: 0
-      m_ExpandedIDs: 32eaffff72eaffff9aebffffd2ebffff12ecffff3aedffff28efffff68efffff90f0ffff6ef1ffffaef1ffffd6f2ffffc2f8ffff02f9ffff30faffffbafaffff
+      m_ExpandedIDs: b8c3fefff8c3feff20c5feffe4c8feff24c9feff4ccafeff90cafeffd0cafefff8cbfeff38cefeff78cefeffa0cffeff28f2ffff68f2ffff90f3fffffef6ffff3ef7ffff66f8ffffa2f8ffffe2f8ffff10faffff32fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -496,10 +496,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 484
-    y: 73
-    width: 1469
-    height: 754
+    x: 2923
+    y: 263
+    width: 1101
+    height: 541
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -754,9 +754,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_Size:
-    m_Target: 9.12025
+    m_Target: 10
     speed: 2
-    m_Value: 9.12025
+    m_Value: 10
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -804,7 +804,7 @@ MonoBehaviour:
     x: 484
     y: 73
     width: 1469
-    height: 754
+    height: 755
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -815,7 +815,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1469, y: 733}
+  m_TargetSize: {x: 1469, y: 734}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -832,8 +832,8 @@ MonoBehaviour:
     vZoomLockedByDefault: 0
     m_HBaseRangeMin: -734.5
     m_HBaseRangeMax: 734.5
-    m_VBaseRangeMin: -366.5
-    m_VBaseRangeMax: 366.5
+    m_VBaseRangeMin: -367
+    m_VBaseRangeMax: 367
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -852,9 +852,9 @@ MonoBehaviour:
       x: 0
       y: 21
       width: 1469
-      height: 733
+      height: 734
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 734.5, y: 366.5}
+    m_Translation: {x: 734.5, y: 367}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
@@ -862,12 +862,12 @@ MonoBehaviour:
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
       x: -734.5
-      y: -366.5
+      y: -367
       width: 1469
-      height: 733
+      height: 734
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 1469, y: 754}
+  m_LastWindowPixelSize: {x: 1469, y: 755}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -893,10 +893,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 484
-    y: 73
-    width: 1469
-    height: 754
+    x: 2923
+    y: 263
+    width: 1101
+    height: 541
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -921,21 +921,21 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2923
-    y: 263
-    width: 1101
-    height: 541
+    x: 484
+    y: 73
+    width: 1469
+    height: 755
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_Spl:
-    ID: 221
+    ID: 318
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
-    - 353
-    - 118
+    - 514
+    - 171
     relativeSizes:
     - 0.75
     - 0.25
@@ -945,7 +945,7 @@ MonoBehaviour:
     maxSizes:
     - 0
     - 0
-    lastTotalSize: 471
+    lastTotalSize: 685
     splitSize: 6
     xOffset: 0
     m_Version: 1
@@ -961,9 +961,9 @@ MonoBehaviour:
       uniqueId: '[UnityMP4Parser][suite]'
       name: UnityMP4Parser
       fullName: UnityMP4Parser
-      resultStatus: 2
-      duration: 0.0699094
-      messages: One or more child tests had errors
+      resultStatus: 0
+      duration: 162.9213
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -977,9 +977,9 @@ MonoBehaviour:
       uniqueId: '[MediaFramework.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/MediaFramework.Tests.dll][suite]'
       name: MediaFramework.Tests.dll
       fullName: E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/MediaFramework.Tests.dll
-      resultStatus: 2
-      duration: 0.0499643
-      messages: One or more child tests had errors
+      resultStatus: 0
+      duration: 162.37407
+      messages: 
       output: 
       stacktrace: 
       notRunnable: 0
@@ -989,114 +989,6 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[UnityMP4Parser][suite]'
-    - id: 1001
-      uniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][AsyncISOParseContentTests][suite]
-      name: AsyncISOParseContentTests
-      fullName: AsyncISOParseContentTests
-      resultStatus: 2
-      duration: 0.0451165
-      messages: One or more child tests had errors
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1005
-      parentUniqueId: '[MediaFramework.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/MediaFramework.Tests.dll][suite]'
-    - id: 1004
-      uniqueId: MediaFramework.Tests.dll/AsyncISOParseContentTests/[MediaFramework.Tests][AsyncISOParseContentTests.ParseMVHD_WithDuplicateBox_ReturnError]
-      name: ParseMVHD_WithDuplicateBox_ReturnError
-      fullName: AsyncISOParseContentTests.ParseMVHD_WithDuplicateBox_ReturnError
-      resultStatus: 1
-      duration: 0.0275508
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1001
-      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][AsyncISOParseContentTests][suite]
-    - id: 1005
-      uniqueId: MediaFramework.Tests.dll/AsyncISOParseContentTests/[MediaFramework.Tests][AsyncISOParseContentTests.ParseMVHD_WithInvalidSize_ReturnError]
-      name: ParseMVHD_WithInvalidSize_ReturnError
-      fullName: AsyncISOParseContentTests.ParseMVHD_WithInvalidSize_ReturnError
-      resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1001
-      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][AsyncISOParseContentTests][suite]
-    - id: 1006
-      uniqueId: MediaFramework.Tests.dll/AsyncISOParseContentTests/[MediaFramework.Tests][AsyncISOParseContentTests.ParseMVHD_WithInvalidSizeForVersion_ReturnError]
-      name: ParseMVHD_WithInvalidSizeForVersion_ReturnError
-      fullName: AsyncISOParseContentTests.ParseMVHD_WithInvalidSizeForVersion_ReturnError
-      resultStatus: 2
-      duration: 0.0345165
-      messages: "  Expected: InvalidSize\r\n  But was:  None\r\n"
-      output: 
-      stacktrace: 'at AsyncISOParseContentTests.AssertError (Unity.MediaFramework.Format.ISOBMFF.AsyncISOParseContent+ErrorType
-        error) [0x00001] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\AsyncISOParseContentTests.cs:159
-
-        at
-        AsyncISOParseContentTests.ParseMVHD_WithInvalidSizeForVersion_ReturnError
-        () [0x0004d] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\AsyncISOParseContentTests.cs:140
-
-'
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1001
-      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][AsyncISOParseContentTests][suite]
-    - id: 1003
-      uniqueId: MediaFramework.Tests.dll/AsyncISOParseContentTests/[MediaFramework.Tests][AsyncISOParseContentTests.ParseMVHD_WithValidData_ReturnValidData]
-      name: ParseMVHD_WithValidData_ReturnValidData
-      fullName: AsyncISOParseContentTests.ParseMVHD_WithValidData_ReturnValidData
-      resultStatus: 1
-      duration: 0.032994
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1001
-      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][AsyncISOParseContentTests][suite]
-    - id: 1002
-      uniqueId: MediaFramework.Tests.dll/AsyncISOParseContentTests/[MediaFramework.Tests][AsyncISOParseContentTests.RunJob_WhenStreamEmpty_ReturnNoError]
-      name: RunJob_WhenStreamEmpty_ReturnNoError
-      fullName: AsyncISOParseContentTests.RunJob_WhenStreamEmpty_ReturnNoError
-      resultStatus: 1
-      duration: 0.0002958
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1001
-      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][AsyncISOParseContentTests][suite]
     - id: 1005
       uniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BigEndianByteWriterTests][suite]
       name: BigEndianByteWriterTests
@@ -1168,8 +1060,8 @@ MonoBehaviour:
       uniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
       name: ISOBoxParseTests
       fullName: ISOBoxParseTests
-      resultStatus: 1
-      duration: 0.0262764
+      resultStatus: 0
+      duration: 162.36598
       messages: 
       output: 
       stacktrace: 
@@ -1180,6 +1072,57 @@ MonoBehaviour:
       categories: []
       parentId: 1013
       parentUniqueId: '[MediaFramework.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/MediaFramework.Tests.dll][suite]'
+    - id: 1006
+      uniqueId: MediaFramework.Tests.dll/ISOBoxParseTests/[MediaFramework.Tests][ISOBoxParseTests.ISOBoxParse_ValidFTYPBox_ReturnExactValue]
+      name: ISOBoxParse_ValidFTYPBox_ReturnExactValue
+      fullName: ISOBoxParseTests.ISOBoxParse_ValidFTYPBox_ReturnExactValue
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1005
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
+    - id: 1011
+      uniqueId: MediaFramework.Tests.dll/ISOBoxParseTests/[MediaFramework.Tests][ISOBoxParseTests.ISOBoxParse_ValidHDLRBoxVideo_ReturnExactValue]
+      name: ISOBoxParse_ValidHDLRBoxVideo_ReturnExactValue
+      fullName: ISOBoxParseTests.ISOBoxParse_ValidHDLRBoxVideo_ReturnExactValue
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1005
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
+    - id: 1010
+      uniqueId: MediaFramework.Tests.dll/ISOBoxParseTests/[MediaFramework.Tests][ISOBoxParseTests.ISOBoxParse_ValidMDHDBox_ReturnExactValue]
+      name: ISOBoxParse_ValidMDHDBox_ReturnExactValue
+      fullName: ISOBoxParseTests.ISOBoxParse_ValidMDHDBox_ReturnExactValue
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1005
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
     - id: 1011
       uniqueId: MediaFramework.Tests.dll/ISOBoxParseTests/[MediaFramework.Tests][ISOBoxParseTests.ISOBoxParse_ValidMVHDBox_ReturnExactValue]
       name: ISOBoxParse_ValidMVHDBox_ReturnExactValue
@@ -1196,6 +1139,57 @@ MonoBehaviour:
       categories:
       - Uncategorized
       parentId: 1010
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
+    - id: 1012
+      uniqueId: MediaFramework.Tests.dll/ISOBoxParseTests/[MediaFramework.Tests][ISOBoxParseTests.ISOBoxParse_ValidSPS_ReturnExactValue]
+      name: ISOBoxParse_ValidSPS_ReturnExactValue
+      fullName: ISOBoxParseTests.ISOBoxParse_ValidSPS_ReturnExactValue
+      resultStatus: 0
+      duration: 161.84064
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1005
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
+    - id: 1009
+      uniqueId: MediaFramework.Tests.dll/ISOBoxParseTests/[MediaFramework.Tests][ISOBoxParseTests.ISOBoxParse_ValidTKHDBoxAudio_ReturnExactValue]
+      name: ISOBoxParse_ValidTKHDBoxAudio_ReturnExactValue
+      fullName: ISOBoxParseTests.ISOBoxParse_ValidTKHDBoxAudio_ReturnExactValue
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1005
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
+    - id: 1008
+      uniqueId: MediaFramework.Tests.dll/ISOBoxParseTests/[MediaFramework.Tests][ISOBoxParseTests.ISOBoxParse_ValidTKHDBoxVideo_ReturnExactValue]
+      name: ISOBoxParse_ValidTKHDBoxVideo_ReturnExactValue
+      fullName: ISOBoxParseTests.ISOBoxParse_ValidTKHDBoxVideo_ReturnExactValue
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1005
       parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
     - id: 1036
       uniqueId: '[Sandbox.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Sandbox.Tests.dll][suite]'
@@ -1718,24 +1712,95 @@ MonoBehaviour:
       - Performance
       parentId: 1033
       parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][RefVsInVsImmutableIn][suite]
-    m_ResultText: "ParseMVHD_WithInvalidSizeForVersion_ReturnError (0.035s)\n---\nExpected:
-      InvalidSize\r\n  But was:  None\n---\nat AsyncISOParseContentTests.AssertError
-      (Unity.MediaFramework.Format.ISOBMFF.AsyncISOParseContent+ErrorType error)
-      [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\MediaFramework\\AsyncISOParseContentTests.cs:159\r\nat
-      AsyncISOParseContentTests.ParseMVHD_WithInvalidSizeForVersion_ReturnError ()
-      [0x0004d] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\MediaFramework\\AsyncISOParseContentTests.cs:140"
-    m_ResultStacktrace: 'at AsyncISOParseContentTests.AssertError (Unity.MediaFramework.Format.ISOBMFF.AsyncISOParseContent+ErrorType
-      error) [0x00001] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\AsyncISOParseContentTests.cs:159
-
-      at
-      AsyncISOParseContentTests.ParseMVHD_WithInvalidSizeForVersion_ReturnError ()
-      [0x0004d] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\AsyncISOParseContentTests.cs:140
-
-'
+    - id: 1041
+      uniqueId: Sandbox.Tests.dll/[Sandbox.Tests][ReorderAndReadBytePerformance][suite]
+      name: ReorderAndReadBytePerformance
+      fullName: ReorderAndReadBytePerformance
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1046
+      parentUniqueId: '[Sandbox.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Sandbox.Tests.dll][suite]'
+    - id: 1042
+      uniqueId: Sandbox.Tests.dll/ReorderAndReadBytePerformance/[Sandbox.Tests][ReorderAndReadBytePerformance.PerformReorderingAndSumTest]
+      name: PerformReorderingAndSumTest
+      fullName: ReorderAndReadBytePerformance.PerformReorderingAndSumTest
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Performance
+      parentId: 1041
+      parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][ReorderAndReadBytePerformance][suite]
+    - id: 1043
+      uniqueId: Sandbox.Tests.dll/[Sandbox.Tests][ReorderBytePerformance][suite]
+      name: ReorderBytePerformance
+      fullName: ReorderBytePerformance
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1046
+      parentUniqueId: '[Sandbox.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Sandbox.Tests.dll][suite]'
+    - id: 1045
+      uniqueId: Sandbox.Tests.dll/ReorderBytePerformance/[Sandbox.Tests][ReorderBytePerformance.PerformReordering64Test]
+      name: PerformReordering64Test
+      fullName: ReorderBytePerformance.PerformReordering64Test
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Performance
+      parentId: 1043
+      parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][ReorderBytePerformance][suite]
+    - id: 1044
+      uniqueId: Sandbox.Tests.dll/ReorderBytePerformance/[Sandbox.Tests][ReorderBytePerformance.PerformReorderingTest]
+      name: PerformReorderingTest
+      fullName: ReorderBytePerformance.PerformReorderingTest
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Performance
+      parentId: 1043
+      parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][ReorderBytePerformance][suite]
+    m_ResultText: ISOBoxParse_ValidSPS_ReturnExactValue (161.841s)
+    m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 8fa26cfd
-      m_LastClickedID: -43212145
+      m_SelectedIDs: 0d4a36da
+      m_LastClickedID: -633976307
       m_ExpandedIDs: feda0987c1680ba1fba8eca9ceffd5af2358b0c5eee6bfc5d5508ec6019e02eb269afa076563e61a24b59330c3227844931d8f5057c7135b26bccc6aef47c66dffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -2017,10 +2082,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2560
-    y: 825
-    width: 1465
-    height: 364
+    x: 0
+    y: 849
+    width: 1954
+    height: 510
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -2045,10 +2110,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 4026
-    y: 263
-    width: 453
-    height: 926
+    x: 1955
+    y: 73
+    width: 604
+    height: 1286
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
