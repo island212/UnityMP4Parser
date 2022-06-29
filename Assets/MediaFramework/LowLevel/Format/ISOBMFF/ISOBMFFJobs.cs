@@ -339,12 +339,10 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
                             var decoderConfig = AVCDecoderConfigurationRecord.Parse(stsd.DecoderConfigurationBox);
                             if (decoderConfig.SPS != null)
                             {
-                                int pos = 0;
-                                var numSPS = decoderConfig.SPS[pos++] & 0b00011111;
-
+                                var numSPS = decoderConfig.SPS[0] & 0b00011111;
                                 if (numSPS > 0)
                                 {
-                                    SequenceParameterSet.Parse(decoderConfig.SPS + 2 + pos, out var sps);
+                                    SequenceParameterSet.Parse(decoderConfig.SPS + 3, numSPS, out var sps);
                                 }
                             }
 

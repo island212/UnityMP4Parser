@@ -1,4 +1,5 @@
 ﻿using Unity.Collections;
+using Unity.Mathematics;
 using Unity.MediaFramework.LowLevel.Codecs;
 using Unity.MediaFramework.LowLevel.Unsafe;
 
@@ -43,8 +44,8 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
         public byte chroma_sample_loc_type_top_field;       // [0..5]
         public byte chroma_sample_loc_type_bottom_field;    // [0..5]
 
-        public uint num_units_in_tick;
-        public uint time_scale;
+        public uint num_units_in_tick;                      // > 0
+        public uint time_scale;                             // > 0
 
         public BitField32 flags;
 
@@ -98,10 +99,11 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
 
         public bool FixedFrameRate { get => flags.IsSet(18); set => flags.SetBits(18, value); }
 
-        public static bool Parse(byte* buffer, out SequenceParameterSet sps)
+        public static bool Parse(byte* buffer, int length, out SequenceParameterSet sps)
         {
-            sps = new SequenceParameterSet();
+            length = RemoveEmulationPreventionBytes(buffer, length);
 
+            sps = new SequenceParameterSet();
             var forbidden_zero_bit = (buffer[0] & 0x80) == 0x80;
             if (forbidden_zero_bit)
                 UnityEngine.Debug.LogWarning("NALU error: invalid NALU header");
@@ -268,6 +270,27 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
             }
 
             return true;
+        }
+
+        private static int RemoveEmulationPreventionBytes(byte* buffer, int length)
+        {
+            int newLength = 1, i = 1;
+            while (i + 2 < length)
+            {            
+                if ((*(uint*)(buffer + i) & 0x00FFFFFF) == 0x00030000)
+                {
+                    buffer[newLength++] = buffer[i++];
+                    buffer[newLength++] = buffer[i++];
+                    i++;
+                }
+                else
+                    buffer[newLength++] = buffer[i++];
+            }
+
+            while (i < length)
+                buffer[newLength++] = buffer[i++];
+
+            return newLength;
         }
     }
 }
