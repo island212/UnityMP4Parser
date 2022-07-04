@@ -137,7 +137,9 @@ public unsafe class ISOBoxParseTests
         var test = spsSmall;
         fixed (byte* ptr = test)
         {
-            SequenceParameterSet.Parse(ptr, test.Length, out var sps);
+            var sps = new SequenceParameterSet();
+            var error = sps.Parse(ptr, test.Length, Allocator.Temp);
+            sps.Dispose();
         }
     }
 }

@@ -342,7 +342,9 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
                                 var numSPS = decoderConfig.SPS[0] & 0b00011111;
                                 if (numSPS > 0)
                                 {
-                                    SequenceParameterSet.Parse(decoderConfig.SPS + 3, numSPS, out var sps);
+                                    var sps = new SequenceParameterSet();
+                                    var error = sps.Parse(decoderConfig.SPS + 3, numSPS, Allocator.Temp);
+                                    sps.Dispose();
                                 }
                             }
 

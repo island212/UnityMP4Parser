@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
+using Unity.MediaFramework.LowLevel.Format.NAL;
 using Unity.MediaFramework.LowLevel.Unsafe;
 
 namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
@@ -716,14 +717,6 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     /// </summary>
     public unsafe readonly struct AVCProfileIndicationMeta
     {
-        public enum ChromaSubsampling : byte
-        {
-            YUV400 = 0,
-            YUV420 = 1,
-            YUV422 = 2,
-            YUV444 = 3
-        }
-
         public readonly ChromaSubsampling ChromaFormat;
         public readonly byte BitDepthLumaMinus8;
         public readonly byte BitDepthChromaMinus8;

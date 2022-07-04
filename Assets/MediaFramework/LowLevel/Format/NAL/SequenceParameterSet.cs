@@ -1,266 +1,769 @@
-﻿using Unity.Collections;
+﻿using System;
+using System.Runtime.InteropServices;
+using Unity.Collections;
+using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 using Unity.MediaFramework.LowLevel.Codecs;
 using Unity.MediaFramework.LowLevel.Unsafe;
 
 namespace Unity.MediaFramework.LowLevel.Format.NAL
 {
+    public enum ChromaSubsampling : byte
+    {
+        YUV400 = 0,
+        YUV420 = 1,
+        YUV422 = 2,
+        YUV444 = 3
+    }
+
+    public enum ColourPrimaries
+    {
+        BT709 = 1,
+        UNSPECIFIED = 2,
+        BT470M = 4,
+        BT470BG = 5, // BT601 625
+        SMPTE170M = 6, // BT601 525
+        SMPTE240M = 7,
+        FILM = 8,
+        BT2020 = 9,
+        SMPTE428 = 10,
+        SMPTE431 = 11,
+        SMPTE432 = 12,
+        EBU3213 = 22
+    }
+
+    public enum SPSError
+    {
+        None,
+        InvalidLength,
+        ForbiddenZeroBit,
+        InvalidRefID,
+        InvalidUnitType,
+        ReaderOverflow,
+        ReaderOutOfRange,
+        ReaderUnknown,
+        InvalidSeqParamaterSetId,
+        InvalidChromaFormat,
+        InvalidBitDepthLuma,
+        InvalidBitDepthChroma,
+        InvalidScalingMatrixDeltaScale,
+        InvalidMaxFrameNum,
+        InvalidPicOrderCntType,
+        InvalidMaxPictureOrderCntLsb,
+        InvalidNumRefFramesInCycle,
+        InvalidMaxNumRefFrames,
+        InvalidMbWidth,
+        InvalidMbHeight,
+        InvalidCrop,
+        InvalidAspectIndicator,
+        InvalidVideoFormat,
+        InvalidChromaLocTypeField,
+        InvalidTimeInfo,
+    }
+
+    public struct ScalingMatrix
+    {
+        public ScalingMatrix4x4 matrix00;
+        public ScalingMatrix4x4 matrix01;
+        public ScalingMatrix4x4 matrix02;
+        public ScalingMatrix4x4 matrix03;
+        public ScalingMatrix4x4 matrix04;
+        public ScalingMatrix4x4 matrix05;
+        public ScalingMatrix8x8 matrix06;
+        public ScalingMatrix8x8 matrix07;
+
+        public ScalingMatrix8x8 matrix08;
+        public ScalingMatrix8x8 matrix09;
+        public ScalingMatrix8x8 matrix10;
+        public ScalingMatrix8x8 matrix11;
+
+        public unsafe SPSError Parse(ref BitReader reader, bool isYUV444)
+        {
+            fixed (ScalingMatrix4x4* default4Intra = &ScalingMatrix4x4.DefaultIntra)
+            fixed (ScalingMatrix4x4* default4Inter = &ScalingMatrix4x4.DefaultInter)
+            fixed (ScalingMatrix8x8* default8Intra = &ScalingMatrix8x8.DefaultIntra)
+            fixed (ScalingMatrix8x8* default8Inter = &ScalingMatrix8x8.DefaultInter)
+            {
+                var mat00 = (uint*)UnsafeUtility.AddressOf(ref matrix00);
+                var mat01 = (uint*)UnsafeUtility.AddressOf(ref matrix01);
+                var mat02 = (uint*)UnsafeUtility.AddressOf(ref matrix02);
+                var mat03 = (uint*)UnsafeUtility.AddressOf(ref matrix03);
+                var mat04 = (uint*)UnsafeUtility.AddressOf(ref matrix04);
+                var mat05 = (uint*)UnsafeUtility.AddressOf(ref matrix05);
+                var mat06 = (uint*)UnsafeUtility.AddressOf(ref matrix06);
+                var mat07 = (uint*)UnsafeUtility.AddressOf(ref matrix07);
+
+                SPSError error;
+                error = ParseScalingMatrices(ref reader, mat00, 16, (uint*)default4Intra, (uint*)default4Intra);    // Intra Y
+                if (error != SPSError.None) return error;
+                error = ParseScalingMatrices(ref reader, mat01, 16, (uint*)default4Intra, mat00);                   // Intra Cr
+                if (error != SPSError.None) return error;
+                error = ParseScalingMatrices(ref reader, mat02, 16, (uint*)default4Intra, mat01);                   // Intra Cb
+                if (error != SPSError.None) return error;
+                error = ParseScalingMatrices(ref reader, mat03, 16, (uint*)default4Inter, (uint*)default4Inter);    // Inter Y
+                if (error != SPSError.None) return error;
+                error = ParseScalingMatrices(ref reader, mat04, 16, (uint*)default4Intra, mat03);                   // Inter Cr
+                if (error != SPSError.None) return error;
+                error = ParseScalingMatrices(ref reader, mat05, 16, (uint*)default4Intra, mat04);                   // Inter Cb
+                if (error != SPSError.None) return error;
+                error = ParseScalingMatrices(ref reader, mat06, 64, (uint*)default8Intra, (uint*)default8Intra);    // Intra Y
+                if (error != SPSError.None) return error;
+                error = ParseScalingMatrices(ref reader, mat07, 64, (uint*)default8Inter, (uint*)default8Inter);    // Inter Y
+                if (error != SPSError.None) return error;
+                if (isYUV444)
+                {
+                    var mat08 = (uint*)UnsafeUtility.AddressOf(ref matrix08);
+                    var mat09 = (uint*)UnsafeUtility.AddressOf(ref matrix09);
+                    var mat10 = (uint*)UnsafeUtility.AddressOf(ref matrix10);
+                    var mat11 = (uint*)UnsafeUtility.AddressOf(ref matrix11);
+
+                    error = ParseScalingMatrices(ref reader, mat08, 64, (uint*)default8Intra, mat06);               // Intra Cr
+                    if (error != SPSError.None) return error;
+                    error = ParseScalingMatrices(ref reader, mat09, 64, (uint*)default8Inter, mat07);               // Inter Cr
+                    if (error != SPSError.None) return error;
+                    error = ParseScalingMatrices(ref reader, mat10, 64, (uint*)default8Intra, mat08);               // Intra Cb
+                    if (error != SPSError.None) return error;
+                    error = ParseScalingMatrices(ref reader, mat11, 64, (uint*)default8Inter, mat09);               // Inter Cb
+                    if (error != SPSError.None) return error;
+                }
+
+                return SPSError.None;
+            }
+        }
+
+        private unsafe static SPSError ParseScalingMatrices(ref BitReader reader, uint* scalingList, int size, uint* defaultMatrix, uint* fallback)
+        {
+            if (reader.CheckForBits(1))
+                return SPSError.ReaderOutOfRange;
+
+            var seq_scaling_list_present_flag = reader.ReadBool();
+            if (seq_scaling_list_present_flag)
+            {
+                var lastScale = 8;
+                var nextScale = 8;
+
+                var deltaScale = reader.ReadSExpGolomb();
+                if (reader.Error != ReaderError.None)
+                    return SequenceParameterSet.ConvertError(reader.Error);
+
+                if (deltaScale < -128 || deltaScale > 127)
+                    return SPSError.InvalidScalingMatrixDeltaScale;
+
+                nextScale = (lastScale + deltaScale) & 0xFF;
+
+                if (nextScale == 0)
+                {
+                    UnsafeUtility.MemCpy(scalingList, defaultMatrix, size * sizeof(uint));
+                }
+
+                lastScale = nextScale;
+                scalingList[0] = (uint)lastScale;
+
+                for (int j = 1; j < size; j++)
+                {
+                    if (nextScale != 0)
+                    {
+                        deltaScale = reader.ReadSExpGolomb();
+                        if (reader.Error != ReaderError.None)
+                            return SequenceParameterSet.ConvertError(reader.Error);
+
+                        if (deltaScale < -128 || deltaScale > 127)
+                            return SPSError.InvalidScalingMatrixDeltaScale;
+
+                        nextScale = (lastScale + deltaScale) & 0xFF;
+                    }
+
+                    lastScale = nextScale == 0 ? lastScale : nextScale;
+                    scalingList[j] = (uint)lastScale;
+                }
+            }
+            else
+            {
+                UnsafeUtility.MemCpy(scalingList, fallback, size * sizeof(uint));
+            }
+
+            return SPSError.None;
+        }
+    }
+
+    public struct ScalingMatrix4x4
+    {
+        public static readonly ScalingMatrix4x4 DefaultIntra = new()
+        {
+            value = new(6, 13, 13, 20, 20, 20, 28, 28, 28, 28, 32, 32, 32, 37, 37, 42)
+        };
+
+        public static readonly ScalingMatrix4x4 DefaultInter = new()
+        {
+            value = new(10, 14, 14, 20, 20, 20, 24, 24, 24, 24, 27, 27, 27, 30, 30, 34)
+        };
+
+        public uint4x4 value;
+    }
+
+    public struct ScalingMatrix8x8
+    {
+        public static readonly ScalingMatrix8x8 DefaultIntra = new()
+        {
+            value0 = new(06, 10, 10, 13, 11, 13, 16, 16, 16, 16, 18, 18, 18, 18, 18, 23),
+            value1 = new(23, 23, 23, 23, 23, 25, 25, 25, 25, 25, 25, 25, 27, 27, 27, 27),
+            value2 = new(27, 27, 27, 27, 29, 29, 29, 29, 29, 29, 29, 31, 31, 31, 31, 31),
+            value3 = new(31, 33, 33, 33, 33, 33, 36, 36, 36, 36, 38, 38, 38, 40, 40, 42)
+        };
+
+        public static readonly ScalingMatrix8x8 DefaultInter = new()
+        {
+            value0 = new(09, 13, 13, 15, 13, 15, 17, 17, 17, 17, 19, 19, 19, 19, 19, 21),
+            value1 = new(21, 21, 21, 21, 21, 22, 22, 22, 22, 22, 22, 22, 24, 24, 24, 24),
+            value2 = new(24, 24, 24, 24, 25, 25, 25, 25, 25, 25, 25, 27, 27, 27, 27, 27),
+            value3 = new(27, 28, 28, 28, 28, 28, 30, 30, 30, 30, 32, 32, 32, 33, 33, 35)
+        };
+
+        public uint4x4 value0;
+        public uint4x4 value1;
+        public uint4x4 value2;
+        public uint4x4 value3;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Size = 4)]
+    public struct SPSProfile
+    {
+        public H264Profile FullProfile => H264Utility.GetProfile(Value, Constraints);
+
+        public uint ProfileLevelId => (uint)Value << 16 | (uint)Constraints << 8 | Level;
+
+        public byte Value;
+        public byte Constraints;
+        public byte Level;
+    }
+
+    [StructLayout(LayoutKind.Sequential, Size = 4)]
+    public unsafe struct SPSChromaFormat
+    {
+        [Flags]
+        public enum Flag : byte
+        {
+            None = 0x00,
+            SeparateColourPlane = 0x01, // separate_colour_plane_flag
+            TransformBypass = 0x02, // qpprime_y_zero_transform_bypass_flag
+        }
+
+        public Flag Flags;
+        public ChromaSubsampling Format;
+        public byte BitDepthLuma;
+        public byte BitDepthChroma;
+
+        public bool SeparateColourPlane => (Flags & Flag.SeparateColourPlane) == Flag.SeparateColourPlane;
+
+        public bool TransformBypass => (Flags & Flag.TransformBypass) == Flag.TransformBypass;
+
+        public uint RawMbBits => 256u * BitDepthLuma + 2u * MbWidthC * MbHeightC * BitDepthChroma;
+
+        public uint MbWidthC => 16 / SubWidthC;
+
+        public uint MbHeightC => 16 / SubHeightC;
+
+        public uint SubWidthC => Format switch
+        {
+            ChromaSubsampling.YUV420 or ChromaSubsampling.YUV422 => 2u,
+            ChromaSubsampling.YUV444 => !SeparateColourPlane ? 1u : 0u,
+            _ => 0u,
+        };
+
+        public uint SubHeightC => Format switch
+        {
+            ChromaSubsampling.YUV420 => 2u,
+            ChromaSubsampling.YUV422 => 1u,
+            ChromaSubsampling.YUV444 => !SeparateColourPlane ? 1u : 0u,
+            _ => 0u,
+        };
+    }
+
+    [StructLayout(LayoutKind.Explicit)]
+    public unsafe struct SPSPicOrderCnt
+    {
+        [FieldOffset(00)] public byte Type;
+        [FieldOffset(01)] public byte MaxNumRefFrames;
+
+        [FieldOffset(04)] public uint MaxLsb;
+
+        [FieldOffset(08)] public int OffsetForNonRefPic;
+        [FieldOffset(12)] public int OffsetForTopToBottomField;
+        [FieldOffset(16)] public int NumRefFramesInCycle;
+        [FieldOffset(20)] public int* OffsetRefFrame;
+    }
+
+    [StructLayout(LayoutKind.Explicit)]
+    public struct SPSAspectRatio
+    {
+        public const byte Extend_SAR = 255;
+
+        [FieldOffset(00)] public byte Indicator;
+        [FieldOffset(04)] public ushort SARWidth, SARHeigth;
+
+        public static Tuple<ushort, ushort> GetSAR(byte indicator) => indicator switch
+        {
+            1 => new(1, 1),
+            2 => new(12, 11),
+            3 => new(10, 11),
+            4 => new(16, 11),
+            5 => new(40, 33),
+            6 => new(24, 11),
+            7 => new(20, 11),
+            8 => new(32, 11),
+            9 => new(80, 33),
+            10 => new(18, 11),
+            11 => new(15, 11),
+            12 => new(64, 33),
+            13 => new(160, 99),
+            14 => new(4, 3),
+            15 => new(3, 2),
+            16 => new(2, 1),
+            _ => new(0, 1)
+        };
+    }
+
+    [StructLayout(LayoutKind.Sequential, Size = 4)]
+    public struct ChromaSampleLocType
+    {
+        public byte TopField;
+        public byte BottomField;
+    }
+
+    public struct SPSTime
+    {
+        public uint NumUnitsInTick;
+        public uint TimeScale;
+    }
+
     /// <summary>
     /// Sequence Parameter Set ITU-T H.264 08/2021 7.3.2.1.1
     /// https://www.itu.int/ITU-T/recommendations/rec.aspx?rec=14659&lang=en
     /// </summary>
-    public unsafe struct SequenceParameterSet
+    public unsafe struct SequenceParameterSet : IDisposable
     {
-        public byte profile_idc;
-        public byte profile_iop;
-        public byte level_idc;
+        public Allocator Allocator;
 
-        public byte seq_parameter_set_id;
+        public int ID;
+        public SPSProfile Profile;
+        public SPSChromaFormat Chroma;
+        public ScalingMatrix* ScalingMatrix;
 
-        public byte chroma_format_idc;
-        public byte bit_depth_luma_minus8;
-        public byte bit_depth_chroma_minus8;
-        public byte log2_max_frame_num_minus4;
+        public uint MaxFrameNum;
+        public SPSPicOrderCnt PicOrderCnt;
 
-        public byte pic_order_cnt_type;
+        public BitField32 Flags;
+        public uint MbWidth, MbHeigth;
+        public uint CropLeft, CropRight;
+        public uint CropTop, CropBottom;
 
-        public uint max_num_ref_frames;
-        public uint pic_width_in_mbs_minus_1;
-        public uint pic_height_in_map_units_minus_1;
+        public SPSAspectRatio AspectRatio;
 
-        public uint frame_crop_left_offset;
-        public uint frame_cropping_rect_right_offset;
-        public uint frame_cropping_rect_top_offset;
-        public uint frame_cropping_rect_bottom_offset;
+        public byte VideoFormat;
+        public byte ColourPrimaries;
+        public byte TransferCharacteristics;
+        public byte MatrixCoefficients;
 
-        public byte aspect_ratio_idc;
-        public ushort sar_width, sar_heigth;
+        public ChromaSampleLocType LocType;
+        public SPSTime Time;
 
-        public byte video_format;
-        public byte colour_primaries;
-        public byte transfer_characteristics;
-        public byte matrix_coefficients;
+        public bool DeltaAlwaysZero { get => Flags.IsSet(00); set => Flags.SetBits(00, value); }
+        public bool GapsInFrameNumValueAllowed { get => Flags.IsSet(01); set => Flags.SetBits(01, value); }
+        public bool FrameMbsOnly { get => Flags.IsSet(02); set => Flags.SetBits(02, value); }
+        public bool MbAdaptiveFrameField { get => Flags.IsSet(03); set => Flags.SetBits(03, value); }
+        public bool Direct8x8Inference { get => Flags.IsSet(04); set => Flags.SetBits(04, value); }
+        public bool OverscanAppropriate { get => Flags.IsSet(05); set => Flags.SetBits(05, value); }
+        public bool VideoFullRange { get => Flags.IsSet(06); set => Flags.SetBits(06, value); }
+        public bool FixedFrameRate { get => Flags.IsSet(07); set => Flags.SetBits(07, value); }
 
-        public byte chroma_sample_loc_type_top_field;       // [0..5]
-        public byte chroma_sample_loc_type_bottom_field;    // [0..5]
-
-        public uint num_units_in_tick;                      // > 0
-        public uint time_scale;                             // > 0
-
-        public BitField32 flags;
-
-        public H264Profile Profile => H264Utility.GetProfile(profile_idc, profile_iop);
-
-        public uint FullProfileLevelID => (uint)profile_idc << 16 | (uint)profile_iop << 8 | level_idc;
-
-        public int MaxFrameNum => 1 << (log2_max_frame_num_minus4 + 4);
-
-        public uint PicWidth => (pic_width_in_mbs_minus_1 + 1) << 4;
-
-        public uint PicHeigth => ((MbAdaptiveFrameField ? 2u : 1u) * (pic_height_in_map_units_minus_1 + 1)) << 4;
-
-        public uint FrameRate => num_units_in_tick > 0 ? time_scale / num_units_in_tick : 0;
-
-        public bool Interlaced => !FrameMbsOnly;
-
-        public bool SeperateColourPlane { get => flags.IsSet(01); set => flags.SetBits(01, value); }
-
-        public bool LosslessQPPrime { get => flags.IsSet(02); set => flags.SetBits(02, value); }
-
-        public bool ScalingMatrixPresent { get => flags.IsSet(03); set => flags.SetBits(03, value); }
-
-        public bool GapsInFrameNumValueAllowed { get => flags.IsSet(04); set => flags.SetBits(04, value); }
-
-        public bool FrameMbsOnly { get => flags.IsSet(05); set => flags.SetBits(05, value); }
-
-        public bool MbAdaptiveFrameField { get => flags.IsSet(06); set => flags.SetBits(06, value); }
-
-        public bool Direct8x8Inference { get => flags.IsSet(07); set => flags.SetBits(07, value); }
-
-        public bool FrameCropping { get => flags.IsSet(08); set => flags.SetBits(08, value); }
-
-        public bool VUIParametersPresent { get => flags.IsSet(09); set => flags.SetBits(09, value); }
-
-        public bool AspectRatioInfoPresent { get => flags.IsSet(10); set => flags.SetBits(10, value); }
-
-        public bool OverscanInfoPresent { get => flags.IsSet(11); set => flags.SetBits(11, value); }
-
-        public bool OverscanAppropriate { get => flags.IsSet(12); set => flags.SetBits(12, value); }
-
-        public bool VideoSignalTypePresent { get => flags.IsSet(13); set => flags.SetBits(13, value); }
-
-        public bool VideoFullRange { get => flags.IsSet(14); set => flags.SetBits(14, value); }
-
-        public bool ColourDescriptionPresent { get => flags.IsSet(15); set => flags.SetBits(15, value); }
-
-        public bool ChromaLocInfoPresent { get => flags.IsSet(16); set => flags.SetBits(16, value); }
-
-        public bool TimingInfoPresent { get => flags.IsSet(17); set => flags.SetBits(17, value); }
-
-        public bool FixedFrameRate { get => flags.IsSet(18); set => flags.SetBits(18, value); }
-
-        public static bool Parse(byte* buffer, int length, out SequenceParameterSet sps)
+        public unsafe SPSError Parse(byte* buffer, int length, Allocator allocator)
         {
-            length = RemoveEmulationPreventionBytes(buffer, length);
+            if (length < 4)
+                return SPSError.InvalidLength;
 
-            sps = new SequenceParameterSet();
-            var forbidden_zero_bit = (buffer[0] & 0x80) == 0x80;
-            if (forbidden_zero_bit)
-                UnityEngine.Debug.LogWarning("NALU error: invalid NALU header");
+            // forbidden_zero_bit
+            if ((buffer[0] & 0x80) == 0x80)
+                return SPSError.ForbiddenZeroBit;
 
-            var nal_ref_id = buffer[0] & 0x60 >> 5;
-            var nal_unit_type = buffer[0] & 0x1F;
-            if (nal_unit_type != 7)
-                UnityEngine.Debug.LogWarning("SPS error: not SPS");
-         
-            sps.profile_idc = buffer[1];
-            sps.profile_iop = buffer[2];
-            sps.level_idc = buffer[3];
+            // nal_ref_id
+            if ((buffer[0] & 0x60) == 0)
+                return SPSError.InvalidRefID;
 
-            var reader = new BitReader(buffer + 4);
+            // nal_unit_type
+            if ((buffer[0] & 0x1F) != 7)
+                return SPSError.InvalidUnitType;
 
-            sps.seq_parameter_set_id = (byte)reader.ReadUExpGolomb();
-            if (sps.seq_parameter_set_id > 31)
-                UnityEngine.Debug.LogWarning("SPS error: seq_parameter_set_id must be 31 or less");
+            Profile.Value = buffer[1];          // profile_idc
+            Profile.Constraints = buffer[2];    // profile_iop
+            Profile.Level = buffer[3];          // level_idc
 
-            if (H264Utility.HasChroma(sps.profile_idc))
+            length = RemoveEmulationPreventionBytes(buffer + 4, length - 4);
+
+            var reader = new BitReader(buffer + 4, length - 4);
+
+            var seq_parameter_set_id = reader.ReadUExpGolomb();
+            if (reader.Error != ReaderError.None)
+                return ConvertError(reader.Error);
+
+            if (seq_parameter_set_id > 31)
+                return SPSError.InvalidSeqParamaterSetId;
+
+            ID = (byte)seq_parameter_set_id;
+
+            if (H264Utility.HasChroma(Profile.Value))
             {
-                sps.chroma_format_idc = (byte)reader.ReadUExpGolomb();
-                if (sps.chroma_format_idc > 3)
-                    UnityEngine.Debug.LogWarning("SPS error: chroma_format_idc must be 3 or less");
+                var chroma_format = reader.ReadUExpGolomb();
+                if (reader.Error != ReaderError.None)
+                    return ConvertError(reader.Error);
 
-                if (sps.chroma_format_idc == 3)
-                    sps.SeperateColourPlane = reader.ReadBool();
+                if (chroma_format > 3)
+                    return SPSError.InvalidChromaFormat;
 
-                sps.bit_depth_luma_minus8 = (byte)reader.ReadUExpGolomb();
-                if (sps.bit_depth_luma_minus8 > 6)
-                    UnityEngine.Debug.LogWarning("SPS error: bit_depth_luma_minus8 must be 6 or less");
+                Chroma.Format = (ChromaSubsampling)chroma_format;
 
-                sps.bit_depth_chroma_minus8 = (byte)reader.ReadUExpGolomb();
-                if (sps.bit_depth_chroma_minus8 > 6)
-                    UnityEngine.Debug.LogWarning("SPS error: bit_depth_chroma_minus8 must be 6 or less");
-
-                sps.LosslessQPPrime = reader.ReadBool();
-
-                sps.ScalingMatrixPresent = reader.ReadBool();
-                if (sps.ScalingMatrixPresent)
+                if (Chroma.Format == ChromaSubsampling.YUV444)
                 {
-                    var scalingLength = sps.chroma_format_idc != 3 ? 8 : 12;
-                    for (int i = 0; i < scalingLength; i++)
-                    {
-                        // We have to read over it to continue parsing
-                        var seq_scaling_list_present_flag = reader.ReadBool();
-                        if (seq_scaling_list_present_flag)
-                        {
-                            var sizeOfScalingList = i < 6 ? 16 : 64;
+                    if (reader.CheckForBits(1))
+                        return SPSError.ReaderOutOfRange;
 
-                            var lastScale = 8L;
-                            var nextScale = 8L;
-                            for (int j = 0; j < sizeOfScalingList; j++)
-                            {
-                                if (nextScale != 0)
-                                {
-                                    var deltaScale = reader.ReadSExpGolomb();
-                                    nextScale = (lastScale + deltaScale + 256) % 256;
-                                }
-                                lastScale = nextScale == 0 ? lastScale : nextScale;
-                            }
-                        }
-                    }
+                    Chroma.Flags |= reader.ReadBool() ? SPSChromaFormat.Flag.SeparateColourPlane : 0;
+                }
+
+                var bit_depth_luma_minus8 = reader.ReadUExpGolomb();
+                if (reader.Error != ReaderError.None)
+                    return ConvertError(reader.Error);
+
+                if (bit_depth_luma_minus8 > 6)
+                    return SPSError.InvalidBitDepthLuma;
+
+                Chroma.BitDepthLuma = (byte)(bit_depth_luma_minus8 + 8);
+
+                var bit_depth_chroma_minus8 = reader.ReadUExpGolomb();
+                if (reader.Error != ReaderError.None)
+                    return ConvertError(reader.Error);
+
+                if (bit_depth_chroma_minus8 > 6)
+                    return SPSError.InvalidBitDepthChroma;
+
+                Chroma.BitDepthChroma = (byte)(bit_depth_chroma_minus8 + 8);
+
+                if (reader.CheckForBits(1))
+                    return SPSError.ReaderOutOfRange;
+
+                Chroma.Flags |= reader.ReadBool() ? SPSChromaFormat.Flag.TransformBypass : 0; // qpprime_y_zero_transform_bypass_flag
+
+                if (reader.CheckForBits(1))
+                    return SPSError.ReaderOutOfRange;
+
+                if (reader.ReadBool()) // seq_scaling_matrix_present_flag
+                {
+                    Allocator = allocator;
+                    if (ScalingMatrix == null)
+                        ScalingMatrix = (ScalingMatrix*)UnsafeUtility.Malloc(sizeof(ScalingMatrix), 4, allocator);
+
+                    var error = ScalingMatrix->Parse(ref reader, Chroma.Format == ChromaSubsampling.YUV444);
+                    if (error != SPSError.None)
+                        return error;
                 }
             }
+            else
+            {
+                // If not present, it shall be inferred to be equal to 1 (4:2:0 chroma format).
+                Chroma.Format = ChromaSubsampling.YUV420;
+                Chroma.BitDepthLuma = 8;
+                Chroma.BitDepthChroma = 8;
+            }
 
-            sps.log2_max_frame_num_minus4 = (byte)reader.ReadUExpGolomb();
-            if (sps.log2_max_frame_num_minus4 > 12)
-                UnityEngine.Debug.LogWarning("SPS error: log2_max_frame_num_minus4 must be 12 or less");
+            var log2_max_frame_num_minus4 = reader.ReadUExpGolomb();
+            if (reader.Error != ReaderError.None)
+                return ConvertError(reader.Error);
 
-            sps.pic_order_cnt_type = (byte)reader.ReadUExpGolomb();
-            if (sps.pic_order_cnt_type > 2)
-                UnityEngine.Debug.LogWarning("SPS error: pic_order_cnt_type must be 2 or less");
+            if (log2_max_frame_num_minus4 > 12)
+                return SPSError.InvalidMaxFrameNum;
 
-            switch (sps.pic_order_cnt_type)
+            MaxFrameNum = 1u << (int)(log2_max_frame_num_minus4 + 4);
+
+            var pic_order_cnt_type = reader.ReadUExpGolomb();
+            if (reader.Error != ReaderError.None)
+                return ConvertError(reader.Error);
+
+            if (pic_order_cnt_type > 1)
+                return SPSError.InvalidPicOrderCntType;
+
+            PicOrderCnt.Type = (byte)pic_order_cnt_type;
+
+            switch (PicOrderCnt.Type)
             {
                 case 0:
                     var log2_max_pic_order_cnt_lsb_minus4 = reader.ReadUExpGolomb();
+                    if (reader.Error != ReaderError.None)
+                        return ConvertError(reader.Error);
+
+                    if (log2_max_pic_order_cnt_lsb_minus4 > 12)
+                        return SPSError.InvalidMaxPictureOrderCntLsb;
+
+                    PicOrderCnt.MaxLsb = 1u << (int)(log2_max_pic_order_cnt_lsb_minus4 + 4);
                     break;
                 case 1:
-                    var delta_pic_order_always_zero_flag = reader.ReadBit();
+                    DeltaAlwaysZero = reader.ReadBool();
+
                     var offset_for_non_ref_pic = reader.ReadSExpGolomb();
+                    if (reader.Error != ReaderError.None)
+                        return ConvertError(reader.Error);
+
+                    PicOrderCnt.OffsetForNonRefPic = offset_for_non_ref_pic;
+
                     var offset_for_top_to_bottom_field = reader.ReadSExpGolomb();
+                    if (reader.Error != ReaderError.None)
+                        return ConvertError(reader.Error);
+
+                    PicOrderCnt.OffsetForTopToBottomField = offset_for_top_to_bottom_field;
+
                     var num_ref_frames_in_pic_order_cnt_cycle = reader.ReadUExpGolomb();
-                    for (int i = 0; i < num_ref_frames_in_pic_order_cnt_cycle; i++)
+                    if (reader.Error != ReaderError.None)
+                        return ConvertError(reader.Error);
+
+                    if (num_ref_frames_in_pic_order_cnt_cycle > 255)
+                        return SPSError.InvalidNumRefFramesInCycle;
+
+                    PicOrderCnt.NumRefFramesInCycle = (byte)num_ref_frames_in_pic_order_cnt_cycle;
+                    if (num_ref_frames_in_pic_order_cnt_cycle > 0)
                     {
-                        var offsetForRefFrame = reader.ReadSExpGolomb();
+                        Allocator = allocator;
+                        if (PicOrderCnt.OffsetRefFrame == null)
+                            PicOrderCnt.OffsetRefFrame = (int*)UnsafeUtility.Malloc(num_ref_frames_in_pic_order_cnt_cycle * sizeof(int), 4, allocator);
+
+                        for (int i = 0; i < num_ref_frames_in_pic_order_cnt_cycle; i++)
+                        {
+                            var offsetForRefFrame = reader.ReadSExpGolomb();
+                            if (reader.Error != ReaderError.None)
+                                return ConvertError(reader.Error);
+
+                            PicOrderCnt.OffsetRefFrame[i] = offsetForRefFrame;
+                        }
                     }
-                    break;
-                case 2:
                     break;
             }
 
-            sps.max_num_ref_frames = reader.ReadUExpGolomb();
-            sps.GapsInFrameNumValueAllowed = reader.ReadBool();
-            sps.pic_width_in_mbs_minus_1 = reader.ReadUExpGolomb();
-            sps.pic_height_in_map_units_minus_1 = reader.ReadUExpGolomb();
-            sps.FrameMbsOnly = reader.ReadBool();
-            if (!sps.FrameMbsOnly)
-                sps.MbAdaptiveFrameField = reader.ReadBool();
+            var max_num_ref_frames = reader.ReadUExpGolomb();
+            if (reader.Error != ReaderError.None)
+                return ConvertError(reader.Error);
 
-            sps.Direct8x8Inference = reader.ReadBool();
+            if (max_num_ref_frames > 16)
+                return SPSError.InvalidMaxNumRefFrames;
 
-            sps.FrameCropping = reader.ReadBool();
-            if (sps.FrameCropping)
+            PicOrderCnt.MaxNumRefFrames = (byte)max_num_ref_frames;
+
+            GapsInFrameNumValueAllowed = reader.ReadBool();
+
+            //public uint PicWidth => (Value.pic_width_in_mbs_minus_1 + 1) << 4;
+
+            //public uint PicHeigth => ((Value.MbAdaptiveFrameField ? 2u : 1u) * (Value.pic_height_in_map_units_minus_1 + 1)) << 4;
+
+            var pic_width_in_mbs_minus_1 = reader.ReadUExpGolomb();
+            if (reader.Error != ReaderError.None)
+                return ConvertError(reader.Error);
+
+            if (pic_width_in_mbs_minus_1 + 1 >= ushort.MaxValue)
+                return SPSError.InvalidMbHeight;
+
+            MbWidth = pic_width_in_mbs_minus_1 + 1;
+
+            var pic_height_in_map_units_minus_1 = reader.ReadUExpGolomb();
+            if (reader.Error != ReaderError.None)
+                return ConvertError(reader.Error);
+
+            if (pic_height_in_map_units_minus_1 + 1 >= ushort.MaxValue)
+                return SPSError.InvalidMbHeight;
+
+            MbHeigth = pic_height_in_map_units_minus_1 + 1;
+
+            if (reader.CheckForBits(1))
+                return SPSError.ReaderOutOfRange;
+
+            FrameMbsOnly = reader.ReadBool();
+
+            if (!FrameMbsOnly)
             {
-                sps.frame_crop_left_offset = reader.ReadUExpGolomb();
-                sps.frame_cropping_rect_right_offset = reader.ReadUExpGolomb();
-                sps.frame_cropping_rect_top_offset = reader.ReadUExpGolomb();
-                sps.frame_cropping_rect_bottom_offset = reader.ReadUExpGolomb();
+                MbHeigth *= 2;
+
+                if (reader.CheckForBits(1))
+                    return SPSError.ReaderOutOfRange;
+
+                MbAdaptiveFrameField = reader.ReadBool();
             }
 
-            sps.VUIParametersPresent = reader.ReadBool();
-            if (sps.VUIParametersPresent)
+            if (reader.CheckForBits(1))
+                return SPSError.ReaderOutOfRange;
+
+            Direct8x8Inference = reader.ReadBool();
+
+            if (reader.CheckForBits(1))
+                return SPSError.ReaderOutOfRange;
+
+            if (reader.ReadBool()) //frame_cropping
             {
-                sps.AspectRatioInfoPresent = reader.ReadBool();
-                if (sps.AspectRatioInfoPresent)
+                var frame_crop_left_offset = reader.ReadUExpGolomb();
+                if (reader.Error != ReaderError.None)
+                    return ConvertError(reader.Error);
+
+                CropLeft = frame_crop_left_offset;
+
+                var frame_cropping_rect_right_offset = reader.ReadUExpGolomb();
+                if (reader.Error != ReaderError.None)
+                    return ConvertError(reader.Error);
+
+                CropRight = frame_cropping_rect_right_offset;
+
+                var frame_cropping_rect_top_offset = reader.ReadUExpGolomb();
+                if (reader.Error != ReaderError.None)
+                    return ConvertError(reader.Error);
+
+                CropTop = frame_cropping_rect_top_offset;
+
+                var frame_cropping_rect_bottom_offset = reader.ReadUExpGolomb();
+                if (reader.Error != ReaderError.None)
+                    return ConvertError(reader.Error);
+
+                CropBottom = frame_cropping_rect_bottom_offset;
+
+                uint width = MbWidth << 4;
+                uint height = MbHeigth << 4;
+
+                if (CropLeft + CropRight > width || CropTop + CropBottom > height)
+                    return SPSError.InvalidCrop;
+            }
+
+            if (reader.CheckForBits(1))
+                return SPSError.ReaderOutOfRange;
+
+            if (reader.ReadBool()) // vui_parameters_present_flag
+            {
+                if (reader.CheckForBits(1))
+                    return SPSError.ReaderOutOfRange;
+
+                if (reader.ReadBool()) // aspect_ratio_info_present_flag
                 {
-                    sps.aspect_ratio_idc = (byte)reader.ReadBits(8);
-                    if (sps.aspect_ratio_idc == 255) // 255 = Extended_SAR Table E-1
+                    if (reader.CheckForBits(8))
+                        return SPSError.ReaderOutOfRange;
+
+                    var aspect_ratio_idc = reader.ReadBits(8);
+                    if (aspect_ratio_idc > 16 && aspect_ratio_idc != 255)
+                        return SPSError.InvalidAspectIndicator;
+
+                    AspectRatio.Indicator = (byte)aspect_ratio_idc;
+                    if (AspectRatio.Indicator == SPSAspectRatio.Extend_SAR)
                     {
-                        sps.sar_width = (ushort)reader.ReadBits(16);
-                        sps.sar_heigth = (ushort)reader.ReadBits(16);
+                        if (reader.CheckForBits(32))
+                            return SPSError.ReaderOutOfRange;
+
+                        AspectRatio.SARWidth = (ushort)reader.ReadBits(16);
+                        AspectRatio.SARHeigth = (ushort)reader.ReadBits(16);
+                    }
+                    else
+                    {
+                        var sar = SPSAspectRatio.GetSAR(AspectRatio.Indicator);
+                        AspectRatio.SARWidth = sar.Item1;
+                        AspectRatio.SARHeigth = sar.Item2;
                     }
                 }
 
-                sps.OverscanInfoPresent = reader.ReadBool();
-                if (sps.OverscanInfoPresent)
-                    sps.OverscanAppropriate = reader.ReadBool();
+                if (reader.CheckForBits(1))
+                    return SPSError.ReaderOutOfRange;
 
-                sps.VideoSignalTypePresent = reader.ReadBool();
-                if (sps.VideoSignalTypePresent)
+                if (reader.ReadBool()) // overscan_info_present_flag
                 {
-                    sps.video_format = (byte)reader.ReadBits(3);
-                    sps.VideoFullRange = reader.ReadBool();
-                    sps.ColourDescriptionPresent = reader.ReadBool();
-                    if (sps.ColourDescriptionPresent)
+                    if (reader.CheckForBits(1))
+                        return SPSError.ReaderOutOfRange;
+
+                    OverscanAppropriate = reader.ReadBool();
+                }
+
+                if (reader.CheckForBits(1))
+                    return SPSError.ReaderOutOfRange;
+
+                if (reader.ReadBool()) // video_signal_type_present_flag
+                {
+                    if (reader.CheckForBits(5))
+                        return SPSError.ReaderOutOfRange;
+
+                    var video_format = reader.ReadBits(3);
+                    if (video_format > 5)
+                        return SPSError.InvalidVideoFormat;
+
+                    VideoFormat = (byte)video_format;
+
+                    VideoFullRange = reader.ReadBool();
+                    if (reader.ReadBool()) // colour_description_present_flag
                     {
-                        sps.colour_primaries = (byte)reader.ReadBits(8);
-                        sps.transfer_characteristics = (byte)reader.ReadBits(8);
-                        sps.matrix_coefficients = (byte)reader.ReadBits(8);
+                        if (reader.CheckForBits(24))
+                            return SPSError.ReaderOutOfRange;
+
+                        var colour_primaries = (byte)reader.ReadBits(8);
+                        var transfer_characteristics = (byte)reader.ReadBits(8);
+                        var matrix_coefficients = (byte)reader.ReadBits(8);
+
+                        ColourPrimaries = colour_primaries;
+                        TransferCharacteristics = transfer_characteristics;
+                        MatrixCoefficients = matrix_coefficients;
+                    }
+                    else
+                    {
+                        ColourPrimaries = 2;
+                        TransferCharacteristics = 2;
+                        MatrixCoefficients = 2;
                     }
                 }
-
-                sps.ChromaLocInfoPresent = reader.ReadBool();
-                if (sps.ChromaLocInfoPresent)
+                else
                 {
-                    sps.chroma_sample_loc_type_top_field = (byte)reader.ReadUExpGolomb();
-                    sps.chroma_sample_loc_type_bottom_field = (byte)reader.ReadUExpGolomb();
+                    VideoFormat = 5;
+                    ColourPrimaries = 2;
+                    TransferCharacteristics = 2;
+                    MatrixCoefficients = 2;
                 }
 
-                sps.TimingInfoPresent = reader.ReadBool();
-                if (sps.TimingInfoPresent)
+
+                if (reader.CheckForBits(1))
+                    return SPSError.ReaderOutOfRange;
+
+                if (reader.ReadBool()) // chroma_loc_info_present_flag
                 {
-                    sps.num_units_in_tick = reader.ReadBits(32);
-                    sps.time_scale = reader.ReadBits(32);
-                    sps.FixedFrameRate = reader.ReadBool();
+                    var chroma_sample_loc_type_top_field = reader.ReadUExpGolomb();
+                    if (reader.Error != ReaderError.None)
+                        return ConvertError(reader.Error);
+
+                    if (chroma_sample_loc_type_top_field > 5)
+                        return SPSError.InvalidChromaLocTypeField;
+
+                    LocType.TopField = (byte)chroma_sample_loc_type_top_field;
+
+                    var chroma_sample_loc_type_bottom_field = (byte)reader.ReadUExpGolomb();
+                    if (reader.Error != ReaderError.None)
+                        return ConvertError(reader.Error);
+
+                    if (chroma_sample_loc_type_bottom_field > 5)
+                        return SPSError.InvalidChromaLocTypeField;
+
+                    LocType.BottomField = (byte)chroma_sample_loc_type_bottom_field;
+                }
+
+                if (reader.CheckForBits(1))
+                    return SPSError.ReaderOutOfRange;
+
+                if (reader.ReadBool()) // timing_info_present_flag
+                {
+                    if (reader.CheckForBits(65))
+                        return SPSError.ReaderOutOfRange;
+
+                    var num_units_in_tick = reader.ReadBits(32);
+                    if (num_units_in_tick == 0)
+                        return SPSError.InvalidTimeInfo;
+
+                    var time_scale = reader.ReadBits(32);
+                    if (time_scale == 0)
+                        return SPSError.InvalidTimeInfo;
+
+                    FixedFrameRate = reader.ReadBool();
                 }
 
                 // Done parsing for now. Remaining parameters
@@ -269,15 +772,15 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
                 // bitstream_restriction
             }
 
-            return true;
+            return SPSError.None;
         }
 
-        private static int RemoveEmulationPreventionBytes(byte* buffer, int length)
+        public unsafe static int RemoveEmulationPreventionBytes(byte* buffer, int length)
         {
             int newLength = 1, i = 1;
             while (i + 2 < length)
-            {            
-                if ((*(uint*)(buffer + i) & 0x00FFFFFF) == 0x00030000)
+            {
+                if (buffer[i] == 0 && buffer[i + 1] == 0 && buffer[i + 2] == 3)
                 {
                     buffer[newLength++] = buffer[i++];
                     buffer[newLength++] = buffer[i++];
@@ -291,6 +794,26 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
                 buffer[newLength++] = buffer[i++];
 
             return newLength;
+        }
+
+        public static SPSError ConvertError(ReaderError error) => error switch
+        {
+            ReaderError.Overflow => SPSError.ReaderOverflow,
+            ReaderError.OutOfRange => SPSError.ReaderOutOfRange,
+            ReaderError.None => SPSError.None,
+            _ => SPSError.ReaderUnknown
+        };
+
+        public void Dispose()
+        {
+            if (Allocator == Allocator.Invalid && Allocator == Allocator.None)
+                return;
+
+            if (ScalingMatrix != null)
+                UnsafeUtility.Free(ScalingMatrix, Allocator);
+
+            if (PicOrderCnt.OffsetRefFrame != null)
+                UnsafeUtility.Free(PicOrderCnt.OffsetRefFrame, Allocator);
         }
     }
 }

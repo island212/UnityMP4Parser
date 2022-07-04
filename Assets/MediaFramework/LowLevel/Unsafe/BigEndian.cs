@@ -411,23 +411,37 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
         }
     }
 
+    public enum ReaderError
+    {
+        None,
+        Overflow,
+        OutOfRange
+    }
+
     public unsafe struct BitReader
     {
-        public int pos;
-        public byte* stream;
+        public ReaderError Error;
+        public int Position;
+        public int Length;
+        public byte* Stream;
 
-        public BitReader(byte* buffer)
+        public BitReader(byte* buffer, int length)
         {
-            pos = 0;
-            stream = buffer;
+            Error = ReaderError.None;
+
+            Position = 0;
+            Stream = buffer;
+            Length = length * 8;
         }
+
+        public bool CheckForBits(int bits) => Length - Position >= bits;
 
         public byte ReadBit()
         {
-            var p = (pos >> 3);
-            var o = 0x07 - (pos & 0x07);
-            var val = (stream[p] >> o) & 0x01;
-            pos++;
+            var p = (Position >> 3);
+            var o = 0x07 - (Position & 0x07);
+            var val = (Stream[p] >> o) & 0x01;
+            Position++;
             return (byte)val;
         }
 
@@ -450,21 +464,41 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
 
         public uint ReadUExpGolomb()
         {
-            var zeros = 0;
-            while (ReadBit() != 1) zeros++;
-            var value = 1 << zeros;
-            for (var i = zeros - 1; i >= 0; i--)
+            if (CheckForBits(1))
             {
-                value |= (ReadBit() << i);
+                Error = ReaderError.OutOfRange;
+                return 0;
+            }            
+
+            var zeros = 0;
+            while (ReadBit() != 1)
+            {
+                zeros++;
+                if (CheckForBits(zeros * 2 + 1))
+                {
+                    Error = ReaderError.OutOfRange;
+                    return 0;
+                }
+
+                if (zeros > 32)
+                {
+                    Error = ReaderError.Overflow;
+                    return 0;
+                }
             }
-            return (uint)(value - 1);
+
+            var value = 1u << zeros;
+            for (var i = zeros - 1; i >= 0; i--)
+                value |= (uint)(ReadBit() << i);
+
+            return value;
         }
 
-        public long ReadSExpGolomb()
+        public int ReadSExpGolomb()
         {
-            var codeword = ReadUExpGolomb();
-            return codeword == 0 ? 0 :
-                (codeword & 0x01) == 0 ? 1 + (codeword >> 1) : -(codeword >> 1);
+            var value = ReadUExpGolomb();
+            return value == 0 || Error != ReaderError.None ? 0 : 
+                (value & 0x01) == 0 ? 1 + (int)(value >> 1) : -(int)(value >> 1);
         }
     }
 }
