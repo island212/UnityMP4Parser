@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 2560
     height: 1357
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Test Runner
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 127
+  controlID: 29
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 77
+  controlID: 30
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 78
+  controlID: 31
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GameView
+  m_Name: TestRunnerWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -215,16 +215,16 @@ MonoBehaviour:
     y: 0
     width: 1471
     height: 776
-  m_MinSize: {x: 202, y: 221}
+  m_MinSize: {x: 102, y: 121}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 15}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 14}
   - {fileID: 15}
   - {fileID: 16}
   - {fileID: 17}
   - {fileID: 18}
-  m_Selected: 1
+  m_Selected: 3
   m_LastSelected: 1
 --- !u!114 &10
 MonoBehaviour:
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -245,14 +245,14 @@ MonoBehaviour:
     y: 776
     width: 1955
     height: 531
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 12}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 12}
   - {fileID: 19}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -320,22 +320,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Tests/MediaFramework
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Tests/MediaFramework
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Projects\UnityMP4Parser
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 84500000
-    m_LastClickedID: 20612
-    m_ExpandedIDs: 000000007850000000ca9a3bffffff7f
+    m_SelectedIDs: d4510000
+    m_LastClickedID: 20948
+    m_ExpandedIDs: 00000000785000008a50000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -394,15 +394,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: New Animator Controller
-      m_OriginalName: New Animator Controller
+      m_Name: SPSParseTests
+      m_OriginalName: SPSParseTests
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: -31540
+      m_UserData: 20958
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -452,7 +452,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 00b8ffff40b8ffff68b9ffffb4b9fffff4b9ffff1cbbffff24c1ffff64c1ffff8cc2ffffe8c2ffff30c3ffffa6c4ffff5ac7ffff9ac7ffffc2c8ffff3ecaffff7ecaffffa6cbffff86ccffffc6ccffffeecdffff7acfffffbacfffffe2d0ffffbad1fffffad1ffff22d3ffff9cd4ffffdcd4ffff04d6ffff18d8ffff58d8ffff80d9ffff60daffffa0daffffc8dbffff46f4ffff86f4ffffb2f5ffff34fbffff
+      m_ExpandedIDs: 58baffff98baffffc0bbffffd0bdffff10beffff38bfffff68bfffffa8bfffffd0c0ffff0cc1ffff54c1ffffcac2ffffb6c3fffff6c3ffff1ec5ffff6ac5ffffaac5ffffd2c6ffff0ac7ffff4ac7ffff72c8ffff40c9ffff80c9ffffa8caffff30d2ffff70d2ffff98d3ffff1cd5ffff5cd5ffff84d6ffffc0d6ffff00d7ffff28d8ffff10d9ffff50d9ffff78daffffb4dafffff4daffff1cdcffff40f0ffff80f0ffffa8f1ffffe4f3ffff24f4ffff4cf5ffffb0f5fffff0f5ffff18f7ffff80f7ffffc0f7ffffecf8ffff34fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -930,7 +930,7 @@ MonoBehaviour:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_Spl:
-    ID: 264
+    ID: 176
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
@@ -961,8 +961,8 @@ MonoBehaviour:
       uniqueId: '[UnityMP4Parser][suite]'
       name: UnityMP4Parser
       fullName: UnityMP4Parser
-      resultStatus: 0
-      duration: 82.28803
+      resultStatus: 1
+      duration: 0.058835
       messages: 
       output: 
       stacktrace: 
@@ -977,8 +977,8 @@ MonoBehaviour:
       uniqueId: '[MediaFramework.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/MediaFramework.Tests.dll][suite]'
       name: MediaFramework.Tests.dll
       fullName: E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/MediaFramework.Tests.dll
-      resultStatus: 0
-      duration: 82.24772
+      resultStatus: 1
+      duration: 0.0359581
       messages: 
       output: 
       stacktrace: 
@@ -1060,8 +1060,8 @@ MonoBehaviour:
       uniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
       name: ISOBoxParseTests
       fullName: ISOBoxParseTests
-      resultStatus: 0
-      duration: 82.241264
+      resultStatus: 1
+      duration: 533.4849
       messages: 
       output: 
       stacktrace: 
@@ -1140,23 +1140,6 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1010
       parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
-    - id: 1012
-      uniqueId: MediaFramework.Tests.dll/ISOBoxParseTests/[MediaFramework.Tests][ISOBoxParseTests.ISOBoxParse_ValidSPS_ReturnExactValue]
-      name: ISOBoxParse_ValidSPS_ReturnExactValue
-      fullName: ISOBoxParseTests.ISOBoxParse_ValidSPS_ReturnExactValue
-      resultStatus: 0
-      duration: 82.18801
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Uncategorized
-      parentId: 1005
-      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
     - id: 1009
       uniqueId: MediaFramework.Tests.dll/ISOBoxParseTests/[MediaFramework.Tests][ISOBoxParseTests.ISOBoxParse_ValidTKHDBoxAudio_ReturnExactValue]
       name: ISOBoxParse_ValidTKHDBoxAudio_ReturnExactValue
@@ -1191,6 +1174,39 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1005
       parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
+    - id: 1012
+      uniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][SPSParseTests][suite]
+      name: SPSParseTests
+      fullName: SPSParseTests
+      resultStatus: 1
+      duration: 0.0294437
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1014
+      parentUniqueId: '[MediaFramework.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/MediaFramework.Tests.dll][suite]'
+    - id: 1013
+      uniqueId: MediaFramework.Tests.dll/SPSParseTests/[MediaFramework.Tests][SPSParseTests.ISOBoxParse_ValidSPS_ReturnExactValue]
+      name: ISOBoxParse_ValidSPS_ReturnExactValue
+      fullName: SPSParseTests.ISOBoxParse_ValidSPS_ReturnExactValue
+      resultStatus: 1
+      duration: 0.0165601
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1012
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][SPSParseTests][suite]
     - id: 1036
       uniqueId: '[Sandbox.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Sandbox.Tests.dll][suite]'
       name: Sandbox.Tests.dll
@@ -1795,13 +1811,13 @@ MonoBehaviour:
       - Performance
       parentId: 1043
       parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][ReorderBytePerformance][suite]
-    m_ResultText: ISOBoxParse_ValidSPS_ReturnExactValue (82.188s)
+    m_ResultText: ISOBoxParse_ValidSPS_ReturnExactValue (0.017s)
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 0d4a36da
-      m_LastClickedID: -633976307
-      m_ExpandedIDs: feda0987c1680ba1fba8eca9ceffd5af2358b0c5eee6bfc5d5508ec6019e02eb269afa076563e61a24b59330c3227844931d8f5057c7135b26bccc6aef47c66dffffff7f
+      m_SelectedIDs: a996b222
+      m_LastClickedID: 582129321
+      m_ExpandedIDs: feda0987015ef3a0c1680ba1fba8eca9ceffd5af2358b0c5eee6bfc5d5508ec6019e02eb269afa076563e61a24b59330c3227844931d8f5057c7135b26bccc6aef47c66dffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

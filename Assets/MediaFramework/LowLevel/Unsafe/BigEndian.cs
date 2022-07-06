@@ -434,7 +434,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             Length = length * 8;
         }
 
-        public bool CheckForBits(int bits) => Length - Position >= bits;
+        public bool HasEnoughBits(int bits) => Length - Position >= bits;
 
         public byte ReadBit()
         {
@@ -464,17 +464,17 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
 
         public uint ReadUExpGolomb()
         {
-            if (CheckForBits(1))
+            if (!HasEnoughBits(1))
             {
                 Error = ReaderError.OutOfRange;
                 return 0;
             }            
 
             var zeros = 0;
-            while (ReadBit() != 1)
+            while (ReadBit() == 0)
             {
                 zeros++;
-                if (CheckForBits(zeros * 2 + 1))
+                if (!HasEnoughBits(zeros * 2 + 1))
                 {
                     Error = ReaderError.OutOfRange;
                     return 0;
@@ -491,7 +491,7 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
             for (var i = zeros - 1; i >= 0; i--)
                 value |= (uint)(ReadBit() << i);
 
-            return value;
+            return value - 1;
         }
 
         public int ReadSExpGolomb()

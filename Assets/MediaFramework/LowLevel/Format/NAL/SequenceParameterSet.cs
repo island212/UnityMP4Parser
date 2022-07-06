@@ -133,7 +133,7 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
 
         private unsafe static SPSError ParseScalingMatrices(ref BitReader reader, uint* scalingList, int size, uint* defaultMatrix, uint* fallback)
         {
-            if (reader.CheckForBits(1))
+            if (!reader.HasEnoughBits(1))
                 return SPSError.ReaderOutOfRange;
 
             var seq_scaling_list_present_flag = reader.ReadBool();
@@ -228,11 +228,11 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
     [StructLayout(LayoutKind.Sequential, Size = 4)]
     public struct SPSProfile
     {
-        public H264Profile FullProfile => H264Utility.GetProfile(Value, Constraints);
+        public H264Profile FullProfile => H264Utility.GetProfile(Type, Constraints);
 
-        public uint ProfileLevelId => (uint)Value << 16 | (uint)Constraints << 8 | Level;
+        public uint ProfileLevelId => (uint)Type << 16 | (uint)Constraints << 8 | Level;
 
-        public byte Value;
+        public byte Type;
         public byte Constraints;
         public byte Level;
     }
@@ -298,7 +298,7 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
     {
         public const byte Extend_SAR = 255;
 
-        [FieldOffset(00)] public byte Indicator;
+        [FieldOffset(00)] public byte Type;
         [FieldOffset(04)] public ushort SARWidth, SARHeigth;
 
         public static Tuple<ushort, ushort> GetSAR(byte indicator) => indicator switch
@@ -342,9 +342,10 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
     /// </summary>
     public unsafe struct SequenceParameterSet : IDisposable
     {
+        public SPSError Error;
         public Allocator Allocator;
 
-        public int ID;
+        public uint ID;
         public SPSProfile Profile;
         public SPSChromaFormat Chroma;
         public ScalingMatrix* ScalingMatrix;
@@ -368,12 +369,19 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
         public SPSTime Time;
 
         public bool DeltaAlwaysZero { get => Flags.IsSet(00); set => Flags.SetBits(00, value); }
+
         public bool GapsInFrameNumValueAllowed { get => Flags.IsSet(01); set => Flags.SetBits(01, value); }
+
         public bool FrameMbsOnly { get => Flags.IsSet(02); set => Flags.SetBits(02, value); }
+
         public bool MbAdaptiveFrameField { get => Flags.IsSet(03); set => Flags.SetBits(03, value); }
+
         public bool Direct8x8Inference { get => Flags.IsSet(04); set => Flags.SetBits(04, value); }
+
         public bool OverscanAppropriate { get => Flags.IsSet(05); set => Flags.SetBits(05, value); }
+
         public bool VideoFullRange { get => Flags.IsSet(06); set => Flags.SetBits(06, value); }
+
         public bool FixedFrameRate { get => Flags.IsSet(07); set => Flags.SetBits(07, value); }
 
         public unsafe SPSError Parse(byte* buffer, int length, Allocator allocator)
@@ -393,11 +401,11 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
             if ((buffer[0] & 0x1F) != 7)
                 return SPSError.InvalidUnitType;
 
-            Profile.Value = buffer[1];          // profile_idc
+            Profile.Type = buffer[1];          // profile_idc
             Profile.Constraints = buffer[2];    // profile_iop
             Profile.Level = buffer[3];          // level_idc
 
-            length = RemoveEmulationPreventionBytes(buffer + 4, length - 4);
+            length = RemoveEmulationPreventionBytes(buffer, length);
 
             var reader = new BitReader(buffer + 4, length - 4);
 
@@ -408,9 +416,9 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
             if (seq_parameter_set_id > 31)
                 return SPSError.InvalidSeqParamaterSetId;
 
-            ID = (byte)seq_parameter_set_id;
+            ID = seq_parameter_set_id;
 
-            if (H264Utility.HasChroma(Profile.Value))
+            if (H264Utility.HasChroma(Profile.Type))
             {
                 var chroma_format = reader.ReadUExpGolomb();
                 if (reader.Error != ReaderError.None)
@@ -423,7 +431,7 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
 
                 if (Chroma.Format == ChromaSubsampling.YUV444)
                 {
-                    if (reader.CheckForBits(1))
+                    if (!reader.HasEnoughBits(1))
                         return SPSError.ReaderOutOfRange;
 
                     Chroma.Flags |= reader.ReadBool() ? SPSChromaFormat.Flag.SeparateColourPlane : 0;
@@ -447,12 +455,12 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
 
                 Chroma.BitDepthChroma = (byte)(bit_depth_chroma_minus8 + 8);
 
-                if (reader.CheckForBits(1))
+                if (!reader.HasEnoughBits(1))
                     return SPSError.ReaderOutOfRange;
 
                 Chroma.Flags |= reader.ReadBool() ? SPSChromaFormat.Flag.TransformBypass : 0; // qpprime_y_zero_transform_bypass_flag
 
-                if (reader.CheckForBits(1))
+                if (!reader.HasEnoughBits(1))
                     return SPSError.ReaderOutOfRange;
 
                 if (reader.ReadBool()) // seq_scaling_matrix_present_flag
@@ -578,7 +586,7 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
 
             MbHeigth = pic_height_in_map_units_minus_1 + 1;
 
-            if (reader.CheckForBits(1))
+            if (!reader.HasEnoughBits(1))
                 return SPSError.ReaderOutOfRange;
 
             FrameMbsOnly = reader.ReadBool();
@@ -587,18 +595,18 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
             {
                 MbHeigth *= 2;
 
-                if (reader.CheckForBits(1))
+                if (!reader.HasEnoughBits(1))
                     return SPSError.ReaderOutOfRange;
 
                 MbAdaptiveFrameField = reader.ReadBool();
             }
 
-            if (reader.CheckForBits(1))
+            if (!reader.HasEnoughBits(1))
                 return SPSError.ReaderOutOfRange;
 
             Direct8x8Inference = reader.ReadBool();
 
-            if (reader.CheckForBits(1))
+            if (!reader.HasEnoughBits(1))
                 return SPSError.ReaderOutOfRange;
 
             if (reader.ReadBool()) //frame_cropping
@@ -634,27 +642,27 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
                     return SPSError.InvalidCrop;
             }
 
-            if (reader.CheckForBits(1))
+            if (!reader.HasEnoughBits(1))
                 return SPSError.ReaderOutOfRange;
 
             if (reader.ReadBool()) // vui_parameters_present_flag
             {
-                if (reader.CheckForBits(1))
+                if (!reader.HasEnoughBits(1))
                     return SPSError.ReaderOutOfRange;
 
                 if (reader.ReadBool()) // aspect_ratio_info_present_flag
                 {
-                    if (reader.CheckForBits(8))
+                    if (!reader.HasEnoughBits(8))
                         return SPSError.ReaderOutOfRange;
 
                     var aspect_ratio_idc = reader.ReadBits(8);
                     if (aspect_ratio_idc > 16 && aspect_ratio_idc != 255)
                         return SPSError.InvalidAspectIndicator;
 
-                    AspectRatio.Indicator = (byte)aspect_ratio_idc;
-                    if (AspectRatio.Indicator == SPSAspectRatio.Extend_SAR)
+                    AspectRatio.Type = (byte)aspect_ratio_idc;
+                    if (AspectRatio.Type == SPSAspectRatio.Extend_SAR)
                     {
-                        if (reader.CheckForBits(32))
+                        if (!reader.HasEnoughBits(32))
                             return SPSError.ReaderOutOfRange;
 
                         AspectRatio.SARWidth = (ushort)reader.ReadBits(16);
@@ -662,29 +670,29 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
                     }
                     else
                     {
-                        var sar = SPSAspectRatio.GetSAR(AspectRatio.Indicator);
+                        var sar = SPSAspectRatio.GetSAR(AspectRatio.Type);
                         AspectRatio.SARWidth = sar.Item1;
                         AspectRatio.SARHeigth = sar.Item2;
                     }
                 }
 
-                if (reader.CheckForBits(1))
+                if (!reader.HasEnoughBits(1))
                     return SPSError.ReaderOutOfRange;
 
                 if (reader.ReadBool()) // overscan_info_present_flag
                 {
-                    if (reader.CheckForBits(1))
+                    if (!reader.HasEnoughBits(1))
                         return SPSError.ReaderOutOfRange;
 
                     OverscanAppropriate = reader.ReadBool();
                 }
 
-                if (reader.CheckForBits(1))
+                if (!reader.HasEnoughBits(1))
                     return SPSError.ReaderOutOfRange;
 
                 if (reader.ReadBool()) // video_signal_type_present_flag
                 {
-                    if (reader.CheckForBits(5))
+                    if (!reader.HasEnoughBits(5))
                         return SPSError.ReaderOutOfRange;
 
                     var video_format = reader.ReadBits(3);
@@ -696,7 +704,7 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
                     VideoFullRange = reader.ReadBool();
                     if (reader.ReadBool()) // colour_description_present_flag
                     {
-                        if (reader.CheckForBits(24))
+                        if (!reader.HasEnoughBits(24))
                             return SPSError.ReaderOutOfRange;
 
                         var colour_primaries = (byte)reader.ReadBits(8);
@@ -723,7 +731,7 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
                 }
 
 
-                if (reader.CheckForBits(1))
+                if (!reader.HasEnoughBits(1))
                     return SPSError.ReaderOutOfRange;
 
                 if (reader.ReadBool()) // chroma_loc_info_present_flag
@@ -747,21 +755,25 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
                     LocType.BottomField = (byte)chroma_sample_loc_type_bottom_field;
                 }
 
-                if (reader.CheckForBits(1))
+                if (!reader.HasEnoughBits(1))
                     return SPSError.ReaderOutOfRange;
 
                 if (reader.ReadBool()) // timing_info_present_flag
                 {
-                    if (reader.CheckForBits(65))
+                    if (!reader.HasEnoughBits(65))
                         return SPSError.ReaderOutOfRange;
 
                     var num_units_in_tick = reader.ReadBits(32);
                     if (num_units_in_tick == 0)
                         return SPSError.InvalidTimeInfo;
 
+                    Time.NumUnitsInTick = num_units_in_tick;
+
                     var time_scale = reader.ReadBits(32);
                     if (time_scale == 0)
                         return SPSError.InvalidTimeInfo;
+
+                    Time.TimeScale = time_scale;
 
                     FixedFrameRate = reader.ReadBool();
                 }
