@@ -368,6 +368,10 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
         public ChromaSampleLocType LocType;
         public SPSTime Time;
 
+        public uint PictureWidth => MbWidth << 4;
+
+        public uint PictureHeigth => MbHeigth << 4;
+
         public bool DeltaAlwaysZero { get => Flags.IsSet(00); set => Flags.SetBits(00, value); }
 
         public bool GapsInFrameNumValueAllowed { get => Flags.IsSet(01); set => Flags.SetBits(01, value); }
@@ -562,11 +566,10 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
 
             PicOrderCnt.MaxNumRefFrames = (byte)max_num_ref_frames;
 
+            if (!reader.HasEnoughBits(1))
+                return SPSError.ReaderOutOfRange;
+
             GapsInFrameNumValueAllowed = reader.ReadBool();
-
-            //public uint PicWidth => (Value.pic_width_in_mbs_minus_1 + 1) << 4;
-
-            //public uint PicHeigth => ((Value.MbAdaptiveFrameField ? 2u : 1u) * (Value.pic_height_in_map_units_minus_1 + 1)) << 4;
 
             var pic_width_in_mbs_minus_1 = reader.ReadUExpGolomb();
             if (reader.Error != ReaderError.None)
