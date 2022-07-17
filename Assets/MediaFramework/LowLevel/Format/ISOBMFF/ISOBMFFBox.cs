@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
-using Unity.MediaFramework.LowLevel.Format.NAL;
+using Unity.MediaFramework.LowLevel.Codecs;
 using Unity.MediaFramework.LowLevel.Unsafe;
 
 namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
@@ -17,12 +17,12 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 
     // 4.2 ISO/IEC 14496-12:2015(E)
     [StructLayout(LayoutKind.Sequential, Size = 8)]
-    public readonly struct ISOBox
+    public struct ISOBox
     {
         public const int ByteNeeded = 8;
 
-        public readonly uint Size;           // 32 bits
-        public readonly ISOBoxType Type;     // 32 bits
+        public uint Size;           // 32 bits
+        public ISOBoxType Type;     // 32 bits
 
         public ISOBox(uint size, ISOBoxType type)
         {
@@ -39,15 +39,15 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 
     // 4.2 ISO/IEC 14496-12:2015(E)
     [StructLayout(LayoutKind.Sequential, Size = 16)]
-    public readonly struct ISOFullBox
+    public struct ISOFullBox
     {
         public const int ByteNeeded = 12;
 
         [StructLayout(LayoutKind.Sequential, Size = 8)]
-        public readonly struct VersionFlags
+        public struct VersionFlags
         {
-            public readonly byte Version;        // 8 bits
-            public readonly uint Flags;          // 24 bits
+            public byte Version;        // 8 bits
+            public uint Flags;          // 24 bits
 
             public VersionFlags(byte version, uint flags)
             {
@@ -56,9 +56,9 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             }
         }
 
-        public readonly uint Size;               // 32 bits
-        public readonly ISOBoxType Type;         // 32 bits
-        public readonly VersionFlags Details;    // 32 bits
+        public uint Size;               // 32 bits
+        public ISOBoxType Type;         // 32 bits
+        public VersionFlags Details;    // 32 bits
 
         public ISOFullBox(uint size, ISOBoxType type, VersionFlags details)
         {
@@ -87,11 +87,11 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct SampleEntry
+    public struct SampleEntry
     {
         public const int ByteNeeded = 16;
 
-        public readonly ushort DataReferenceIndex;
+        public ushort DataReferenceIndex;
 
         public SampleEntry(ushort dataReferenceIndex)
         {
@@ -110,7 +110,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     /// FileTypeBox
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = 32)]
-    public readonly struct FTYPBox : IEquatable<FTYPBox>
+    public struct FTYPBox : IEquatable<FTYPBox>
     {
         public unsafe struct Ptr
         { 
@@ -121,15 +121,15 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 
         public const int MaxCachedBrands = 5;
 
-        public readonly ISOBrand MajorBrand;
-        public readonly uint MinorVersion;
+        public ISOBrand MajorBrand;
+        public uint MinorVersion;
 
-        public readonly int BrandCount;
-        public readonly ISOBrand Brand0;
-        public readonly ISOBrand Brand1;
-        public readonly ISOBrand Brand2;
-        public readonly ISOBrand Brand3;
-        public readonly ISOBrand Brand4;
+        public int BrandCount;
+        public ISOBrand Brand0;
+        public ISOBrand Brand1;
+        public ISOBrand Brand2;
+        public ISOBrand Brand3;
+        public ISOBrand Brand4;
 
         public FTYPBox(ISOBrand majorBrand, uint minorVersion, int brandCount,
             ISOBrand brand0, ISOBrand brand1, ISOBrand brand2, ISOBrand brand3, ISOBrand brand4)
@@ -148,7 +148,6 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 
         public unsafe static FTYPBox Parse(byte* buffer)
         {
-
             ISOBrand majorBrand = (ISOBrand)BigEndian.ReadUInt32(buffer + ISOBox.ByteNeeded);
             uint minorVersion = BigEndian.ReadUInt32(buffer + ISOBox.ByteNeeded + 4);
 
@@ -176,7 +175,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     /// <summary>
     /// MovieHeaderBox
     /// </summary>
-    public readonly struct MVHDBox : IEquatable<MVHDBox>
+    public struct MVHDBox : IEquatable<MVHDBox>
     {
         public enum Size
         {
@@ -191,15 +190,15 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             public MVHDBox Parse() => MVHDBox.Parse(value);
         }
 
-        public readonly byte Version;
-        public readonly ISODate CreationTime;
-        public readonly ISODate ModificationTime;
-        public readonly uint Timescale;
-        public readonly ulong Duration;
-        public readonly FixedPoint1616 Rate;
-        public readonly FixedPoint88 Volume;
-        public readonly FixedPoint1616Matrix3x3 Matrix;
-        public readonly uint NextTrackID;
+        public byte Version;
+        public ISODate CreationTime;
+        public ISODate ModificationTime;
+        public uint Timescale;
+        public ulong Duration;
+        public FixedPoint1616 Rate;
+        public FixedPoint88 Volume;
+        public FixedPoint1616Matrix3x3 Matrix;
+        public uint NextTrackID;
 
         public MVHDBox(byte version, ulong creationTime, ulong modificationTime, uint timescale,
             ulong duration, int rate, short volume, int3x3 matrix, uint nextTrackID)
@@ -284,7 +283,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     /// <summary>
     /// TrackHeaderBox
     /// </summary>
-    public readonly struct TKHDBox : IEquatable<TKHDBox>
+    public struct TKHDBox : IEquatable<TKHDBox>
     {
         public unsafe struct Ptr
         {
@@ -308,18 +307,18 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             SizeIsAspectRatio = 0x8
         }
 
-        public readonly byte Version;
-        public readonly FullBoxFlags Flags;
-        public readonly ISODate CreationTime;
-        public readonly ISODate ModificationTime;
-        public readonly uint TrackID;
-        public readonly ulong Duration;
-        public readonly short Layer;
-        public readonly short AlternateGroup;
-        public readonly FixedPoint88 Volume;
-        public readonly FixedPoint1616Matrix3x3 Matrix;
-        public readonly UFixedPoint1616 Width;
-        public readonly UFixedPoint1616 Height;
+        public byte Version;
+        public FullBoxFlags Flags;
+        public ISODate CreationTime;
+        public ISODate ModificationTime;
+        public uint TrackID;
+        public ulong Duration;
+        public short Layer;
+        public short AlternateGroup;
+        public FixedPoint88 Volume;
+        public FixedPoint1616Matrix3x3 Matrix;
+        public UFixedPoint1616 Width;
+        public UFixedPoint1616 Height;
 
         public TKHDBox(byte version, FullBoxFlags flags, ulong creationTime, ulong modificationTime, uint trackID, ulong duration, short layer,
             short alternateGroup, short volume, int3x3 matrix, uint width, uint height)
@@ -410,7 +409,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     /// <summary>
     /// MediaHeaderBox
     /// </summary>
-    public readonly struct MDHDBox : IEquatable<MDHDBox>
+    public struct MDHDBox : IEquatable<MDHDBox>
     {
         public unsafe struct Ptr
         {
@@ -425,12 +424,12 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             Version1 = 44
         }
 
-        public readonly byte Version;
-        public readonly ISODate CreationTime;
-        public readonly ISODate ModificationTime;
-        public readonly uint Timescale;
-        public readonly ulong Duration;
-        public readonly ISOLanguage Language;
+        public byte Version;
+        public ISODate CreationTime;
+        public ISODate ModificationTime;
+        public uint Timescale;
+        public ulong Duration;
+        public ISOLanguage Language;
 
         public MDHDBox(byte version, ulong creationTime, ulong modificationTime,
             uint timescale, ulong duration, ushort language)
@@ -484,7 +483,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
         public static int GetSize(byte version) => version == 1 ? (int)Size.Version1 : (int)Size.Version0;
     }
 
-    public readonly struct HDLRBox : IEquatable<HDLRBox>
+    public struct HDLRBox : IEquatable<HDLRBox>
     {
         public unsafe struct Ptr
         {
@@ -493,8 +492,8 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             public HDLRBox Parse() => HDLRBox.Parse(value);
         }
 
-        public readonly ISOHandler Handler;
-        public readonly FixedString64Bytes Name;
+        public ISOHandler Handler;
+        public FixedString64Bytes Name;
 
         public HDLRBox(ISOHandler handler, in FixedString64Bytes name)
         {
@@ -532,7 +531,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     /// <summary>
     /// SampleDescriptionBox
     /// </summary>
-    public readonly struct STSDBox
+    public struct STSDBox
     {
         public unsafe struct Ptr
         {
@@ -544,7 +543,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
         }
     }
 
-    public unsafe readonly struct VisualSampleEntry
+    public unsafe struct VisualSampleEntry
     {
         public enum EntryType
         { 
@@ -557,18 +556,18 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 
         public const int ByteNeeded = SampleEntry.ByteNeeded + 70;
 
-        public readonly VideoCodec Codec;
-        public readonly ushort Width, Height;
-        public readonly UFixedPoint1616 HorizResolution;
-        public readonly UFixedPoint1616 VertResolution;
-        public readonly ushort FrameCount;
-        public readonly FixedString64Bytes CompressorName;
+        public VideoCodec Codec;
+        public ushort Width, Height;
+        public UFixedPoint1616 HorizResolution;
+        public UFixedPoint1616 VertResolution;
+        public ushort FrameCount;
+        public FixedString64Bytes CompressorName;
 
-        public readonly byte* BitRateBox;
-        public readonly byte* DecoderConfigurationBox;
-        public readonly byte* CleanApertureBox;
-        public readonly byte* PixelAspectRatioBox;
-        public readonly byte* ColourInformationBox;
+        public byte* BitRateBox;
+        public byte* DecoderConfigurationBox;
+        public byte* CleanApertureBox;
+        public byte* PixelAspectRatioBox;
+        public byte* ColourInformationBox;
 
         public VisualSampleEntry(VideoCodec codec, ushort width, ushort height, uint horizResolution, uint vertResolution, ushort frameCount, 
             in FixedString64Bytes compressorName, byte* bitRateBox, byte* decoderConfigurationBox, byte* cleanApertureBox, byte* pixelAspectRatioBox, byte* colourInformationBox)
@@ -647,17 +646,17 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     /// <summary>
     /// AVCDecoderConfigurationRecord (avcC) ISO/IEC 14496-15
     /// </summary>
-    public unsafe readonly struct AVCDecoderConfigurationRecord
+    public unsafe struct AVCDecoderConfigurationRecord
     {
-        public readonly byte ConfigurationVersion;
-        public readonly byte AVCProfileIndication;
-        public readonly byte ProfileCompatibility;
-        public readonly byte AVCLevelIndication;
-        public readonly byte LengthSizeMinusOne;
+        public byte ConfigurationVersion;
+        public byte AVCProfileIndication;
+        public byte ProfileCompatibility;
+        public byte AVCLevelIndication;
+        public byte LengthSizeMinusOne;
 
-        public readonly byte* SPS;
-        public readonly byte* PPS;
-        public readonly byte* AVCProfileIndicationMeta;
+        public byte* SPS;
+        public byte* PPS;
+        public byte* AVCProfileIndicationMeta;
 
         public AVCDecoderConfigurationRecord(byte configurationVersion, byte avcProfileIndication, byte profileCompatibility, 
             byte avcLevelIndication, byte lengthSizeMinusOne, byte* sps, byte* pps, byte* avcProfileIndicationMeta)
@@ -715,12 +714,12 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     /// AVCProfileIndicationMeta inside AVCDecoderConfigurationRecord (avcC) ISO/IEC 14496-15
     /// If the AvcProfileIndication is 100, 110, 122 or 144 additionnal metadata can be provided
     /// </summary>
-    public unsafe readonly struct AVCProfileIndicationMeta
+    public unsafe struct AVCProfileIndicationMeta
     {
-        public readonly ChromaSubsampling ChromaFormat;
-        public readonly byte BitDepthLumaMinus8;
-        public readonly byte BitDepthChromaMinus8;
-        public readonly byte* SPSExt;
+        public ChromaSubsampling ChromaFormat;
+        public byte BitDepthLumaMinus8;
+        public byte BitDepthChromaMinus8;
+        public byte* SPSExt;
 
         public AVCProfileIndicationMeta(byte chromaFormat, byte bitDepthLumaMinus8, byte bitDepthChromaMinus8, byte* spsExt)
         {
@@ -741,7 +740,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
         }
     }
 
-    public unsafe readonly struct AudioSampleEntry
+    public unsafe struct AudioSampleEntry
     {
         public enum EntryType
         {
@@ -751,12 +750,12 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 
         public const int ByteNeeded = SampleEntry.ByteNeeded + 20;
 
-        public readonly AudioCodec Codec;
-        public readonly ushort ChannelCount;
-        public readonly ushort SampleSize;
-        public readonly uint SampleRate;
+        public AudioCodec Codec;
+        public ushort ChannelCount;
+        public ushort SampleSize;
+        public uint SampleRate;
 
-        public readonly byte* ChannelLayout;
+        public byte* ChannelLayout;
 
         public AudioSampleEntry(AudioCodec codec, ushort channelCount, ushort sampleSize, uint sampleRate, byte* channelLayout)
         {
@@ -813,9 +812,9 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     }
 
     /// <summary>
-    /// 
+    /// TimeToSampleBox
     /// </summary>
-    public unsafe readonly struct STTSBox
+    public unsafe struct STTSBox
     {
         public unsafe struct Ptr
         {
@@ -824,13 +823,11 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             public STTSBox Parse() => STTSBox.Parse(value);
         }
 
-        public const int SamplesOffset = ISOFullBox.ByteNeeded + 4;
+        public uint SampleCount;
+        public uint EntryCount;
+        public SampleGroup* SamplesTable;
 
-        public readonly uint SampleCount;
-        public readonly uint EntryCount;
-        public readonly SampleGoup* SamplesTable;
-
-        public STTSBox(uint sampleCount, uint entryCount, SampleGoup* samplesTable)
+        public STTSBox(uint sampleCount, uint entryCount, SampleGroup* samplesTable)
         {
             SampleCount = sampleCount;
             EntryCount = entryCount;
@@ -852,14 +849,14 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
                 sampleCount += *(uint*)(samplePtr + i);
             }
 
-            return new(sampleCount, entryCount, (SampleGoup*)buffer);
+            return new(sampleCount, entryCount, (SampleGroup*)buffer);
         }
     }
 
     /// <summary>
-    /// 
+    /// SyncSampleBox
     /// </summary>
-    public unsafe readonly struct STSSBox
+    public unsafe struct STSSBox
     {
         public unsafe struct Ptr
         {
@@ -868,10 +865,8 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             public STSSBox Parse() => STSSBox.Parse(value);
         }
 
-        public const int SamplesOffset = ISOFullBox.ByteNeeded + 4;
-
-        public readonly uint EntryCount;
-        public readonly uint* SyncSamplesTable;
+        public uint EntryCount;
+        public uint* SyncSamplesTable;
 
         public STSSBox(uint entryCount, uint* syncSamplesTable)
         {
@@ -894,51 +889,4 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             return new(entryCount, (uint*)buffer);
         }
     }
-
-    ///// <summary>
-    ///// TimeToSampleBox (STTS) 
-    ///// </summary>
-    //public unsafe readonly struct TimeToSampleRawBox
-    //{
-    //    public const int SampleSize = 8;
-    //    public const int SamplesOffset = ISOFullBox.ByteNeeded + 4;
-
-    //    public readonly uint EntryCount;
-    //    public readonly byte* Samples;
-
-    //    public TimeToSampleRawBox(uint entryCount, byte* samples)
-    //    {
-    //        EntryCount = entryCount;
-    //        Samples = samples;
-    //    }
-
-    //    public static unsafe byte* Allocate(uint entryCount)
-    //        => (byte*)UnsafeUtility.Malloc(entryCount * 8, 8, Allocator.Persistent);
-
-    //    public static unsafe uint GetEntryCount(byte* buffer) 
-    //        => BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded);
-    //}
-
-    ///// <summary>
-    ///// SyncSampleBox (STSS)
-    ///// </summary>
-    //public unsafe readonly struct SyncSampleRawBox
-    //{
-    //    public const int SamplesOffset = ISOFullBox.ByteNeeded + 4;
-
-    //    public readonly uint EntryCount;
-    //    public readonly byte* SampleNumbers;
-
-    //    public SyncSampleRawBox(uint entryCount, byte* sampleNumbers)
-    //    {
-    //        EntryCount = entryCount;
-    //        SampleNumbers = sampleNumbers;
-    //    }
-
-    //    public static unsafe byte* Allocate(uint entryCount)
-    //        => (byte*)UnsafeUtility.Malloc(entryCount * 4, 4, Allocator.Persistent);
-
-    //    public static unsafe uint GetEntryCount(byte* buffer)
-    //        => BigEndian.ReadUInt32(buffer + ISOFullBox.ByteNeeded);
-    //}
 }

@@ -6,7 +6,7 @@ using Unity.Mathematics;
 using Unity.MediaFramework.LowLevel.Codecs;
 using Unity.MediaFramework.LowLevel.Unsafe;
 
-namespace Unity.MediaFramework.LowLevel.Format.NAL
+namespace Unity.MediaFramework.LowLevel.Codecs
 {
     public enum ChromaSubsampling : byte
     {
@@ -235,6 +235,36 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
         public byte Type;
         public byte Constraints;
         public byte Level;
+
+        public override string ToString() => FullProfile switch
+        {
+            H264Profile.Baseline => $"Baseline@{(double)Level / 10:0.0}",
+            H264Profile.ConstrainedBaseline => $"Baseline(c)@{(double)Level / 10:0.0}",
+            H264Profile.Extended => $"Extended@{(double)Level / 10:0.0}",
+            H264Profile.Main => $"Main@{(double)Level / 10:0.0}",
+            H264Profile.High => $"High@{(double)Level / 10:0.0}",
+            H264Profile.ProgressiveHigh => $"High(p)@{(double)Level / 10:0.0}",
+            H264Profile.ConstrainedHigh => $"High(c)@{(double)Level / 10:0.0}",
+            H264Profile.High10 => $"High10@{(double)Level / 10:0.0}",
+            H264Profile.High10Intra => $"High10(i)@{(double)Level / 10:0.0}",
+            H264Profile.High422 => $"High422@{(double)Level / 10:0.0}",
+            H264Profile.High422Intra => $"High422(i)@{(double)Level / 10:0.0}",
+            H264Profile.High444Predictive => $"High444(p)@{(double)Level / 10:0.0}",
+            H264Profile.High444Intra => $"High444(i)@{(double)Level / 10:0.0}",
+            H264Profile.CAVLC444Intra => $"CAVLC444@{(double)Level / 10:0.0}",
+            H264Profile.ScalableBaseline => $"Baseline(s)@{(double)Level / 10:0.0}",
+            H264Profile.ScalableConstrainedBaseline => $"Baseline(sc)@{(double)Level / 10:0.0}",
+            H264Profile.ScalableHigh => $"High(s)@{(double)Level / 10:0.0}",
+            H264Profile.ScalableConstrainedHigh => $"High(sc)@{(double)Level / 10:0.0}",
+            H264Profile.ScalableHighIntra => $"High(si)@{(double)Level / 10:0.0}",
+            H264Profile.StereoHighProfile => $"StereoHighProfile@{(double)Level / 10:0.0}",
+            H264Profile.MultiviewHighProfile => $"MultiviewHighProfile@{(double)Level / 10:0.0}",
+            H264Profile.MFCHigh => $"MFCHigh@{(double)Level / 10:0.0}",
+            H264Profile.MFCDepthHigh => $"MFCDepthHigh@{(double)Level / 10:0.0}",
+            H264Profile.MultiviewDepthHigh => $"MultiviewDepthHigh@{(double)Level / 10:0.0}",
+            H264Profile.EnhancedMultiviewDepthHigh => $"EnhancedMultiviewDepthHigh@{(double)Level / 10:0.0}",
+            _ => $"{FullProfile}@{(double)Level / 10:0.0}",
+        };
     }
 
     [StructLayout(LayoutKind.Sequential, Size = 4)]
@@ -252,6 +282,8 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
         public ChromaSubsampling Format;
         public byte BitDepthLuma;
         public byte BitDepthChroma;
+
+        public byte ArrayType => SeparateColourPlane ? (byte)0 : (byte)Format;
 
         public bool SeparateColourPlane => (Flags & Flag.SeparateColourPlane) == Flag.SeparateColourPlane;
 
@@ -293,15 +325,19 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
         [FieldOffset(20)] public int* OffsetRefFrame;
     }
 
-    [StructLayout(LayoutKind.Explicit)]
     public struct SPSAspectRatio
     {
         public const byte Extend_SAR = 255;
 
-        [FieldOffset(00)] public byte Type;
-        [FieldOffset(04)] public ushort SARWidth, SARHeigth;
+        public ushort Width, Height;
 
-        public static Tuple<ushort, ushort> GetSAR(byte indicator) => indicator switch
+        public SPSAspectRatio(ushort width, ushort height)
+        {
+            Width = width;
+            Height = height;
+        }
+
+        public static SPSAspectRatio GetSAR(byte indicator) => indicator switch
         {
             1 => new(1, 1),
             2 => new(12, 11),
@@ -330,8 +366,10 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
         public byte BottomField;
     }
 
-    public struct SPSTime
+    public struct SPSFramerate
     {
+        public double Value => TimeScale > 0 ? (double)NumUnitsInTick / TimeScale : 0;
+
         public uint NumUnitsInTick;
         public uint TimeScale;
     }
@@ -342,7 +380,6 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
     /// </summary>
     public unsafe struct SequenceParameterSet : IDisposable
     {
-        public SPSError Error;
         public Allocator Allocator;
 
         public uint ID;
@@ -366,7 +403,7 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
         public byte MatrixCoefficients;
 
         public ChromaSampleLocType LocType;
-        public SPSTime Time;
+        public SPSFramerate Framerate;
 
         public uint PictureWidth => MbWidth << 4;
 
@@ -499,7 +536,7 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
             if (reader.Error != ReaderError.None)
                 return ConvertError(reader.Error);
 
-            if (pic_order_cnt_type > 1)
+            if (pic_order_cnt_type > 2)
                 return SPSError.InvalidPicOrderCntType;
 
             PicOrderCnt.Type = (byte)pic_order_cnt_type;
@@ -614,29 +651,33 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
 
             if (reader.ReadBool()) //frame_cropping
             {
+                var cropUnitX = Chroma.ArrayType == 0 ? 1 : Chroma.SubWidthC;
+                var cropUnitY = Chroma.ArrayType == 0 ? 1 : Chroma.SubHeightC;
+                cropUnitY *= FrameMbsOnly ? 1u : 2u;
+
                 var frame_crop_left_offset = reader.ReadUExpGolomb();
                 if (reader.Error != ReaderError.None)
                     return ConvertError(reader.Error);
 
-                CropLeft = frame_crop_left_offset;
+                CropLeft = frame_crop_left_offset * cropUnitX;
 
-                var frame_cropping_rect_right_offset = reader.ReadUExpGolomb();
+                var frame_crop_right_offset = reader.ReadUExpGolomb();
                 if (reader.Error != ReaderError.None)
                     return ConvertError(reader.Error);
 
-                CropRight = frame_cropping_rect_right_offset;
+                CropRight = frame_crop_right_offset * cropUnitX;
 
-                var frame_cropping_rect_top_offset = reader.ReadUExpGolomb();
+                var frame_crop_top_offset = reader.ReadUExpGolomb();
                 if (reader.Error != ReaderError.None)
                     return ConvertError(reader.Error);
 
-                CropTop = frame_cropping_rect_top_offset;
+                CropTop = frame_crop_top_offset * cropUnitY;
 
-                var frame_cropping_rect_bottom_offset = reader.ReadUExpGolomb();
+                var frame_crop_bottom_offset = reader.ReadUExpGolomb();
                 if (reader.Error != ReaderError.None)
                     return ConvertError(reader.Error);
 
-                CropBottom = frame_cropping_rect_bottom_offset;
+                CropBottom = frame_crop_bottom_offset * cropUnitY;
 
                 uint width = MbWidth << 4;
                 uint height = MbHeigth << 4;
@@ -662,20 +703,17 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
                     if (aspect_ratio_idc > 16 && aspect_ratio_idc != 255)
                         return SPSError.InvalidAspectIndicator;
 
-                    AspectRatio.Type = (byte)aspect_ratio_idc;
-                    if (AspectRatio.Type == SPSAspectRatio.Extend_SAR)
+                    if (aspect_ratio_idc == SPSAspectRatio.Extend_SAR)
                     {
                         if (!reader.HasEnoughBits(32))
                             return SPSError.ReaderOutOfRange;
 
-                        AspectRatio.SARWidth = (ushort)reader.ReadBits(16);
-                        AspectRatio.SARHeigth = (ushort)reader.ReadBits(16);
+                        AspectRatio.Width = (ushort)reader.ReadBits(16);
+                        AspectRatio.Height = (ushort)reader.ReadBits(16);
                     }
                     else
                     {
-                        var sar = SPSAspectRatio.GetSAR(AspectRatio.Type);
-                        AspectRatio.SARWidth = sar.Item1;
-                        AspectRatio.SARHeigth = sar.Item2;
+                        AspectRatio = SPSAspectRatio.GetSAR((byte)aspect_ratio_idc);
                     }
                 }
 
@@ -770,13 +808,13 @@ namespace Unity.MediaFramework.LowLevel.Format.NAL
                     if (num_units_in_tick == 0)
                         return SPSError.InvalidTimeInfo;
 
-                    Time.NumUnitsInTick = num_units_in_tick;
+                    Framerate.NumUnitsInTick = num_units_in_tick;
 
                     var time_scale = reader.ReadBits(32);
                     if (time_scale == 0)
                         return SPSError.InvalidTimeInfo;
 
-                    Time.TimeScale = time_scale;
+                    Framerate.TimeScale = time_scale;
 
                     FixedFrameRate = reader.ReadBool();
                 }

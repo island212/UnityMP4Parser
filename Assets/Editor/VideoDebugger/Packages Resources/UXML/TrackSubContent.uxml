@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement style="flex-direction: row; margin-left: 3px; margin-top: 10px;">
+        <ui:VisualElement>
+            <ui:Foldout text="AVC1" value="true">
+                <ui:Label text="Video: h264 (Main) ([27][0][0][0] / 0x001B), yuv420p(tv, smpte170m/smpte170m/bt709), 400x300, Closed Captions, 29.92 fps, 29.92 tbr, 90k tbn, 180k tbc" display-tooltip-when-elided="true" style="flex-wrap: wrap; white-space: normal; -unity-font-style: normal;" />
+            </ui:Foldout>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

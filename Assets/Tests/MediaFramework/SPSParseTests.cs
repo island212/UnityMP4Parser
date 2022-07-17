@@ -2,7 +2,7 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
-using Unity.MediaFramework.LowLevel.Format.NAL;
+using Unity.MediaFramework.LowLevel.Codecs;
 using UnityEngine;
 
 public class SPSParseTests
@@ -16,9 +16,9 @@ public class SPSParseTests
 
     readonly byte[] spsBasic =
     {
-            0x67, 0x42, 0xC0, 0x0D, 0x95, 0xB0, 0x50, 0x6F, 0xE5, 0xC0, 0x44,
-            0x00, 0x00, 0x03, 0x00, 0x04, 0x00, 0x00, 0x03, 0x00, 0xF0, 0x36, 0x82,
-            0x21, 0x1B
+        0x67, 0x42, 0xC0, 0x0D, 0x95, 0xB0, 0x50, 0x6F, 0xE5, 0xC0, 0x44,
+        0x00, 0x00, 0x03, 0x00, 0x04, 0x00, 0x00, 0x03, 0x00, 0xF0, 0x36, 0x82,
+        0x21, 0x1B
     };
 
     [Test]
@@ -67,9 +67,8 @@ public class SPSParseTests
             Assert.AreEqual(0, sps.CropTop, "CropTop");
             Assert.AreEqual(0, sps.CropBottom, "CropBottom");
 
-            Assert.AreEqual(0, sps.AspectRatio.Type, "AspectRatio");
-            Assert.AreEqual(0, sps.AspectRatio.SARWidth, "SARWidth");
-            Assert.AreEqual(0, sps.AspectRatio.SARHeigth, "SARHeigth");
+            Assert.AreEqual(0, sps.AspectRatio.Width, "SARWidth");
+            Assert.AreEqual(0, sps.AspectRatio.Height, "SARHeigth");
 
             Assert.AreEqual(5, sps.VideoFormat, "VideoFormat");
             Assert.IsFalse(sps.VideoFullRange, "VideoFullRange");
@@ -80,8 +79,8 @@ public class SPSParseTests
             Assert.AreEqual(0, sps.LocType.TopField, "ChromaSampleLocType TopField");
             Assert.AreEqual(0, sps.LocType.BottomField, "ChromaSampleLocType BottomField");
 
-            Assert.AreEqual(1, sps.Time.NumUnitsInTick, "NumUnitsInTick");
-            Assert.AreEqual(60, sps.Time.TimeScale, "TimeScale");
+            Assert.AreEqual(1, sps.Framerate.NumUnitsInTick, "NumUnitsInTick");
+            Assert.AreEqual(60, sps.Framerate.TimeScale, "TimeScale");
         }
     }
 }

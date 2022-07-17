@@ -457,11 +457,6 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
 
         public bool ReadBool() => ReadBit() == 1;
 
-        public uint ReadUInt()
-        {
-            return ReadBits(16) << 16 | ReadBits(16);
-        }
-
         public uint ReadUExpGolomb()
         {
             if (!HasEnoughBits(1))

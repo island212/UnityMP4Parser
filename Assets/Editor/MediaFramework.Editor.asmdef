@@ -1,0 +1,19 @@
+{
+    "name": "MediaFramework.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:33dcfd65edbbe8d49933aec59de6cb5b",
+        "GUID:e0cd26848372d4e5c891c569017e11f1"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

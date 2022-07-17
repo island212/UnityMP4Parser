@@ -5,7 +5,6 @@ using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
 using Unity.MediaFramework.LowLevel.Format.ISOBMFF;
-using Unity.MediaFramework.LowLevel.Format.NAL;
 using Unity.MediaFramework.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.TestTools;

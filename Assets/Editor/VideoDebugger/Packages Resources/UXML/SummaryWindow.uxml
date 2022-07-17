@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" MemoryProfiler="Unity.MemoryProfiler.Editor" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:VisualElement style="margin-left: 9px; margin-right: 9px; margin-top: 9px; margin-bottom: 9px;">
+        <ui:VisualElement style="padding-bottom: 16px; margin-left: 14px;">
+            <ui:Label text="Filename.mp4" display-tooltip-when-elided="true" style="font-size: 22px;" />
+            <ui:VisualElement style="flex-direction: row;">
+                <ui:Label text="File size" display-tooltip-when-elided="true" class="summary-track-label" />
+                <ui:Label text="25.0 KB" display-tooltip-when-elided="true" class="summary-track-value" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-direction: row;">
+                <ui:Label text="GUID" display-tooltip-when-elided="true" class="summary-track-label" />
+                <ui:Label text="8as5dhq7dg6ha7e6" display-tooltip-when-elided="true" class="summary-track-value" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-direction: row;">
+                <ui:Label text="Format" display-tooltip-when-elided="true" class="summary-track-label" />
+                <ui:Label text="MPEG-4" display-tooltip-when-elided="true" class="summary-track-value" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

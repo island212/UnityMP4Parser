@@ -5,11 +5,10 @@ using Unity.Collections.LowLevel.Unsafe;
 using Unity.MediaFramework.LowLevel.Unsafe;
 using Unity.Mathematics;
 using Unity.IO.LowLevel.Unsafe;
-using Unity.MediaFramework.LowLevel.Format.NAL;
 
 namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 {
-    public enum ErrorType
+    public enum ISOBMFFError
     {
         None,
         MissingBox,
@@ -23,14 +22,14 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
         public long Size;
     }
 
-    public unsafe struct UnsafeRawArray : System.IDisposable
+    public unsafe struct UnsafeByteArray : System.IDisposable
     {
         public Allocator Allocator;
 
         public int Length;
         public byte* Ptr;
 
-        public UnsafeRawArray(byte* ptr, int length, Allocator allocator)
+        public UnsafeByteArray(byte* ptr, int length, Allocator allocator)
         {
             Allocator = allocator;
             Length = length;
@@ -52,7 +51,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 
     public struct ErrorMessage
     {
-        public ErrorType Type;
+        public ISOBMFFError Type;
         public FixedString128Bytes Message;
     }
 
@@ -60,8 +59,6 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
     {
         public long FileSize;
         public ReadCommandArray Commands;
-
-        public int JobCount => Commands.CommandCount;
 
         public unsafe int AddReadCommandJob(ref ReadCommand command)
         {
@@ -75,7 +72,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 
     public struct MediaJobContext
     {
-        public bool HasError => Error.Type != ErrorType.None;
+        public bool HasError => Error.Type != ISOBMFFError.None;
 
         public ReadCommand ReadCommand;
         public ErrorMessage Error;
@@ -150,15 +147,15 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
         [ReadOnly] public NativeList<BoxChunk> BoxChunks;
 
         [WriteOnly] public NativeReference<MediaIOContext> IOContext;    
-        [WriteOnly] public NativeReference<UnsafeRawArray> Header;
+        [WriteOnly] public NativeReference<UnsafeByteArray> Header;
 
         public unsafe void Execute()
         {
             if (BoxChunks.Length == 0)
                 return;
 
-            ref var header = ref UnsafeUtility.AsRef<UnsafeRawArray>(Header.GetUnsafePtr());
-            header = new UnsafeRawArray();
+            ref var header = ref UnsafeUtility.AsRef<UnsafeByteArray>(Header.GetUnsafePtr());
+            header = new UnsafeByteArray();
             foreach (var chunk in BoxChunks)
                 header.Length += (int)chunk.Size;
 
@@ -168,7 +165,8 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             var buffer = header.Ptr;
             ref var ioContext = ref UnsafeUtility.AsRef<MediaIOContext>(IOContext.GetUnsafePtr());
 
-            ReadCommand readCommand; 
+            ReadCommand readCommand;
+            // Reduce the number of read by combining adjacent boxes
             var combinedChunk = BoxChunks[0];
             for (int i = 1; i < BoxChunks.Length; i++)
             {
@@ -202,10 +200,10 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
         }
     }
 
-    [BurstCompile(Debug = true)]
+    [BurstCompile]
     public struct CreateISOTable : IJob
     {
-        [ReadOnly] public NativeReference<UnsafeRawArray> Header;
+        [ReadOnly] public NativeReference<UnsafeByteArray> Header;
 
         [WriteOnly] public NativeReference<ISOTable> Table;
 
@@ -277,145 +275,6 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
                 }
 
                 position += size;
-            }
-        }
-    }
-
-    //[BurstCompile(Debug = true, CompileSynchronously = true)]
-    public struct GetMediaAttributes : IJob
-    {
-        [ReadOnly] public NativeReference<ISOTable> Table;
-
-        public NativeReference<UnsafeRawArray> Header;
-
-        [WriteOnly] public NativeList<VideoTrack> VideoTracks;
-        [WriteOnly] public NativeList<AudioTrack> AudioTracks;
-
-        public unsafe void Execute()
-        {
-            ref var table = ref UnsafeUtility.AsRef<ISOTable>(Table.GetUnsafeReadOnlyPtr());
-
-            for (int i = 0; i < table.Tracks.Length; i++)
-            {
-                switch (table.Tracks[i].Handler)
-                {
-                    case ISOHandler.VIDE: ParseVideo(table.Tracks[i]); break;
-                    case ISOHandler.SOUN: ParseAudio(table.Tracks[i]); break;
-                }
-            }
-        }
-
-        public unsafe void ParseVideo(in ISOTrackTable table)
-        {
-            var videoTrack = new VideoTrack();
-            if (table.MDHD.value != null)
-            {
-                var mdhd = table.MDHD.Parse();
-                videoTrack.Duration = mdhd.Duration;
-                videoTrack.TimeScale = mdhd.Timescale;
-            }
-
-            if (table.TKHD.value != null)
-            { 
-                var tkhd = table.TKHD.Parse();
-                videoTrack.TrackID = tkhd.TrackID;
-                videoTrack.Width = (int)tkhd.Width.ConvertDouble();
-                videoTrack.Height = (int)tkhd.Height.ConvertDouble();
-            }
-
-            if (table.STSD.value != null)
-            {
-                var stsd = table.STSD.ParseVideo();
-                videoTrack.Codec = stsd.Codec;
-                videoTrack.PixelWidth = stsd.Width;
-                videoTrack.PixelHeight = stsd.Height;
-                videoTrack.ColorFormat = new ColorFormat();
-
-                if (stsd.DecoderConfigurationBox != null)
-                {
-                    switch (stsd.Codec)
-                    {
-                        case VideoCodec.AVC1:
-                            var decoderConfig = AVCDecoderConfigurationRecord.Parse(stsd.DecoderConfigurationBox);
-                            if (decoderConfig.SPS != null)
-                            {
-                                var numSPS = decoderConfig.SPS[0] & 0b00011111;
-                                if (numSPS > 0)
-                                {
-                                    var sps = new SequenceParameterSet();
-                                    var error = sps.Parse(decoderConfig.SPS + 3, numSPS, Allocator.Temp);
-                                    sps.Dispose();
-                                }
-                            }
-
-                            if (decoderConfig.AVCProfileIndicationMeta != null)
-                            {
-                                var profileMeta = AVCProfileIndicationMeta.Parse(decoderConfig.AVCProfileIndicationMeta);
-                                UnityEngine.Debug.Log($"{profileMeta.ChromaFormat} {profileMeta.BitDepthChromaMinus8 + 8} {profileMeta.BitDepthLumaMinus8 + 8}");
-                            }
-                            break;
-                    }
-                }
-            }
-
-            if (table.STTS.value != null)
-            {
-                var stts = table.STTS.Parse();
-                videoTrack.FrameCount = stts.SampleCount;
-                videoTrack.TimeToSampleTable = new TimeToSampleTable
-                {
-                    Length = stts.EntryCount,
-                    Samples = stts.SamplesTable
-                };
-            }
-
-            if (table.STSS.value != null)
-            {
-                var stss = table.STSS.Parse();
-                videoTrack.SyncSampleTable = new SyncSampleTable
-                {
-                    Length = stss.EntryCount,
-                    SampleNumbers = stss.SyncSamplesTable
-                };
-            }
-
-            VideoTracks.Add(videoTrack);
-        }
-
-        public unsafe void ParseAudio(in ISOTrackTable table)
-        {
-            var audioTrack = new AudioTrack();
-            if (table.MDHD.value != null)
-            {
-                var mdhd = table.MDHD.Parse();
-                audioTrack.Duration = mdhd.Duration;
-                audioTrack.TimeScale = mdhd.Timescale;
-                audioTrack.Language = mdhd.Language;
-            }
-
-            if (table.TKHD.value != null)
-            {
-                var tkhd = table.TKHD.Parse();
-                audioTrack.TrackID = tkhd.TrackID;
-            }
-
-            if (table.STSD.value != null)
-            {
-                var stsd = table.STSD.ParseAudio();
-                audioTrack.Codec = stsd.Codec;
-                audioTrack.ChannelCount = stsd.ChannelCount;
-                audioTrack.SampleRate = stsd.SampleRate;
-            }
-
-            if (table.STTS.value != null)
-            {
-                var stts = table.STTS.Parse();
-                audioTrack.SampleCount = stts.SampleCount;
-                audioTrack.TimeToSampleTable = new TimeToSampleTable
-                {
-                    Length = stts.EntryCount,
-                    Samples = stts.SamplesTable
-                };
             }
         }
     }
@@ -495,7 +354,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             }
         }
 
-        public unsafe static void ThrowError(ref MediaIOContext ioContext, ref MediaJobContext context, in ErrorType type, in FixedString128Bytes message)
+        public unsafe static void ThrowError(ref MediaIOContext ioContext, ref MediaJobContext context, in ISOBMFFError type, in FixedString128Bytes message)
         {
             context.Error = new()
             {

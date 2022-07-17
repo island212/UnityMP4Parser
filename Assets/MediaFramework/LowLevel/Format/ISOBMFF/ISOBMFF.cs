@@ -69,6 +69,13 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             => value > 0 ? value / 256.0 : 0;
     }
 
+    [StructLayout(LayoutKind.Sequential, Size = 8)]
+    public struct SampleGroup
+    {
+        public uint Count;
+        public uint Delta;
+    }
+
     public static class ISOUtility
     {
         public static bool CanBeParent(ISOBoxType type)
