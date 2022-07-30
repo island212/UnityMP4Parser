@@ -87,7 +87,21 @@ public class SwitchVsArrayVsContains
                 sum += BitFieldArrayHasChromaIndex[profileIDCs[i] >> 7].GetBits(profileIDCs[i] & 0x3F) >= 0 ? 1 : 0;
             }
         })
-        .SampleGroup($"BitField Index")
+        .SampleGroup($"BitField64 Index")
+        .WarmupCount(WarmupCount)
+        .IterationsPerMeasurement(IterationsPerMeasurement)
+        .MeasurementCount(MeasurementCount)
+        .Run();
+
+        Measure.Method(() =>
+        {
+            int sum = 0;
+            for (int i = 0; i < profileIDCs.Length; i++)
+            {
+                sum += BitArrayHasChromaIndex.Get(profileIDCs[i]) ? 1 : 0;
+            }
+        })
+        .SampleGroup($"BitArray")
         .WarmupCount(WarmupCount)
         .IterationsPerMeasurement(IterationsPerMeasurement)
         .MeasurementCount(MeasurementCount)
@@ -105,6 +119,8 @@ public class SwitchVsArrayVsContains
     public static readonly bool[] ArrayHasChromaIndex = CreateArrayHasChromaIndex();
 
     public static readonly BitField64[] BitFieldArrayHasChromaIndex = CreateBitFieldArrayHasChromaIndex();
+
+    public static readonly BitArray BitArrayHasChromaIndex = CreateBitArrayHasChromaIndex();
 
     public static readonly NativeArray<byte> ArrayHasChromaValue 
         = new NativeArray<byte>(new byte[]{ 44, 83, 86, 100, 110, 118, 122, 128, 134, 135, 138, 139, 244 }, Allocator.Persistent);
@@ -125,6 +141,25 @@ public class SwitchVsArrayVsContains
         array[138] = true;
         array[139] = true;
         array[244] = true;
+        return array;
+    }
+
+    private static BitArray CreateBitArrayHasChromaIndex()
+    {
+        var array = new BitArray(256, false);
+        array.Set(44, true);
+        array.Set(83, true);
+        array.Set(86, true);
+        array.Set(100, true);
+        array.Set(110, true);
+        array.Set(118, true);
+        array.Set(122, true);
+        array.Set(128, true);
+        array.Set(134, true);
+        array.Set(135, true);
+        array.Set(138, true);
+        array.Set(139, true);
+        array.Set(244, true);
         return array;
     }
 
