@@ -214,10 +214,10 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
 
             var header = Header.Value;
 
-            uint position = 0;
-            while (position < header.Length)
+            uint index = 0;
+            while (index < header.Length)
             {
-                var box = ISOBox.Parse(header.Ptr + position);
+                var box = ISOBox.Parse(header.Ptr + index);
 
                 if (box.Size == 0)
                 {
@@ -233,34 +233,34 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
                 switch (box.Type)
                 {
                     case ISOBoxType.FTYP:
-                        table.FTYP = new FTYPBox.Ptr { value = header.Ptr + position };
+                        table.FTYP = new FTYPBox.Ptr { value = header.Ptr + index };
                         break;
                     case ISOBoxType.MVHD:
-                        table.MVHD = new MVHDBox.Ptr { value = header.Ptr + position };
+                        table.MVHD = new MVHDBox.Ptr { value = header.Ptr + index };
                         break;
                     case ISOBoxType.HDLR:
                         table.Tracks.ElementAt(table.Tracks.Length - 1)
-                            .Handler = HDLRBox.GetHandlerType(header.Ptr + position);
+                            .Handler = HDLRBox.GetHandlerType(header.Ptr + index);
                         break;
                     case ISOBoxType.TKHD:
                         table.Tracks.ElementAt(table.Tracks.Length - 1)
-                            .TKHD = new TKHDBox.Ptr { value = header.Ptr + position };
+                            .TKHD = new TKHDBox.Ptr { value = header.Ptr + index };
                         break;
                     case ISOBoxType.MDHD:
                         table.Tracks.ElementAt(table.Tracks.Length - 1)
-                            .MDHD = new MDHDBox.Ptr { value = header.Ptr + position };
+                            .MDHD = new MDHDBox.Ptr { value = header.Ptr + index };
                         break;
                     case ISOBoxType.STSD:
                         table.Tracks.ElementAt(table.Tracks.Length - 1)
-                            .STSD = new STSDBox.Ptr { value = header.Ptr + position };
+                            .STSD = new STSDBox.Ptr { value = header.Ptr + index };
                         break;
                     case ISOBoxType.STTS:
                         table.Tracks.ElementAt(table.Tracks.Length - 1)
-                            .STTS = new STTSBox.Ptr { value = header.Ptr + position };
+                            .STTS = new STTSBox.Ptr { value = header.Ptr + index };
                         break;
                     case ISOBoxType.STSS:
                         table.Tracks.ElementAt(table.Tracks.Length - 1)
-                            .STSS = new STSSBox.Ptr { value = header.Ptr + position };
+                            .STSS = new STSSBox.Ptr { value = header.Ptr + index };
                         break;
                     case ISOBoxType.STBL:
                     case ISOBoxType.MINF:
@@ -274,7 +274,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
                         break;
                 }
 
-                position += size;
+                index += size;
             }
         }
     }

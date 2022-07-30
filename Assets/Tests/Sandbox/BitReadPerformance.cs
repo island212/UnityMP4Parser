@@ -17,10 +17,12 @@ public unsafe class BitReadPerformance
     {
         using var array = new NativeArray<byte>(16000, Allocator.Temp);
 
+        byte* readonlyBuffer = (byte*)array.GetUnsafeReadOnlyPtr();
+
         Measure.Method(() =>
         {
             int sum = 0;
-            byte* buffer = (byte*)array.GetUnsafeReadOnlyPtr();
+            byte* buffer = readonlyBuffer;
 
             for (int i = 0; i < array.Length; i += 16)
             {
@@ -41,8 +43,8 @@ public unsafe class BitReadPerformance
         Measure.Method(() =>
         {
             int sum = 0;
-            byte* buffer = (byte*)array.GetUnsafeReadOnlyPtr();
 
+            byte* buffer = readonlyBuffer;
             for (int i = 0; i < array.Length; i += 16)
             {
                 sum ^= GetInt32(buffer); buffer += 4;
@@ -60,8 +62,8 @@ public unsafe class BitReadPerformance
         Measure.Method(() =>
         {
             int sum = 0;
-            byte* buffer = (byte*)array.GetUnsafeReadOnlyPtr();
 
+            byte* buffer = readonlyBuffer;
             for (int i = 0; i < array.Length; i += 16)
             {
                 sum ^= ReadInt32Backward(ref buffer);
@@ -79,15 +81,14 @@ public unsafe class BitReadPerformance
         Measure.Method(() =>
         {
             int sum = 0;
-            byte* buffer = (byte*)array.GetUnsafeReadOnlyPtr();
-
             int offset = 0;
+            byte* buffer = readonlyBuffer;
             for (int i = 0; i < array.Length; i += 16)
             {
                 sum ^= ReadInt32Seperate(buffer, ref offset);
-                sum ^= ReadInt32Seperate(buffer + offset, ref offset);
-                sum ^= ReadInt32Seperate(buffer + offset, ref offset);
-                sum ^= ReadInt32Seperate(buffer + offset, ref offset);
+                sum ^= ReadInt32Seperate(buffer, ref offset);
+                sum ^= ReadInt32Seperate(buffer, ref offset);
+                sum ^= ReadInt32Seperate(buffer, ref offset);
             }
         })
         .SampleGroup("ReadInt32Seperate")
@@ -101,7 +102,7 @@ public unsafe class BitReadPerformance
             int sum = 0;
             var stream = new BitStream()
             {
-                buffer = (byte*)array.GetUnsafeReadOnlyPtr(),
+                buffer = readonlyBuffer,
                 offset = 0,
             };
 
@@ -118,6 +119,69 @@ public unsafe class BitReadPerformance
         .IterationsPerMeasurement(100)
         .MeasurementCount(20)
         .Run();
+
+        Measure.Method(() =>
+        {
+            int sum = 0;
+            var stream = new BitNoOffset()
+            {
+                buffer = readonlyBuffer
+            };
+
+            for (int i = 0; i < array.Length; i += 16)
+            {
+                sum ^= stream.ReadInt32();
+                sum ^= stream.ReadInt32();
+                sum ^= stream.ReadInt32();
+                sum ^= stream.ReadInt32();
+            }
+        })
+        .SampleGroup("BitNoOffset.ReadInt32")
+        .WarmupCount(20)
+        .IterationsPerMeasurement(100)
+        .MeasurementCount(20)
+        .Run();
+
+        Measure.Method(() =>
+        {
+            int sum = 0;
+            var stream = new BitNoOffsetNoTemp()
+            {
+                buffer = readonlyBuffer
+            };
+
+            for (int i = 0; i < array.Length; i += 16)
+            {
+                sum ^= stream.ReadInt32();
+                sum ^= stream.ReadInt32();
+                sum ^= stream.ReadInt32();
+                sum ^= stream.ReadInt32();
+            }
+        })
+        .SampleGroup("BitNoOffsetNoTemp.ReadInt32")
+        .WarmupCount(20)
+        .IterationsPerMeasurement(100)
+        .MeasurementCount(20)
+        .Run();
+
+        Measure.Method(() =>
+        {
+            int sum = 0;
+            var stream = new BitNoOffsetNoTempOneline(readonlyBuffer, array.Length);
+
+            for (int i = 0; i < array.Length; i += 16)
+            {
+                sum ^= stream.ReadInt32();
+                sum ^= stream.ReadInt32();
+                sum ^= stream.ReadInt32();
+                sum ^= stream.ReadInt32();
+            }
+        })
+        .SampleGroup("BitNoOffsetNoTempOneline.ReadInt32")
+        .WarmupCount(20)
+        .IterationsPerMeasurement(100)
+        .MeasurementCount(20)
+        .Run();
     }
 
     public struct BitStream
@@ -125,31 +189,62 @@ public unsafe class BitReadPerformance
         public byte* buffer;
         public int offset;
 
+        public int ReadInt32() =>
+            *(buffer + offset++) << 24 | *(buffer + offset++) << 16 | *(buffer + offset++) << 8 | *(buffer + offset++);
+    }
+
+    public struct BitNoOffset
+    {
+        public byte* buffer;
+
         public int ReadInt32()
         {
-            offset += 4;
-            return GetInt32(buffer + offset - 4);
+            var temp = buffer[0] << 24 | buffer[1] << 16 | buffer[2] << 8 | buffer[3];
+            buffer += 4;
+            return temp;
         }
     }
 
-    [BurstCompile(CompileSynchronously = true)]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public struct BitNoOffsetNoTempOneline
+    {
+        public byte* start;
+        public byte* end;
+
+        public byte* head;
+
+        public BitNoOffsetNoTempOneline(byte* buffer, int length)
+        {
+            start = head = buffer;
+            end = buffer + length;
+        }
+
+        public int ReadInt32() => *head++ << 24 | *head++ << 16 | *head++ << 8 | *head++;
+    }
+
+    public struct BitNoOffsetNoTemp
+    {
+        public int length;
+        public byte* buffer;
+
+        public int ReadInt32()
+        {
+            buffer += 4;
+            return *(buffer - 4) << 24 | *(buffer - 3) << 16 | *(buffer - 2) << 8 | *(buffer - 1);
+        }
+    }
+
     public static int ReadInt32Seperate(byte* data, ref int offset)
     {
         offset += 4;
-        return GetInt32(data);
+        return *(data + offset - 4) << 24 | *(data + offset - 3) << 16 | *(data + offset - 2) << 8 | *(data + offset - 1);
     }
 
-    [BurstCompile(CompileSynchronously = true)]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int ReadInt32Backward(ref byte* data)
     {
         data += 4;
-        return GetInt32(data - 4);
+        return *(data - 4) << 24 | *(data - 3) << 16 | *(data - 2) << 8 | *(data - 1);
     }
 
-    [BurstCompile(CompileSynchronously = true)]
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int GetInt32(byte* data) =>
-        (int)data[0] << 24 | (int)data[1] << 16 | (int)data[2] << 8 | data[3];
+        data[0] << 24 | data[1] << 16 | data[2] << 8 | data[3];
 }

@@ -13,7 +13,6 @@ namespace Unity.MediaFramework.LowLevel
     public interface ByteReader
     {
         public int Length { get; }
-        public int Capacity { get; }
 
         public sbyte PeekInt8();
         public short PeekInt16();

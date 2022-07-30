@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Unity.Collections;
 using Unity.Collections.LowLevel.Unsafe;
 using Unity.Mathematics;
@@ -7,24 +8,31 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
 {
     public unsafe static class BigEndian
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ushort ReadUInt16(byte* data) => (ushort)(data[0] << 8 | data[1]);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static uint ReadUInt32(byte* data) =>
                 (uint)data[0] << 24 | (uint)data[1] << 16 | (uint)data[2] << 8 | data[3];
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong Read2UInt32(byte* data) =>
             (ulong)data[4] << 56 | (ulong)data[5] << 48 | (ulong)data[6] << 40 | (ulong)data[7] << 32 |
             (ulong)data[0] << 24 | (ulong)data[1] << 16 | (ulong)data[2] << 8 | data[3];
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ulong ReadUInt64(byte* data) =>
             (ulong)data[0] << 56 | (ulong)data[1] << 48 | (ulong)data[2] << 40 | (ulong)data[3] << 32 |
             (ulong)data[4] << 24 | (ulong)data[5] << 16 | (ulong)data[6] << 8 | data[7];
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static short ReadInt16(byte* data) => (short)(data[0] << 8 | data[1]);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int ReadInt32(byte* data) =>
             (int)data[0] << 24 | (int)data[1] << 16 | (int)data[2] << 8 | data[3];
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static long ReadInt64(byte* data) =>
             (long)data[0] << 56 | (long)data[1] << 48 | (long)data[2] << 40 | (long)data[3] << 32 |
             (long)data[4] << 24 | (long)data[5] << 16 | (long)data[6] << 8 | data[7];
@@ -87,8 +95,6 @@ namespace Unity.MediaFramework.LowLevel.Unsafe
         public int capacity;
 
         public int Length => length;
-
-        public int Capacity => capacity;
 
         public short PeekInt16()
         {

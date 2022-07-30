@@ -746,6 +746,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
         {
             SRAT = 0x73726174,
             CHNL = 0x63686e6c,
+            ESDS = 0x65736473
         }
 
         public const int ByteNeeded = SampleEntry.ByteNeeded + 20;
@@ -755,14 +756,16 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
         public ushort SampleSize;
         public uint SampleRate;
 
+        public byte* ESDS;
         public byte* ChannelLayout;
 
-        public AudioSampleEntry(AudioCodec codec, ushort channelCount, ushort sampleSize, uint sampleRate, byte* channelLayout)
+        public AudioSampleEntry(AudioCodec codec, ushort channelCount, ushort sampleSize, uint sampleRate, byte* esds, byte* channelLayout)
         {
             Codec = codec;
             ChannelCount = channelCount;
             SampleSize = sampleSize;
             SampleRate = sampleRate;
+            ESDS = esds;
             ChannelLayout = channelLayout;
         }
 
@@ -783,7 +786,7 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
             buffer += 20;
 
             int size = (int)box.Size - ByteNeeded;
-            byte* channelLayout = null;
+            byte* channelLayout = null, esds = null;
             while (size >= ISOBox.ByteNeeded)
             {
                 var entryBox = ISOBox.Parse(buffer);
@@ -801,13 +804,142 @@ namespace Unity.MediaFramework.LowLevel.Format.ISOBMFF
                     case EntryType.CHNL:
                         channelLayout = buffer;
                         break;
+                    case EntryType.ESDS:
+                        esds = buffer;
+                        break;
                 }
 
                 size -= (int)entryBox.Size;
                 buffer += (int)entryBox.Size;
             }
 
-            return new(codec, channelCount, sampleSize, sampleRate, channelLayout);      
+            return new(codec, channelCount, sampleSize, sampleRate, esds, channelLayout);      
+        }
+    }
+
+    /// <summary>
+    /// Elementary Stream Descriptor ISO 14496-1 2010 7.2.6.5
+    /// </summary>
+    public unsafe struct ESDSBox
+    {
+
+    }
+
+    public struct ES_Descriptor
+    { 
+        
+    }
+
+    public enum DescriptorTag
+    {
+        ObjectDescrTag = 0x01,
+        InitialObjectDescrTag = 0x02,
+        ES_DescrTag = 0x03,
+        DecoderConfigDescrTag = 0x04,
+        DecSpecificInfoTag = 0x05,
+        SLConfigDescrTag = 0x06,
+        ContentIdentDescrTag = 0x07,
+        SupplContentIdentDescrTag = 0x08,
+        IPI_DescrPointerTag = 0x09,
+        IPMP_DescrPointerTag = 0x0A,
+        IPMP_DescrTag = 0x0B,
+        QoS_DescrTag = 0x0C,
+        RegistrationDescrTag = 0x0D,
+        ES_ID_IncTag = 0x0E,
+        ES_ID_RefTag = 0x0F,
+        MP4_IOD_Tag = 0x10,
+        MP4_OD_Tag = 0x11,
+        IPL_DescrPointerRefTag = 0x12,
+        ExtensionProfileLevelDescrTag = 0x13,
+        profileLevelIndicationIndexDescrTag = 0x14,
+        ContentClassificationDescrTag = 0x40,
+        KeyWordDescrTag = 0x41,
+        RatingDescrTag = 0x42,
+        LanguageDescrTag = 0x43,
+        ShortTextualDescrTag = 0x44,
+        ExpandedTextualDescrTag = 0x45,
+        ContentCreatorNameDescrTag = 0x46,
+        ContentCreationDateDescrTag = 0x47,
+        OCICreatorNameDescrTag = 0x48,
+        OCICreationDateDescrTag = 0x49,
+        SmpteCameraPositionDescrTag = 0x4A,
+        SegmentDescrTag = 0x4B,
+        MediaTimeDescrTag = 0x4C,
+        IPMP_ToolsListDescrTag = 0x60,
+        IPMP_ToolTag = 0x61,
+        M4MuxTimingDescrTag = 0x62,
+        M4MuxCodeTableDescrTag = 0x63,
+        ExtSLConfigDescrTag = 0x64,
+        M4MuxBufferSizeDescrTag = 0x65,
+        M4MuxIdentDescrTag = 0x66,
+        DependencyPointerTag = 0x67,
+        DependencyMarkerTag = 0x68,
+        M4MuxChannelDescrTag = 0x69
+    }
+
+    /// <summary>
+    /// AudioSpecificConfig ISO 14496-3 Section 1.6.2.1
+    /// </summary>
+    public unsafe struct AudioSpecificConfig
+    {
+        public enum AudioObjectType
+        { 
+            Null = 0,
+            AAC_Main = 1,
+            AAC_LC = 2,
+            ACC_SSR = 3,
+            AAC_LTP = 4,
+            SBR = 5,
+            AAC_Scalable = 6,
+        }
+
+        public AudioObjectType ObjectType;
+        public uint SampleRate;
+        public uint ChannelConfiguration;
+
+        public AudioSpecificConfig(AudioObjectType objectType, uint samplerate, uint channelConfiguration)
+        {
+            ObjectType = objectType;
+            ChannelConfiguration = channelConfiguration;
+            SampleRate = samplerate;
+        }
+
+        public static AudioSpecificConfig Parse(byte* buffer)
+        {
+            var box = ISOFullBox.Parse(buffer);
+            if (box.Size - ISOFullBox.ByteNeeded < 13)
+                return default;
+
+            var bitReader = new BitReader(buffer + ISOFullBox.ByteNeeded + 31, (int)box.Size - ISOFullBox.ByteNeeded);
+            var audioObjectType = bitReader.ReadBits(5);
+            if (audioObjectType == 31)
+            {
+                var audioObjectTypeExt = bitReader.ReadBits(6);
+                audioObjectType = 32 + audioObjectTypeExt;
+            }
+
+            var samplingFrequencyIndex = bitReader.ReadBits(4);
+            var samplerate = samplingFrequencyIndex switch
+            {
+                0 => 96000u,
+                1 => 88200u,
+                2 => 64000u,
+                3 => 48000u,
+                4 => 44100u,
+                5 => 32000u,
+                6 => 24000u,
+                7 => 22050u,
+                8 => 16000u,
+                9 => 12000u,
+                10 => 11025u,
+                11 => 8000u,
+                12 => 7350u,
+                15 => bitReader.ReadBits(24),
+                _ => 0u
+            };
+
+            var channelConfiguration = bitReader.ReadBits(4);
+            return new((AudioObjectType)audioObjectType, samplerate, channelConfiguration);
         }
     }
 

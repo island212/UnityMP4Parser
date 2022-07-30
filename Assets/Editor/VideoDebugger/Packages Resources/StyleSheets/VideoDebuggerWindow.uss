@@ -18,3 +18,9 @@
     white-space: normal;
     -unity-font-style: normal;
 }
+
+.track-content__container {
+    flex-direction: row;
+    margin-left: 3px;
+    margin-top: 10px;
+}

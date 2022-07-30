@@ -1,9 +1,9 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <Style src="project://database/Assets/Editor/VideoDebugger/Packages%20Resources/StyleSheets/VideoDebuggerWindow.uss?fileID=7433441132597879392&amp;guid=bcada80c64fc01c4e81e1dc76caf2a81&amp;type=3#VideoDebuggerWindow" />
     <ui:VisualElement>
         <ui:VisualElement class="foldout-content">
             <ui:Foldout text="Video Track #1" style="-unity-font-style: bold;">
-                <ui:VisualElement style="flex-direction: row; margin-left: 3px; margin-top: 10px;">
+                <ui:VisualElement class="track-content__container">
                     <ui:Label text="Video: h264 (Main) ([27][0][0][0] / 0x001B), yuv420p(tv, smpte170m/smpte170m/bt709), 400x300, Closed Captions, 29.92 fps, 29.92 tbr, 90k tbn, 180k tbc" display-tooltip-when-elided="true" class="track-content__label" />
                 </ui:VisualElement>
             </ui:Foldout>

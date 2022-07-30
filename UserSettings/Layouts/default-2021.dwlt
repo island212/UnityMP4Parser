@@ -15,16 +15,181 @@ MonoBehaviour:
   m_PixelRect:
     serializedVersion: 2
     x: 0
+    y: 0
+    width: 0
+    height: 6
+  m_ShowMode: 0
+  m_Title: 
+  m_RootView: {fileID: 5}
+  m_MinSize: {x: 0, y: 0}
+  m_MaxSize: {x: 0, y: 0}
+  m_Maximized: 0
+--- !u!114 &2
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12004, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PixelRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 6
+  m_ShowMode: 0
+  m_Title: 
+  m_RootView: {fileID: 6}
+  m_MinSize: {x: 0, y: 0}
+  m_MaxSize: {x: 0, y: 0}
+  m_Maximized: 0
+--- !u!114 &3
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12004, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PixelRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 6
+  m_ShowMode: 0
+  m_Title: 
+  m_RootView: {fileID: 7}
+  m_MinSize: {x: 0, y: 0}
+  m_MaxSize: {x: 0, y: 0}
+  m_Maximized: 0
+--- !u!114 &4
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12004, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PixelRect:
+    serializedVersion: 2
+    x: 0
     y: 43
     width: 2560
     height: 1357
   m_ShowMode: 4
-  m_Title: Test Runner
-  m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 300}
+  m_Title: Project
+  m_RootView: {fileID: 9}
+  m_MinSize: {x: 875, y: 350}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
---- !u!114 &2
+--- !u!114 &5
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  m_MinSize: {x: 0, y: 0}
+  m_MaxSize: {x: 0, y: 0}
+  vertical: 0
+  controlID: 0
+--- !u!114 &6
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  m_MinSize: {x: 0, y: 0}
+  m_MaxSize: {x: 0, y: 0}
+  vertical: 0
+  controlID: 0
+--- !u!114 &7
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  m_MinSize: {x: 0, y: 0}
+  m_MaxSize: {x: 0, y: 0}
+  vertical: 0
+  controlID: 0
+--- !u!114 &8
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 12}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 30
+    width: 2560
+    height: 1307
+  m_MinSize: {x: 300, y: 200}
+  m_MaxSize: {x: 24288, y: 16192}
+  vertical: 1
+  controlID: 106
+--- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,9 +202,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 3}
-  - {fileID: 5}
-  - {fileID: 4}
+  - {fileID: 10}
+  - {fileID: 8}
+  - {fileID: 11}
   m_Position:
     serializedVersion: 2
     x: 0
@@ -52,7 +217,7 @@ MonoBehaviour:
   m_TopViewHeight: 30
   m_UseBottomView: 1
   m_BottomViewHeight: 20
---- !u!114 &3
+--- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,7 +239,7 @@ MonoBehaviour:
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LastLoadedLayoutName: 
---- !u!114 &4
+--- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,7 +260,7 @@ MonoBehaviour:
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
---- !u!114 &5
+--- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,19 +273,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 6}
-  - {fileID: 11}
+  - {fileID: 13}
+  - {fileID: 18}
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 30
+    y: 0
     width: 2560
     height: 1307
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 44
---- !u!114 &6
+  controlID: 107
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,19 +298,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 7}
-  - {fileID: 10}
+  - {fileID: 14}
+  - {fileID: 17}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1955
+    width: 2014
     height: 1307
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 49
---- !u!114 &7
+  controlID: 19
+--- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,19 +323,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 8}
-  - {fileID: 9}
+  - {fileID: 15}
+  - {fileID: 16}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1955
-    height: 776
+    width: 2014
+    height: 929
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 50
---- !u!114 &8
+  controlID: 20
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,16 +352,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 484
-    height: 776
+    width: 424
+    height: 929
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 13}
+  m_ActualView: {fileID: 23}
   m_Panes:
-  - {fileID: 13}
+  - {fileID: 23}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &9
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -206,27 +371,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: TestRunnerWindow
+  m_Name: PackageManagerWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 484
+    x: 424
     y: 0
-    width: 1471
-    height: 776
-  m_MinSize: {x: 102, y: 121}
+    width: 1590
+    height: 929
+  m_MinSize: {x: 802, y: 271}
   m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 29}
   m_Panes:
-  - {fileID: 14}
-  - {fileID: 15}
-  - {fileID: 16}
-  - {fileID: 17}
-  - {fileID: 18}
-  m_Selected: 3
-  m_LastSelected: 1
---- !u!114 &10
+  - {fileID: 24}
+  - {fileID: 29}
+  - {fileID: 25}
+  - {fileID: 26}
+  - {fileID: 20}
+  - {fileID: 19}
+  m_Selected: 1
+  m_LastSelected: 4
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,24 +402,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 776
-    width: 1955
-    height: 531
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 19}
+    y: 929
+    width: 2014
+    height: 378
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 22}
   m_Panes:
-  - {fileID: 12}
-  - {fileID: 19}
-  m_Selected: 1
-  m_LastSelected: 0
---- !u!114 &11
+  - {fileID: 22}
+  - {fileID: 27}
+  - {fileID: 21}
+  m_Selected: 0
+  m_LastSelected: 1
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,23 +430,179 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1955
+    x: 2014
     y: 0
-    width: 605
+    width: 546
     height: 1307
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 20}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 28}
   m_Panes:
-  - {fileID: 20}
+  - {fileID: 28}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &12
+--- !u!114 &19
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13999, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: UI Builder
+    m_Image: {fileID: 8683992553321208622, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 362
+    y: 73
+    width: 1765
+    height: 908
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+--- !u!114 &20
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Game
+    m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 362
+    y: 73
+    width: 1765
+    height: 908
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+  m_SerializedViewNames: []
+  m_SerializedViewValues: []
+  m_PlayModeViewName: GameView
+  m_ShowGizmos: 0
+  m_TargetDisplay: 0
+  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+  m_TargetSize: {x: 1765, y: 887}
+  m_TextureFilterMode: 0
+  m_TextureHideFlags: 61
+  m_RenderIMGUI: 1
+  m_EnterPlayModeBehavior: 0
+  m_UseMipMap: 0
+  m_VSyncEnabled: 0
+  m_Gizmos: 0
+  m_Stats: 0
+  m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_ZoomArea:
+    m_HRangeLocked: 0
+    m_VRangeLocked: 0
+    hZoomLockedByDefault: 0
+    vZoomLockedByDefault: 0
+    m_HBaseRangeMin: -882.5
+    m_HBaseRangeMax: 882.5
+    m_VBaseRangeMin: -443.5
+    m_VBaseRangeMax: 443.5
+    m_HAllowExceedBaseRangeMin: 1
+    m_HAllowExceedBaseRangeMax: 1
+    m_VAllowExceedBaseRangeMin: 1
+    m_VAllowExceedBaseRangeMax: 1
+    m_ScaleWithWindow: 0
+    m_HSlider: 0
+    m_VSlider: 0
+    m_IgnoreScrollWheelUntilClicked: 0
+    m_EnableMouseInput: 1
+    m_EnableSliderZoomHorizontal: 0
+    m_EnableSliderZoomVertical: 0
+    m_UniformScale: 1
+    m_UpDirection: 1
+    m_DrawArea:
+      serializedVersion: 2
+      x: 0
+      y: 21
+      width: 1765
+      height: 887
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 882.5, y: 443.5}
+    m_MarginLeft: 0
+    m_MarginRight: 0
+    m_MarginTop: 0
+    m_MarginBottom: 0
+    m_LastShownAreaInsideMargins:
+      serializedVersion: 2
+      x: -882.5
+      y: -443.5
+      width: 1765
+      height: 887
+    m_MinimalGUI: 1
+  m_defaultScale: 1
+  m_LastWindowPixelSize: {x: 1765, y: 908}
+  m_ClearInEditMode: 1
+  m_NoCameraWarning: 1
+  m_LowResolutionForAspectRatios: 01000000000000000000
+  m_XRRenderMode: 0
+  m_RenderTexture: {fileID: 0}
+--- !u!114 &21
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13956, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: UI Toolkit Debugger
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 0
+    y: 1002
+    width: 2128
+    height: 357
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+  m_DebuggerImpl:
+    m_LastVisualTreeName: MemoryProfilerWindow
+  m_DebuggerContext:
+    m_SelectedElementIndex: 849
+    m_ShowLayoutBound: 0
+    m_ShowRepaintOverlay: 0
+    m_ShowDrawStats: 0
+    m_BreakBatches: 0
+--- !u!114 &22
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -300,9 +623,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 849
-    width: 1954
-    height: 510
+    y: 1002
+    width: 2013
+    height: 357
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -320,22 +643,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Tests/MediaFramework
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Tests/MediaFramework
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: E:\Projects\UnityMP4Parser
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d4510000
-    m_LastClickedID: 20948
-    m_ExpandedIDs: 000000007a500000
+    scrollPos: {x: 0, y: 47}
+    m_SelectedIDs: 74520000
+    m_LastClickedID: 21108
+    m_ExpandedIDs: 000000007452000076520000785200007a5200007c5200007e5200008052000082520000925200009852000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -351,7 +674,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 0}
+      m_ClientGUIView: {fileID: 17}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -363,7 +686,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007a500000
+    m_ExpandedIDs: 000000007452000076520000785200007a5200007c5200007e5200008052000082520000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -391,23 +714,23 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c6230000
+    m_ExpandedInstanceIDs: c62300001c53000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: OldMediaFramework
+      m_OriginalName: OldMediaFramework
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 21138
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 10}
+      m_ClientGUIView: {fileID: 17}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -419,7 +742,7 @@ MonoBehaviour:
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
---- !u!114 &13
+--- !u!114 &23
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -441,8 +764,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 73
-    width: 483
-    height: 755
+    width: 423
+    height: 908
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -468,7 +791,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
+        m_ClientGUIView: {fileID: 15}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -476,7 +799,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
---- !u!114 &14
+--- !u!114 &24
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -496,10 +819,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 2923
-    y: 263
-    width: 1101
-    height: 541
+    x: 488
+    y: 73
+    width: 1482
+    height: 755
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -510,7 +833,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 1
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: -98, y: -26}
+      snapOffsetDelta: {x: -101, y: -26}
       snapCorner: 3
       id: Tool Settings
       index: 0
@@ -696,14 +1019,14 @@ MonoBehaviour:
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
   m_SceneLighting: 1
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: -19.526897, y: 15.948595, z: 392.52032}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: -19.526897, y: 15.948595, z: 392.52032}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -732,35 +1055,35 @@ MonoBehaviour:
       m_Size: {x: 0, y: 0}
     yGrid:
       m_Fade:
+        m_Target: 0
+        speed: 2
+        m_Value: 0
+      m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
+      m_Pivot: {x: 0, y: 0, z: 0}
+      m_Size: {x: 1, y: 1}
+    zGrid:
+      m_Fade:
         m_Target: 1
         speed: 2
         m_Value: 1
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
       m_Size: {x: 1, y: 1}
-    zGrid:
-      m_Fade:
-        m_Target: 0
-        speed: 2
-        m_Value: 0
-      m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
-      m_Pivot: {x: 0, y: 0, z: 0}
-      m_Size: {x: 0, y: 0}
     m_ShowGrid: 1
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 10
+    m_Target: 79.152664
     speed: 2
-    m_Value: 10
+    m_Value: 79.152664
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
@@ -774,134 +1097,14 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &15
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 1
-  m_Script: {fileID: 12015, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Game
-    m_Image: {fileID: -6423792434712278376, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 484
-    y: 73
-    width: 1469
-    height: 755
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-  m_SerializedViewNames: []
-  m_SerializedViewValues: []
-  m_PlayModeViewName: GameView
-  m_ShowGizmos: 0
-  m_TargetDisplay: 0
-  m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-  m_TargetSize: {x: 1469, y: 734}
-  m_TextureFilterMode: 0
-  m_TextureHideFlags: 61
-  m_RenderIMGUI: 1
-  m_EnterPlayModeBehavior: 0
-  m_UseMipMap: 0
-  m_VSyncEnabled: 0
-  m_Gizmos: 0
-  m_Stats: 0
-  m_SelectedSizes: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
-  m_ZoomArea:
-    m_HRangeLocked: 0
-    m_VRangeLocked: 0
-    hZoomLockedByDefault: 0
-    vZoomLockedByDefault: 0
-    m_HBaseRangeMin: -734.5
-    m_HBaseRangeMax: 734.5
-    m_VBaseRangeMin: -377.5
-    m_VBaseRangeMax: 377.5
-    m_HAllowExceedBaseRangeMin: 1
-    m_HAllowExceedBaseRangeMax: 1
-    m_VAllowExceedBaseRangeMin: 1
-    m_VAllowExceedBaseRangeMax: 1
-    m_ScaleWithWindow: 0
-    m_HSlider: 0
-    m_VSlider: 0
-    m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
-    m_EnableSliderZoomHorizontal: 0
-    m_EnableSliderZoomVertical: 0
-    m_UniformScale: 1
-    m_UpDirection: 1
-    m_DrawArea:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 1469
-      height: 755
-    m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 734.5, y: 377.5}
-    m_MarginLeft: 0
-    m_MarginRight: 0
-    m_MarginTop: 0
-    m_MarginBottom: 0
-    m_LastShownAreaInsideMargins:
-      serializedVersion: 2
-      x: -734.5
-      y: -377.5
-      width: 1469
-      height: 755
-    m_MinimalGUI: 1
-  m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 1469, y: 755}
-  m_ClearInEditMode: 1
-  m_NoCameraWarning: 1
-  m_LowResolutionForAspectRatios: 01000000000000000000
-  m_XRRenderMode: 0
-  m_RenderTexture: {fileID: 0}
---- !u!114 &16
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 13953, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 800, y: 250}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Package Manager
-    m_Image: {fileID: -2824328813065806953, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 2923
-    y: 263
-    width: 1101
-    height: 541
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
---- !u!114 &17
+--- !u!114 &25
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -921,21 +1124,21 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 484
+    x: 362
     y: 73
-    width: 1469
-    height: 755
+    width: 1765
+    height: 908
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
   m_Spl:
-    ID: 115
+    ID: 308
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
-    - 514
-    - 171
+    - 628
+    - 210
     relativeSizes:
     - 0.75
     - 0.25
@@ -945,7 +1148,7 @@ MonoBehaviour:
     maxSizes:
     - 0
     - 0
-    lastTotalSize: 685
+    lastTotalSize: 838
     splitSize: 6
     xOffset: 0
     m_Version: 1
@@ -955,15 +1158,15 @@ MonoBehaviour:
     oldSplitSize: 0
   m_TestTypeToolbarIndex: 0
   m_PlayModeTestListGUI:
-    m_Window: {fileID: 17}
+    m_Window: {fileID: 25}
     m_NewResultList:
     - id: 1000
       uniqueId: '[UnityMP4Parser][suite]'
       name: UnityMP4Parser
       fullName: UnityMP4Parser
-      resultStatus: 1
-      duration: 0.058835
-      messages: 
+      resultStatus: 0
+      duration: 0.06361
+      messages: One or more child tests were ignored
       output: 
       stacktrace: 
       notRunnable: 0
@@ -977,8 +1180,8 @@ MonoBehaviour:
       uniqueId: '[MediaFramework.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/MediaFramework.Tests.dll][suite]'
       name: MediaFramework.Tests.dll
       fullName: E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/MediaFramework.Tests.dll
-      resultStatus: 1
-      duration: 0.0359581
+      resultStatus: 0
+      duration: 1.6091495
       messages: 
       output: 
       stacktrace: 
@@ -989,11 +1192,567 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[UnityMP4Parser][suite]'
+    - id: 1014
+      uniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+      name: BByteReaderTests
+      fullName: BByteReaderTests
+      resultStatus: 0
+      duration: 0.0524229
+      messages: One or more child tests were ignored
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1035
+      parentUniqueId: '[MediaFramework.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/MediaFramework.Tests.dll][suite]'
+    - id: 1013
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt16_OneMissingByte_ThrowException]
+      name: ReadInt16_OneMissingByte_ThrowException
+      fullName: BByteReaderTests.ReadInt16_OneMissingByte_ThrowException
+      resultStatus: 0
+      duration: 0.0269182
+      messages: 
+      output: 
+      stacktrace: 'at BByteReaderTests.ReadInt16_OneMissingByte_ThrowException ()
+        [0x00007] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\BByteReaderTests.cs:161
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1022
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt16_SingleNegative_ExpectSameValue]
+      name: ReadInt16_SingleNegative_ExpectSameValue
+      fullName: BByteReaderTests.ReadInt16_SingleNegative_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0078859
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1021
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt16_SinglePositive_ExpectSameValue]
+      name: ReadInt16_SinglePositive_ExpectSameValue
+      fullName: BByteReaderTests.ReadInt16_SinglePositive_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0002568
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1019
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt24_OneMissingByte_ThrowException]
+      name: ReadInt24_OneMissingByte_ThrowException
+      fullName: BByteReaderTests.ReadInt24_OneMissingByte_ThrowException
+      resultStatus: 0
+      duration: 0.0002499
+      messages: 
+      output: 
+      stacktrace: 'at BByteReaderTests.ReadInt24_OneMissingByte_ThrowException ()
+        [0x00007] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\BByteReaderTests.cs:238
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1026
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt24_SingleNegative_ExpectSameValue]
+      name: ReadInt24_SingleNegative_ExpectSameValue
+      fullName: BByteReaderTests.ReadInt24_SingleNegative_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0001805
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1025
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt24_SinglePositive_ExpectSameValue]
+      name: ReadInt24_SinglePositive_ExpectSameValue
+      fullName: BByteReaderTests.ReadInt24_SinglePositive_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0001697
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1025
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt32_OneMissingByte_ThrowException]
+      name: ReadInt32_OneMissingByte_ThrowException
+      fullName: BByteReaderTests.ReadInt32_OneMissingByte_ThrowException
+      resultStatus: 0
+      duration: 0.0002344
+      messages: 
+      output: 
+      stacktrace: 'at BByteReaderTests.ReadInt32_OneMissingByte_ThrowException ()
+        [0x00007] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\BByteReaderTests.cs:320
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1030
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt32_SingleNegative_ExpectSameValue]
+      name: ReadInt32_SingleNegative_ExpectSameValue
+      fullName: BByteReaderTests.ReadInt32_SingleNegative_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0003763
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1029
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt32_SinglePositive_ExpectSameValue]
+      name: ReadInt32_SinglePositive_ExpectSameValue
+      fullName: BByteReaderTests.ReadInt32_SinglePositive_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0001823
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1031
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt64_OneMissingByte_ThrowException]
+      name: ReadInt64_OneMissingByte_ThrowException
+      fullName: BByteReaderTests.ReadInt64_OneMissingByte_ThrowException
+      resultStatus: 0
+      duration: 0.0002711
+      messages: 
+      output: 
+      stacktrace: 'at BByteReaderTests.ReadInt64_OneMissingByte_ThrowException ()
+        [0x00007] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\BByteReaderTests.cs:425
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1034
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt64_SingleNegative_ExpectSameValue]
+      name: ReadInt64_SingleNegative_ExpectSameValue
+      fullName: BByteReaderTests.ReadInt64_SingleNegative_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0002178
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1033
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt64_SinglePositive_ExpectSameValue]
+      name: ReadInt64_SinglePositive_ExpectSameValue
+      fullName: BByteReaderTests.ReadInt64_SinglePositive_ExpectSameValue
+      resultStatus: 0
+      duration: 0.000207
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1007
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt8_OneMissingByte_ThrowException]
+      name: ReadInt8_OneMissingByte_ThrowException
+      fullName: BByteReaderTests.ReadInt8_OneMissingByte_ThrowException
+      resultStatus: 0
+      duration: 0.0002074
+      messages: 
+      output: 
+      stacktrace: 'at BByteReaderTests.ReadInt8_OneMissingByte_ThrowException ()
+        [0x00007] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\BByteReaderTests.cs:91
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1018
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt8_SingleNegative_ExpectSameValue]
+      name: ReadInt8_SingleNegative_ExpectSameValue
+      fullName: BByteReaderTests.ReadInt8_SingleNegative_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0001691
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1017
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadInt8_SinglePositive_ExpectSameValue]
+      name: ReadInt8_SinglePositive_ExpectSameValue
+      fullName: BByteReaderTests.ReadInt8_SinglePositive_ExpectSameValue
+      resultStatus: 0
+      duration: 0.00014
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1010
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt16_OneMissingByte_ThrowException]
+      name: ReadUInt16_OneMissingByte_ThrowException
+      fullName: BByteReaderTests.ReadUInt16_OneMissingByte_ThrowException
+      resultStatus: 0
+      duration: 0.0002038
+      messages: 
+      output: 
+      stacktrace: 'at BByteReaderTests.ReadUInt16_OneMissingByte_ThrowException ()
+        [0x00007] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\BByteReaderTests.cs:125
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1020
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt16_SingleNegative_ExpectSameValue]
+      name: ReadUInt16_SingleNegative_ExpectSameValue
+      fullName: BByteReaderTests.ReadUInt16_SingleNegative_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0003873
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1019
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt16_SinglePositive_ExpectSameValue]
+      name: ReadUInt16_SinglePositive_ExpectSameValue
+      fullName: BByteReaderTests.ReadUInt16_SinglePositive_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0003692
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1016
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt24_OneMissingByte_ThrowException]
+      name: ReadUInt24_OneMissingByte_ThrowException
+      fullName: BByteReaderTests.ReadUInt24_OneMissingByte_ThrowException
+      resultStatus: 0
+      duration: 0.0002218
+      messages: 
+      output: 
+      stacktrace: 'at BByteReaderTests.ReadUInt24_OneMissingByte_ThrowException ()
+        [0x00007] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\BByteReaderTests.cs:199
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1024
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt24_SingleNegative_ExpectSameValue]
+      name: ReadUInt24_SingleNegative_ExpectSameValue
+      fullName: BByteReaderTests.ReadUInt24_SingleNegative_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0001728
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1023
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt24_SinglePositive_ExpectSameValue]
+      name: ReadUInt24_SinglePositive_ExpectSameValue
+      fullName: BByteReaderTests.ReadUInt24_SinglePositive_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0001627
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1022
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt32_OneMissingByte_ThrowException]
+      name: ReadUInt32_OneMissingByte_ThrowException
+      fullName: BByteReaderTests.ReadUInt32_OneMissingByte_ThrowException
+      resultStatus: 0
+      duration: 0.0002158
+      messages: 
+      output: 
+      stacktrace: 'at BByteReaderTests.ReadUInt32_OneMissingByte_ThrowException ()
+        [0x00007] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\BByteReaderTests.cs:279
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1028
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt32_SingleNegative_ExpectSameValue]
+      name: ReadUInt32_SingleNegative_ExpectSameValue
+      fullName: BByteReaderTests.ReadUInt32_SingleNegative_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0001693
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1027
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt32_SinglePositive_ExpectSameValue]
+      name: ReadUInt32_SinglePositive_ExpectSameValue
+      fullName: BByteReaderTests.ReadUInt32_SinglePositive_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0001705
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1028
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt64_OneMissingByte_ThrowException]
+      name: ReadUInt64_OneMissingByte_ThrowException
+      fullName: BByteReaderTests.ReadUInt64_OneMissingByte_ThrowException
+      resultStatus: 0
+      duration: 0.0002347
+      messages: 
+      output: 
+      stacktrace: 'at BByteReaderTests.ReadUInt64_OneMissingByte_ThrowException ()
+        [0x00007] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\BByteReaderTests.cs:371
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1032
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt64_SingleNegative_ExpectSameValue]
+      name: ReadUInt64_SingleNegative_ExpectSameValue
+      fullName: BByteReaderTests.ReadUInt64_SingleNegative_ExpectSameValue
+      resultStatus: 0
+      duration: 0.000408
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1031
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt64_SinglePositive_ExpectSameValue]
+      name: ReadUInt64_SinglePositive_ExpectSameValue
+      fullName: BByteReaderTests.ReadUInt64_SinglePositive_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0004201
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1004
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt8_OneMissingByte_ThrowException]
+      name: ReadUInt8_OneMissingByte_ThrowException
+      fullName: BByteReaderTests.ReadUInt8_OneMissingByte_ThrowException
+      resultStatus: 0
+      duration: 0.0002183
+      messages: 
+      output: 
+      stacktrace: 'at BByteReaderTests.ReadUInt8_OneMissingByte_ThrowException ()
+        [0x00007] in E:\Projects\UnityMP4Parser\Assets\Tests\MediaFramework\BByteReaderTests.cs:59
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1016
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt8_SingleNegative_ExpectSameValue]
+      name: ReadUInt8_SingleNegative_ExpectSameValue
+      fullName: BByteReaderTests.ReadUInt8_SingleNegative_ExpectSameValue
+      resultStatus: 0
+      duration: 0.0001804
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
+    - id: 1015
+      uniqueId: MediaFramework.Tests.dll/BByteReaderTests/[MediaFramework.Tests][BByteReaderTests.ReadUInt8_SinglePositive_ExpectSameValue]
+      name: ReadUInt8_SinglePositive_ExpectSameValue
+      fullName: BByteReaderTests.ReadUInt8_SinglePositive_ExpectSameValue
+      resultStatus: 0
+      duration: 0.000141
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1014
+      parentUniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BByteReaderTests][suite]
     - id: 1005
       uniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][BigEndianByteWriterTests][suite]
       name: BigEndianByteWriterTests
       fullName: BigEndianByteWriterTests
-      resultStatus: 1
+      resultStatus: 0
       duration: 0.0424136
       messages: 
       output: 
@@ -1009,7 +1768,7 @@ MonoBehaviour:
       uniqueId: MediaFramework.Tests.dll/BigEndianByteWriterTests/[MediaFramework.Tests][BigEndianByteWriterTests.ByteWriter_MultipleWrite_ReturnGoodLengthAndData]
       name: ByteWriter_MultipleWrite_ReturnGoodLengthAndData
       fullName: BigEndianByteWriterTests.ByteWriter_MultipleWrite_ReturnGoodLengthAndData
-      resultStatus: 1
+      resultStatus: 0
       duration: 0.021232
       messages: 
       output: 
@@ -1026,7 +1785,7 @@ MonoBehaviour:
       uniqueId: MediaFramework.Tests.dll/BigEndianByteWriterTests/[MediaFramework.Tests][BigEndianByteWriterTests.ByteWriter_SingleWrite_ReturnGoodLengthAndData]
       name: ByteWriter_SingleWrite_ReturnGoodLengthAndData
       fullName: BigEndianByteWriterTests.ByteWriter_SingleWrite_ReturnGoodLengthAndData
-      resultStatus: 1
+      resultStatus: 0
       duration: 0.0007265
       messages: 
       output: 
@@ -1060,7 +1819,7 @@ MonoBehaviour:
       uniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][ISOBoxParseTests][suite]
       name: ISOBoxParseTests
       fullName: ISOBoxParseTests
-      resultStatus: 1
+      resultStatus: 0
       duration: 533.4849
       messages: 
       output: 
@@ -1127,7 +1886,7 @@ MonoBehaviour:
       uniqueId: MediaFramework.Tests.dll/ISOBoxParseTests/[MediaFramework.Tests][ISOBoxParseTests.ISOBoxParse_ValidMVHDBox_ReturnExactValue]
       name: ISOBoxParse_ValidMVHDBox_ReturnExactValue
       fullName: ISOBoxParseTests.ISOBoxParse_ValidMVHDBox_ReturnExactValue
-      resultStatus: 1
+      resultStatus: 0
       duration: 0.0153281
       messages: 
       output: 
@@ -1178,7 +1937,7 @@ MonoBehaviour:
       uniqueId: MediaFramework.Tests.dll/[MediaFramework.Tests][SPSParseTests][suite]
       name: SPSParseTests
       fullName: SPSParseTests
-      resultStatus: 1
+      resultStatus: 0
       duration: 0.0294437
       messages: 
       output: 
@@ -1194,7 +1953,7 @@ MonoBehaviour:
       uniqueId: MediaFramework.Tests.dll/SPSParseTests/[MediaFramework.Tests][SPSParseTests.ISOBoxParse_ValidSPS_ReturnExactValue]
       name: ISOBoxParse_ValidSPS_ReturnExactValue
       fullName: SPSParseTests.ISOBoxParse_ValidSPS_ReturnExactValue
-      resultStatus: 1
+      resultStatus: 0
       duration: 0.0165601
       messages: 
       output: 
@@ -1211,8 +1970,8 @@ MonoBehaviour:
       uniqueId: '[Sandbox.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Sandbox.Tests.dll][suite]'
       name: Sandbox.Tests.dll
       fullName: E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Sandbox.Tests.dll
-      resultStatus: 1
-      duration: 3.8665946
+      resultStatus: 0
+      duration: 3.385734
       messages: 
       output: 
       stacktrace: 
@@ -1223,12 +1982,103 @@ MonoBehaviour:
       categories: []
       parentId: 1000
       parentUniqueId: '[UnityMP4Parser][suite]'
+    - id: 1015
+      uniqueId: Sandbox.Tests.dll/[Sandbox.Tests][BinaryStreamPerformance][suite]
+      name: BinaryStreamPerformance
+      fullName: BinaryStreamPerformance
+      resultStatus: 0
+      duration: 1.0127387
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1051
+      parentUniqueId: '[Sandbox.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Sandbox.Tests.dll][suite]'
+    - id: 1017
+      uniqueId: Sandbox.Tests.dll/BinaryStreamPerformance/[Sandbox.Tests][BinaryStreamPerformance.BinaryReaderVsNativeArray64]
+      name: BinaryReaderVsNativeArray64
+      fullName: BinaryStreamPerformance.BinaryReaderVsNativeArray64
+      resultStatus: 0
+      duration: 0.4787917
+      messages: 
+      output: 'UnsafeBinaryReader.BigEndian Millisecond Median:12.63 Min:12.56 Max:13.08
+        Avg:12.69 Std:0.14 SampleCount: 20 Sum: 253.81
+
+        NativeArray.BigEndian
+        Millisecond Median:3.24 Min:3.20 Max:3.31 Avg:3.24 Std:0.02 SampleCount:
+        20 Sum: 64.81
+
+        UnsafeBinaryReader Millisecond Median:0.87 Min:0.86
+        Max:0.91 Avg:0.87 Std:0.01 SampleCount: 20 Sum: 17.45
+
+        NativeArray
+        Millisecond Median:0.96 Min:0.94 Max:0.98 Avg:0.95 Std:0.01 SampleCount:
+        20 Sum: 19.09
+
+
+
+        ##performancetestresult2:{"Name":"BinaryStreamPerformance.BinaryReaderVsNativeArray64","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"UnsafeBinaryReader.BigEndian","Unit":2,"IncreaseIsBetter":false,"Samples":[12.6066,12.605599999999996,12.592200000000006,12.631900000000002,12.604100000000003,12.559700000000007,12.759600000000006,12.630099999999999,12.606300000000005,12.647599999999983,12.737899999999997,12.61960000000002,12.656299999999988,13.08019999999999,12.975999999999999,12.84729999999999,12.56170000000003,12.82650000000001,12.588199999999972,12.669299999999965],"Min":12.559700000000007,"Max":13.08019999999999,"Median":12.631900000000002,"Average":12.690335,"StandardDeviation":0.13814414672724793,"Sum":253.80669999999999},{"Name":"NativeArray.BigEndian","Unit":2,"IncreaseIsBetter":false,"Samples":[3.2494999999999978,3.2009000000000009,3.2662000000000015,3.2045999999999994,3.219000000000001,3.227499999999999,3.2232999999999949,3.2556999999999975,3.2147000000000007,3.2294999999999947,3.2548999999999994,3.2343000000000048,3.251199999999997,3.2453999999999967,3.2592,3.2342000000000015,3.2445999999999914,3.2420000000000046,3.2382999999999955,3.3101999999999949],"Min":3.2009000000000009,"Max":3.3101999999999949,"Median":3.2420000000000046,"Average":3.2402599999999985,"StandardDeviation":0.023661939903565817,"Sum":64.80519999999997},{"Name":"UnsafeBinaryReader","Unit":2,"IncreaseIsBetter":false,"Samples":[0.8700999999999999,0.8778000000000006,0.875,0.8677999999999999,0.8666999999999998,0.8647000000000009,0.8674,0.8673000000000002,0.8686000000000007,0.8655999999999988,0.8843999999999994,0.8674999999999997,0.866299999999999,0.8645999999999994,0.8664000000000023,0.8706999999999994,0.8716000000000008,0.9063000000000017,0.8777000000000008,0.884800000000002],"Min":0.8645999999999994,"Max":0.9063000000000017,"Median":0.8686000000000007,"Average":0.8725650000000004,"StandardDeviation":0.009751783170272399,"Sum":17.451300000000008},{"Name":"NativeArray","Unit":2,"IncreaseIsBetter":false,"Samples":[0.9580000000000002,0.9720000000000004,0.9565999999999999,0.9556000000000005,0.9572000000000003,0.9479000000000006,0.9456000000000007,0.9482999999999997,0.9674999999999994,0.9693000000000005,0.9772999999999996,0.9518999999999984,0.9599000000000011,0.9566000000000017,0.9405999999999999,0.9439000000000029,0.9418000000000006,0.9573,0.9432000000000009,0.9402000000000008],"Min":0.9402000000000008,"Max":0.9772999999999996,"Median":0.9565999999999999,"Average":0.9545350000000005,"StandardDeviation":0.010601144985330337,"Sum":19.09070000000001}]}
+
+        ##performancetestruninfo2:{"TestSuite":"Playmode","Date":0,"Player":{"Development":true,"ScreenWidth":2560,"ScreenHeight":1440,"ScreenRefreshRate":144,"Fullscreen":false,"Vsync":1,"AntiAliasing":2,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsPlayer","ColorSpace":"Gamma","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows
+        10  (10.0.19043) 64bit","DeviceModel":"System Product Name (System manufacturer)","DeviceName":"DESKTOP-66R04J2","ProcessorType":"AMD
+        Ryzen 9 5950X 16-Core Processor ","ProcessorCount":32,"GraphicsDeviceName":"NVIDIA
+        GeForce RTX 3090","SystemMemorySizeMB":32673},"Editor":{"Version":"2021.3.6f1","Branch":"2021.3/staging","Changeset":"7da38d85baf6","Date":1656549633},"Dependencies":["com.unity.burst@1.7.2","com.unity.collab-proxy@1.15.18","com.unity.collections@1.3.1","com.unity.ide.rider@3.0.14","com.unity.ide.visualstudio@2.0.16","com.unity.ide.vscode@1.2.5","com.unity.memoryprofiler@0.7.1-preview.1","com.unity.test-framework@1.1.31","com.unity.test-framework.performance@2.8.1-preview","com.unity.textmeshpro@3.0.6","com.unity.timeline@1.7.1","com.unity.ugui@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.uielementsnative@1.0.0","com.unity.ext.nunit@1.0.6","com.unity.editorcoroutines@1.0.0","com.unity.services.core@1.4.0","com.unity.mathematics@1.2.6","com.unity.nuget.newtonsoft-json@3.0.2"],"Results":[]}
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Performance
+      parentId: 1015
+      parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][BinaryStreamPerformance][suite]
+    - id: 1016
+      uniqueId: Sandbox.Tests.dll/BinaryStreamPerformance/[Sandbox.Tests][BinaryStreamPerformance.BinaryReaderVsNativeArrayMixes]
+      name: BinaryReaderVsNativeArrayMixes
+      fullName: BinaryStreamPerformance.BinaryReaderVsNativeArrayMixes
+      resultStatus: 0
+      duration: 0.5253273
+      messages: 
+      output: 'UnsafeBinaryReader.BigEndian Millisecond Median:14.60 Min:14.55 Max:14.90
+        Avg:14.63 Std:0.09 SampleCount: 20 Sum: 292.54
+
+        NativeArray.BigEndian
+        Millisecond Median:3.79 Min:3.78 Max:3.87 Avg:3.80 Std:0.03 SampleCount:
+        20 Sum: 76.07
+
+        UnsafeBinaryReader Millisecond Median:1.22 Min:1.21
+        Max:1.23 Avg:1.22 Std:0.01 SampleCount: 20 Sum: 24.39
+
+        NativeArray
+        Millisecond Median:1.08 Min:1.07 Max:1.10 Avg:1.08 Std:0.01 SampleCount:
+        20 Sum: 21.54
+
+
+
+        ##performancetestresult2:{"Name":"BinaryStreamPerformance.BinaryReaderVsNativeArrayMixes","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"UnsafeBinaryReader.BigEndian","Unit":2,"IncreaseIsBetter":false,"Samples":[14.5882,14.552099999999996,14.623800000000003,14.6772,14.5822,14.600899999999996,14.549000000000007,14.550699999999978,14.54910000000001,14.586900000000015,14.633299999999992,14.55789999999999,14.580399999999969,14.552400000000035,14.604000000000042,14.603300000000047,14.754500000000008,14.78309999999999,14.897699999999987,14.710300000000018],"Min":14.549000000000007,"Max":14.897699999999987,"Median":14.600899999999996,"Average":14.626850000000005,"StandardDeviation":0.09121359273704488,"Sum":292.5370000000001},{"Name":"NativeArray.BigEndian","Unit":2,"IncreaseIsBetter":false,"Samples":[3.7926,3.7863000000000008,3.8232000000000037,3.7815999999999976,3.829900000000002,3.783200000000001,3.8676999999999994,3.7774,3.7896999999999965,3.7890000000000016,3.8253000000000059,3.7868000000000068,3.802499999999995,3.786599999999993,3.829400000000007,3.775500000000008,3.8074000000000014,3.7930000000000065,3.8579000000000009,3.788499999999999],"Min":3.775500000000008,"Max":3.8676999999999994,"Median":3.7926,"Average":3.803675000000001,"StandardDeviation":0.02588406604457694,"Sum":76.07350000000003},{"Name":"UnsafeBinaryReader","Unit":2,"IncreaseIsBetter":false,"Samples":[1.2099000000000003,1.2139000000000007,1.216000000000001,1.233600000000001,1.2164000000000002,1.2166000000000015,1.225999999999999,1.2281999999999994,1.2133999999999983,1.2200999999999987,1.2165999999999997,1.2162000000000007,1.216700000000003,1.2179000000000003,1.2199999999999989,1.2164000000000002,1.2334000000000032,1.2161000000000009,1.2159999999999976,1.2271999999999999],"Min":1.2099000000000003,"Max":1.233600000000001,"Median":1.2166000000000015,"Average":1.2195300000000003,"StandardDeviation":0.006418574608120046,"Sum":24.390600000000004},{"Name":"NativeArray","Unit":2,"IncreaseIsBetter":false,"Samples":[1.0806000000000005,1.08,1.0804,1.0808,1.093399999999999,1.0892999999999998,1.0711000000000013,1.0686,1.0790000000000007,1.079399999999998,1.0685000000000003,1.0685000000000003,1.0686,1.0685000000000003,1.0686,1.0686,1.068399999999997,1.0691999999999987,1.0864000000000012,1.1039999999999993],"Min":1.068399999999997,"Max":1.1039999999999993,"Median":1.0790000000000007,"Average":1.0770949999999998,"StandardDeviation":0.00990895932981861,"Sum":21.541899999999996}]}
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Performance
+      parentId: 1015
+      parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][BinaryStreamPerformance][suite]
     - id: 1010
       uniqueId: Sandbox.Tests.dll/[Sandbox.Tests][BitReadPerformance][suite]
       name: BitReadPerformance
       fullName: BitReadPerformance
       resultStatus: 0
-      duration: 0
+      duration: 0.3733731
       messages: 
       output: 
       stacktrace: 
@@ -1244,55 +2094,44 @@ MonoBehaviour:
       name: BitReadPerformanceTest
       fullName: BitReadPerformance.BitReadPerformanceTest
       resultStatus: 0
-      duration: 0
+      duration: 0.3639891
       messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 0
-      categories:
-      - Performance
-      parentId: 1010
-      parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][BitReadPerformance][suite]
-    - id: 1012
-      uniqueId: Sandbox.Tests.dll/[Sandbox.Tests][BitStreamPerformance][suite]
-      name: BitStreamPerformance
-      fullName: BitStreamPerformance
-      resultStatus: 0
-      duration: 1.0566015
-      messages: 
-      output: 
-      stacktrace: 
-      notRunnable: 0
-      ignoredOrSkipped: 0
-      description: 
-      isSuite: 1
-      categories: []
-      parentId: 1036
-      parentUniqueId: '[Sandbox.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Sandbox.Tests.dll][suite]'
-    - id: 1013
-      uniqueId: Sandbox.Tests.dll/BitStreamPerformance/[Sandbox.Tests][BitStreamPerformance.BitStreamVsNativeArray]
-      name: BitStreamVsNativeArray
-      fullName: BitStreamPerformance.BitStreamVsNativeArray
-      resultStatus: 0
-      duration: 1.0441061
-      messages: 
-      output: 'BitStream Millisecond Median:20.15 Min:19.88 Max:20.99 Avg:20.22 Std:0.31
-        SampleCount: 20 Sum: 404.31
+      output: 'GetInt32 Millisecond Median:0.53 Min:0.52 Max:0.54 Avg:0.53 Std:0.01
+        SampleCount: 20 Sum: 10.57
 
-        NativeArray Millisecond Median:15.63
-        Min:15.53 Max:16.18 Avg:15.76 Std:0.24 SampleCount: 20 Sum: 315.25
+        GetInt32 + Offset Millisecond Median:0.51
+        Min:0.50 Max:0.52 Avg:0.51 Std:0.01 SampleCount: 20 Sum: 10.23
+
+        ReadInt32Backward
+        Millisecond Median:0.72 Min:0.72 Max:0.73 Avg:0.72 Std:0.01 SampleCount:
+        20 Sum: 14.43
+
+        ReadInt32Seperate Millisecond Median:1.26 Min:1.24
+        Max:1.30 Avg:1.26 Std:0.01 SampleCount: 20 Sum: 25.24
+
+        BitStream.ReadInt32
+        Millisecond Median:2.99 Min:2.93 Max:3.07 Avg:2.99 Std:0.04 SampleCount:
+        20 Sum: 59.81
+
+        BitNoOffset.ReadInt32 Millisecond Median:0.65 Min:0.65
+        Max:0.67 Avg:0.66 Std:0.01 SampleCount: 20 Sum: 13.15
+
+        BitNoOffsetNoTemp.ReadInt32
+        Millisecond Median:0.70 Min:0.70 Max:0.72 Avg:0.70 Std:0.01 SampleCount:
+        20 Sum: 14.02
+
+        BitNoOffsetNoTempOneline.ReadInt32 Millisecond Median:0.78
+        Min:0.77 Max:0.83 Avg:0.78 Std:0.01 SampleCount: 20 Sum: 15.64
 
 
 
-        ##performancetestresult2:{"Name":"BitStreamPerformance.BitStreamVsNativeArray","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"BitStream","Unit":2,"IncreaseIsBetter":false,"Samples":[20.7175,20.721400000000018,20.184600000000019,20.1473,20.356700000000019,19.88299999999998,20.56389999999999,20.101499999999989,20.187900000000015,20.019600000000027,19.934000000000027,20.088099999999998,20.99090000000001,20.436199999999987,19.969400000000009,19.942199999999958,19.93349999999998,19.933899999999995,20.29449999999997,19.902900000000046],"Min":19.88299999999998,"Max":20.99090000000001,"Median":20.1473,"Average":20.21545,"StandardDeviation":0.31313117938014548,"Sum":404.309},{"Name":"NativeArray","Unit":2,"IncreaseIsBetter":false,"Samples":[16.156400000000006,16.135400000000005,16.13929999999999,16.18249999999999,16.08929999999998,15.57419999999999,15.627700000000005,15.601300000000009,15.615200000000016,15.764399999999995,15.92840000000001,15.813000000000017,15.589300000000037,15.552999999999998,15.575300000000027,15.642799999999966,15.526899999999955,15.532100000000014,15.589400000000012,15.609500000000026],"Min":15.526899999999955,"Max":16.18249999999999,"Median":15.627700000000005,"Average":15.762270000000005,"StandardDeviation":0.2383273926765416,"Sum":315.2454000000001}]}
+        ##performancetestresult2:{"Name":"BitReadPerformance.BitReadPerformanceTest","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"GetInt32","Unit":2,"IncreaseIsBetter":false,"Samples":[0.5250000000000004,0.5199999999999996,0.5248000000000008,0.5350999999999999,0.5335999999999999,0.5337999999999994,0.5335000000000001,0.5338000000000029,0.5239999999999974,0.5320999999999998,0.5195000000000007,0.5195000000000007,0.5296999999999983,0.523299999999999,0.5338999999999992,0.5337999999999994,0.5385999999999989,0.5331999999999972,0.5250999999999984,0.5192000000000014],"Min":0.5192000000000014,"Max":0.5385999999999989,"Median":0.5320999999999998,"Average":0.5285749999999997,"StandardDeviation":0.006131547520813747,"Sum":10.571499999999994},{"Name":"GetInt32
+        + Offset","Unit":2,"IncreaseIsBetter":false,"Samples":[0.5024999999999995,0.5036000000000005,0.5165000000000006,0.5001000000000015,0.4983000000000004,0.5137,0.5137,0.5137999999999998,0.5186000000000011,0.5139000000000014,0.5143000000000004,0.5165999999999986,0.5165999999999968,0.5166999999999966,0.5158999999999985,0.5137999999999998,0.5137999999999998,0.5137999999999998,0.5101000000000013,0.5025000000000013],"Min":0.4983000000000004,"Max":0.5186000000000011,"Median":0.5137999999999998,"Average":0.5114399999999999,"StandardDeviation":0.00611869267082381,"Sum":10.228799999999998},{"Name":"ReadInt32Backward","Unit":2,"IncreaseIsBetter":false,"Samples":[0.7179000000000002,0.7172999999999998,0.7274999999999992,0.7298000000000009,0.7173000000000016,0.7282000000000011,0.7171000000000021,0.7177000000000007,0.7169999999999988,0.7177000000000007,0.7210999999999999,0.7335000000000029,0.7329000000000008,0.724499999999999,0.7175000000000011,0.7179000000000002,0.7271000000000001,0.7172000000000018,0.7176000000000009,0.7171999999999983],"Min":0.7169999999999988,"Max":0.7335000000000029,"Median":0.7179000000000002,"Average":0.7217000000000005,"StandardDeviation":0.00575039129103424,"Sum":14.43400000000001},{"Name":"ReadInt32Seperate","Unit":2,"IncreaseIsBetter":false,"Samples":[1.272199999999998,1.248700000000003,1.244799999999998,1.2469000000000002,1.2480999999999974,1.2554000000000017,1.2608000000000033,1.2530999999999964,1.2653999999999997,1.2507999999999982,1.2616999999999977,1.2511999999999973,1.3000999999999934,1.2860999999999976,1.2689999999999984,1.2812000000000055,1.2579999999999956,1.2687000000000027,1.2615999999999943,1.254099999999994],"Min":1.244799999999998,"Max":1.3000999999999934,"Median":1.2608000000000033,"Average":1.2618949999999987,"StandardDeviation":0.014052098597718221,"Sum":25.23789999999997},{"Name":"BitStream.ReadInt32","Unit":2,"IncreaseIsBetter":false,"Samples":[2.9435000000000004,2.9699000000000099,3.001199999999997,2.9402000000000045,2.9895000000000069,2.9688999999999909,2.9684999999999919,3.0107,2.9775999999999955,3.011099999999999,3.0083999999999948,3.065100000000001,3.066199999999995,3.049899999999994,3.0091000000000038,2.9750999999999978,2.935600000000008,2.93480000000001,3.0065000000000028,2.979699999999994],"Min":2.93480000000001,"Max":3.066199999999995,"Median":2.9895000000000069,"Average":2.9905749999999999,"StandardDeviation":0.03836983027066761,"Sum":59.811499999999998},{"Name":"BitNoOffset.ReadInt32","Unit":2,"IncreaseIsBetter":false,"Samples":[0.6704000000000008,0.6702000000000012,0.6524999999999999,0.6521000000000008,0.6529999999999987,0.6521000000000008,0.6522000000000006,0.6527999999999992,0.6575000000000024,0.666599999999999,0.6547000000000018,0.6529999999999987,0.6522000000000006,0.6522000000000006,0.6527000000000029,0.6523000000000003,0.6623999999999981,0.6676000000000002,0.6664999999999992,0.657],"Min":0.6521000000000008,"Max":0.6704000000000008,"Median":0.6529999999999987,"Average":0.6575000000000003,"StandardDeviation":0.00673008172312922,"Sum":13.150000000000006},{"Name":"BitNoOffsetNoTemp.ReadInt32","Unit":2,"IncreaseIsBetter":false,"Samples":[0.718300000000001,0.7109000000000005,0.6966000000000001,0.697300000000002,0.7143000000000015,0.6996000000000002,0.6956999999999987,0.7089999999999996,0.6977000000000011,0.6960999999999977,0.6954999999999991,0.6954999999999991,0.6963000000000008,0.6985000000000028,0.7000999999999991,0.6995000000000005,0.6993000000000009,0.7063000000000024,0.6977000000000011,0.6958999999999982],"Min":0.6954999999999991,"Max":0.718300000000001,"Median":0.6985000000000028,"Average":0.7010050000000003,"StandardDeviation":0.0066931662910767598,"Sum":14.020100000000007},{"Name":"BitNoOffsetNoTempOneline.ReadInt32","Unit":2,"IncreaseIsBetter":false,"Samples":[0.7879000000000005,0.7678000000000012,0.7729999999999997,0.7785000000000011,0.7779999999999987,0.7799999999999976,0.7779999999999987,0.7798000000000016,0.7779999999999987,0.7785999999999973,0.7676999999999978,0.7895000000000003,0.827499999999997,0.7780999999999985,0.7822999999999993,0.7828999999999979,0.7823000000000029,0.7834000000000003,0.7825999999999986,0.7829999999999977],"Min":0.7676999999999978,"Max":0.827499999999997,"Median":0.7799999999999976,"Average":0.7819449999999992,"StandardDeviation":0.011722946515274693,"Sum":15.638899999999986}]}
 
-        ##performancetestruninfo2:{"TestSuite":"Playmode","Date":1654752941534,"Player":{"Development":true,"ScreenWidth":2560,"ScreenHeight":1440,"ScreenRefreshRate":144,"Fullscreen":false,"Vsync":1,"AntiAliasing":2,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsEditor","ColorSpace":"Gamma","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows
+        ##performancetestruninfo2:{"TestSuite":"Playmode","Date":0,"Player":{"Development":true,"ScreenWidth":2560,"ScreenHeight":1440,"ScreenRefreshRate":144,"Fullscreen":false,"Vsync":1,"AntiAliasing":2,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsPlayer","ColorSpace":"Gamma","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows
         10  (10.0.19043) 64bit","DeviceModel":"System Product Name (System manufacturer)","DeviceName":"DESKTOP-66R04J2","ProcessorType":"AMD
         Ryzen 9 5950X 16-Core Processor ","ProcessorCount":32,"GraphicsDeviceName":"NVIDIA
-        GeForce RTX 3090","SystemMemorySizeMB":32673},"Editor":{"Version":"2021.2.1f1","Branch":"2021.2/staging","Changeset":"c20c6d589440","Date":1635200762},"Dependencies":["com.unity.burst@1.6.5","com.unity.collab-proxy@1.15.15","com.unity.collections@1.2.3","com.unity.ide.rider@3.0.7","com.unity.ide.visualstudio@2.0.15","com.unity.ide.vscode@1.2.5","com.unity.test-framework@1.1.31","com.unity.test-framework.performance@2.8.1-preview","com.unity.textmeshpro@3.0.6","com.unity.timeline@1.6.2","com.unity.ugui@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.uielementsnative@1.0.0","com.unity.ext.nunit@1.0.6","com.unity.services.core@1.0.1","com.unity.mathematics@1.2.4"],"Results":[]}
+        GeForce RTX 3090","SystemMemorySizeMB":32673},"Editor":{"Version":"2021.3.6f1","Branch":"2021.3/staging","Changeset":"7da38d85baf6","Date":1656549633},"Dependencies":["com.unity.burst@1.7.2","com.unity.collab-proxy@1.15.18","com.unity.collections@1.3.1","com.unity.ide.rider@3.0.14","com.unity.ide.visualstudio@2.0.16","com.unity.ide.vscode@1.2.5","com.unity.memoryprofiler@0.7.1-preview.1","com.unity.test-framework@1.1.31","com.unity.test-framework.performance@2.8.1-preview","com.unity.textmeshpro@3.0.6","com.unity.timeline@1.7.1","com.unity.ugui@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.uielementsnative@1.0.0","com.unity.ext.nunit@1.0.6","com.unity.editorcoroutines@1.0.0","com.unity.services.core@1.4.0","com.unity.mathematics@1.2.6","com.unity.nuget.newtonsoft-json@3.0.2"],"Results":[]}
 
 '
       stacktrace: 
@@ -1302,15 +2141,15 @@ MonoBehaviour:
       isSuite: 0
       categories:
       - Performance
-      parentId: 1012
-      parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][BitStreamPerformance][suite]
+      parentId: 1010
+      parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][BitReadPerformance][suite]
     - id: 1014
       uniqueId: Sandbox.Tests.dll/[Sandbox.Tests][FileStreamingPerformance][suite]
       name: FileStreamingPerformance
       fullName: FileStreamingPerformance
       resultStatus: 0
-      duration: 0
-      messages: 
+      duration: 0.1890142
+      messages: One or more child tests had errors
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1325,8 +2164,8 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialRead
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialRead
       resultStatus: 0
-      duration: 0
-      messages: 
+      duration: 0.096963
+      messages: One or more child tests had errors
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1342,10 +2181,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialRead(1024)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialRead(1024)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.0160226
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialRead(1024)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderMethod (System.String path)
+        [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:107
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass4_0.<FileStreamingPerformanceSequetialRead>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:33
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialRead (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:31
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1359,10 +2226,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialRead(2048)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialRead(2048)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.011455
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialRead(2048)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderMethod (System.String path)
+        [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:107
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass4_0.<FileStreamingPerformanceSequetialRead>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:33
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialRead (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:31
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1376,10 +2271,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialRead(4096)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialRead(4096)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.0137446
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialRead(4096)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderMethod (System.String path)
+        [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:107
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass4_0.<FileStreamingPerformanceSequetialRead>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:33
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialRead (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:31
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1393,10 +2316,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialRead(8192)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialRead(8192)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.0137434
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialRead(8192)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderMethod (System.String path)
+        [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:107
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass4_0.<FileStreamingPerformanceSequetialRead>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:33
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialRead (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:31
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1410,10 +2361,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialRead(16384)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialRead(16384)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.013732
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialRead(16384)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderMethod (System.String path)
+        [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:107
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass4_0.<FileStreamingPerformanceSequetialRead>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:33
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialRead (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:31
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1427,10 +2406,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialRead(32768)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialRead(32768)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.0137662
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialRead(32768)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderMethod (System.String path)
+        [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:107
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass4_0.<FileStreamingPerformanceSequetialRead>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:33
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialRead (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:31
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1444,8 +2451,8 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialSeek
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialSeek
       resultStatus: 0
-      duration: 0
-      messages: 
+      duration: 0.0896741
+      messages: One or more child tests had errors
       output: 
       stacktrace: 
       notRunnable: 0
@@ -1461,10 +2468,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialSeek(1024)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(1024)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.0134829
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(1024)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderSeekMethod (System.String path,
+        System.Int32 stackSize) [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:122
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass5_0.<FileStreamingPerformanceSequetialSeek>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:72
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialSeek (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:70
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1478,10 +2513,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialSeek(2048)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(2048)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.0137354
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(2048)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderSeekMethod (System.String path,
+        System.Int32 stackSize) [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:122
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass5_0.<FileStreamingPerformanceSequetialSeek>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:72
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialSeek (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:70
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1495,10 +2558,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialSeek(4096)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(4096)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.0137368
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(4096)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderSeekMethod (System.String path,
+        System.Int32 stackSize) [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:122
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass5_0.<FileStreamingPerformanceSequetialSeek>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:72
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialSeek (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:70
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1512,10 +2603,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialSeek(8192)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(8192)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.0137683
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(8192)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderSeekMethod (System.String path,
+        System.Int32 stackSize) [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:122
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass5_0.<FileStreamingPerformanceSequetialSeek>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:72
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialSeek (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:70
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1529,10 +2648,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialSeek(16384)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(16384)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.013733
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(16384)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderSeekMethod (System.String path,
+        System.Int32 stackSize) [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:122
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass5_0.<FileStreamingPerformanceSequetialSeek>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:72
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialSeek (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:70
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1546,10 +2693,38 @@ MonoBehaviour:
       name: FileStreamingPerformanceSequetialSeek(32768)
       fullName: FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(32768)
       resultStatus: 0
-      duration: 0
-      messages: 
-      output: 
-      stacktrace: 
+      duration: 0.0137393
+      messages: 'System.IO.DirectoryNotFoundException : Could not find a part of
+        the path "E:\Projects\UnityMP4Parser\Temp\UnityTempFile-9c0f96dca2989974c8f528a4641dfbdb\PlayerWithTests\PlayerWithTests_Data\Media\small.mp4".'
+      output: '
+
+        ##performancetestresult2:{"Name":"FileStreamingPerformance.FileStreamingPerformanceSequetialSeek(32768)","Version":"1","Categories":["Performance"],"SampleGroups":[]}
+
+'
+      stacktrace: "  at System.IO.FileStream..ctor (System.String path, System.IO.FileMode
+        mode, System.IO.FileAccess access, System.IO.FileShare share, System.Int32
+        bufferSize, System.Boolean anonymous, System.IO.FileOptions options) [0x00164]
+        in <e40e5a8f982c4b618a930d29f9bd091c>:0 \r\n  at System.IO.FileStream..ctor
+        (System.String path, System.IO.FileMode mode, System.IO.FileAccess access,
+        System.IO.FileShare share) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at (wrapper remoting-invoke-with-check) System.IO.FileStream..ctor(string,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare)\r\n 
+        at System.IO.File.OpenRead (System.String path) [0x00000] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+        \r\n  at FileStreamingPerformance.BinaryReaderSeekMethod (System.String path,
+        System.Int32 stackSize) [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:122
+        \r\n  at FileStreamingPerformance+<>c__DisplayClass5_0.<FileStreamingPerformanceSequetialSeek>b__0
+        () [0x00001] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:72
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.ExecuteForIterations
+        (System.Int32 iterations) [0x00068] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:259
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Warmup (System.Int32
+        iterations) [0x00006] in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:211
+        \r\n  at Unity.PerformanceTesting.Measurements.MethodMeasurement.Run () [0x0000f]
+        in E:\\Projects\\UnityMP4Parser\\Library\\PackageCache\\com.unity.test-framework.performance@2.8.1-preview\\Runtime\\Measurements\\MethodMeasurement.cs:128
+        \r\n  at FileStreamingPerformance.FileStreamingPerformanceSequetialSeek (System.Int32
+        bufferSize) [0x0002a] in E:\\Projects\\UnityMP4Parser\\Assets\\Tests\\Sandbox\\FileStreamingPerformance.cs:70
+        \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n 
+        at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags
+        invokeAttr, System.Reflection.Binder binder, System.Object[] parameters,
+        System.Globalization.CultureInfo culture) [0x0006a] in <e40e5a8f982c4b618a930d29f9bd091c>:0 "
       notRunnable: 0
       ignoredOrSkipped: 0
       description: 
@@ -1563,7 +2738,7 @@ MonoBehaviour:
       name: GenericFunction
       fullName: GenericFunction
       resultStatus: 0
-      duration: 0
+      duration: 0.0194488
       messages: 
       output: 
       stacktrace: 
@@ -1579,9 +2754,19 @@ MonoBehaviour:
       name: GenericFunctionTest
       fullName: GenericFunction.GenericFunctionTest
       resultStatus: 0
-      duration: 0
+      duration: 0.013758
       messages: 
-      output: 
+      output: 'Compare<T> Millisecond Median:0.03 Min:0.02 Max:0.19 Avg:0.05 Std:0.05
+        SampleCount: 20 Sum: 0.96
+
+        Compare Millisecond Median:0.00 Min:0.00
+        Max:0.00 Avg:0.00 Std:0.00 SampleCount: 20 Sum: 0.03
+
+
+
+        ##performancetestresult2:{"Name":"GenericFunction.GenericFunctionTest","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"Compare<T>","Unit":2,"IncreaseIsBetter":false,"Samples":[0.03070000000000006,0.03249999999999997,0.03400000000000003,0.18569999999999999,0.0252,0.024699999999999945,0.02529999999999999,0.025700000000000057,0.02510000000000001,0.0252,0.17399999999999994,0.026000000000000024,0.0250999999999999,0.024499999999999967,0.023599999999999845,0.023900000000000034,0.023600000000000067,0.023400000000000089,0.15900000000000004,0.024899999999999923],"Min":0.023400000000000089,"Max":0.18569999999999999,"Median":0.0252,"Average":0.048104999999999998,"StandardDeviation":0.05267073641976158,"Sum":0.9620999999999998},{"Name":"Compare","Unit":2,"IncreaseIsBetter":false,"Samples":[0.0015000000000000014,0.0015000000000000014,0.0015000000000000014,0.0013999999999999985,0.0014999999999999875,0.0013999999999999985,0.0015000000000000014,0.0013999999999999985,0.0015000000000000014,0.0013999999999999985,0.0015000000000000014,0.0015000000000000014,0.0015000000000000014,0.0013999999999999985,0.0015000000000000014,0.0015000000000000014,0.0015000000000000014,0.0015000000000000014,0.0015000000000000014,0.0015000000000000014],"Min":0.0013999999999999985,"Max":0.0015000000000000014,"Median":0.0015000000000000014,"Average":0.001475,"StandardDeviation":0.000043301270189222766,"Sum":0.0295}]}
+
+'
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -1595,8 +2780,8 @@ MonoBehaviour:
       uniqueId: Sandbox.Tests.dll/[Sandbox.Tests][LazyReadingVSFullReading][suite]
       name: LazyReadingVSFullReading
       fullName: LazyReadingVSFullReading
-      resultStatus: 1
-      duration: 3.8620646
+      resultStatus: 0
+      duration: 1.3563222
       messages: 
       output: 
       stacktrace: 
@@ -1611,29 +2796,24 @@ MonoBehaviour:
       uniqueId: Sandbox.Tests.dll/LazyReadingVSFullReading/[Sandbox.Tests][LazyReadingVSFullReading.LazyReadingVSFullReadingSimplePasses]
       name: LazyReadingVSFullReadingSimplePasses
       fullName: LazyReadingVSFullReading.LazyReadingVSFullReadingSimplePasses
-      resultStatus: 1
-      duration: 3.8501005
+      resultStatus: 0
+      duration: 1.349356
       messages: 
-      output: 'FullRead Millisecond Median:90.00 Min:88.31 Max:97.61 Avg:90.30 Std:2.00
-        SampleCount: 20 Sum: 1805.95
+      output: 'FullRead Millisecond Median:39.07 Min:38.62 Max:39.64 Avg:39.05 Std:0.21
+        SampleCount: 20 Sum: 780.96
 
-        Lazy Inline Millisecond Median:18.30
-        Min:18.13 Max:20.09 Avg:18.43 Std:0.44 SampleCount: 20 Sum: 368.69
+        Lazy Inline Millisecond Median:2.32
+        Min:2.26 Max:2.41 Avg:2.32 Std:0.04 SampleCount: 20 Sum: 46.41
 
         Lazy
-        NoInline Millisecond Median:18.18 Min:18.13 Max:18.56 Avg:18.20 Std:0.09
-        SampleCount: 20 Sum: 364.06
+        NoInline Millisecond Median:3.26 Min:3.19 Max:3.37 Avg:3.26 Std:0.04 SampleCount:
+        20 Sum: 65.10
 
 
 
-        ##performancetestresult2:{"Name":"LazyReadingVSFullReading.LazyReadingVSFullReadingSimplePasses","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"FullRead","Unit":2,"IncreaseIsBetter":false,"Samples":[97.61490000000004,88.6604000000001,92.77019999999993,92.3279,89.77240000000006,90.97890000000007,88.75819999999999,88.88850000000002,90.00029999999993,90.08740000000012,89.47419999999988,89.25600000000009,90.06830000000014,88.92740000000004,88.3076000000001,89.93239999999969,90.08789999999999,90.13140000000021,90.15009999999984,89.7509],"Min":88.3076000000001,"Max":97.61490000000004,"Median":90.00029999999993,"Average":90.29726500000001,"StandardDeviation":1.9983206740348194,"Sum":1805.9453},{"Name":"Lazy
-        Inline","Unit":2,"IncreaseIsBetter":false,"Samples":[18.219600000000015,18.14360000000002,18.1318,19.125899999999974,20.08929999999998,18.16919999999999,18.304100000000007,18.3673,18.1336,18.16610000000003,18.290599999999985,18.290900000000023,18.6216,18.370299999999987,18.614199999999984,18.29110000000003,18.250999999999978,18.40179999999998,18.37099999999998,18.34190000000001],"Min":18.1318,"Max":20.08929999999998,"Median":18.304100000000007,"Average":18.434745,"StandardDeviation":0.4401120192348684,"Sum":368.69489999999998},{"Name":"Lazy
-        NoInline","Unit":2,"IncreaseIsBetter":false,"Samples":[18.28880000000001,18.16919999999999,18.162200000000014,18.16550000000001,18.17689999999999,18.192700000000003,18.161200000000009,18.15749999999997,18.193399999999998,18.248099999999967,18.169200000000047,18.56110000000001,18.209900000000006,18.132900000000008,18.13130000000001,18.175399999999969,18.15980000000002,18.16919999999999,18.239100000000009,18.192499999999997],"Min":18.13130000000001,"Max":18.56110000000001,"Median":18.175399999999969,"Average":18.202795000000003,"StandardDeviation":0.09026891754640787,"Sum":364.0559}]}
-
-        ##performancetestruninfo2:{"TestSuite":"Playmode","Date":1654823470928,"Player":{"Development":true,"ScreenWidth":2560,"ScreenHeight":1440,"ScreenRefreshRate":144,"Fullscreen":false,"Vsync":1,"AntiAliasing":2,"Batchmode":false,"RenderThreadingMode":"GraphicsJobs","GpuSkinning":true,"Platform":"WindowsEditor","ColorSpace":"Gamma","AnisotropicFiltering":"ForceEnable","BlendWeights":"FourBones","GraphicsApi":"Direct3D11","ScriptingBackend":"Mono2x","AndroidTargetSdkVersion":"AndroidApiLevelAuto","AndroidBuildSystem":"Gradle","BuildTarget":"StandaloneWindows64","StereoRenderingPath":"MultiPass"},"Hardware":{"OperatingSystem":"Windows
-        10  (10.0.19043) 64bit","DeviceModel":"System Product Name (System manufacturer)","DeviceName":"DESKTOP-66R04J2","ProcessorType":"AMD
-        Ryzen 9 5950X 16-Core Processor ","ProcessorCount":32,"GraphicsDeviceName":"NVIDIA
-        GeForce RTX 3090","SystemMemorySizeMB":32673},"Editor":{"Version":"2021.2.1f1","Branch":"2021.2/staging","Changeset":"c20c6d589440","Date":1635200762},"Dependencies":["com.unity.burst@1.6.5","com.unity.collab-proxy@1.15.15","com.unity.collections@1.2.3","com.unity.ide.rider@3.0.7","com.unity.ide.visualstudio@2.0.15","com.unity.ide.vscode@1.2.5","com.unity.test-framework@1.1.31","com.unity.test-framework.performance@2.8.1-preview","com.unity.textmeshpro@3.0.6","com.unity.timeline@1.6.2","com.unity.ugui@1.0.0","com.unity.modules.ai@1.0.0","com.unity.modules.androidjni@1.0.0","com.unity.modules.animation@1.0.0","com.unity.modules.assetbundle@1.0.0","com.unity.modules.audio@1.0.0","com.unity.modules.cloth@1.0.0","com.unity.modules.director@1.0.0","com.unity.modules.imageconversion@1.0.0","com.unity.modules.imgui@1.0.0","com.unity.modules.jsonserialize@1.0.0","com.unity.modules.particlesystem@1.0.0","com.unity.modules.physics@1.0.0","com.unity.modules.physics2d@1.0.0","com.unity.modules.screencapture@1.0.0","com.unity.modules.terrain@1.0.0","com.unity.modules.terrainphysics@1.0.0","com.unity.modules.tilemap@1.0.0","com.unity.modules.ui@1.0.0","com.unity.modules.uielements@1.0.0","com.unity.modules.umbra@1.0.0","com.unity.modules.unityanalytics@1.0.0","com.unity.modules.unitywebrequest@1.0.0","com.unity.modules.unitywebrequestassetbundle@1.0.0","com.unity.modules.unitywebrequestaudio@1.0.0","com.unity.modules.unitywebrequesttexture@1.0.0","com.unity.modules.unitywebrequestwww@1.0.0","com.unity.modules.vehicles@1.0.0","com.unity.modules.video@1.0.0","com.unity.modules.vr@1.0.0","com.unity.modules.wind@1.0.0","com.unity.modules.xr@1.0.0","com.unity.modules.subsystems@1.0.0","com.unity.modules.uielementsnative@1.0.0","com.unity.ext.nunit@1.0.6","com.unity.services.core@1.0.1","com.unity.mathematics@1.2.4"],"Results":[]}
+        ##performancetestresult2:{"Name":"LazyReadingVSFullReading.LazyReadingVSFullReadingSimplePasses","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"FullRead","Unit":2,"IncreaseIsBetter":false,"Samples":[39.08230000000003,39.06709999999998,38.9862,39.12039999999996,39.05550000000005,39.644100000000097,39.09699999999998,39.099500000000038,39.1182,39.3886,38.62290000000007,38.835699999999977,38.831500000000009,39.18629999999996,39.10900000000004,39.02539999999999,39.00419999999997,38.821899999999917,38.890899999999877,38.97069999999985],"Min":38.62290000000007,"Max":39.644100000000097,"Median":39.06709999999998,"Average":39.04786999999999,"StandardDeviation":0.2087690855946054,"Sum":780.9573999999998},{"Name":"Lazy
+        Inline","Unit":2,"IncreaseIsBetter":false,"Samples":[2.314,2.3016000000000007,2.264900000000001,2.3542000000000025,2.321099999999994,2.356100000000005,2.322900000000004,2.3842,2.4102999999999996,2.3596999999999967,2.3471999999999939,2.3681999999999947,2.320700000000002,2.2882999999999997,2.2911,2.261400000000002,2.299199999999999,2.2912999999999998,2.297699999999992,2.257400000000004],"Min":2.257400000000004,"Max":2.4102999999999996,"Median":2.320700000000002,"Average":2.3205749999999996,"StandardDeviation":0.041078131347469359,"Sum":46.41149999999999},{"Name":"Lazy
+        NoInline","Unit":2,"IncreaseIsBetter":false,"Samples":[3.2729,3.2213999999999958,3.2485,3.2986999999999968,3.2275999999999955,3.2612000000000025,3.2196,3.283999999999999,3.2192000000000009,3.2785999999999975,3.2553999999999947,3.2489999999999954,3.2737999999999944,3.2675999999999876,3.2502000000000068,3.369399999999999,3.1894000000000064,3.1979999999999935,3.2438999999999966,3.273900000000012],"Min":3.1894000000000064,"Max":3.369399999999999,"Median":3.2553999999999947,"Average":3.2551149999999988,"StandardDeviation":0.038609937516136779,"Sum":65.10229999999997}]}
 
 '
       stacktrace: 
@@ -1645,12 +2825,57 @@ MonoBehaviour:
       - Performance
       parentId: 1034
       parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][LazyReadingVSFullReading][suite]
+    - id: 1038
+      uniqueId: Sandbox.Tests.dll/[Sandbox.Tests][ParseMethod][suite]
+      name: ParseMethod
+      fullName: ParseMethod
+      resultStatus: 0
+      duration: 0.1746943
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1050
+      parentUniqueId: '[Sandbox.Tests][E:/Projects/UnityMP4Parser/Library/ScriptAssemblies/Sandbox.Tests.dll][suite]'
+    - id: 1039
+      uniqueId: Sandbox.Tests.dll/ParseMethod/[Sandbox.Tests][ParseMethod.CompareParseMethodWithAndWithoutCheck]
+      name: CompareParseMethodWithAndWithoutCheck
+      fullName: ParseMethod.CompareParseMethodWithAndWithoutCheck
+      resultStatus: 0
+      duration: 0.1700456
+      messages: 
+      output: 'SPS with check Millisecond Median:2.06 Min:2.03 Max:2.07 Avg:2.05
+        Std:0.01 SampleCount: 20 Sum: 41.02
+
+        SPS without check Millisecond
+        Median:1.92 Min:1.90 Max:1.94 Avg:1.92 Std:0.01 SampleCount: 20 Sum: 38.34
+
+
+
+        ##performancetestresult2:{"Name":"ParseMethod.CompareParseMethodWithAndWithoutCheck","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"SPS
+        with check","Unit":2,"IncreaseIsBetter":false,"Samples":[2.0309000000000028,2.058,2.0456000000000005,2.0479999999999949,2.050600000000003,2.0343000000000019,2.056899999999999,2.0394999999999969,2.058,2.0748999999999997,2.0405999999999979,2.0715000000000005,2.055099999999996,2.056900000000013,2.0567999999999957,2.0486999999999968,2.0622999999999935,2.058499999999995,2.032200000000003,2.036999999999992],"Min":2.0309000000000028,"Max":2.0748999999999997,"Median":2.055099999999996,"Average":2.050814999999999,"StandardDeviation":0.012060566943556011,"Sum":41.01629999999998},{"Name":"SPS
+        without check","Unit":2,"IncreaseIsBetter":false,"Samples":[1.9447000000000046,1.9446000000000013,1.9025999999999997,1.900100000000002,1.9022000000000006,1.9005999999999972,1.922699999999999,1.905700000000003,1.9410000000000026,1.9225999999999957,1.9172000000000012,1.9018999999999978,1.9185000000000017,1.9173000000000045,1.9024,1.9224999999999995,1.9357000000000114,1.9215000000000089,1.9191000000000003,1.9009000000000072],"Min":1.900100000000002,"Max":1.9447000000000046,"Median":1.9185000000000017,"Average":1.917190000000002,"StandardDeviation":0.014805738752255256,"Sum":38.34380000000004}]}
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Performance
+      parentId: 1038
+      parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][ParseMethod][suite]
     - id: 1031
       uniqueId: Sandbox.Tests.dll/[Sandbox.Tests][ReadingBitFromArray][suite]
       name: ReadingBitFromArray
       fullName: ReadingBitFromArray
       resultStatus: 0
-      duration: 0
+      duration: 0.0459209
       messages: 
       output: 
       stacktrace: 
@@ -1666,9 +2891,26 @@ MonoBehaviour:
       name: ReadingBitFromArrayTest
       fullName: ReadingBitFromArray.ReadingBitFromArrayTest
       resultStatus: 0
-      duration: 0
+      duration: 0.0425212
       messages: 
-      output: 
+      output: 'GetUInt64 Millisecond Median:0.21 Min:0.20 Max:0.21 Avg:0.20 Std:0.00
+        SampleCount: 20 Sum: 4.09
+
+        UnsafeUtility.ReadArrayElement Millisecond
+        Median:0.07 Min:0.07 Max:0.08 Avg:0.07 Std:0.00 SampleCount: 20 Sum: 1.45
+
+        ReadArrayElement
+        Millisecond Median:0.62 Min:0.62 Max:0.65 Avg:0.63 Std:0.01 SampleCount:
+        20 Sum: 12.57
+
+        GetUInt64WithValue Millisecond Median:0.24 Min:0.24
+        Max:0.24 Avg:0.24 Std:0.00 SampleCount: 20 Sum: 4.74
+
+
+
+        ##performancetestresult2:{"Name":"ReadingBitFromArray.ReadingBitFromArrayTest","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"GetUInt64","Unit":2,"IncreaseIsBetter":false,"Samples":[0.20330000000000005,0.20400000000000019,0.20340000000000003,0.20269999999999989,0.2027000000000001,0.20340000000000026,0.20479999999999966,0.20540000000000004,0.20499999999999964,0.20509999999999985,0.20599999999999997,0.20500000000000008,0.20569999999999978,0.20520000000000006,0.20480000000000055,0.2060000000000004,0.20500000000000008,0.20559999999999957,0.20500000000000008,0.20500000000000008],"Min":0.20269999999999989,"Max":0.2060000000000004,"Median":0.20500000000000008,"Average":0.20465499999999998,"StandardDeviation":0.0010086996579755212,"Sum":4.0931},{"Name":"UnsafeUtility.ReadArrayElement","Unit":2,"IncreaseIsBetter":false,"Samples":[0.07120000000000004,0.07109999999999994,0.07190000000000008,0.07200000000000007,0.0714999999999999,0.07120000000000015,0.0714999999999999,0.07139999999999991,0.07139999999999991,0.07109999999999994,0.07200000000000007,0.0714999999999999,0.07150000000000012,0.07450000000000001,0.0746,0.0746,0.07469999999999999,0.07519999999999971,0.07469999999999999,0.07469999999999999],"Min":0.07109999999999994,"Max":0.07519999999999971,"Median":0.07190000000000008,"Average":0.07261499999999999,"StandardDeviation":0.001564376872751557,"Sum":1.4522999999999998},{"Name":"ReadArrayElement","Unit":2,"IncreaseIsBetter":false,"Samples":[0.6504000000000003,0.6364000000000001,0.6234999999999999,0.6232000000000006,0.6228999999999996,0.6229000000000013,0.6234000000000002,0.6264000000000003,0.6471,0.6303000000000001,0.6167999999999996,0.6433,0.6471999999999998,0.6470000000000002,0.6231000000000009,0.6182000000000016,0.6163999999999987,0.6158000000000001,0.6179000000000023,0.6154000000000011],"Min":0.6154000000000011,"Max":0.6504000000000003,"Median":0.6234000000000002,"Average":0.6283800000000004,"StandardDeviation":0.011857385883912006,"Sum":12.567600000000008},{"Name":"GetUInt64WithValue","Unit":2,"IncreaseIsBetter":false,"Samples":[0.23550000000000005,0.23610000000000043,0.23550000000000005,0.23609999999999999,0.23540000000000028,0.23609999999999999,0.23540000000000028,0.2362000000000002,0.23740000000000006,0.2386000000000008,0.23799999999999955,0.23859999999999993,0.23800000000000044,0.23850000000000017,0.23799999999999955,0.23850000000000017,0.23800000000000044,0.23859999999999993,0.23800000000000044,0.23800000000000044],"Min":0.23540000000000028,"Max":0.2386000000000008,"Median":0.23799999999999955,"Average":0.23722500000000017,"StandardDeviation":0.0012251020365667582,"Sum":4.744500000000003}]}
+
+'
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -1683,7 +2925,7 @@ MonoBehaviour:
       name: RefVsInVsImmutableIn
       fullName: RefVsInVsImmutableIn
       resultStatus: 0
-      duration: 0
+      duration: 2.698757
       messages: 
       output: 
       stacktrace: 
@@ -1699,9 +2941,34 @@ MonoBehaviour:
       name: RefVsInVsImmutableInTest
       fullName: RefVsInVsImmutableIn.RefVsInVsImmutableInTest
       resultStatus: 0
-      duration: 0
+      duration: 1.825882
       messages: 
-      output: 
+      output: 'BigValue.Sum Millisecond Median:13.41 Min:13.14 Max:13.72 Avg:13.41
+        Std:0.17 SampleCount: 20 Sum: 268.11
+
+        BigValue.SumIn Millisecond
+        Median:11.34 Min:11.06 Max:11.46 Avg:11.31 Std:0.09 SampleCount: 20 Sum:
+        226.20
+
+        BigValue.SumRef Millisecond Median:11.35 Min:11.15 Max:11.94
+        Avg:11.39 Std:0.17 SampleCount: 20 Sum: 227.87
+
+        BigValueImmutable.Sum
+        Millisecond Median:13.41 Min:13.33 Max:13.77 Avg:13.46 Std:0.11 SampleCount:
+        20 Sum: 269.15
+
+        BigValueImmutable.SumIn Millisecond Median:11.27
+        Min:11.08 Max:11.49 Avg:11.24 Std:0.10 SampleCount: 20 Sum: 224.84
+
+        BigValueImmutable.SumRef
+        Millisecond Median:11.48 Min:11.42 Max:11.76 Avg:11.49 Std:0.07 SampleCount:
+        20 Sum: 229.89
+
+
+
+        ##performancetestresult2:{"Name":"RefVsInVsImmutableIn.RefVsInVsImmutableInTest","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"BigValue.Sum","Unit":2,"IncreaseIsBetter":false,"Samples":[13.598399999999998,13.380200000000002,13.405199999999994,13.2731,13.317400000000007,13.636799999999994,13.41640000000001,13.47229999999999,13.378400000000028,13.563799999999987,13.72229999999999,13.499899999999997,13.4375,13.709299999999985,13.320899999999995,13.143500000000018,13.203900000000033,13.225300000000005,13.137800000000027,13.263500000000022],"Min":13.137800000000027,"Max":13.72229999999999,"Median":13.405199999999994,"Average":13.405295000000005,"StandardDeviation":0.17180661359504305,"Sum":268.1059000000001},{"Name":"BigValue.SumIn","Unit":2,"IncreaseIsBetter":false,"Samples":[11.061499999999996,11.1935,11.369399999999999,11.144499999999994,11.186300000000003,11.292599999999993,11.299300000000003,11.274100000000005,11.366199999999992,11.365799999999979,11.359399999999994,11.321399999999983,11.384199999999993,11.409599999999984,11.364800000000003,11.455700000000008,11.316000000000003,11.355800000000017,11.34050000000002,11.340000000000032],"Min":11.061499999999996,"Max":11.455700000000008,"Median":11.34050000000002,"Average":11.31003,"StandardDeviation":0.09373218817460784,"Sum":226.20059999999999},{"Name":"BigValue.SumRef","Unit":2,"IncreaseIsBetter":false,"Samples":[11.153499999999994,11.225200000000001,11.2483,11.20219999999999,11.617800000000003,11.35199999999999,11.321499999999987,11.309799999999996,11.339200000000006,11.380700000000019,11.942700000000002,11.664500000000004,11.438500000000005,11.380400000000009,11.352400000000018,11.376200000000012,11.332099999999997,11.459300000000014,11.420499999999948,11.35170000000005],"Min":11.153499999999994,"Max":11.942700000000002,"Median":11.352400000000018,"Average":11.393425000000003,"StandardDeviation":0.1733148662838834,"Sum":227.86850000000005},{"Name":"BigValueImmutable.Sum","Unit":2,"IncreaseIsBetter":false,"Samples":[13.402999999999992,13.455300000000009,13.400199999999998,13.359300000000005,13.695000000000008,13.525100000000009,13.4332,13.412800000000005,13.374300000000006,13.412900000000008,13.460700000000003,13.396000000000015,13.406500000000023,13.396299999999997,13.373099999999994,13.557000000000017,13.387,13.33359999999999,13.772099999999967,13.596000000000004],"Min":13.33359999999999,"Max":13.772099999999967,"Median":13.412800000000005,"Average":13.45747,"StandardDeviation":0.11269804834157196,"Sum":269.1494},{"Name":"BigValueImmutable.SumIn","Unit":2,"IncreaseIsBetter":false,"Samples":[11.079900000000002,11.083699999999994,11.196299999999994,11.266900000000007,11.13109999999999,11.133300000000006,11.313599999999994,11.245799999999975,11.228199999999987,11.1387,11.170599999999979,11.494200000000007,11.153099999999995,11.277999999999992,11.278300000000002,11.317300000000018,11.277600000000007,11.359100000000013,11.375399999999957,11.320899999999995],"Min":11.079900000000002,"Max":11.494200000000007,"Median":11.266900000000007,"Average":11.242099999999997,"StandardDeviation":0.10441521919720397,"Sum":224.84199999999994},{"Name":"BigValueImmutable.SumRef","Unit":2,"IncreaseIsBetter":false,"Samples":[11.479200000000006,11.481100000000012,11.418300000000003,11.469700000000004,11.506799999999999,11.4829,11.444900000000004,11.55970000000002,11.500599999999992,11.496799999999979,11.468199999999996,11.475099999999998,11.460099999999983,11.476699999999994,11.48520000000002,11.433999999999998,11.473899999999987,11.480099999999993,11.52940000000001,11.76279999999997],"Min":11.418300000000003,"Max":11.76279999999997,"Median":11.480099999999993,"Average":11.494274999999999,"StandardDeviation":0.06856503390941629,"Sum":229.88549999999996}]}
+
+'
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -1716,9 +2983,23 @@ MonoBehaviour:
       name: RefVsOutVsReturn
       fullName: RefVsInVsImmutableIn.RefVsOutVsReturn
       resultStatus: 0
-      duration: 0
+      duration: 0.8667747
       messages: 
-      output: 
+      output: 'BigValue.SumReturnRef Millisecond Median:9.36 Min:9.22 Max:9.63 Avg:9.36
+        Std:0.08 SampleCount: 20 Sum: 187.27
+
+        BigValue.SumReturnOut Millisecond
+        Median:11.46 Min:11.25 Max:11.68 Avg:11.44 Std:0.11 SampleCount: 20 Sum:
+        228.81
+
+        BigValue.Sum Millisecond Median:13.45 Min:13.33 Max:13.94
+        Avg:13.49 Std:0.16 SampleCount: 20 Sum: 269.74
+
+
+
+        ##performancetestresult2:{"Name":"RefVsInVsImmutableIn.RefVsOutVsReturn","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"BigValue.SumReturnRef","Unit":2,"IncreaseIsBetter":false,"Samples":[9.365899999999997,9.421100000000003,9.348699999999994,9.359099999999998,9.32480000000001,9.330299999999994,9.361900000000006,9.310699999999997,9.358899999999992,9.223700000000008,9.335000000000008,9.326699999999989,9.367199999999997,9.28970000000001,9.324799999999982,9.387599999999992,9.49090000000001,9.627399999999995,9.342900000000015,9.370000000000005],"Min":9.223700000000008,"Max":9.627399999999995,"Median":9.358899999999992,"Average":9.363365,"StandardDeviation":0.07891856102970875,"Sum":187.2673},{"Name":"BigValue.SumReturnOut","Unit":2,"IncreaseIsBetter":false,"Samples":[11.5017,11.444900000000004,11.543099999999996,11.4846,11.477800000000002,11.464500000000001,11.444600000000009,11.469700000000018,11.465599999999995,11.616600000000006,11.678699999999992,11.266899999999993,11.25490000000002,11.319299999999999,11.32820000000001,11.390599999999978,11.430000000000007,11.453100000000007,11.492600000000039,11.280200000000037],"Min":11.25490000000002,"Max":11.678699999999992,"Median":11.464500000000001,"Average":11.440380000000005,"StandardDeviation":0.10735638127283959,"Sum":228.8076000000001},{"Name":"BigValue.Sum","Unit":2,"IncreaseIsBetter":false,"Samples":[13.545199999999995,13.328900000000005,13.848100000000003,13.942899999999995,13.342500000000002,13.343799999999988,13.348199999999992,13.375799999999999,13.614599999999996,13.457599999999986,13.420699999999983,13.410399999999982,13.394100000000009,13.50399999999999,13.549699999999973,13.4341,13.524000000000001,13.457100000000026,13.45429999999999,13.441100000000006],"Min":13.328900000000005,"Max":13.942899999999995,"Median":13.45429999999999,"Average":13.486854999999997,"StandardDeviation":0.1562266637773461,"Sum":269.73709999999996}]}
+
+'
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -1733,7 +3014,7 @@ MonoBehaviour:
       name: ReorderAndReadBytePerformance
       fullName: ReorderAndReadBytePerformance
       resultStatus: 0
-      duration: 0
+      duration: 0.0808602
       messages: 
       output: 
       stacktrace: 
@@ -1749,9 +3030,26 @@ MonoBehaviour:
       name: PerformReorderingAndSumTest
       fullName: ReorderAndReadBytePerformance.PerformReorderingAndSumTest
       resultStatus: 0
-      duration: 0
+      duration: 0.0794282
       messages: 
-      output: 
+      output: 'With Variable Millisecond Median:0.87 Min:0.86 Max:0.89 Avg:0.87 Std:0.01
+        SampleCount: 20 Sum: 17.48
+
+        Using Ptr Millisecond Median:0.88 Min:0.87
+        Max:0.90 Avg:0.88 Std:0.01 SampleCount: 20 Sum: 17.56
+
+        Using Ptr
+        Read 2 UInt Millisecond Median:0.60 Min:0.60 Max:0.61 Avg:0.60 Std:0.00 SampleCount:
+        20 Sum: 12.04
+
+
+
+        ##performancetestresult2:{"Name":"ReorderAndReadBytePerformance.PerformReorderingAndSumTest","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"With
+        Variable","Unit":2,"IncreaseIsBetter":false,"Samples":[0.8631000000000011,0.8851000000000013,0.8636999999999997,0.8681000000000001,0.8678000000000008,0.8858000000000015,0.8875999999999991,0.8638999999999992,0.8749000000000002,0.8708999999999989,0.8684000000000012,0.8676999999999993,0.8683999999999976,0.8684000000000012,0.8775000000000013,0.8805000000000014,0.8739999999999988,0.8831999999999987,0.8874999999999993,0.8697000000000017],"Min":0.8631000000000011,"Max":0.8875999999999991,"Median":0.8708999999999989,"Average":0.8738100000000001,"StandardDeviation":0.008157567039258742,"Sum":17.476200000000003},{"Name":"Using
+        Ptr","Unit":2,"IncreaseIsBetter":false,"Samples":[0.8797000000000015,0.8811999999999998,0.8854000000000006,0.8687000000000005,0.8712999999999997,0.8731000000000009,0.8726000000000003,0.8734000000000002,0.8900999999999986,0.889599999999998,0.8951999999999991,0.8681999999999981,0.8687000000000005,0.8734000000000002,0.8727000000000018,0.883300000000002,0.8789999999999978,0.8731999999999971,0.8779000000000004,0.8842999999999996],"Min":0.8681999999999981,"Max":0.8951999999999991,"Median":0.8779000000000004,"Average":0.8780499999999998,"StandardDeviation":0.007661494632250059,"Sum":17.560999999999998},{"Name":"Using
+        Ptr Read 2 UInt","Unit":2,"IncreaseIsBetter":false,"Samples":[0.6016000000000004,0.6116999999999999,0.6097999999999999,0.5980000000000008,0.6043000000000003,0.6112000000000002,0.6006999999999998,0.5980000000000008,0.5981000000000005,0.6047000000000011,0.6112000000000002,0.6011000000000006,0.597999999999999,0.597999999999999,0.5987999999999989,0.5978999999999992,0.5981000000000023,0.5980999999999987,0.5981000000000023,0.6042999999999985],"Min":0.5978999999999992,"Max":0.6116999999999999,"Median":0.6006999999999998,"Average":0.6020850000000001,"StandardDeviation":0.00498239651171999,"Sum":12.041700000000003}]}
+
+'
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -1766,7 +3064,7 @@ MonoBehaviour:
       name: ReorderBytePerformance
       fullName: ReorderBytePerformance
       resultStatus: 0
-      duration: 0
+      duration: 0.2725675
       messages: 
       output: 
       stacktrace: 
@@ -1782,9 +3080,34 @@ MonoBehaviour:
       name: PerformReordering64Test
       fullName: ReorderBytePerformance.PerformReordering64Test
       resultStatus: 0
-      duration: 0
+      duration: 0.1207896
       messages: 
-      output: 
+      output: 'Temp Variable Millisecond Median:1.03 Min:1.00 Max:1.34 Avg:1.04 Std:0.08
+        SampleCount: 20 Sum: 20.87
+
+        Outside Temp Variable Millisecond Median:1.00
+        Min:1.00 Max:1.03 Avg:1.01 Std:0.01 SampleCount: 20 Sum: 20.18
+
+        Static
+        Temp Variable Millisecond Median:0.56 Min:0.55 Max:0.58 Avg:0.56 Std:0.01
+        SampleCount: 20 Sum: 11.20
+
+        Static Temp Variable Inline Millisecond
+        Median:0.51 Min:0.50 Max:0.52 Avg:0.51 Std:0.01 SampleCount: 20 Sum: 10.22
+
+        BigEndian.ReadUInt64
+        Millisecond Median:0.61 Min:0.60 Max:0.65 Avg:0.61 Std:0.01 SampleCount:
+        20 Sum: 12.14
+
+
+
+        ##performancetestresult2:{"Name":"ReorderBytePerformance.PerformReordering64Test","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"Temp
+        Variable","Unit":2,"IncreaseIsBetter":false,"Samples":[0.9974999999999987,1.0198,1.0246999999999993,1.0258000000000003,1.0310999999999986,1.0312999999999999,0.998700000000003,0.9968000000000004,1.0291999999999995,0.9986999999999995,0.9991000000000021,1.0254000000000013,1.030899999999999,1.008700000000001,1.0086000000000013,1.0088000000000009,1.3368000000000003,1.1849999999999988,1.0351999999999997,1.0824999999999996],"Min":0.9968000000000004,"Max":1.3368000000000003,"Median":1.0254000000000013,"Average":1.04373,"StandardDeviation":0.07866807548173505,"Sum":20.8746},{"Name":"Outside
+        Temp Variable","Unit":2,"IncreaseIsBetter":false,"Samples":[1.0030000000000002,1.0282,1.0061999999999998,1.0030000000000002,1.0027000000000009,1.0031999999999997,1.002600000000001,1.0245999999999996,1.0029000000000004,1.0136000000000003,1.0232000000000028,1.0043000000000007,1.0227000000000004,1.004999999999999,1.0249000000000024,1.0018999999999992,1.0024000000000016,1.002600000000001,1.002600000000001,1.0026999999999973],"Min":1.0018999999999992,"Max":1.0282,"Median":1.0031999999999997,"Average":1.0091150000000003,"StandardDeviation":0.009380952776770938,"Sum":20.182300000000006},{"Name":"Static
+        Temp Variable","Unit":2,"IncreaseIsBetter":false,"Samples":[0.5564,0.5788000000000002,0.5603999999999996,0.5697999999999999,0.567400000000001,0.5588000000000015,0.5518999999999998,0.5548000000000002,0.5591000000000008,0.5512000000000015,0.5635999999999992,0.5640000000000001,0.5562000000000005,0.5571999999999999,0.557500000000001,0.5597999999999992,0.5645999999999987,0.5559999999999992,0.5572999999999997,0.5571000000000019],"Min":0.5512000000000015,"Max":0.5788000000000002,"Median":0.5588000000000015,"Average":0.5600950000000002,"StandardDeviation":0.0063241975775585978,"Sum":11.201900000000004},{"Name":"Static
+        Temp Variable Inline","Unit":2,"IncreaseIsBetter":false,"Samples":[0.5121000000000002,0.5115999999999996,0.5118999999999998,0.5129999999999999,0.5172999999999997,0.5147000000000013,0.5145999999999997,0.5150000000000006,0.5151000000000003,0.5150000000000006,0.514800000000001,0.5147999999999993,0.5151000000000003,0.5129999999999999,0.5119000000000007,0.5044000000000004,0.5008999999999997,0.5010999999999992,0.5009000000000015,0.5008999999999997],"Min":0.5008999999999997,"Max":0.5172999999999997,"Median":0.5129999999999999,"Average":0.5109050000000002,"StandardDeviation":0.005565291995933431,"Sum":10.218100000000004},{"Name":"BigEndian.ReadUInt64","Unit":2,"IncreaseIsBetter":false,"Samples":[0.6101000000000001,0.6489000000000003,0.6120000000000001,0.6135000000000002,0.6137999999999995,0.6109000000000009,0.5972000000000008,0.6066000000000003,0.6135999999999999,0.6142000000000003,0.609,0.5971000000000011,0.5969999999999995,0.5969999999999995,0.5975999999999999,0.5970999999999993,0.5969999999999995,0.5971000000000011,0.6097999999999999,0.5979000000000028],"Min":0.5969999999999995,"Max":0.6489000000000003,"Median":0.609,"Average":0.6068700000000002,"StandardDeviation":0.011962905165552309,"Sum":12.137400000000005}]}
+
+'
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -1799,9 +3122,34 @@ MonoBehaviour:
       name: PerformReorderingTest
       fullName: ReorderBytePerformance.PerformReorderingTest
       resultStatus: 0
-      duration: 0
+      duration: 0.1478261
       messages: 
-      output: 
+      output: 'Temp Variable Millisecond Median:1.09 Min:1.08 Max:1.11 Avg:1.09 Std:0.01
+        SampleCount: 20 Sum: 21.85
+
+        Outside Temp Variable Millisecond Median:1.09
+        Min:1.08 Max:1.11 Avg:1.09 Std:0.01 SampleCount: 20 Sum: 21.78
+
+        Static
+        Temp Variable Millisecond Median:0.85 Min:0.84 Max:0.89 Avg:0.85 Std:0.01
+        SampleCount: 20 Sum: 17.03
+
+        Static Temp Variable Inline Millisecond
+        Median:0.81 Min:0.81 Max:0.83 Avg:0.82 Std:0.01 SampleCount: 20 Sum: 16.37
+
+        BigEndian.ReadUInt32
+        Millisecond Median:0.88 Min:0.87 Max:0.89 Avg:0.88 Std:0.01 SampleCount:
+        20 Sum: 17.56
+
+
+
+        ##performancetestresult2:{"Name":"ReorderBytePerformance.PerformReorderingTest","Version":"1","Categories":["Performance"],"SampleGroups":[{"Name":"Temp
+        Variable","Unit":2,"IncreaseIsBetter":false,"Samples":[1.0832999999999995,1.1004999999999985,1.0959000000000004,1.0873000000000009,1.0968,1.0868000000000003,1.0915,1.096499999999999,1.0869999999999998,1.0995999999999989,1.0899999999999999,1.0914000000000002,1.0957000000000008,1.0867000000000005,1.1067,1.1102000000000026,1.0893000000000016,1.0859000000000024,1.085799999999999,1.0873999999999989],"Min":1.0832999999999995,"Max":1.1102000000000026,"Median":1.0914000000000002,"Average":1.092715,"StandardDeviation":0.007162141788599373,"Sum":21.854300000000003},{"Name":"Outside
+        Temp Variable","Unit":2,"IncreaseIsBetter":false,"Samples":[1.0928999999999985,1.0823999999999999,1.0815000000000002,1.0818000000000013,1.0924999999999994,1.082699999999999,1.0810999999999993,1.0818000000000013,1.0919999999999988,1.0814999999999984,1.0817000000000015,1.0869,1.0985000000000014,1.0922000000000019,1.1121999999999979,1.0984000000000017,1.0883000000000003,1.1042000000000024,1.0922000000000019,1.0772000000000013],"Min":1.0772000000000013,"Max":1.1121999999999979,"Median":1.0883000000000003,"Average":1.0891000000000005,"StandardDeviation":0.008842793676208855,"Sum":21.782000000000008},{"Name":"Static
+        Temp Variable","Unit":2,"IncreaseIsBetter":false,"Samples":[0.8450000000000006,0.8884999999999987,0.8437999999999999,0.8450000000000006,0.8448999999999991,0.8524999999999992,0.8444000000000003,0.8508999999999993,0.8556999999999988,0.8445999999999998,0.8460999999999999,0.8567999999999998,0.8486000000000011,0.8488000000000007,0.8498999999999981,0.8559999999999981,0.8463999999999992,0.847999999999999,0.8562000000000012,0.8583999999999996],"Min":0.8437999999999999,"Max":0.8884999999999987,"Median":0.8488000000000007,"Average":0.8515249999999996,"StandardDeviation":0.009687820962424656,"Sum":17.030499999999994},{"Name":"Static
+        Temp Variable Inline","Unit":2,"IncreaseIsBetter":false,"Samples":[0.8135999999999992,0.8135000000000012,0.8139000000000003,0.8144000000000009,0.8323,0.8167000000000009,0.8247,0.8318999999999992,0.8292000000000002,0.8132999999999999,0.8142999999999994,0.8106000000000009,0.8089000000000013,0.8108000000000004,0.8139000000000003,0.8318000000000012,0.8188999999999993,0.8108000000000004,0.8183000000000007,0.8303000000000012],"Min":0.8089000000000013,"Max":0.8323,"Median":0.8144000000000009,"Average":0.8186050000000004,"StandardDeviation":0.007963195024611587,"Sum":16.372100000000008},{"Name":"BigEndian.ReadUInt32","Unit":2,"IncreaseIsBetter":false,"Samples":[0.8695000000000004,0.8682999999999996,0.8807999999999989,0.8766999999999996,0.8795999999999999,0.8681999999999999,0.8683999999999994,0.872399999999999,0.8729999999999993,0.8729000000000013,0.8701000000000008,0.8697000000000017,0.877600000000001,0.8872,0.8872,0.8868000000000009,0.8872999999999998,0.8875999999999991,0.8874999999999993,0.8866000000000014],"Min":0.8681999999999999,"Max":0.8875999999999991,"Median":0.877600000000001,"Average":0.87787,"StandardDeviation":0.007647555164887591,"Sum":17.5574}]}
+
+'
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -1811,13 +3159,18 @@ MonoBehaviour:
       - Performance
       parentId: 1043
       parentUniqueId: Sandbox.Tests.dll/[Sandbox.Tests][ReorderBytePerformance][suite]
-    m_ResultText: ISOBoxParse_ValidSPS_ReturnExactValue (0.017s)
+    m_ResultText: 'BByteReaderTests (0.052s)
+
+      ---
+
+      One or more child
+      tests were ignored'
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: a996b222
-      m_LastClickedID: 582129321
-      m_ExpandedIDs: feda0987015ef3a0c1680ba1fba8eca9ceffd5af2358b0c5eee6bfc5d5508ec6019e02eb269afa076563e61a24b59330c3227844931d8f5057c7135b26bccc6aef47c66dffffff7f
+      m_SelectedIDs: 61d6895b
+      m_LastClickedID: 1535759969
+      m_ExpandedIDs: feda09878cca1c8eec849ca0015ef3a0c1680ba1edb23ca6fba8eca9ceffd5af2358b0c5eee6bfc5d5508ec6b91b03d4019e02ebe592c1ef631913f0269afa076563e61afc9e8b26d7f6ee2f24b5933067f00240c3227844931d8f5057c7135b61d6895b26bccc6a7a770d6cef47c66dffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1844,9 +3197,9 @@ MonoBehaviour:
       availableCategories:
       - Performance
       - Uncategorized
-    m_SelectedOption: 0
+    m_SelectedOption: 1
   m_EditModeTestListGUI:
-    m_Window: {fileID: 17}
+    m_Window: {fileID: 25}
     m_NewResultList:
     - id: 1030
       uniqueId: '[UnityMP4Parser][suite]'
@@ -1896,7 +3249,7 @@ MonoBehaviour:
       selectedCategoryMask: 0
       availableCategories:
       - Uncategorized
---- !u!114 &18
+--- !u!114 &26
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1916,10 +3269,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 484
+    x: 362
     y: 73
-    width: 1469
-    height: 755
+    width: 1765
+    height: 908
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1934,8 +3287,8 @@ MonoBehaviour:
   m_colorWarningText: {r: 1, g: 0, b: 0, a: 1}
   m_testListTreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 00000000
-    m_LastClickedID: 0
+    m_SelectedIDs: 01000000
+    m_LastClickedID: 1
     m_ExpandedIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2078,7 +3431,7 @@ MonoBehaviour:
       userData: 0
     m_VisibleColumns: 0000000001000000020000000400000003000000050000000600000007000000
     m_SortedColumns: 00000000
---- !u!114 &19
+--- !u!114 &27
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2099,14 +3452,14 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 849
-    width: 1954
-    height: 510
+    y: 1002
+    width: 2013
+    height: 357
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
---- !u!114 &20
+--- !u!114 &28
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2126,9 +3479,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1955
+    x: 2014
     y: 73
-    width: 604
+    width: 545
     height: 1286
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
@@ -2137,7 +3490,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: -160
+    m_CachedPref: 312
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
@@ -2147,3 +3500,31 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
+--- !u!114 &29
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13953, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 800, y: 250}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Package Manager
+    m_Image: {fileID: -2824328813065806953, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 424
+    y: 73
+    width: 1588
+    height: 908
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
