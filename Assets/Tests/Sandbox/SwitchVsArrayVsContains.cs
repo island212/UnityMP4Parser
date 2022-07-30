@@ -79,6 +79,20 @@ public class SwitchVsArrayVsContains
         .MeasurementCount(MeasurementCount)
         .Run();
 
+        Measure.Method(() =>
+        {
+            int sum = 0;
+            for (int i = 0; i < profileIDCs.Length; i++)
+            {
+                sum += BitFieldArrayHasChromaIndex[profileIDCs[i] >> 7].GetBits(profileIDCs[i] & 0x3F) >= 0 ? 1 : 0;
+            }
+        })
+        .SampleGroup($"BitField Index")
+        .WarmupCount(WarmupCount)
+        .IterationsPerMeasurement(IterationsPerMeasurement)
+        .MeasurementCount(MeasurementCount)
+        .Run();
+
         profileIDCs.Dispose();
     }
 
@@ -89,6 +103,8 @@ public class SwitchVsArrayVsContains
     };
 
     public static readonly bool[] ArrayHasChromaIndex = CreateArrayHasChromaIndex();
+
+    public static readonly BitField64[] BitFieldArrayHasChromaIndex = CreateBitFieldArrayHasChromaIndex();
 
     public static readonly NativeArray<byte> ArrayHasChromaValue 
         = new NativeArray<byte>(new byte[]{ 44, 83, 86, 100, 110, 118, 122, 128, 134, 135, 138, 139, 244 }, Allocator.Persistent);
@@ -109,6 +125,24 @@ public class SwitchVsArrayVsContains
         array[138] = true;
         array[139] = true;
         array[244] = true;
+        return array;
+    }
+
+    private static BitField64[] CreateBitFieldArrayHasChromaIndex()
+    {
+        var array = new BitField64[4];
+        array[0].SetBits(44, true);
+        array[1].SetBits(83 - 64, true);
+        array[1].SetBits(86 - 64, true);
+        array[1].SetBits(100 - 64, true);
+        array[1].SetBits(110 - 64, true);
+        array[1].SetBits(118 - 64, true);
+        array[1].SetBits(122 - 64, true);
+        array[2].SetBits(128 - 128, true);
+        array[2].SetBits(134 - 128, true);
+        array[2].SetBits(135 - 128, true);
+        array[2].SetBits(138 - 128, true);
+        array[3].SetBits(244 - 192, true);
         return array;
     }
 }
